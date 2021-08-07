@@ -4554,7 +4554,7 @@ The position control mode is effective. Compensation for reverse static friction
     <P03-03>
       <ParameteCode>P03-03</ParameteCode>
       <Name>Instruction pulse inversion</Name>
-      <set>0</set>
+      <set>1</set>
       <set_range>0-1</set_range>
       <Initialize>0</Initialize>
       <Unit>---</Unit>
@@ -4707,7 +4707,7 @@ The threshold value used to set the location to complete the output 。When abso
     <P03-10>
       <ParameteCode>P03-10</ParameteCode>
       <Name>  numerator of electronic gear1</Name>
-      <set>256</set>
+      <set>512</set>
       <set_range>1-65535</set_range>
       <Initialize>1</Initialize>
       <Unit>---</Unit>

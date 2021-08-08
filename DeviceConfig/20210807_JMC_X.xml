@@ -8519,7 +8519,7 @@ Set the function of CN1's DI1 input port.
       <Code>P06-06</Code>
       <Name>
 DI4 input port effective level</Name>
-      <Set>0</Set>
+      <Set>1</Set>
       <set_range>0-4</set_range>
       <Initialize>0</Initialize>
       <Unit>---</Unit>
@@ -8552,7 +8552,7 @@ Set the valid input of the DI1 input port of CN1.
     <P06-07>
       <Code>P06-07</Code>
       <Name>DI4 input port function selection (reverse overrun)</Name>
-      <Set>4</Set>
+      <Set>11</Set>
       <set_range>0-24</set_range>
       <Initialize>4</Initialize>
       <Unit>---</Unit>

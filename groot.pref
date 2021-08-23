@@ -20,7 +20,7 @@ toggle_readout = True
 spindle_start_rpm = 300.0
 blockheight = 0.0
 open_file = 
-screen1 = window
+screen1 = maximized
 x_pos = 40
 y_pos = 30
 width = 979
@@ -65,6 +65,6 @@ view_dimension = True
 run_from_line = run
 unlock_way = no
 show_preview_on_offset = False
-use_keyboard_shortcuts = False
+use_keyboard_shortcuts = True
 tool_in_spindle = 0
 

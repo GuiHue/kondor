@@ -45,11 +45,11 @@ net machine-is-enabled  =>     hm2_7i76e.0.7i76.0.0.output-08
 # --- MIN-HOME-X ---
 net min-home-x     <=  hm2_7i76e.0.7i76.0.0.input-04-not
 
-# --- MIN-HOME-Y ---
-net min-home-y     <=  hm2_7i76e.0.7i76.0.0.input-06-not
-
 # --- MIN-HOME-Y2 ---
-net min-home-y2     <=  hm2_7i76e.0.7i76.0.0.input-07-not
+net min-home-y2     <=  hm2_7i76e.0.7i76.0.0.input-06-not
+
+# --- MIN-HOME-Y1 ---
+net min-home-y1     <=  hm2_7i76e.0.7i76.0.0.input-07-not
 
 # --- MIN-HOME-Z ---
 net min-home-z     <=  hm2_7i76e.0.7i76.0.0.input-08-not
@@ -108,7 +108,7 @@ net min-home-x     =>  joint.0.neg-lim-sw-in
 net x-pos-limit     =>  joint.0.pos-lim-sw-in
 
 #*******************
-#  AXIS Y JOINT 1
+#  AXIS Y JOINT 1 U30 2030 WAND
 #*******************
 
 setp   pid.y1.Pgain     [JOINT_1]P
@@ -156,9 +156,9 @@ net y1-enable     => [HMOT](CARD0).stepgen.01.enable
 
 # ---setup home / limit switch signals---
 
-net min-home-y     =>  joint.1.home-sw-in
-net min-home-y     =>  joint.1.neg-lim-sw-in
-net y-pos-limit     =>  joint.1.pos-lim-sw-in
+net min-home-y1     =>  joint.1.home-sw-in
+net min-home-y1     =>  joint.1.neg-lim-sw-in
+net y1-pos-limit     =>  joint.1.pos-lim-sw-in
 
 #*******************
 #  Tandem AXIS Y2 JOINT 2
@@ -316,8 +316,8 @@ net machine-is-enabled        <=  motion.motion-enabled
 #  ---estop signals---
 
 net estop-out     <=  iocontrol.0.user-enable-out
-net estop-out     =>  iocontrol.0.emc-enable-in
-
+net estop-ext => iocontrol.0.emc-enable-in
+net estop-ext <= hm2_7i76e.0.7i76.0.0.input-12
 #  ---manual tool change signals---
 
 loadusr -W hal_manualtoolchange

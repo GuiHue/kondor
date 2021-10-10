@@ -7,7 +7,7 @@ loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
 # num_dio=9 num_aio=1 
 loadrt hostmot2
-loadrt hm2_eth board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=00xxxx" 
+loadrt hm2_eth board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=11xxxxxx" 
 setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 
 #############################################
 #pid.y changed to "y1" & pid.y2 added
@@ -44,11 +44,14 @@ net machine-is-enabled  =>     hm2_7i76e.0.7i76.0.0.output-08
 
 # --- MIN-HOME-X ---
 net min-home-x     <=  hm2_7i76e.0.7i76.0.0.input-04-not
+ 
 
 # --- MIN-HOME-Y2 ---
+# ori 06
 net min-home-y2     <=  hm2_7i76e.0.7i76.0.0.input-06-not
 
 # --- MIN-HOME-Y1 ---
+# ori 07
 net min-home-y1     <=  hm2_7i76e.0.7i76.0.0.input-07-not
 
 # --- MIN-HOME-Z ---
@@ -156,8 +159,8 @@ net y1-enable     => [HMOT](CARD0).stepgen.01.enable
 
 # ---setup home / limit switch signals---
 
-net min-home-y1     =>  joint.1.home-sw-in
-net min-home-y1     =>  joint.1.neg-lim-sw-in
+net min-home-y2     =>  joint.1.home-sw-in
+net min-home-y2     =>  joint.1.neg-lim-sw-in
 net y1-pos-limit     =>  joint.1.pos-lim-sw-in
 
 #*******************

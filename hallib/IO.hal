@@ -4,7 +4,7 @@
 # Prefixes "DO" and "AO" indicate digital and analog outputs
 # Second word indicates functional group
 
-
+################################################################################################
 # ---Inputs---
 
 # external input signals
@@ -111,8 +111,8 @@ net     DI_CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30
 # --- DI 31 UNUSED ---
 net     DI_31                           <= hm2_7i76e.0.7i76.0.0.input-31
 
-
- # ---Outputs---
+########################################################################################################################
+# ---Outputs---
 
 # --- DO 00 MQL-FLOOD ---
 net     DO_MQL_flood                    => hm2_7i76e.0.7i76.0.0.output-00

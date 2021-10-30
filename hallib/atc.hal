@@ -1,0 +1,43 @@
+# ---------- ATC  ----------
+# Handles all functions pertaining to ATC operation
+# Includes the following fucntions:     
+#       - Check is spindle is off
+#       - set spindle.0.inhibit whenever drawbar is down (hardcoded based on sensor)
+#       - triggers cone cleaning when manual process is triggered
+
+
+
+# Note: At this time, there is only manual tool release implemented
+
+loadusr -W hal_manualtoolchange
+net tool-change-request     iocontrol.0.tool-change       =>  hal_manualtoolchange.change
+net tool-change-confirmed   iocontrol.0.tool-changed      <=  hal_manualtoolchange.changed
+net tool-number             iocontrol.0.tool-prep-number  =>  hal_manualtoolchange.number
+net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+
+
+
+#net      tool-released                         hm2_7i76e.0.7i76.0.0.input-08
+#net      tool-locked                           hm2_7i76e.0.7i76.0.0.input-09
+
+#setp     lut_inhibit.function                  0xb
+#net      tool-released                         lut_inhibit.in-0
+#net      tool-locked                           lut_inhibit.in-1
+#net      spindle-inhibit                       lut_inhibit.out                     spindle.0.inhibit
+
+#setp     lut_toolchange.function               0x4
+#net      spindle-is-running                    lut_toolchange.in-0
+#net      toolchange-command                    lut_toolchange.in-1
+#net      toolchange-trigger                    lut_toolchange.out
+
+#setp     delay_cleaning.on-delay               0
+#setp     delay_cleaning.off-delay              1.5
+#setp     delay_toolchange.on-delay             0
+#setp     delay_toolchange.off-delay            2
+
+#net      toolchange-trigger                    toggle_toolchange.in
+#net      toolchange-toggle                     toggle_toolchange.out               delay_toolchange.in
+#net      toolchange-trigger                    delay_cleaning.in
+
+#net      toolchange                            delay_toolchange.out                hm2_7i76e.0.7i76.0.0.output-10
+#net      cone-cleaning                         delay_cleaning.out                  hm2_7i76e.0.7i76.0.0.output-09

@@ -1,0 +1,169 @@
+# ---------- IO  ----------
+# links all external signal sources and destinations to signals
+# Prefixes "DI" and "AI" indicate digital and analog inputs 
+# Prefixes "DO" and "AO" indicate digital and analog outputs
+# Second word indicates functional group
+
+
+# ---Inputs---
+
+# external input signals
+
+# --- AI 00 CP-POT-FEED ---
+net     AI_CP-pot-feed                  <= hm2_7i76e.0.7i76.0.0.input-00
+
+# --- AI 01 CP-POT-SPINDLE ---
+net     AI_CP-pot-spindle               <= hm2_7i76e.0.7i76.0.0.input-01
+
+# --- AI 02 FIELDVOLTAGE ---
+# Reference voltage 24v for NTC resitor 
+net     AI_fieldvoltage                 <= hm2_7i76e.0.7i76.0.0.input-02
+
+# --- AI 03  ATC-TEMP-SENSOR ---
+# Voltage from voltage divider over spindle temperature sensor
+net     AI_ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.input-03
+
+# --- DI 04 CNC-MIN-HOME-X ---
+# Signal inversion required 
+net     DI_CNC_min-home-x               <= hm2_7i76e.0.7i76.0.0.input-04-not
+
+# --- DI 05 CNC-POS-LIMIT-X ---
+# NOT IN USE DI_pos-limit-x
+net     DI_05                           <= hm2_7i76e.0.7i76.0.0.input-05
+
+# --- DI 06 CNC-MIN-HOME-Y1 ---
+net     DI_CNC-min-home-y1              <= hm2_7i76e.0.7i76.0.0.input-06-not
+
+# --- DI 07 CNC-MIN-HOME-Y2 ---
+net     DI_CNC-min-home-y2              <= hm2_7i76e.0.7i76.0.0.input-07-not
+
+# --- DI 08 CNC-MIN-HOME-Z ---
+net     DI_CNC-min-home-z               <= hm2_7i76e.0.7i76.0.0.input-08-not
+
+
+# --- DI 09 ATC-TOOL-SENSOR ---
+net     DI_ATC-tool-sensor              <= hm2_7i76e.0.7i76.0.0.input-09
+
+# --- DI 10  ATC-DRAWBAR-SENSOR---
+net     DI_ATC-drawbar-sensor           <= hm2_7i76e.0.7i76.0.0.input-10
+
+# --- DI 11 ATC-MAN-BUTTON ---
+net     DI_ATC-man-button               <= hm2_7i76e.0.7i76.0.0.input-11
+
+# --- DI 12 ESTOP-EXT ---
+# X11-safety-PLCON
+net     DI_ESTOP-ext                    <= hm2_7i76e.0.7i76.0.0.input-12
+
+# --- DI 13 CNC-PROBE---
+net     DI_CNC-probe                    <= hm2_7i76e.0.7i76.0.0.input-13
+
+# --- DI 14 CNC-PROBE_OT ---
+net     DI_CNC-probe-ot                 <= hm2_7i76e.0.7i76.0.0.input-14
+
+# --- DI 15 CP-CYCLE-START-BUTTON ---
+net     DI_CP-cycle-start-button         <= hm2_7i76e.0.7i76.0.0.input-15
+
+# --- DI 16 CP-CYCLE-STOP-BUTTON ---
+net     DI_CP-cycle-stop-button          <= hm2_7i76e.0.7i76.0.0.input-16
+
+# --- DI 17 CP-MACHINE-ON-BUTTON ---
+net     DI_CP-machine-one-button        <= hm2_7i76e.0.7i76.0.0.input-17
+
+# --- DI 18 CNC-CHILLER_ALARM ---
+net     DI_CNC-chiller-alarm            <= hm2_7i76e.0.7i76.0.0.input-18
+
+# --- DI 19 AIR-PRESSURE-ALARM ---
+net     DI_AIR-pressure-alarm           <= hm2_7i76e.0.7i76.0.0.input-19
+
+# --- DI 20 DRIVE-X-ALARM ---
+net     DI_DRIVE-x-alarm                <= hm2_7i76e.0.7i76.0.0.input-20
+
+# --- DI 21 DRIVE-Y1-ALARM ---
+net     DI_DRIVE-y1-alarm               <= hm2_7i76e.0.7i76.0.0.input-21
+
+# --- DI 22 DRIVE-Y2-ALARM ---
+net     DI_DRIVE-y2-alarm               <= hm2_7i76e.0.7i76.0.0.input-22
+
+# --- DI 23 DRIVE-Z-ALARM ---
+net     DI_DRIVE-z-alarm                <= hm2_7i76e.0.7i76.0.0.input-23
+
+# --- DI 24 DRIVE-A-ALARM ---
+net     DI_DRIVE-a-alarm                <= hm2_7i76e.0.7i76.0.0.input-24
+
+# --- DI 25 DRIVE-X-WARN ---
+net     DI_DRIVE-x-warn                 <= hm2_7i76e.0.7i76.0.0.input-25
+
+# --- DI 26 DRIVE-Y1-WARN ---
+net     DI_DRIVE-y1-WARN                <= hm2_7i76e.0.7i76.0.0.input-26
+
+# --- DI 27 DRIVE-Y2-WARN ---
+net     DI_DRIVE-y2-WARN                <= hm2_7i76e.0.7i76.0.0.input-27
+
+# --- DI 28 DRIVE-Z-WARN ---
+net     DI_DRIVE-z-WARN                 <= hm2_7i76e.0.7i76.0.0.input-28
+
+# --- DI 29 DRIVE-A-WARN ---
+net     DI_DRIVE-a-WARN                 <= hm2_7i76e.0.7i76.0.0.input-29
+
+# --- DI 30 MIN-HOME-A ---
+net     DI_CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30
+
+# --- DI 31 UNUSED ---
+net     DI_31                           <= hm2_7i76e.0.7i76.0.0.input-31
+
+
+ # ---Outputs---
+
+# --- DO 00 MQL-FLOOD ---
+net     DO_MQL_flood                    => hm2_7i76e.0.7i76.0.0.output-00
+
+# --- DO 01 MQL-MIST ---
+net     DO_MQL_mist                     => hm2_7i76e.0.7i76.0.0.output-01
+
+# --- DO 02 VFD_RESET  ---
+net     DO_VFD-reset                    => hm2_7i76e.0.7i76.0.0.output-02
+
+# --- DO 03 ATC-CONE-CLEAN   ---
+# High = Cone clean airblast on
+net     DO_ATC-cone-clean               => hm2_7i76e.0.7i76.0.0.output-03
+
+# --- DO 04 ATC-DRAWBAR-ACTUATOR  ---
+# Note: Triggers 5/2 via 2 position relais
+# High = open drawbar
+net     DO_ATC-drawbar-actuator         => hm2_7i76e.0.7i76.0.0.output-04
+
+# --- DO 05 CNC-PROBE-BLOWOFF  ---
+net     DO_CNC-probe-blowoff            => hm2_7i76e.0.7i76.0.0.output-05
+
+# --- DO 06 CNC-PROBE-COVER-ACTUATOR  ---
+net     DO_CNC-probe-cover-actuator     => hm2_7i76e.0.7i76.0.0.output-06
+
+# --- DO 07  ATC-RACK-ACTUATOR ---
+# Note: Triggers 5/2 via 2 position relais
+#High = open/ push into position
+net     DO_ATC-rack-actuator            => hm2_7i76e.0.7i76.0.0.output-07
+
+# --- DO 08 CNC-MACHINE-IS-ENABLED ---
+net     DO_CNC-machine-is-enabled       => hm2_7i76e.0.7i76.0.0.output-08
+
+# --- DO 09  CNC-GANTRY---
+# Enables gantry mode of Y1/Y2 Delta drives
+net     DO_CNC-gantry                   => hm2_7i76e.0.7i76.0.0.output-09
+
+# --- DO 10 DRIVE-ALARM-RESET  ---
+net     DO_DRIVE-alarm-reset            => hm2_7i76e.0.7i76.0.0.output-10
+
+# --- DO 11 CP-LIGHT-RED ---
+net     DO_CP-light-red                 => hm2_7i76e.0.7i76.0.0.output-11
+
+# --- DO 12 CP-LIGHT-YELLOW ---
+net     DO_CP-light-yellow              => hm2_7i76e.0.7i76.0.0.output-12
+
+# --- DO 13 CP-LIGHT-BLUE ---
+net     DO_CP-light-BLUE                => hm2_7i76e.0.7i76.0.0.output-13
+
+# --- DO 14 CP-LIGHT-GREEN ---
+net     DO_CP-light-green               => hm2_7i76e.0.7i76.0.0.output-14
+
+# --- DO 15 AUX-VAC-REMOTE ---
+net     DO_AUX-vac-remote               => hm2_7i76e.0.7i76.0.0.output-15

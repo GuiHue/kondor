@@ -1,0 +1,2 @@
+# ---------- SHUTDOWN  ----------
+# Handles any commands that are required during shutdown, usually in the form of "setp"

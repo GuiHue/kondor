@@ -1,0 +1,10 @@
+# ---------- ESTOP  ----------
+# Handles all internal processing required to manage estop functions
+# Note: This setup does not have a mean to trigger physical estop from software
+#       Instead, physical estop will trigger linuxcnc and trigger als drives via hardwiring to estop/STO
+#       Further, a semidconductor port of the deployed PILZ relay triggers linuxcnc (DI_ESTOP-ext)
+#       Within linuxCNC, there ar emultiple other signal sources that may trigger soft estop
+#       This file also handles warnings
+
+net     estop-out                               <=  iocontrol.0.user-enable-out
+net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in

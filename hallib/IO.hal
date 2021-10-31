@@ -15,13 +15,13 @@ net     AI_CP-pot-feed                  <= hm2_7i76e.0.7i76.0.0.input-00
 # --- AI 01 CP-POT-SPINDLE ---
 net     AI_CP-pot-spindle               <= hm2_7i76e.0.7i76.0.0.input-01
 
-# --- AI 02 FIELDVOLTAGE ---
-# Reference voltage 24v for NTC resitor 
-net     AI_fieldvoltage                 <= hm2_7i76e.0.7i76.0.0.input-02
-
-# --- AI 03  ATC-TEMP-SENSOR ---
+# --- AI 02  ATC-TEMP-SENSOR ---
 # Voltage from voltage divider over spindle temperature sensor
-net     AI_ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.input-03
+net     AI_ATC-temp-sensor             <= hm2_7i76e.0.7i76.0.0.input-02
+
+# --- AI 03 FIELDVOLTAGE ---
+# Reference voltage 24v for NTC resitor 
+net     AI_fieldvoltage                 <= hm2_7i76e.0.7i76.0.0.input-03
 
 # --- DI 04 CNC-MIN-HOME-X ---
 # Signal inversion required 
@@ -69,8 +69,8 @@ net     DI_CP-cycle-stop-button          <= hm2_7i76e.0.7i76.0.0.input-16
 # --- DI 17 CP-MACHINE-ON-BUTTON ---
 net     DI_CP-machine-one-button        <= hm2_7i76e.0.7i76.0.0.input-17
 
-# --- DI 18 CNC-CHILLER_ALARM ---
-net     DI_CNC-chiller-alarm            <= hm2_7i76e.0.7i76.0.0.input-18
+# --- DI 18 CNC-PROBE-ERROR ---
+net     DI_CNC-probe-error              <= hm2_7i76e.0.7i76.0.0.input-18
 
 # --- DI 19 AIR-PRESSURE-ALARM ---
 net     DI_AIR-pressure-alarm           <= hm2_7i76e.0.7i76.0.0.input-19
@@ -120,8 +120,8 @@ net     DO_MQL_flood                    => hm2_7i76e.0.7i76.0.0.output-00
 # --- DO 01 MQL-MIST ---
 net     DO_MQL_mist                     => hm2_7i76e.0.7i76.0.0.output-01
 
-# --- DO 02 VFD_RESET  ---
-net     DO_VFD-reset                    => hm2_7i76e.0.7i76.0.0.output-02
+# --- DO 02 ATC-STATUS-LIGHT  ---
+net     DO_ATC-status-light                    => hm2_7i76e.0.7i76.0.0.output-02
 
 # --- DO 03 ATC-CONE-CLEAN   ---
 # High = Cone clean airblast on

@@ -1499,7 +1499,7 @@ Terminal invalid torque mode
     <P01-02>
       <Code>P01-02</Code>
       <Name>Real time automatic adjustment mode</Name>
-      <Setting>0</Setting>
+      <Setting>1</Setting>
       <set_range>0-3</set_range>
       <Initialize>1</Initialize>
       <Unit>---</Unit>
@@ -1535,7 +1535,7 @@ P02-03 (speed feed forward gain), P02-04 (speed feed forward smoothing constant)
     <P01-03>
       <Code>P01-03</Code>
       <Name>Real time automatic adjustment of rigidity setting</Name>
-      <Setting>13</Setting>
+      <Setting>10</Setting>
       <set_range>0-31</set_range>
       <Initialize>13</Initialize>
       <Unit>---</Unit>
@@ -1557,7 +1557,7 @@ Built in 32 gain parameters, when P01-02 is set to 1, or 2 time to play a role. 
     <P01-04>
       <Code>P01-04</Code>
       <Name>Moment of inertia ratio</Name>
-      <Setting>13</Setting>
+      <Setting>3</Setting>
       <set_range>0-100.00</set_range>
       <Initialize>3</Initialize>
       <Unit>1 times</Unit>
@@ -3044,7 +3044,7 @@ The longest waiting time of the brake output is when the motor is in rotation.
     <P02-00>
       <Code>P02-00</Code>
       <Name>Position control gain 1</Name>
-      <set>200</set>
+      <set>17,5</set>
       <set_range>0-3000.0</set_range>
       <Initialize>48.0</Initialize>
       <Unit>1/S</Unit>
@@ -3068,7 +3068,7 @@ This parameter is for steady state response.
     <P02-01>
       <Code>P02-01</Code>
       <Name>Position control gain 2</Name>
-      <set>140</set>
+      <set>22</set>
       <set_range>0-3000.0</set_range>
       <Initialize>57.0</Initialize>
       <Unit>1/S</Unit>
@@ -3111,7 +3111,7 @@ This parameter is for dynamic response.
     <P02-03>
       <Code>P02-03</Code>
       <Name>Speed feed forward gain</Name>
-      <set>90</set>
+      <set>20</set>
       <set_range>0-100.0</set_range>
       <Initialize>30</Initialize>
       <Unit>0.01</Unit>
@@ -3139,7 +3139,7 @@ The feedforward gain of the speed loop, the larger the parameter value, the smal
     <P02-04>
       <Code>P02-04</Code>
       <Name>Speed feedforward smoothing constant</Name>
-      <set>5</set>
+      <set>0,5</set>
       <set_range>0-64.00</set_range>
       <Initialize>0.5</Initialize>
       <Unit>1ms</Unit>
@@ -3255,7 +3255,7 @@ This parameter is used to set the speed loop feed forward filter time constant. 
     <P02-10>
       <Code>P02-10</Code>
       <Name>Speed proportional gain 1</Name>
-      <set>50</set>
+      <set>14</set>
       <set_range>1.0-2000.0</set_range>
       <Initialize>27</Initialize>
       <Unit>1Hz</Unit>
@@ -3281,7 +3281,7 @@ This parameter is for static response.
     <P02-11>
       <Code>P02-11</Code>
       <Name>Velocity integral constant 1</Name>
-      <set>100</set>
+      <set>40</set>
       <set_range>0.1-1000.0</set_range>
       <Initialize>10</Initialize>
       <Unit>1ms</Unit>
@@ -3329,7 +3329,7 @@ By adjusting this coefficient, the velocity loop can have better dynamic respons
     <P02-13>
       <Code>P02-13</Code>
       <Name>Speed proportional gain 2</Name>
-      <set>45</set>
+      <set>14</set>
       <set_range>1.0-2000.0</set_range>
       <Initialize>27</Initialize>
       <Unit>1Hz</Unit>
@@ -3355,7 +3355,7 @@ This parameter is for dynamic response.</Description>
       <Code>P02-14</Code>
       <Name>
 Velocity integral constant 2</Name>
-      <set>500</set>
+      <set>1000</set>
       <set_range>0.1-1000.0</set_range>
       <Initialize>1000</Initialize>
       <Unit>1ms</Unit>
@@ -3675,7 +3675,7 @@ This parameter is used to set the torque feedforward filter time constant.</Desc
     <P02-30>
       <Code>P02-30</Code>
       <Name>Gain switching mode</Name>
-      <set>7</set>
+      <set>0</set>
       <set_range>0-10</set_range>
       <Initialize>7</Initialize>
       <Unit>---</Unit>
@@ -4554,7 +4554,7 @@ The position control mode is effective. Compensation for reverse static friction
     <P03-03>
       <ParameteCode>P03-03</ParameteCode>
       <Name>Instruction pulse inversion</Name>
-      <set>1</set>
+      <set>0</set>
       <set_range>0-1</set_range>
       <Initialize>0</Initialize>
       <Unit>---</Unit>
@@ -4707,7 +4707,7 @@ The threshold value used to set the location to complete the output 。When abso
     <P03-10>
       <ParameteCode>P03-10</ParameteCode>
       <Name>  numerator of electronic gear1</Name>
-      <set>512</set>
+      <set>28672</set>
       <set_range>1-65535</set_range>
       <Initialize>1</Initialize>
       <Unit>---</Unit>
@@ -4736,7 +4736,7 @@ G= C*4/P = 2500 * 4/ 3200 = 10000/3200 = 25:8
     <P03-11>
       <ParameteCode>P03-11</ParameteCode>
       <Name>  Denominator of electronic gear 1</Name>
-      <set>100</set>
+      <set>13750</set>
       <set_range>1-65535</set_range>
       <Initialize>1</Initialize>
       <Unit>---</Unit>
@@ -9901,7 +9901,7 @@ Setting the dead-time voltage of the torque analog command, the system defaults 
     <P08-02>
       <Code>P08-02</Code>
       <Name>Inertia identification maximum speed</Name>
-      <setting>1500</setting>
+      <setting>800</setting>
       <Setting_range>100-2000</Setting_range>
       <Initialize>800</Initialize>
       <Unit>1rpm</Unit>
@@ -9947,7 +9947,7 @@ When the off-line inertia is identified, the acceleration and deceleration time 
       <Name>
 
 Waiting time after completion of single inertia identification</Name>
-      <setting>500</setting>
+      <setting>1000</setting>
       <Setting_range>50-10000</Setting_range>
       <Initialize>1000</Initialize>
       <Unit>1ms</Unit>
@@ -10083,7 +10083,7 @@ When off-line inertia is identified, waiting time after completion of single ine
     <P08-11>
       <Code>P08-11</Code>
       <Name>Adaptive notch filter mode selection</Name>
-      <setting>1</setting>
+      <setting>0</setting>
       <Setting_range>0-4</Setting_range>
       <Initialize>0</Initialize>
       <Unit>---</Unit>
@@ -10129,7 +10129,7 @@ Third, fourth notch filter parameters are no longer automatically updated, save 
       <Name>
 
 Adaptive notch filter vibration detection threshold</Name>
-      <setting>4</setting>
+      <setting>3</setting>
       <Setting_range>1-7</Setting_range>
       <Initialize>4</Initialize>
       <Unit>---</Unit>
@@ -10264,7 +10264,7 @@ Adaptive notch filter vibration detection threshold</Name>
       <Code>P08-20</Code>
       <Name>
 Torque command filtering constant</Name>
-      <setting>84</setting>
+      <setting>2</setting>
       <Setting_range>0-25.00</Setting_range>
       <Initialize>0.8</Initialize>
       <Unit>1ms</Unit>
@@ -10287,7 +10287,7 @@ Torque command filter time constant. When the motor starts screaming, it can be 
       <Code>P08-21</Code>
       <Name>
 Torque command filtering constant</Name>
-      <setting>0,84</setting>
+      <setting>2</setting>
       <Setting_range>0-25.00</Setting_range>
       <Initialize>0.8</Initialize>
       <Unit>1ms</Unit>

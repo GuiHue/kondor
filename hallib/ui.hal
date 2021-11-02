@@ -22,20 +22,20 @@ net     jog-selected-neg            halui.axis.selected.minus
 net     spindle-manual-cw           halui.spindle.0.forward
 net     spindle-manual-ccw          halui.spindle.0.reverse
 net     spindle-manual-stop         halui.spindle.0.stop
-net     machine-is-on               halui.machine.is-on
+net     DO_CNC-machine-is-enabled   halui.machine.is-on
 net     jog-speed                   halui.axis.jog-speed
 net     MDI-mode                    halui.mode.is-mdi
 
 #  ---coolant signals---
 
-net coolant-mist      <=  iocontrol.0.coolant-mist
-net coolant-flood     <=  iocontrol.0.coolant-flood
+net     coolant-mist                <= iocontrol.0.coolant-mist
+net     coolant-flood               <= iocontrol.0.coolant-flood
 
 #  ---probe signal---
 
-net probe-in     =>  motion.probe-input
+net     DI_CNC-probe                => motion.probe-input
 
 #  ---motion control signals---
 
-net in-position               <=  motion.in-position
-net DO_CNC-machine-is-enabled        <=  motion.motion-enabled
+net     in-position                 <= motion.in-position
+net     motion-enabled              <= motion.motion-enabled

@@ -78,10 +78,10 @@ setp    pid.y1.error-previous-target            true
 setp    pid.y1.maxerror                         0.012700
 
 net     y1-index-enable                         => pid.y1.index-enable
-net     y1-enable                               =>  pid.y1.enable
-net     y1-pos-cmd                              =>  pid.y1.command
-net     y1-pos-fb                               =>  pid.y1.feedback
-net     y1-output                               <=  pid.y1.output
+net     y1-enable                               => pid.y1.enable
+net     y1-pos-cmd                              => pid.y1.command
+net     y1-pos-fb                               => pid.y1.feedback
+net     y1-output                               <= pid.y1.output
 
 # Step Gen signals/setup
 
@@ -107,9 +107,9 @@ net     y1-enable                               => [HMOT](CARD0).stepgen.01.enab
 
 # ---setup home / limit switch signals---
 
-net     DI_CNC-min-home-y1                      =>  joint.1.home-sw-in
-net     DI_CNC-min-home-y1                      =>  joint.1.neg-lim-sw-in
-net     y1-pos-limit                            =>  joint.1.pos-lim-sw-in
+net     DI_CNC-min-home-y1                      => joint.1.home-sw-in
+net     DI_CNC-min-home-y1                      => joint.1.neg-lim-sw-in
+net     y1-pos-limit                            => joint.1.pos-lim-sw-in
 
 #*******************
 #  Tandem AXIS Y2 JOINT 2
@@ -131,10 +131,10 @@ setp    pid.y2.error-previous-target            true
 setp    pid.y2.maxerror                         0.012700
 
 net     y2-index-enable                         => pid.y2.index-enable
-net     y2-enable                               =>  pid.y2.enable
-net     y2-pos-cmd                              =>  pid.y2.command
-net     y2-pos-fb                               =>  pid.y2.feedback
-net     y2-output                               <=  pid.y2.output
+net     y2-enable                               => pid.y2.enable
+net     y2-pos-cmd                              => pid.y2.command
+net     y2-pos-fb                               => pid.y2.feedback
+net     y2-output                               <= pid.y2.output
 
 # Step Gen signals/setup
 
@@ -160,9 +160,9 @@ net     y2-enable                               => [HMOT](CARD0).stepgen.02.enab
 
 # ---setup home / limit switch signals---
 
-net     DI_CNC-min-home-y2                      =>  joint.2.home-sw-in
-net     DI_CNC-min-home-y2                      =>  joint.2.neg-lim-sw-in
-net     y2-pos-limit                            =>  joint.2.pos-lim-sw-in
+net     DI_CNC-min-home-y2                      => joint.2.home-sw-in
+net     DI_CNC-min-home-y2                      => joint.2.neg-lim-sw-in
+net     y2-pos-limit                            => joint.2.pos-lim-sw-in
 
 #*******************
 #  AXIS Z JOINT 3
@@ -184,10 +184,10 @@ setp    pid.z.error-previous-target             true
 setp    pid.z.maxerror                          0.012700
 
 net     z-index-enable                          => pid.z.index-enable
-net     z-enable                                =>  pid.z.enable
-net     z-pos-cmd                               =>  pid.z.command
-net     z-pos-fb                                =>  pid.z.feedback
-net     z-output                                <=  pid.z.output
+net     z-enable                                => pid.z.enable
+net     z-pos-cmd                               => pid.z.command
+net     z-pos-fb                                => pid.z.feedback
+net     z-output                                <= pid.z.output
 
 # Step Gen signals/setup
 
@@ -213,6 +213,6 @@ net     z-enable                                => [HMOT](CARD0).stepgen.03.enab
 
 # ---setup home / limit switch signals---
 
-net     DI_CNC-min-home-z                       =>  joint.3.home-sw-in
-net     DI_CNC-min-home-z                       =>  joint.3.neg-lim-sw-in
-net     z-pos-limit                             =>  joint.3.pos-lim-sw-in
+net     DI_CNC-min-home-z                       => joint.3.home-sw-in
+net     DI_CNC-min-home-z                       => joint.3.neg-lim-sw-in
+net     z-pos-limit                             => joint.3.pos-lim-sw-in

@@ -94,16 +94,16 @@ net     DI_DRIVE-a-alarm                <= hm2_7i76e.0.7i76.0.0.input-24
 net     DI_DRIVE-x-warn                 <= hm2_7i76e.0.7i76.0.0.input-25
 
 # --- DI 26 DRIVE-Y1-WARN ---
-net     DI_DRIVE-y1-WARN                <= hm2_7i76e.0.7i76.0.0.input-26
+net     DI_DRIVE-y1-warn                <= hm2_7i76e.0.7i76.0.0.input-26
 
 # --- DI 27 DRIVE-Y2-WARN ---
-net     DI_DRIVE-y2-WARN                <= hm2_7i76e.0.7i76.0.0.input-27
+net     DI_DRIVE-y2-warn                <= hm2_7i76e.0.7i76.0.0.input-27
 
 # --- DI 28 DRIVE-Z-WARN ---
-net     DI_DRIVE-z-WARN                 <= hm2_7i76e.0.7i76.0.0.input-28
+net     DI_DRIVE-z-warn                 <= hm2_7i76e.0.7i76.0.0.input-28
 
 # --- DI 29 DRIVE-A-WARN ---
-net     DI_DRIVE-a-WARN                 <= hm2_7i76e.0.7i76.0.0.input-29
+net     DI_DRIVE-a-warn                 <= hm2_7i76e.0.7i76.0.0.input-29
 
 # --- DI 30 MIN-HOME-A ---
 net     DI_CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30

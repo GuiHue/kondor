@@ -29,7 +29,7 @@ net     DI_CNC_min-home-x               <= hm2_7i76e.0.7i76.0.0.input-04-not
 
 # --- DI 05 CNC-POS-LIMIT-X ---
 # NOT IN USE DI_pos-limit-x
-net     DI_05                           <= hm2_7i76e.0.7i76.0.0.input-05
+net     DI_05_limx2                           <= hm2_7i76e.0.7i76.0.0.input-05
 
 # --- DI 06 CNC-MIN-HOME-Y1 ---
 net     DI_CNC-min-home-y1              <= hm2_7i76e.0.7i76.0.0.input-06-not
@@ -109,7 +109,7 @@ net     DI_DRIVE-a-warn                 <= hm2_7i76e.0.7i76.0.0.input-29
 net     DI_CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30
 
 # --- DI 31 UNUSED ---
-net     DI_31                           <= hm2_7i76e.0.7i76.0.0.input-31
+net     DI_31_unused                           <= hm2_7i76e.0.7i76.0.0.input-31
 
 ########################################################################################################################
 # ---Outputs---
@@ -144,7 +144,7 @@ net     DO_CNC-probe-cover-actuator     => hm2_7i76e.0.7i76.0.0.output-06
 net     DO_ATC-rack-actuator            => hm2_7i76e.0.7i76.0.0.output-07
 
 # --- DO 08 CNC-MACHINE-IS-ENABLED ---
-net     DO_CNC-machine-is-enabled       => hm2_7i76e.0.7i76.0.0.output-08
+net     machine-is-enabled       => hm2_7i76e.0.7i76.0.0.output-08
 
 # --- DO 09  CNC-GANTRY---
 # Enables gantry mode of Y1/Y2 Delta drives

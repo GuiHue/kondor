@@ -4,43 +4,32 @@
 # realtime components are added to the servo thread here or for postgui calls at their corresponding position
 
 # ---------- LOAD and SETUP MESA ----------
-loadrt  [KINS]KINEMATICS
-loadrt  [EMCMOT]EMCMOT                          servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
+
+
+
+
+loadrt [KINS]KINEMATICS
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
 # num_dio=9 num_aio=1 
-# Load HOSTMOT components for MESA 
-loadrt  hostmot2
-loadrt  hm2_eth                                 board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=11xxxxxx" 
-setp    [HMOT](CARD0).watchdog.timeout_ns       5000000 
-setp    [HMOT](CARD0).dpll.01.timer-us          -50
-setp    [HMOT](CARD0).stepgen.timer-number      1
+loadrt hostmot2
+loadrt hm2_eth board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=11xxxxxx" 
+setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 
+#############################################
+#pid.y changed to "y1" & pid.y2 added
+loadrt pid names=pid.x,pid.y1,pid.y2,pid.z
+#############################################
+addf [HMOT](CARD0).read          servo-thread
+addf motion-command-handler   servo-thread
+addf motion-controller        servo-thread
+addf pid.x.do-pid-calcs       servo-thread
+#############################################
+#pid.y changed to "y1" & pid.y2 added
+addf pid.y1.do-pid-calcs       servo-thread
+addf pid.y2.do-pid-calcs       servo-thread
+#############################################
+addf pid.z.do-pid-calcs       servo-thread
+addf [HMOT](CARD0).write         servo-thread
+setp [HMOT](CARD0).dpll.01.timer-us -50
+setp [HMOT](CARD0).stepgen.timer-number 1
 
-
-# ---------- LOAD HAL components ----------
-#loadrt  and2                                    names=and_on,and_start,and_led_pause,and_mist,and_flood,and_x,and_y,and_z,and_home,and_sp-start,and_sp-stop,and_sp-inc,and_sp-dec,and_led_toolchange
-#loadrt  comp                                    names=comp_temp
-#loadrt  lut5                                    names=lut_inhibit,lut_toolchange,lut_estop
-#loadrt  mux4                                    names=mux_jog
-#loadrt  near                                    names=near_sp-start,near_sp-stop,near_sp-inc,near_sp-dec
-#loadrt  not                                     names=not_led_pause,not_led_toolchange
-#loadrt  offset                                  names=offset_ntc
-#loadrt  or2                                     names=or_prot,or_on,or_led,or_mist,or_flood,or_sp-inc,or_sp-dec
-loadrt  pid                                     names=pid.x,pid.y1,pid.y2,pid.z,pid.s
-#loadrt  sum2                                    names=sum_jog-z
-#loadrt  timedelay                               names=delay_cleaning,delay_toolchange,delay_enable,delay_led_pause,delay_led_toolchange
-#loadrt  toggle                                  names=toggle_toolchange,toggle_on,toggle_pause,toggle_mist,toggle_flood
-#loadrt  toggle2nist                             names=nist_on,nist_pause,nist_mist,nist_flood
-#loadrt  watchdog                                num_inputs=1
-
-
-# ---------- ADD to servo-thread ----------
-addf    [HMOT](CARD0).read                      servo-thread
-addf    [HMOT](CARD0).write                     servo-thread
-addf    motion-command-handler                  servo-thread
-addf    motion-controller                       servo-thread
-
-addf    pid.x.do-pid-calcs                      servo-thread
-addf    pid.y1.do-pid-calcs                     servo-thread
-addf    pid.y2.do-pid-calcs                     servo-thread
-addf    pid.z.do-pid-calcs                      servo-thread
-addf    pid.s.do-pid-calcs                      servo-thread
 

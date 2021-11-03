@@ -1,3 +1,28 @@
 # ---------- SPINDLE  ----------
 # Handles connection wo VFD wj200-022SF
 # Handles processing of temperature sensor in spindle
+
+
+
+# ---------- SPINDLE NTC ----------
+# by Tilman from github/hausen8
+# NTC: 103F3950, R25: 10K 1% B: 3950K
+# analogin2: 24V fieldvoltage (since hm2_7i76e.0.7i76.0.0.fieldvoltage is too noisy)
+# analogin3: output of voltage divider (spindle NTC / 10K resistor)
+# offset_ntc is required since we don't need the output voltage but the voltage drop
+# comp_temp compares the computed temperature with a maximum temperature to trigger estop
+
+loadusr  -W thermistor
+
+setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
+setp     thermistor.0.r0                       [NTC]NTC_RES
+setp     thermistor.0.beta                     [NTC]NTC_BETA
+setp     thermistor.0.r-other                  [NTC]VDIV_RES
+setp     comp_temp.in0                         [NTC]NTC_MAX_TEMP
+
+net      AI_fieldvoltage                       offset_ntc.fb-in                    
+net      AI_ATC-temp-sensor                    offset_ntc.offset                   
+net      ntc-voltage-drop                      offset_ntc.fb-out                   thermistor.0.v-thermistor
+
+net      AI_fieldvoltage                       thermistor.0.v-total
+net      spindle-temp                          thermistor.0.temperature-c          comp_temp.in1

@@ -17,7 +17,7 @@ net     AI_CP-pot-spindle               <= hm2_7i76e.0.7i76.0.0.input-01
 
 # --- AI 02  ATC-TEMP-SENSOR ---
 # Voltage from voltage divider over spindle temperature sensor
-net     AI_ATC-temp-sensor             <= hm2_7i76e.0.7i76.0.0.input-02
+net     AI_ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.input-02
 
 # --- AI 03 FIELDVOLTAGE ---
 # Reference voltage 24v for NTC resitor 
@@ -29,7 +29,7 @@ net     DI_CNC_min-home-x               <= hm2_7i76e.0.7i76.0.0.input-04-not
 
 # --- DI 05 CNC-POS-LIMIT-X ---
 # NOT IN USE DI_pos-limit-x
-net     DI_05_limx2                           <= hm2_7i76e.0.7i76.0.0.input-05
+net     DI_05_limx2                     <= hm2_7i76e.0.7i76.0.0.input-05
 
 # --- DI 06 CNC-MIN-HOME-Y1 ---
 net     DI_CNC-min-home-y1              <= hm2_7i76e.0.7i76.0.0.input-06-not
@@ -61,10 +61,10 @@ net     DI_CNC-probe                    <= hm2_7i76e.0.7i76.0.0.input-13
 net     DI_CNC-probe-ot                 <= hm2_7i76e.0.7i76.0.0.input-14
 
 # --- DI 15 CP-CYCLE-START-BUTTON ---
-net     DI_CP-cycle-start-button         <= hm2_7i76e.0.7i76.0.0.input-15
+net     DI_CP-cycle-start-button        <= hm2_7i76e.0.7i76.0.0.input-15
 
 # --- DI 16 CP-CYCLE-STOP-BUTTON ---
-net     DI_CP-cycle-stop-button          <= hm2_7i76e.0.7i76.0.0.input-16
+net     DI_CP-cycle-stop-button         <= hm2_7i76e.0.7i76.0.0.input-16
 
 # --- DI 17 CP-MACHINE-ON-BUTTON ---
 net     DI_CP-machine-one-button        <= hm2_7i76e.0.7i76.0.0.input-17
@@ -109,7 +109,7 @@ net     DI_DRIVE-a-warn                 <= hm2_7i76e.0.7i76.0.0.input-29
 net     DI_CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30
 
 # --- DI 31 UNUSED ---
-net     DI_31_unused                           <= hm2_7i76e.0.7i76.0.0.input-31
+net     DI_31_unused                    <= hm2_7i76e.0.7i76.0.0.input-31
 
 ########################################################################################################################
 # ---Outputs---
@@ -121,7 +121,7 @@ net     DO_MQL_flood                    => hm2_7i76e.0.7i76.0.0.output-00
 net     DO_MQL_mist                     => hm2_7i76e.0.7i76.0.0.output-01
 
 # --- DO 02 ATC-STATUS-LIGHT  ---
-net     DO_ATC-status-light                    => hm2_7i76e.0.7i76.0.0.output-02
+net     DO_ATC-status-light             => hm2_7i76e.0.7i76.0.0.output-02
 
 # --- DO 03 ATC-CONE-CLEAN   ---
 # High = Cone clean airblast on
@@ -144,7 +144,7 @@ net     DO_CNC-probe-cover-actuator     => hm2_7i76e.0.7i76.0.0.output-06
 net     DO_ATC-rack-actuator            => hm2_7i76e.0.7i76.0.0.output-07
 
 # --- DO 08 CNC-MACHINE-IS-ENABLED ---
-net     machine-is-enabled       => hm2_7i76e.0.7i76.0.0.output-08
+net     machine-is-enabled              => hm2_7i76e.0.7i76.0.0.output-08
 
 # --- DO 09  CNC-GANTRY---
 # Enables gantry mode of Y1/Y2 Delta drives

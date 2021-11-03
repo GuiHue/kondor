@@ -6,5 +6,5 @@
 #       Within linuxCNC, there ar emultiple other signal sources that may trigger soft estop
 #       This file also handles warnings
 
-net     estop-out                               <=  iocontrol.0.user-enable-out
+net     estop-out                               <= iocontrol.0.user-enable-out
 net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in

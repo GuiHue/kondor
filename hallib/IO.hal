@@ -29,7 +29,7 @@ net     DI_CNC_min-home-x               <= hm2_7i76e.0.7i76.0.0.input-04-not
 
 # --- DI 05 CNC-POS-LIMIT-X ---
 # NOT IN USE DI_pos-limit-x
-net     DI_05                           <= hm2_7i76e.0.7i76.0.0.input-05
+net     DI_05_limx2                           <= hm2_7i76e.0.7i76.0.0.input-05
 
 # --- DI 06 CNC-MIN-HOME-Y1 ---
 net     DI_CNC-min-home-y1              <= hm2_7i76e.0.7i76.0.0.input-06-not
@@ -94,22 +94,22 @@ net     DI_DRIVE-a-alarm                <= hm2_7i76e.0.7i76.0.0.input-24
 net     DI_DRIVE-x-warn                 <= hm2_7i76e.0.7i76.0.0.input-25
 
 # --- DI 26 DRIVE-Y1-WARN ---
-net     DI_DRIVE-y1-WARN                <= hm2_7i76e.0.7i76.0.0.input-26
+net     DI_DRIVE-y1-warn                <= hm2_7i76e.0.7i76.0.0.input-26
 
 # --- DI 27 DRIVE-Y2-WARN ---
-net     DI_DRIVE-y2-WARN                <= hm2_7i76e.0.7i76.0.0.input-27
+net     DI_DRIVE-y2-warn                <= hm2_7i76e.0.7i76.0.0.input-27
 
 # --- DI 28 DRIVE-Z-WARN ---
-net     DI_DRIVE-z-WARN                 <= hm2_7i76e.0.7i76.0.0.input-28
+net     DI_DRIVE-z-warn                 <= hm2_7i76e.0.7i76.0.0.input-28
 
 # --- DI 29 DRIVE-A-WARN ---
-net     DI_DRIVE-a-WARN                 <= hm2_7i76e.0.7i76.0.0.input-29
+net     DI_DRIVE-a-warn                 <= hm2_7i76e.0.7i76.0.0.input-29
 
 # --- DI 30 MIN-HOME-A ---
 net     DI_CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30
 
 # --- DI 31 UNUSED ---
-net     DI_31                           <= hm2_7i76e.0.7i76.0.0.input-31
+net     DI_31_unused                           <= hm2_7i76e.0.7i76.0.0.input-31
 
 ########################################################################################################################
 # ---Outputs---
@@ -144,7 +144,7 @@ net     DO_CNC-probe-cover-actuator     => hm2_7i76e.0.7i76.0.0.output-06
 net     DO_ATC-rack-actuator            => hm2_7i76e.0.7i76.0.0.output-07
 
 # --- DO 08 CNC-MACHINE-IS-ENABLED ---
-net     DO_CNC-machine-is-enabled       => hm2_7i76e.0.7i76.0.0.output-08
+net     machine-is-enabled       => hm2_7i76e.0.7i76.0.0.output-08
 
 # --- DO 09  CNC-GANTRY---
 # Enables gantry mode of Y1/Y2 Delta drives

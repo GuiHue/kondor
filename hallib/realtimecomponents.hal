@@ -1,0 +1,35 @@
+# ---------- REALTIME COMPONENTS ----------
+# loads all required RT components including basic MESA components
+# all components are loaded by name to increase clarity
+# realtime components are added to the servo thread here or for postgui calls at their corresponding position
+
+# ---------- LOAD and SETUP MESA ----------
+
+
+
+
+loadrt [KINS]KINEMATICS
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
+# num_dio=9 num_aio=1 
+loadrt hostmot2
+loadrt hm2_eth board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=11xxxxxx" 
+setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 
+#############################################
+#pid.y changed to "y1" & pid.y2 added
+loadrt pid names=pid.x,pid.y1,pid.y2,pid.z
+#############################################
+addf [HMOT](CARD0).read          servo-thread
+addf motion-command-handler   servo-thread
+addf motion-controller        servo-thread
+addf pid.x.do-pid-calcs       servo-thread
+#############################################
+#pid.y changed to "y1" & pid.y2 added
+addf pid.y1.do-pid-calcs       servo-thread
+addf pid.y2.do-pid-calcs       servo-thread
+#############################################
+addf pid.z.do-pid-calcs       servo-thread
+addf [HMOT](CARD0).write         servo-thread
+setp [HMOT](CARD0).dpll.01.timer-us -50
+setp [HMOT](CARD0).stepgen.timer-number 1
+
+

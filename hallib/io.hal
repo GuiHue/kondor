@@ -10,18 +10,18 @@
 # external input signals
 
 # --- AI 00 CP-POT-FEED ---
-net     AI_CP-pot-feed                  <= hm2_7i76e.0.7i76.0.0.input-00
+net     AI_CP-pot-feed                  <= hm2_7i76e.0.7i76.0.0.analogin0
 
 # --- AI 01 CP-POT-SPINDLE ---
-net     AI_CP-pot-spindle               <= hm2_7i76e.0.7i76.0.0.input-01
+net     AI_CP-pot-spindle               <= hm2_7i76e.0.7i76.0.0.analogin1
 
 # --- AI 02  ATC-TEMP-SENSOR ---
 # Voltage from voltage divider over spindle temperature sensor
-net     AI_ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.input-02
+net     AI_ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.analogin2
 
 # --- AI 03 FIELDVOLTAGE ---
 # Reference voltage 24v for NTC resitor 
-net     AI_fieldvoltage                 <= hm2_7i76e.0.7i76.0.0.input-03
+net     AI_fieldvoltage                 <= hm2_7i76e.0.7i76.0.0.analogin3
 
 # --- DI 04 CNC-MIN-HOME-X ---
 # Signal inversion required 
@@ -31,11 +31,11 @@ net     DI_CNC_min-home-x               <= hm2_7i76e.0.7i76.0.0.input-04-not
 # NOT IN USE DI_pos-limit-x
 net     DI_05_limx2                     <= hm2_7i76e.0.7i76.0.0.input-05
 
-# --- DI 06 CNC-MIN-HOME-Y1 ---
-net     DI_CNC-min-home-y1              <= hm2_7i76e.0.7i76.0.0.input-06-not
+# --- DI 06 CNC-MIN-HOME-Y2 ---
+net     DI_CNC-min-home-y2              <= hm2_7i76e.0.7i76.0.0.input-06-not
 
-# --- DI 07 CNC-MIN-HOME-Y2 ---
-net     DI_CNC-min-home-y2              <= hm2_7i76e.0.7i76.0.0.input-07-not
+# --- DI 07 CNC-MIN-HOME-Y1 ---
+net     DI_CNC-min-home-y1              <= hm2_7i76e.0.7i76.0.0.input-07-not
 
 # --- DI 08 CNC-MIN-HOME-Z ---
 net     DI_CNC-min-home-z               <= hm2_7i76e.0.7i76.0.0.input-08-not
@@ -73,6 +73,7 @@ net     DI_CP-machine-one-button        <= hm2_7i76e.0.7i76.0.0.input-17
 net     DI_CNC-probe-error              <= hm2_7i76e.0.7i76.0.0.input-18
 
 # --- DI 19 AIR-PRESSURE-ALARM ---
+# High when OK
 net     DI_AIR-pressure-alarm           <= hm2_7i76e.0.7i76.0.0.input-19
 
 # --- DI 20 DRIVE-X-ALARM ---
@@ -160,7 +161,7 @@ net     DO_CP-light-red                 => hm2_7i76e.0.7i76.0.0.output-11
 net     DO_CP-light-yellow              => hm2_7i76e.0.7i76.0.0.output-12
 
 # --- DO 13 CP-LIGHT-BLUE ---
-net     DO_CP-light-BLUE                => hm2_7i76e.0.7i76.0.0.output-13
+net     DO_CP-light-blue                => hm2_7i76e.0.7i76.0.0.output-13
 
 # --- DO 14 CP-LIGHT-GREEN ---
 net     DO_CP-light-green               => hm2_7i76e.0.7i76.0.0.output-14

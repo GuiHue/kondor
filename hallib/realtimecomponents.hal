@@ -17,6 +17,7 @@ setp    [HMOT](CARD0).watchdog.timeout_ns 5000000
 
 loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z
 loadrt  offset                              names=offset_ntc
+loadrt   comp                               names=comp_temp
 # ---------- ADD CORE RT COMPONENTS TO SERVOTHREAD ----------
 addf    [HMOT](CARD0).read                  servo-thread
 addf    motion-command-handler              servo-thread
@@ -31,4 +32,5 @@ setp    [HMOT](CARD0).stepgen.timer-number  1
 
 # ---------- ADD ADDITIONAL RT COMPONENTS TO SERVOTHREAD ----------
 addf    offset_ntc.update-feedback          servo-thread
+addf    comp_temp                           servo-thread
 

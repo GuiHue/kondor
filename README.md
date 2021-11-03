@@ -1,7 +1,21 @@
-# kondor
-Repository for all things related to the control system of my Kondor CNC router
+# LinuxCNC Config for groot2.0
+Repository for all things related to the linuxCNC and MESA based control system of my CNC router groot2.0
 
+_Status_: Experimental, exect substantial changes during setup. In other words: For the love of all that is holy: Don't try this at home. It couldn't possibly be more broken and machine specific.
 
-For the love of god: Don't try this at home. It couldn't possibly be more broken and custom. 
+## About the machine
+* CNC router made from aluminium profile and plate based on a design by fraseserbruch.de
+* Workspace XYZ approx. 650/1200/230 mm
+* Key components
+    * AC spindle Jianken JGL80 (2.2 kW, ISO20) driven by VFD Hitachi WJ20-022SF
+    * All drives Delta A2 Series (Driver Delta ASDA-A2 0421L and Motors EMCA0604 series)
+    * Control based on linuxCNC 2.8 and Mesa cards (7i76E + 7i84)
+    * ATC Setup using rack stle toolchange (to come)
+    * tool lenght sensor and 3D wireless touch probe
+    * Pendant by talla83 with TSHW housing as designed by surmetal (see thingiverse)
+    * Further features: Status lights, control consolde for start/stop and feed and spindle override
 
-Using gmoccapy for sake of convenience
+## About the config
+* _Currently_ Manual tool change operated by a toogled push-button on Z axis)
+
+## Useful Links 

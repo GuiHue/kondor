@@ -53,8 +53,8 @@ net         x-enable                                    => [HMOT](CARD0).stepgen
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC_min-home-x                           => joint.0.home-sw-in
-net         DI_CNC_min-home-x                           => joint.0.neg-lim-sw-in
+net         DI_CNC-min-home-x                           => joint.0.home-sw-in
+net         DI_CNC-min-home-x                           => joint.0.neg-lim-sw-in
 net         x-pos-limit                                 => joint.0.pos-lim-sw-in
 
 #*******************
@@ -106,8 +106,8 @@ net         y1-enable                                    => [HMOT](CARD0).stepge
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC_min-home-y1                           => joint.1.home-sw-in
-net         DI_CNC_min-home-y1                           => joint.1.neg-lim-sw-in
+net         DI_CNC-min-home-y2                           => joint.1.home-sw-in
+net         DI_CNC-min-home-y2                           => joint.1.neg-lim-sw-in
 net         y1-pos-limit                                 => joint.1.pos-lim-sw-in
 
 #*******************
@@ -159,8 +159,8 @@ net         y2-enable                                    => [HMOT](CARD0).stepge
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC_min-home-y2                           => joint.2.home-sw-in
-net         DI_CNC_min-home-y2                           => joint.2.neg-lim-sw-in
+net         DI_CNC-min-home-y2                           => joint.2.home-sw-in
+net         DI_CNC-min-home-y2                           => joint.2.neg-lim-sw-in
 net         y2-pos-limit                                 => joint.2.pos-lim-sw-in
 
 #*******************
@@ -212,6 +212,6 @@ net         z-enable                                    => [HMOT](CARD0).stepgen
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC_min-home-z                           => joint.3.home-sw-in
-net         DI_CNC_min-home-z                           => joint.3.neg-lim-sw-in
+net         DI_CNC-min-home-z                           => joint.3.home-sw-in
+net         DI_CNC-min-home-z                           => joint.3.neg-lim-sw-in
 net         z-pos-limit                                 => joint.3.pos-lim-sw-in

@@ -106,8 +106,8 @@ net         y1-enable                                    => [HMOT](CARD0).stepge
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC-min-home-y2                           => joint.1.home-sw-in
-net         DI_CNC-min-home-y2                           => joint.1.neg-lim-sw-in
+net         DI_CNC-min-home-y1                           => joint.1.home-sw-in
+net         DI_CNC-min-home-y1                           => joint.1.neg-lim-sw-in
 net         y1-pos-limit                                 => joint.1.pos-lim-sw-in
 
 #*******************

@@ -1,6 +1,24 @@
-    # ---------- POSTGUI  ----------
+# ---------- POSTGUI  ----------
 # Handles anything that needs to setup after the GUI components are loaded
 # Includes:
 #   - Control Panel Buttons
 #   - Status lights
 
+
+# ------- Machine On Button -------
+net     DI_CP-machine-one-button                    toggle.machineon.in
+net     machineon-pwr-btn                           toggle2nist.machineon.in            <= toggle.machineon.out
+net     machineon-tog-on                            toggle2nist.machineon.is-on         <=  halui.machine.is-on
+net     machineon-pwr-on                            halui.machine.on                    <= toggle2nist.machineon.on
+net     machineon-pwr-off                           halui.machine.off                   <= toggle2nist.machineon.off
+
+# ------- Feed Rate Override -------
+# Uses 10k potentiometer at control panel to vary feed rate
+
+# to say 2x36.3/24
+#setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     3
+# 1.0 / 24V = 0.0147
+setp    scale.feed.gain                             0.0417
+net     AI_CP-pot-feed                              => scale.feed.in
+net     feed-override-scaled                        scale.feed.out                         => gmoccapy.feed-override.direct-value
+setp    gmoccapy.analog-enable                      1

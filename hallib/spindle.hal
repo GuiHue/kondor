@@ -2,7 +2,43 @@
 # Handles connection wo VFD wj200-022SF
 # Handles processing of temperature sensor in spindle
 
+# watchdog.timeout-0 can not be set to 0.2s here. It may take too long to establish communication via USB
+# therefore it is initially set to a high value and later reduced in postgui.hal
 
+loadusr  -W wj200_vfd                          --device /dev/ttyUSB0 --baud 9600 --parity N --data 8 --stop 1
+
+setp     wj200-vfd.0.mbslaveaddr               1
+setp     wj200-vfd.0.enable                    1
+
+setp     pid.s.Pgain                           [SPINDLE_0]P
+setp     pid.s.Igain                           [SPINDLE_0]I
+setp     pid.s.Dgain                           [SPINDLE_0]D
+setp     pid.s.bias                            [SPINDLE_0]BIAS
+setp     pid.s.FF0                             [SPINDLE_0]FF0
+setp     pid.s.FF1                             [SPINDLE_0]FF1
+setp     pid.s.FF2                             [SPINDLE_0]FF2
+setp     pid.s.deadband                        [SPINDLE_0]DEADBAND
+setp     pid.s.maxoutput                       [SPINDLE_0]MAX_OUTPUT
+setp     pid.s.error-previous-target           true
+
+net      spindle-index-enable                  pid.s.index-enable
+net      spindle-enable                        pid.s.enable
+net      spindle-vel-cmd-rpm                   pid.s.command
+net      spindle-vel-fb-rpm                    pid.s.feedback
+net      spindle-output                        pid.s.output
+
+net      spindle-enable                        spindle.0.on                        wj200-vfd.0.run
+net      spindle-vel-cmd-rps-abs               spindle.0.speed-out-rps-abs         wj200-vfd.0.commanded-frequency
+net      spindle-ccw                           spindle.0.reverse                   wj200-vfd.0.reverse
+net      spindle-rpm                           spindle.0.speed-out
+net      spindle-at-speed                      wj200-vfd.0.is-at-speed             spindle.0.at-speed
+net      spindle-watchdog                      wj200-vfd.0.watchdog-out            watchdog.input-0
+net      spindle-is-running                    wj200-vfd.0.is-running
+net      spindle-current                       wj200-vfd.0.motor-current
+net      vfd-temp                              wj200-vfd.0.heatsink-temp
+
+setp     watchdog.timeout-0                    1.5
+setp     watchdog.enable-in                    true
 
 # ---------- SPINDLE NTC ----------
 # by Tilman from github/hausen8

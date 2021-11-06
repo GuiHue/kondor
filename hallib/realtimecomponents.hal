@@ -15,9 +15,12 @@ setp    [HMOT](CARD0).watchdog.timeout_ns 5000000
 
 
 
-loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z
+loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z,pid.s
 loadrt  offset                              names=offset_ntc
-loadrt   comp                               names=comp_temp
+loadrt  comp                                names=comp_temp
+loadrt  scale                               names=scale.feed,scale.spindle 
+loadrt  toggle                              names=toggle.machineon
+loadrt  toggle2nist                         names=toogle2nist.machineon
 # ---------- ADD CORE RT COMPONENTS TO SERVOTHREAD ----------
 addf    [HMOT](CARD0).read                  servo-thread
 addf    motion-command-handler              servo-thread
@@ -26,6 +29,7 @@ addf    pid.x.do-pid-calcs                  servo-thread
 addf    pid.y1.do-pid-calcs                 servo-thread
 addf    pid.y2.do-pid-calcs                 servo-thread
 addf    pid.z.do-pid-calcs                  servo-thread
+addf    pid.s.do-pid-calcs                  servo-thread
 addf    [HMOT](CARD0).write                 servo-thread
 setp    [HMOT](CARD0).dpll.01.timer-us      -50
 setp    [HMOT](CARD0).stepgen.timer-number  1
@@ -33,4 +37,7 @@ setp    [HMOT](CARD0).stepgen.timer-number  1
 # ---------- ADD ADDITIONAL RT COMPONENTS TO SERVOTHREAD ----------
 addf    offset_ntc.update-feedback          servo-thread
 addf    comp_temp                           servo-thread
-
+addf    scale.feed                          servo-thread
+addf    scale.spindle                       servo-thread
+addf    toggle.machineon                    servo-thread
+addf    taggle2nist.machineon               servo-thread

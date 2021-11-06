@@ -10,10 +10,18 @@
 # Note: At this time, there is only manual tool release implemented
 
 loadusr -W hal_manualtoolchange
+
 net tool-change-request     iocontrol.0.tool-change       =>  hal_manualtoolchange.change
 net tool-change-confirmed   iocontrol.0.tool-changed      <=  hal_manualtoolchange.changed
 net tool-number             iocontrol.0.tool-prep-number  =>  hal_manualtoolchange.number
 net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+
+#net     tool-change gmoccapy.toolchange-change <= iocontrol.0.tool-change
+#net     tool-changed gmoccapy.toolchange-changed <= iocontrol.0.tool-changed
+#net     tool-prep-number gmoccapy.toolchange-number <= iocontrol.0.tool-prep-number
+#net     tool-prep-loop iocontrol.0.tool-prepare <= iocontrol.0.tool-prepared
+
+# https://xpkiller.de/2016/12/06/automatische-werkzeuglaengenmessung/
 
 
 

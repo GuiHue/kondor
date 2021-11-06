@@ -5,19 +5,33 @@
 #   - Status lights
 
 # ------- Feed Rate Override -------
-# Uses 10k potentiometer at control panel to vary feed rate
-
-# to say 2x36.3/24
-#setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     3
-# 1.0 / 24V = 0.0147
+# Uses 10k potentiometer at control panel to control feed rate
+# 1.0 / 23.8V = 0.04201
+# may need correction by offsetting
+# Alternative approach
+#setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     3.025
 # Scale directly at analog in 2x36.3/24 =~3
 # CHECK HOW THIS IS CALCULATED
-# This will end up being 200% (2.0) =feed override max
+
+setp    scale.feed.gain                             0.04201
+net     AI_CP-pot-feed                              => scale.feed.in
+net     feed-override-scaled                        scale.feed.out                         => gmoccapy.feed.feed-override.direct-value
+setp    gmoccapy.feed.feed-override.analog-enable   1
+
+# ------- Spindle Override -------
+# Uses 10k potentiometer at control panel to control spindle rpm
+# 1.0 / 23.8V = 0.04201
+# may need correction by offsetting
+# Alternative approach
 #setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     3.025
-#setp    scale.feed.gain                             0.0417
-#net     AI_CP-pot-feed                              => scale.feed.in
-#net     feed-override-scaled                        scale.feed.out                         => gmoccapy.feed.feed-override.direct-value
-#setp    gmoccapy.feed.feed-override.analog-enable   1
+# Scale directly at analog in 2x36.3/24 =~3
+# CHECK HOW THIS IS CALCULATED
+
+setp    scale.spindle.gain                          0.04201
+net     AI_CP-pot-spindle                           => scale.spindle.in
+net     spindle-override-scaled                     scale.spindle.out                         => gmoccapy.spindle.spindle-override.direct-value
+setp    gmoccapy.spindle.spindle-override.analog-enable   1
+
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at contro panel to turn the machine on/off

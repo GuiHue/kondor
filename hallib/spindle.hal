@@ -1,10 +1,32 @@
 # ---------- SPINDLE  ----------
-# Handles connection wo VFD wj200-022SF
+# Handles connection for VFD Hitachi WJ200-022SF
 # Handles processing of temperature sensor in spindle
 
 # watchdog.timeout-0 can not be set to 0.2s here. It may take too long to establish communication via USB
 # therefore it is initially set to a high value and later reduced in postgui.hal
 
+# ---------- Setup general spindle signals ----------
+# all required general spindle signals
+net     spindle-vel-cmd-rps                     <=  spindle.0.speed-out-rps
+net     spindle-vel-cmd-rps-abs                 <=  spindle.0.speed-out-rps-abs
+net     spindle-vel-cmd-rpm                     <=  spindle.0.speed-out
+net     spindle-vel-cmd-rpm-abs                 <=  spindle.0.speed-out-abs
+net     spindle-enable                          <=  spindle.0.on
+net     spindle-cw                              <=  spindle.0.forward
+net     spindle-ccw                             <=  spindle.0.reverse
+net     spindle-brake                           <=  spindle.0.brake
+net     spindle-revs                            =>  spindle.0.revs
+net     spindle-at-speed                        =>  spindle.0.at-speed
+net     spindle-vel-fb-rps                      =>  spindle.0.speed-in
+net     spindle-index-enable                    <=>  spindle.0.index-enable
+
+# ---setup spindle control signals---
+
+#******************************
+# SETUP SPINDLE CONTROL VIA MODBUS
+#******************************
+# VFD Connection via Modbus 
+# Load from different Device (i.e. USB when not using onboard components; Baudrate needs to be set in VFD using Hitachi ProDrive)
 loadusr  -W wj200_vfd                          --device /dev/ttyUSB0 --baud 9600 --parity N --data 8 --stop 1
 
 setp     wj200-vfd.0.mbslaveaddr               1
@@ -39,6 +61,7 @@ net      vfd-temp                              wj200-vfd.0.heatsink-temp
 
 setp     watchdog.timeout-0                    1.5
 setp     watchdog.enable-in                    true
+
 
 # ---------- SPINDLE NTC ----------
 # by Tilman from github/hausen8

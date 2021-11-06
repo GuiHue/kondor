@@ -4,14 +4,6 @@
 #   - Control Panel Buttons
 #   - Status lights
 
-
-# ------- Machine On Button -------
-net     DI_CP-machine-one-button                    toggle.machineon.in
-net     machineon-pwr-btn                           toggle2nist.machineon.in            <= toggle.machineon.out
-net     machineon-tog-on                            toggle2nist.machineon.is-on         <=  halui.machine.is-on
-net     machineon-pwr-on                            halui.machine.on                    <= toggle2nist.machineon.on
-net     machineon-pwr-off                           halui.machine.off                   <= toggle2nist.machineon.off
-
 # ------- Feed Rate Override -------
 # Uses 10k potentiometer at control panel to vary feed rate
 
@@ -22,3 +14,38 @@ setp    scale.feed.gain                             0.0417
 net     AI_CP-pot-feed                              => scale.feed.in
 net     feed-override-scaled                        scale.feed.out                         => gmoccapy.feed-override.direct-value
 setp    gmoccapy.analog-enable                      1
+# -------- MACHINE ON --------
+# Uses a momentary switch at contro panel to turn the machine on/off
+net     DI_CP-machine-one-button                    <= toggle.machineon.in 
+net     machineon-toogle                            toggle2nist.machineon.in            <= toggle.machineon.out
+net     machineon-toogle-on                         toggle2nist.machineon.is-on         <=  halui.machine.is-on
+net     machineon-pwr-on                            halui.machine.on                    <= toggle2nist.machineon.on
+net     machineon-pwr-on                            halui.machine.off                   <= toggle2nist.machineon.off
+
+# -------- Start/Resume Hold/Pause --------
+# Uses a momentary switch at contro panel to turn the machine on/off
+
+
+# -------- Feed Rate Override --------
+# Uses a 10k potentiometer at control panel to adjust feed rate
+
+# Scale directly at analog in 2x36.3/24 =~3
+# CHECK HOW THIS IS CALCULATED
+# This will end up being 200% (2.0) =feed override max
+setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     3.025
+setp    gmoccapy.feed-override.analog-enable        1
+# 1.0 / 24V = 0.0147
+net     AI_CP-pot-feed                              => gmoccapy.feed-override.direct-value
+
+# setp    scale.feed.gain                             0.0417
+# net     AI_CP-pot-feed                              => scale.feed.in
+# net     feed-override-scaled                        scale.feed.out                      => gmoccapy.feed-override.direct-value
+
+
+# -------- Spindle Override --------
+#Uses a 10k potentiometer at control panel to adjust spindle rpm
+
+# -------- GMOCCAPY Spindle Setup --------
+# Connect spindle information to gmoccapy spindle info display
+net     spindle-at-speed                            => gmoccapy.spindle_at_speed_led 
+net     spindle-cmd-rps-abs                         => gmoccapy.spindle_feedback_bar

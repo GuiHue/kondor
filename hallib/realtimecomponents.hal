@@ -19,8 +19,11 @@ loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z,pid.
 loadrt  offset                              names=offset_ntc
 loadrt  comp                                names=comp_temp
 loadrt  scale                               names=scale.feed,scale.spindle 
+loadrt  toggle2nist                         names=toggle2nist.machineon
 loadrt  toggle                              names=toggle.machineon
-loadrt  toggle2nist                         names=toogle2nist.machineon
+loadrt  watchdog                            num_inputs=1
+
+
 # ---------- ADD CORE RT COMPONENTS TO SERVOTHREAD ----------
 addf    [HMOT](CARD0).read                  servo-thread
 addf    motion-command-handler              servo-thread
@@ -41,3 +44,6 @@ addf    scale.feed                          servo-thread
 addf    scale.spindle                       servo-thread
 addf    toggle.machineon                    servo-thread
 addf    taggle2nist.machineon               servo-thread
+addf    watchdog.process                    servo-thread
+addf    watchdog.set-timeouts               servo-thread
+

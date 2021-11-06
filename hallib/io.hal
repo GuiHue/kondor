@@ -40,7 +40,6 @@ net     DI_CNC-min-home-y1              <= hm2_7i76e.0.7i76.0.0.input-07-not
 # --- DI 08 CNC-MIN-HOME-Z ---
 net     DI_CNC-min-home-z               <= hm2_7i76e.0.7i76.0.0.input-08-not
 
-
 # --- DI 09 ATC-TOOL-SENSOR ---
 net     DI_ATC-tool-sensor              <= hm2_7i76e.0.7i76.0.0.input-09
 

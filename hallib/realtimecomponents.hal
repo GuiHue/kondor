@@ -43,7 +43,7 @@ addf    comp_temp                           servo-thread
 addf    scale.feed                          servo-thread
 addf    scale.spindle                       servo-thread
 addf    toggle.machineon                    servo-thread
-addf    taggle2nist.machineon               servo-thread
+addf    toggle2nist.machineon               servo-thread
 addf    watchdog.process                    servo-thread
 addf    watchdog.set-timeouts               servo-thread
 

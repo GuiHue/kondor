@@ -20,17 +20,30 @@ net     spindle-at-speed                        =>  spindle.0.at-speed
 net     spindle-vel-fb-rps                      =>  spindle.0.speed-in
 net     spindle-index-enable                    <=>  spindle.0.index-enable
 
-# ---setup spindle control signals---
+# ---------- SPINDLE LOCK ----------
+# Lock the spindle through spindle.0.inhibit whenever either the drawbar is open (=high), no tool is present (=low) or the drawbar actuator valve is active (=high)
+# lut5.spindleinhibit in0 (high) / in1 (low) / in2 (high)or any combination thereof = b1110111 = 0x77
+#  see http://linuxcnc.org/docs/2.8/html/man/man9/lut5.9.html
+# DI_ATC-drawbar-sensor
+# DO_ATC-drawbar-actuator
+# DI_ATC-tool-sensor
+
+setp    lut5.spindleinhibit.function            0x77
+net     DI_ATC-drawbar-sensor                   lut5.spindleinhibit.in-0
+net     DO_ATC-drawbar-actuator                 lut5.spindleinhibit.in-1
+net     DI_ATC-tool-sensor                      lut5.spindleinhibit.in-2     
+net     spindle-inhibit                         lut5.spindleinhibitlut.out                     spindle.0.inhibit
+
 
 #******************************
 # SETUP SPINDLE CONTROL VIA MODBUS
 #******************************
 # VFD Connection via Modbus 
 # Load from different Device (i.e. USB when not using onboard components; Baudrate needs to be set in VFD using Hitachi ProDrive)
-loadusr  -W wj200_vfd                          --device /dev/ttyUSB0 --baud 9600 --parity N --data 8 --stop 1
+#loadusr  -W wj200_vfd                          --device /dev/ttyUSB0 --baud 9600 --parity N --data 8 --stop 1
 
-setp     wj200-vfd.0.mbslaveaddr               1
-setp     wj200-vfd.0.enable                    1
+#setp     wj200-vfd.0.mbslaveaddr               1
+#setp     wj200-vfd.0.enable                    1
 
 setp     pid.s.Pgain                           [SPINDLE_0]P
 setp     pid.s.Igain                           [SPINDLE_0]I
@@ -49,15 +62,15 @@ net      spindle-vel-cmd-rpm                   pid.s.command
 net      spindle-vel-fb-rpm                    pid.s.feedback
 net      spindle-output                        pid.s.output
 
-net      spindle-enable                        spindle.0.on                        wj200-vfd.0.run
-net      spindle-vel-cmd-rps-abs               spindle.0.speed-out-rps-abs         wj200-vfd.0.commanded-frequency
-net      spindle-ccw                           spindle.0.reverse                   wj200-vfd.0.reverse
+#net      spindle-enable                        spindle.0.on                        wj200-vfd.0.run
+#net      spindle-vel-cmd-rps-abs               spindle.0.speed-out-rps-abs         wj200-vfd.0.commanded-frequency
+#net      spindle-ccw                           spindle.0.reverse                   wj200-vfd.0.reverse
 net      spindle-rpm                           spindle.0.speed-out
-net      spindle-at-speed                      wj200-vfd.0.is-at-speed             spindle.0.at-speed
-net      spindle-watchdog                      wj200-vfd.0.watchdog-out            watchdog.input-0
-net      spindle-is-running                    wj200-vfd.0.is-running
-net      spindle-current                       wj200-vfd.0.motor-current
-net      vfd-temp                              wj200-vfd.0.heatsink-temp
+#net      spindle-at-speed                      wj200-vfd.0.is-at-speed             spindle.0.at-speed
+#net      spindle-watchdog                      wj200-vfd.0.watchdog-out            watchdog.input-0
+#net      spindle-is-running                    wj200-vfd.0.is-running
+#net      spindle-current                       wj200-vfd.0.motor-current
+#net      vfd-temp                              wj200-vfd.0.heatsink-temp
 
 setp     watchdog.timeout-0                    1.5
 setp     watchdog.enable-in                    true
@@ -68,8 +81,8 @@ setp     watchdog.enable-in                    true
 # NTC: 103F3950, R25: 10K 1% B: 3950K
 # analogin2: 24V fieldvoltage (since hm2_7i76e.0.7i76.0.0.fieldvoltage is too noisy)
 # analogin3: output of voltage divider (spindle NTC / 10K resistor)
-# offset_ntc is required since we don't need the output voltage but the voltage drop
-# comp_temp compares the computed temperature with a maximum temperature to trigger estop
+# offset.ntc is required since we don't need the output voltage but the voltage drop
+# comp.temp compares the computed temperature with a maximum temperature to trigger estop
 
 loadusr  -W thermistor
 
@@ -77,11 +90,11 @@ setp     thermistor.0.t0-c                     [NTC]NTC_TEMP
 setp     thermistor.0.r0                       [NTC]NTC_RES
 setp     thermistor.0.beta                     [NTC]NTC_BETA
 setp     thermistor.0.r-other                  [NTC]VDIV_RES
-setp     comp_temp.in0                         [NTC]NTC_MAX_TEMP
+setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
 
-net      AI_fieldvoltage                       offset_ntc.fb-in                    
-net      AI_ATC-temp-sensor                    offset_ntc.offset                   
-net      ntc-voltage-drop                      offset_ntc.fb-out                   thermistor.0.v-thermistor
+net      AI_fieldvoltage                       offset.ntc.fb-in                    
+net      AI_ATC-temp-sensor                    offset.ntc.offset                   
+net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
 
 net      AI_fieldvoltage                       thermistor.0.v-total
-net      spindle-temp                          thermistor.0.temperature-c          comp_temp.in1
+net      spindle-temp                          thermistor.0.temperature-c          comp.temp.in1

@@ -19,3 +19,10 @@ _Status_: Experimental, exect substantial changes during setup. In other words: 
 * _Currently_ Manual tool change operated by a toogled push-button on Z axis)
 
 ## Useful Links 
+
+* Physical override using poti https://forum.linuxcnc.org/24-hal-components/36336-physical-feed-override-knob?start=0
+* Run/Step buttons https://forum.linuxcnc.org/47-hal-examples/13201-run-step-hold-resume-buttons?start=0
+* GMOCCAPY Docu https://linuxcnc.org/docs/devel/html/gui/gmoccapy.html
+* GMOCCAPY tool change: https://xpkiller.de/2016/12/06/automatische-werkzeuglaengenmessung/
+* bin to hex converter https://www.rapidtables.com/convert/number/binary-to-hex.html
+* 

@@ -6,6 +6,7 @@
 
 # ------- Feed Rate Override -------
 # Uses 10k potentiometer at control panel to control feed rate
+# Uses same potentiometer to adapt rapid rate!
 # 1.0 / 23.8V = 0.04201
 # may need correction by offsetting
 # Alternative approach
@@ -14,9 +15,28 @@
 # CHECK HOW THIS IS CALCULATED
 
 setp    scale.feed.gain                             0.04201
-net     AI_CP-pot-feed                              => scale.feed.in
-net     feed-override-scaled                        scale.feed.out                         => gmoccapy.feed.feed-override.direct-value
+
+lowpass.N.in float in
+lowpass.N.out float out
+
+out += (in - out) * gain
+
+lowpass.N.load bit in
+
+When TRUE, copy in to out instead of applying the filter equation.
+
+PARAMETERS
+lowpass.N.gain float rw
+setp    lowpass.feed.gain                           0.1
+net     AI_CP-pot-feed                              lowpass.feed.in
+net     low-offset-feed                             lowpass.feed.out                    offset.feed.fb-in
+setp    offset.feed.offset                          0.1
+net     offset-scale-feed                           offset.feed.fb-out                  scale.feed.in                          
+# => scale.feed.in
+net     feed-override-scaled                        scale.feed.out                      => gmoccapy.feed.feed-override.direct-value      => gmoccapy.rapid.rapid-override.direct-value
+setp    gmoccapy.rapid.rapid-override.analog-enable 1
 setp    gmoccapy.feed.feed-override.analog-enable   1
+
 
 # ------- Spindle Override -------
 # Uses 10k potentiometer at control panel to control spindle rpm
@@ -29,9 +49,8 @@ setp    gmoccapy.feed.feed-override.analog-enable   1
 
 setp    scale.spindle.gain                          0.04201
 net     AI_CP-pot-spindle                           => scale.spindle.in
-net     spindle-override-scaled                     scale.spindle.out                         => gmoccapy.spindle.spindle-override.direct-value
+net     spindle-override-scaled                     scale.spindle.out                   => gmoccapy.spindle.spindle-override.direct-value
 setp    gmoccapy.spindle.spindle-override.analog-enable   1
-
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at contro panel to turn the machine on/off
@@ -52,4 +71,4 @@ net     machineon-pwr-off                           halui.machine.off           
 # -------- GMOCCAPY Spindle Setup --------
 # Connect spindle information to gmoccapy spindle info display
 net     spindle-at-speed                            => gmoccapy.spindle_at_speed_led 
-net     spindle-cmd-rps-abs                         => gmoccapy.spindle_feedback_bar
+net     spindle-vel-cmd-rps-abs                     => gmoccapy.spindle_feedback_bar

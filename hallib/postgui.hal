@@ -16,17 +16,6 @@
 
 setp    scale.feed.gain                             0.04201
 
-lowpass.N.in float in
-lowpass.N.out float out
-
-out += (in - out) * gain
-
-lowpass.N.load bit in
-
-When TRUE, copy in to out instead of applying the filter equation.
-
-PARAMETERS
-lowpass.N.gain float rw
 setp    lowpass.feed.gain                           0.1
 net     AI_CP-pot-feed                              lowpass.feed.in
 net     low-offset-feed                             lowpass.feed.out                    offset.feed.fb-in

@@ -43,10 +43,10 @@ net     DI_CNC-min-home-z               <= hm2_7i76e.0.7i76.0.0.input-08-not
 # --- DI 09 ATC-TOOL-SENSOR ---
 # Sensor to indicate the presence of a tool (high when tool present)
 net     DI_ATC-tool-sensor              <= hm2_7i76e.0.7i76.0.0.input-09
-
 # --- DI 10  ATC-DRAWBAR-SENSOR---
 # Sensor to indicate that the drawbar has been activated (high when drawbar open)
 net     DI_ATC-drawbar-sensor           <= hm2_7i76e.0.7i76.0.0.input-10
+net     DI_ATC-drawbar-sensor-not       <= hm2_7i76e.0.7i76.0.0.input-10-not
 
 # --- DI 11 ATC-MAN-BUTTON ---
 net     DI_ATC-man-button               <= hm2_7i76e.0.7i76.0.0.input-11

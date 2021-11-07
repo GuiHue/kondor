@@ -5,34 +5,20 @@
 # watchdog.timeout-0 can not be set to 0.2s here. It may take too long to establish communication via USB
 # therefore it is initially set to a high value and later reduced in postgui.hal
 
-# ---------- Setup general spindle signals ----------
-# all required general spindle signals
-net     spindle-vel-cmd-rps                     <=  spindle.0.speed-out-rps
-net     spindle-vel-cmd-rps-abs                 <=  spindle.0.speed-out-rps-abs
-net     spindle-vel-cmd-rpm                     <=  spindle.0.speed-out
-net     spindle-vel-cmd-rpm-abs                 <=  spindle.0.speed-out-abs
-net     spindle-enable                          <=  spindle.0.on
-net     spindle-cw                              <=  spindle.0.forward
-net     spindle-ccw                             <=  spindle.0.reverse
-net     spindle-brake                           <=  spindle.0.brake
-net     spindle-revs                            =>  spindle.0.revs
-net     spindle-at-speed                        =>  spindle.0.at-speed
-net     spindle-vel-fb-rps                      =>  spindle.0.speed-in
-net     spindle-index-enable                    <=>  spindle.0.index-enable
 
 # ---------- SPINDLE LOCK ----------
 # Lock the spindle through spindle.0.inhibit whenever either the drawbar is open (=high), no tool is present (=low) or the drawbar actuator valve is active (=high)
-# lut5.spindleinhibit in0 (high) / in1 (low) / in2 (high)or any combination thereof = b1110111 = 0x77
+# lut5.spindleinhibit in0 (high) / in1 (low) / in2 (high)or any combination thereof = b11101111 = 0xEF
 #  see http://linuxcnc.org/docs/2.8/html/man/man9/lut5.9.html
 # DI_ATC-drawbar-sensor
 # DO_ATC-drawbar-actuator
 # DI_ATC-tool-sensor
 
-setp    lut5.spindleinhibit.function            0x77
+setp    lut5.spindleinhibit.function            0xEF
 net     DI_ATC-drawbar-sensor                   lut5.spindleinhibit.in-0
 net     DO_ATC-drawbar-actuator                 lut5.spindleinhibit.in-1
 net     DI_ATC-tool-sensor                      lut5.spindleinhibit.in-2     
-net     spindle-inhibit                         lut5.spindleinhibitlut.out                     spindle.0.inhibit
+net     spindle-inhibit                         lut5.spindleinhibit.out                     spindle.0.inhibit
 
 
 #******************************
@@ -40,10 +26,10 @@ net     spindle-inhibit                         lut5.spindleinhibitlut.out      
 #******************************
 # VFD Connection via Modbus 
 # Load from different Device (i.e. USB when not using onboard components; Baudrate needs to be set in VFD using Hitachi ProDrive)
-#loadusr  -W wj200_vfd                          --device /dev/ttyUSB0 --baud 9600 --parity N --data 8 --stop 1
+loadusr  -W wj200_vfd                          --device /dev/ttyUSB0 --baud 9600 --parity N --data 8 --stop 1
 
-#setp     wj200-vfd.0.mbslaveaddr               1
-#setp     wj200-vfd.0.enable                    1
+setp     wj200-vfd.0.mbslaveaddr               1
+setp     wj200-vfd.0.enable                    1
 
 setp     pid.s.Pgain                           [SPINDLE_0]P
 setp     pid.s.Igain                           [SPINDLE_0]I
@@ -62,15 +48,31 @@ net      spindle-vel-cmd-rpm                   pid.s.command
 net      spindle-vel-fb-rpm                    pid.s.feedback
 net      spindle-output                        pid.s.output
 
-#net      spindle-enable                        spindle.0.on                        wj200-vfd.0.run
-#net      spindle-vel-cmd-rps-abs               spindle.0.speed-out-rps-abs         wj200-vfd.0.commanded-frequency
-#net      spindle-ccw                           spindle.0.reverse                   wj200-vfd.0.reverse
+net      spindle-enable                        spindle.0.on                        wj200-vfd.0.run
+net      spindle-vel-cmd-rps-abs               spindle.0.speed-out-rps-abs         wj200-vfd.0.commanded-frequency
+net      spindle-ccw                           spindle.0.reverse                   wj200-vfd.0.reverse
 net      spindle-rpm                           spindle.0.speed-out
-#net      spindle-at-speed                      wj200-vfd.0.is-at-speed             spindle.0.at-speed
-#net      spindle-watchdog                      wj200-vfd.0.watchdog-out            watchdog.input-0
-#net      spindle-is-running                    wj200-vfd.0.is-running
-#net      spindle-current                       wj200-vfd.0.motor-current
-#net      vfd-temp                              wj200-vfd.0.heatsink-temp
+net      spindle-at-speed                      wj200-vfd.0.is-at-speed             spindle.0.at-speed
+net      spindle-watchdog                      wj200-vfd.0.watchdog-out            watchdog.input-0
+net      spindle-is-running                    wj200-vfd.0.is-running
+net      spindle-current                       wj200-vfd.0.motor-current
+net      vfd-temp                              wj200-vfd.0.heatsink-temp
+
+
+# ---------- Setup general spindle signals ----------
+# all required general spindle signals
+#net     spindle-vel-cmd-rps                     <=  spindle.0.speed-out-rps
+#net     spindle-vel-cmd-rps-abs                 <=  spindle.0.speed-out-rps-abs
+#net     spindle-vel-cmd-rpm                     <=  spindle.0.speed-out
+#net     spindle-vel-cmd-rpm-abs                 <=  spindle.0.speed-out-abs
+#net     spindle-enable                          <=  spindle.0.on
+#net     spindle-cw                              <=  spindle.0.forward
+#net     spindle-ccw                             <=  spindle.0.reverse#
+#net     spindle-brake                           <=  spindle.0.brake
+##net     spindle-revs                            =>  spindle.0.revs
+#net     spindle-at-speed                        =>  spindle.0.at-speed
+#net     spindle-vel-fb-rps                      =>  spindle.0.speed-in
+#net     spindle-index-enable                    <=>  spindle.0.index-enable
 
 setp     watchdog.timeout-0                    1.5
 setp     watchdog.enable-in                    true

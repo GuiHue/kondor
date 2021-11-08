@@ -63,15 +63,13 @@ net     DO_ATC-cone-clean                           timedelay.conecleaning.out
 # LED
 # off,              when spindle-is-running =high   and spindle-inhibit =low    and DI_ATC-tool-sensor =high (this is related to spindle-inhibit being low)  --> not ready for tool change   
 # on,               when spindle-is-running =low    and spindle-inhibit =low    and DI_ATC-tool-sensor =high (ready for tool change)
-# blinking fast,    when spindle-is-running =low    and spindle-inhibit =high   and DI_ATC-tool-sensor =high (tool change taking place) 
-# blinking slow,    when spindle-is-running =low    and spindle-inhibit =high   and DI_ATC-tool-sensor =low  (currently no tool) 
+# blinking,         when spindle-is-running =low    and spindle-inhibit =high   and DI_ATC-tool-sensor =low (tool change taking place or not tool - this cannot be distinguished by using the selected inputs) 
 #   Logic Table
 #       sel0=1 sel1=0 sel2=1 >> in5 (light off)                 signal: spindle-inhibit
 #       sel0=0 sel1=0 sel2=1 >> in4 (READY FOR TS light  on)    signal: spindle-inhibit
-#       sel0=0 sel1=1 sel2=1 >> in6 (blink fast)                signal: atcledfast-out
 #       sel0=0 sel1=1 sel2=0 >> in2 (blink slow)                signal: atcledslow-out
        
-
+# Select signal
 net     DI_ATC-tool-sensor                          mux8.atcstatusled.sel2
 net     spindle-is-running                          mux8.atcstatusled.sel0
 net     spindle-inhibit                             and.atcledslow.in0              and.atcledslow.in0              mux8.atcstatusled.sel1       not.spindleinhibit.in  conv_bit_float.spindleinhibit.in 
@@ -81,62 +79,14 @@ net     spindleinhibitnotbfloat                     conv_bit_float.spindleinhibi
 net     spindle-inhibit-not-atc                     conv_bit_float.spindleinhibitnot.out    mux8.atcstatusled.in4                              
 
 # Slow blinking
-setp    timedelay.atcledslow.on-delay               0.4
-setp    timedelay.atcledslow.off-delay              0.4
+setp    timedelay.atcledslow.on-delay               0.3
+setp    timedelay.atcledslow.off-delay              0.3
 net     atcledslow-out                              timedelay.atcledslow.out        not.atcledslow.in           conv_bit_float.atcstatusled-slow.in      
 net     atcledslow-out-mux8                         conv_bit_float.atcstatusled-slow.out mux8.atcstatusled.in2
 net     atcledslownot                               not.atcledslow.out              and.atcledslow.in1
 net     atcledslow-toogle                           and.atcledslow.out              timedelay.atcledslow.in
 
-# Fast blinking
-setp    timedelay.atcledfast.on-delay               0.1
-setp    timedelay.atcledfast.off-delay              0.1
-net     atcledfast-out                              timedelay.atcledfast.out        not.atcledfast.in           conv_bit_float.atcstatusled-fast.in    
-net     atcledfast-out-mux8                         conv_bit_float.atcstatusled-fast.out mux8.atcstatusled.in6
-net     atcledfastnot                               not.atcledfast.out              and.atcledfast.in1
-net     atcledfast-toogle                           and.atcledfast.out              timedelay.atcledfast.in
-
+# Map output signal
 net     atcledout-flu32                             conv_flu32.atcstatusledout.in       mux8.atcstatusled.out
 net     atcledout-conv_u32b                         conv_flu32.atcstatusledout.out      conv_u32b.atcstatusledout.in
 net     DO_ATC-status-light                         conv_u32b.atcstatusledout.out
-
-
-# ---------- TOOLCHANGE ----------
-# spindle-inhibit is linked to a blink function to indicate that the tool holder is not locked
-# blinking of toolchange LED is gained by a loopback of AND -> DELAY -> NOT
-
-#addf     and_led_toolchange                    servo-thread
-#addf     delay_led_toolchange                  servo-thread
-#addf     not_led_toolchange                    servo-thread
-
-#net      toolchange-command                    hm2_7i76e.0.7i84.0.1.input-22
-#net      spindle-inhibit                       and_led_toolchange.in0
-
-#net      led_toolchange-out                    delay_led_toolchange.out            not_led_toolchange.in   hm2_7i76e.0.7i84.0.1.output-12
-#net      led_toolchange-not                    not_led_toolchange.out              and_led_toolchange.in1
-#net      led_toolchange-toogle                 and_led_toolchange.out              delay_led_toolchange.in
-
-#net      tool-released                         hm2_7i76e.0.7i76.0.0.input-08
-#net      tool-locked                           hm2_7i76e.0.7i76.0.0.input-09
-
-#setp     lut_inhibit.function                  0xb
-#net      tool-released                         lut_inhibit.in-0
-#net      tool-locked                           lut_inhibit.in-1
-#net      spindle-inhibit                       lut_inhibit.out                     spindle.0.inhibit
-
-#setp     lut_toolchange.function               0x4
-#net      spindle-is-running                    lut_toolchange.in-0
-#net      toolchange-command                    lut_toolchange.in-1
-#net      toolchange-trigger                    lut_toolchange.out
-
-#setp     delay_cleaning.on-delay               0
-#setp     delay_cleaning.off-delay              1.5
-#setp     delay_toolchange.on-delay             0
-#setp     delay_toolchange.off-delay            2
-
-#net      toolchange-trigger                    toggle_toolchange.in
-#net      toolchange-toggle                     toggle_toolchange.out               delay_toolchange.in
-#net      toolchange-trigger                    delay_cleaning.in
-
-#net      toolchange                            delay_toolchange.out                hm2_7i76e.0.7i76.0.0.output-10
-#net      cone-cleaning                         delay_cleaning.out                  hm2_7i76e.0.7i76.0.0.output-09

@@ -26,3 +26,9 @@ _Status_: Experimental, exect substantial changes during setup. In other words: 
 * GMOCCAPY tool change: https://xpkiller.de/2016/12/06/automatische-werkzeuglaengenmessung/
 * bin to hex converter https://www.rapidtables.com/convert/number/binary-to-hex.html
 * 
+
+## Useful Hints
+* Serial communication common fixes: 
+    * add cnc user to group dialout (debian) using usermod -a -G dialout username
+    * additionally, consider chmod 777 for /dev/ttyUSB0 (or any other device tha tis used)
+* Serial communication using modbus via TCP --> use socat

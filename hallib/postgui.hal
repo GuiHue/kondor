@@ -6,26 +6,26 @@
 
 # ------- Feed Rate Override -------
 # Uses 10k potentiometer at control panel to control feed rate
-# Uses same potentiometer to adapt rapid rate!
+# Uses same potentiometer to adapt rapid rate but with different scale
 # 1.0 / 23.75V = 0.0421
-# may need correction by offsetting
-# Alternative approach
-#setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     3.025
-# Scale directly at analog in 2x36.3/24 =~3
-# CHECK HOW THIS IS CALCULATED
+# gmoccapy applies the scaled value to the specified range according to ini and considers this to be 1
+# For Feed Rate Override this is from 0 to [DISPLAY]MAX_FEED_OVERRIDE
+# For Spindle Override this is from [DISPLAY]MIN_SPINDLE_OVERRIDE to [DISPLAY]MAX_SPINDLE_OVERRIDE
+# As long as the range is symmetric to 100% this is easy 
+
+
 
 setp    scale.feed.gain                             0.0421
+setp    scale.feed.offset                           0.1
+# rapid override needs to be scaled differently as the scale width is smaller: 0-100%
+# 2.0 / 23.75V = 0.0421
+setp    scale.rapid.gain                            0.0842
+setp    scale.rapid.offset                          0.05
 setp    lowpass.feed.gain                           0.01
 net     AI_CP-pot-feed                              lowpass.feed.in
-net     low-offset-feed                             lowpass.feed.out                    offset.feed.fb-in       scale.rapid.in
-setp    offset.feed.offset                          0.05
-net     offset-scale-feed                           offset.feed.fb-out                  scale.feed.in                          
-# => scale.feed.in
-net     feed-override-scaled                        scale.feed.out                      => gmoccapy.feed.feed-override.direct-value      
-# rapi needs to be scaled differently as the scale width is smaller: 0-100%
-# 2.0 / 23.75V = 0.0421
-setp    scale.rapid.gain                             0.0842
-net     rapid-override-scaled                        scale.rapid.out                    => gmoccapy.rapid.rapid-override.direct-value
+net     lowpass-scale-feed-signal                   lowpass.feed.out                    scale.feed.in                                   scale.rapid.in   
+net     scale-gmoccapy-feed                         scale.feed.out                      => gmoccapy.feed.feed-override.direct-value      
+net     scale-gmoccapy-rapid                        scale.rapid.out                     => gmoccapy.rapid.rapid-override.direct-value
 setp    gmoccapy.rapid.rapid-override.analog-enable 1
 setp    gmoccapy.feed.feed-override.analog-enable   1
 
@@ -34,19 +34,12 @@ setp    gmoccapy.feed.feed-override.analog-enable   1
 # Uses 10k potentiometer at control panel to control spindle rpm
 # 1.0 / 23.8V = 0.04201
 # may need correction by offsetting
-# Alternative approach
-#setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     3.025
-# Scale directly at analog in 2x36.3/24 =~3
-# CHECK HOW THIS IS CALCULATED
-
 setp    scale.spindle.gain                          0.04201
 setp    lowpass.spindle.gain                        0.05
 net     AI_CP-pot-spindle                           => lowpass.spindle.in
 net     low-spindle                                 lowpass.spindle.out                 scale.spindle.in
 net     spindle-override-scaled                     scale.spindle.out                   => gmoccapy.spindle.spindle-override.direct-value
 setp    gmoccapy.spindle.spindle-override.analog-enable   1
-
-
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at contro panel to turn the machine on/off
@@ -57,12 +50,30 @@ net     machineon-pwr-on                            halui.machine.on            
 net     machineon-pwr-off                           halui.machine.off                   <= toggle2nist.machineon.off
 
 # -------- Start/Resume Hold/Pause --------
-# Uses a momentary switch at contro panel to turn the machine on/off
+# External Program Pause/Resume and Run/Step Buttons
+#This is how they function:
+#Pressing Run/Step will begin executing a program.
+#Pressing Hold/Resume while a program is running will pause the program.
+#Pressing Run/Step while a program is paused will single step the program.
+#Pressing Hold/Resume while a program is paused will return it to normal run mode.
+
+# Pause/Resume Section
+net pause-resume-btn and.pauseresume1.in0 and.pauseresume2.in0 <= hm2_5i20.0.gpio.027.in_not (this is your input)
+net pause-on toggle2nist.externalprogram.is-on and.pauseresume1.in1 and.runstep1.in1 <= halui.program.is-paused
+net run-on and.pauseresume2.in1 <= halui.program.is-running
+net pause-sig or2.externalprogram.in0 <= and.pauseresume1.out
+net resume-sig or2.externalprogram.in1 <= and.pauseresume2.out
+net toggle-ok toggle.externalprogram.in <= or2.externalprogram.out
+net togglesig toggle2nist.externalprogram.in <= toggle.externalprogram.out
+net toggleon halui.program.pause <= toggle2nist.externalprogram.on
+net toggleoff halui.program.resume <= toggle2nist.externalprogram.off
+# Run/Step Section
+net run-step-btn and.runstep1.in0 and.runstep2.in0 <= hm2_5i20.0.gpio.026.in_not (this is your input)
+net idle-on and.runstep1.in1 <= halui.program.is-idle
+net run-sig halui.mode.auto halui.program.run <= and.runstep1.out
+net step-sig halui.program.step <= and.runstep2.out
 
 
-
-# -------- Spindle Override --------
-#Uses a 10k potentiometer at control panel to adjust spindle rpm
 
 # -------- GMOCCAPY Spindle Setup --------
 # Connect spindle information to gmoccapy spindle info display

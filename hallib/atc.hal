@@ -9,12 +9,12 @@
 
 # Note: At this time, there is only manual tool release implemented
 
-loadusr -W hal_manualtoolchange
+#loadusr -W hal_manualtoolchange
 
-net tool-change-request     iocontrol.0.tool-change       =>  hal_manualtoolchange.change
-net tool-change-confirmed   iocontrol.0.tool-changed      <=  hal_manualtoolchange.changed
-net tool-number             iocontrol.0.tool-prep-number  =>  hal_manualtoolchange.number
-net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+#net tool-change-request     iocontrol.0.tool-change       =>  hal_manualtoolchange.change
+#net tool-change-confirmed   iocontrol.0.tool-changed      <=  hal_manualtoolchange.changed
+#net tool-number             iocontrol.0.tool-prep-number  =>  hal_manualtoolchange.number
+#net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
 
 #net     tool-change gmoccapy.toolchange-change <= iocontrol.0.tool-change
 #net     tool-changed gmoccapy.toolchange-changed <= iocontrol.0.tool-changed
@@ -72,7 +72,7 @@ net     DO_ATC-cone-clean                           timedelay.conecleaning.out
 # Select signal
 net     DI_ATC-tool-sensor                          mux8.atcstatusled.sel2
 net     spindle-is-running                          mux8.atcstatusled.sel0
-net     spindle-inhibit                             and.atcledslow.in0              and.atcledslow.in0              mux8.atcstatusled.sel1       not.spindleinhibit.in  conv_bit_float.spindleinhibit.in 
+net     spindle-inhibit                             and.atcledslow.in0                      mux8.atcstatusled.sel1       not.spindleinhibit.in  conv_bit_float.spindleinhibit.in 
 
 net     spindleinhibitbfloat                        conv_bit_float.spindleinhibit.out       mux8.atcstatusled.in5       
 net     spindleinhibitnotbfloat                     conv_bit_float.spindleinhibitnot.in     not.spindleinhibit.out 
@@ -81,10 +81,10 @@ net     spindle-inhibit-not-atc                     conv_bit_float.spindleinhibi
 # Slow blinking
 setp    timedelay.atcledslow.on-delay               0.3
 setp    timedelay.atcledslow.off-delay              0.3
-net     atcledslow-out                              timedelay.atcledslow.out        not.atcledslow.in           conv_bit_float.atcstatusled-slow.in      
-net     atcledslow-out-mux8                         conv_bit_float.atcstatusled-slow.out mux8.atcstatusled.in2
-net     atcledslownot                               not.atcledslow.out              and.atcledslow.in1
-net     atcledslow-toogle                           and.atcledslow.out              timedelay.atcledslow.in
+net     atcledslow-out                              timedelay.atcledslow.out                not.atcledslow.in           conv_bit_float.atcstatusled-slow.in      
+net     atcledslow-out-mux8                         conv_bit_float.atcstatusled-slow.out    mux8.atcstatusled.in2
+net     atcledslownot                               not.atcledslow.out                      and.atcledslow.in1
+net     atcledslow-toogle                           and.atcledslow.out                      timedelay.atcledslow.in
 
 # Map output signal
 net     atcledout-flu32                             conv_flu32.atcstatusledout.in       mux8.atcstatusled.out

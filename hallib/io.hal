@@ -27,9 +27,8 @@ net     AI_fieldvoltage                 <= hm2_7i76e.0.7i76.0.0.analogin3
 # Signal inversion required 
 net     DI_CNC-min-home-x               <= hm2_7i76e.0.7i76.0.0.input-04-not
 
-# --- DI 05 CNC-POS-LIMIT-X ---
-# NOT IN USE DI_pos-limit-x
-net     DI_05-limx2                     <= hm2_7i76e.0.7i76.0.0.input-05
+# --- DI 05 CP-cycle-pause-button ---
+net     DI_CP-cycle-pause-button        <= hm2_7i76e.0.7i76.0.0.input-05
 
 # --- DI 06 CNC-MIN-HOME-Y2 ---
 net     DI_CNC-min-home-y2              <= hm2_7i76e.0.7i76.0.0.input-06-not
@@ -68,7 +67,7 @@ net     DI_CP-cycle-start-button        <= hm2_7i76e.0.7i76.0.0.input-15
 net     DI_CP-cycle-stop-button         <= hm2_7i76e.0.7i76.0.0.input-16
 
 # --- DI 17 CP-MACHINE-ON-BUTTON ---
-net     DI_CP-machine-one-button        <= hm2_7i76e.0.7i76.0.0.input-17
+net     DI_CP-machine-on-button        <= hm2_7i76e.0.7i76.0.0.input-17
 
 # --- DI 18 CNC-PROBE-ERROR ---
 net     DI_CNC-probe-error              <= hm2_7i76e.0.7i76.0.0.input-18

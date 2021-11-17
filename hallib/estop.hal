@@ -2,9 +2,102 @@
 # Handles all internal processing required to manage estop functions
 # Note: This setup does not have a mean to trigger physical estop from software
 #       Instead, physical estop will trigger linuxcnc and trigger als drives via hardwiring to estop/STO
-#       Further, a semidconductor port of the deployed PILZ relay triggers linuxcnc (DI_ESTOP-ext)
+#       Further, a semiconductor port of the deployed PILZ relay triggers linuxcnc (DI_ESTOP-ext)
 #       Within linuxCNC, there ar emultiple other signal sources that may trigger soft estop
 #       This file also handles warnings
+# Handles and Displays Warnings from Pneumatic Pressure Sensor, Drives and Probe
 
 net     estop-out                               <= iocontrol.0.user-enable-out
 net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
+
+# ----- MERGE SERVO ALM  ----- 
+# in-0  Servo X         HIGH when ALM
+# in-1  Servo Y1            
+# in-2  Servo Y2
+# in-3  Servo Z
+# in-4  Servo A
+# Out   High when ALM
+# Function OR5, whenever any input is true
+setp    lut5.drivealarm.function                0xfffffffe
+net     DI_DRIVE-x-alarm                        lut5.drivealarm.in-0
+net     DI_DRIVE-y1-alarm                       lut5.drivealarm.in-1
+net     DI_DRIVE-y2-alarm                       lut5.drivealarm.in-2
+net     DI_DRIVE-z-alarm                        lut5.drivealarm.in-3
+net     DI_DRIVE-a-alarm                        lut5.drivealarm.in-4
+
+# ----- SOFT ESTOP  ----- 
+#   in0     External Estop from Hardware        HIGH when OK
+#   in1     VFD Error                           LOW when OK
+#   in2     Servo Alarm (merged)                LOW when OK
+#   in3     pendant                             HIGH when OK
+#   in4     watchdog                            HIGH when OK
+#   OUT     iocontrol.0.emc-enable-in           HIGH when OK
+# NEEDS ADAPTATION!
+
+setp    lut5.estop.function                     0x4
+
+net     DI_ESTOP-ext                            lut5.estop.in-0
+net     estop-vfd-error                         lut5.estop.in-1                     wj200-vfd.0.is-alarm
+net     estop-servo-alarm                       lut5.estop.in-2                     lut5.drivealarm.out
+net     pendant_estop                           lut5.estop.in-3
+net     estop-vfd-watchdog                      lut5.estop.in-4                     watchdog.ok-out
+
+# Output LUT5.ESTOP to IOCONTROL
+# net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in        conv_bit_float.estopsignal.in       mux2.estoplight.sel
+# Bypass lut5 for testing purposes
+net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in        not.estop.in            conv_bit_float.estopsignal.in       mux2.estoplight.sel
+
+
+##############################################################################
+# ---------- WARNINGS  ---------- 
+# Servo Warning Signals are connected to linuxcnc without further detailled function. These IO can possibly be made availabe when switchover to mb2hal has been completed
+# Note: Warnings are User information and presently not part of estop!
+
+# ----- Merge Drive Warnings ----- 
+# High when any of the inputs goes high
+setp    lut5.drivewarning.function              0xfffffffe
+net     DI_DRIVE-x-warn                        lut5.drivewarning.in-0
+net     DI_DRIVE-y1-warn                       lut5.drivewarning.in-1
+net     DI_DRIVE-y2-warn                       lut5.drivewarning.in-2
+net     DI_DRIVE-z-warn                        lut5.drivewarning.in-3
+net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
+
+# ----- Trigger Warnings -----  
+# Drive alarm
+net     estop-drive-alarm                       m_drivealm.trigger                    
+# Drive warning
+net     m-drive-warning                         lut5.drivewarning.out   m_drivewarn.trigger
+# Low Pressure Warning
+net     DI_AIR-pressure-alarm                   m_lowpressure.trigger
+# Spindle temperature warning
+net     m-spindle-temp-warning                  comp.temp.out           m_tempwarn.trigger
+# External Estop
+net     DI_ESTOP-ext                            m_estopext.trigger
+# Watchdog
+net     estop-vfd-watchdog                      m_vfdcom.trigger
+# VFD Error
+net     estop-vfd-error                         m_vfderror.trigger
+
+
+# ----- ESTOP/ WARNING LIGHT  ----- 
+# ESTOP: Red Light = Perm on
+# Warning: Red Light = slowly blinking
+# Use mux2 to distinguish between both
+# mux2.estoplight.in0 =  warning out
+# mux2.estoplight.in1 = estop
+# mux2.estoplight.sel = estop triggered
+# convert to float required
+
+
+setp    timedelay.estoplight.on-delay           0.5
+setp    timedelay.estoplight.off-delay          0.5
+net     estop-inverse                           not.estop.out                       and.estoplight.in0    
+net     estopsignal-blink-out                   timedelay.estoplight.out            not.estoplight.in       conv_bit_float.warningsignal.in        
+net     estoplight-not                          not.estoplight.out                  and.estoplight.in1
+net     estoplight-toogle                       and.estoplight.out                  timedelay.estoplight.in
+
+net     mux2-estoplight-warning                 conv_bit_float.warningsignal.out    mux2.estoplight.in0
+net     mux2-estoplight-estopsignal             conv_bit_float.estopsignal.out      mux2.estoplight.in1
+net     mux2-estopsignalout-conv_flu32          conv_flu32.estoplight.in            mux2.estoplight.out
+net     mux2-estopsignalout-conv_u32b           conv_flu32.estoplight.out           conv_u32b.estoplight.in
+net     DO_CP-light-red                         conv_u32b.estoplight.out

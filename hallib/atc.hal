@@ -45,7 +45,7 @@ net     spindle-is-running                          lut5.toolchange.in-0
 net     DI_ATC-man-button                           lut5.toolchange.in-1
 
 net     toolchange-signal                           lut5.toolchange.out             toggle.toolchange.in        and.atcdb.in1
-net     DI_ATC-drawbar-sensor-not                      and.atcdb.in0
+net     DI_ATC-drawbar-sensor-not                   and.atcdb.in0
 net     coneclean-trigger                           timedelay.conecleaning.in       and.atcdb.out
 
 
@@ -90,3 +90,4 @@ net     atcledslow-toogle                           and.atcledslow.out          
 net     atcledout-flu32                             conv_flu32.atcstatusledout.in       mux8.atcstatusled.out
 net     atcledout-conv_u32b                         conv_flu32.atcstatusledout.out      conv_u32b.atcstatusledout.in
 net     DO_ATC-status-light                         conv_u32b.atcstatusledout.out
+net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out

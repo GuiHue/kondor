@@ -55,7 +55,7 @@ net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in    
 
 # ----- Merge Drive Warnings ----- 
 # High when any of the inputs goes high
-setp    lut5.drivewarning.function              0xfffffffe
+setp    lut5.drivewarning.function              0x1
 net     DI_DRIVE-x-warn                        lut5.drivewarning.in-0
 net     DI_DRIVE-y1-warn                       lut5.drivewarning.in-1
 net     DI_DRIVE-y2-warn                       lut5.drivewarning.in-2
@@ -64,18 +64,25 @@ net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
 
 # ----- Trigger Warnings -----  
 # Drive alarm
+setp    m_drivealm.edge                         1 
 net     estop-drive-alarm                       m_drivealm.trigger                    
 # Drive warning
+setp    m_drivewarn.edge                        1
 net     m-drive-warning                         lut5.drivewarning.out   m_drivewarn.trigger
 # Low Pressure Warning
+setp    m_lowpressure.edge                        1
 net     DI_AIR-pressure-alarm                   m_lowpressure.trigger
 # Spindle temperature warning
+setp    m_tempwarn.edge                        1
 net     m-spindle-temp-warning                  comp.temp.out           m_tempwarn.trigger
 # External Estop
+setp    m_estopext.edge                        0
 net     DI_ESTOP-ext                            m_estopext.trigger
 # Watchdog
+setp    m_vfdcom.edge                        0
 net     estop-vfd-watchdog                      m_vfdcom.trigger
 # VFD Error
+setp    m_vfderror.edge                        1
 net     estop-vfd-error                         m_vfderror.trigger
 
 

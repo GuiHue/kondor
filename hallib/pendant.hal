@@ -99,11 +99,12 @@ net     zero-z                                          and.shw.zero-z.out      
 # --- Start Button ---
 net     key-03                                          <= hm2_7i76e.0.TsHW.0.1.key-03 
 net     key-03                                          => or.program-run.in1           # Other in in postgui.hal for CP
-net     key-03                                          => halui.mode.auto
+#net     key-03                                          => halui.mode.auto
 
 # --- Pause/Resume Button ---
 net     key-09                                          <= hm2_7i76e.0.TsHW.0.1.key-09 
 net     key-09                                          => or.program-pause.in1
 
 # --- Emergency SOFT-Stop Mushroom Button---
+# This is low when OK!
 net     pendant_estop                                   <= hm2_7i76e.0.TsHW.0.1.key-10

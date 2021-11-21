@@ -5,11 +5,11 @@
 
 # ---------- LOAD and SETUP MESA ----------
 loadrt  [KINS]KINEMATICS
-loadrt  [EMCMOT]EMCMOT servo_periodnot.shw.sec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
+loadrt  [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
 # num_dio=9 num_aio=1 
 loadrt  hostmot2
 loadrt  hm2_eth board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=11xxxxxx" 
-setp    [HMOT](CARD0).watchdog.timeoutnot.shw.s 5000000 
+setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 
 
 # ---------- LOAD RT COMPONENTS ----------
 loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z,pid.s
@@ -21,7 +21,7 @@ loadrt  toggle                              names=toggle.machineon,toggle.toolch
 loadrt  lowpass                             names=lowpass.feed,lowpass.spindle
 loadrt  ilowpass                            names=ilowpass.shw.enc-smooth		
 loadrt  watchdog                            num_inputs=1
-loadrt  lut5                                names=lut5.spindleinhibit,lut5.toolchange,lut5.estop,lut5.drivealarm,lut5.drivealarm
+loadrt  lut5                                names=lut5.spindleinhibit,lut5.toolchange,lut5.estop,lut5.drivealarm,lut5.drivewarning
 loadrt  timedelay                           names=timedelay.conecleaning,timedelay.atcledslow,timedelay.atcledfast,timedelay.toolchange,timedelay.ledyellow,timedelay.ledgreen,timedelay.stepsig,timedelay.estoplight
 loadrt  mux2                                names=mux2.estoplight
 loadrt  mux4                                names=mux4.ledgreen
@@ -70,7 +70,7 @@ addf    lowpass.spindle                     servo-thread
 addf    lut5.spindleinhibit                 servo-thread
 addf    lut5.toolchange                     servo-thread
 addf    lut5.estop                          servo-thread
-net     lut5.drivealarm                     servo-thread
+addf    lut5.drivealarm                     servo-thread
 addf    lut5.drivewarning                   servo-thread
 addf    timedelay.conecleaning              servo-thread
 addf    timedelay.toolchange                servo-thread

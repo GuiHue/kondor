@@ -6,7 +6,7 @@
 
 # Include  setup for TSHW pendant 
 source  hallib/pendant.hal
-
+source  hallib/estop.hal
 
 # ------- Feed Rate Override -------
 # Uses 10k potentiometer at control panel to control feed rate
@@ -138,3 +138,9 @@ unlinkp iocontrol.0.tool-prepared
 
 
 net tooloffset-z gmoccapy.tooloffset-z <= motion.tooloffset.z
+
+
+
+# ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
+
+setp     watchdog.timeout-0                    0.4

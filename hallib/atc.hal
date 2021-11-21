@@ -90,4 +90,5 @@ net     atcledslow-toogle                           and.atcledslow.out          
 net     atcledout-flu32                             conv_flu32.atcstatusledout.in       mux8.atcstatusled.out
 net     atcledout-conv_u32b                         conv_flu32.atcstatusledout.out      conv_u32b.atcstatusledout.in
 net     DO_ATC-status-light                         conv_u32b.atcstatusledout.out
-net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out
+# To be added at a later stage - careful, appraoch below does not work due to doubl linkage
+#net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out

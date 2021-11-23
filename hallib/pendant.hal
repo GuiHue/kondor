@@ -71,7 +71,7 @@ net     key-ena                                         => and.shw.ena-x.in1
 net     key-ena                                         => and.shw.ena-y.in1
 net     key-ena                                         => and.shw.ena-z.in1
 net     key-ena                                         => halui.mode.manual
-#net key-ena => axisui.notifications-clear 	# Fehler resetten
+#net     key-ena                                         => axisui.notifications-clear 	# Fehler resetten
 net     key-ena-not                                     not.shw.key0.out                => hm2_7i76e.0.TsHW.0.1.led-00
 
 # --- Encoder ---

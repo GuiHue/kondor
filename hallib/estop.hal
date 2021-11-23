@@ -43,9 +43,9 @@ net     pendant_estop                           lut5.estop.in-3
 net     estop-vfd-watchdog                      lut5.estop.in-4                     watchdog.ok-out
 
 # Output LUT5.ESTOP to IOCONTROL
-# net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in        conv_bit_float.estopsignal.in       mux2.estoplight.sel
+# net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in              mux2.estoplight.sel
 # Bypass lut5 for testing purposes
-net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in        not.estop.in            conv_bit_float.estopsignal.in       mux2.estoplight.sel
+net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in        not.estop.in                   mux2.estoplight.sel
 
 
 ##############################################################################
@@ -98,7 +98,7 @@ net     estop-vfd-error                         m_vfderror.trigger
 
 setp    timedelay.estoplight.on-delay           0.5
 setp    timedelay.estoplight.off-delay          0.5
-net     estop-inverse                           not.estop.out                       and.estoplight.in0    
+net     estop-inverse                           not.estop.out                       and.estoplight.in0      conv_bit_float.estopsignal.in
 net     estopsignal-blink-out                   timedelay.estoplight.out            not.estoplight.in       conv_bit_float.warningsignal.in        
 net     estoplight-not                          not.estoplight.out                  and.estoplight.in1
 net     estoplight-toogle                       and.estoplight.out                  timedelay.estoplight.in

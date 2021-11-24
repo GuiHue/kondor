@@ -1,0 +1,49 @@
+( This program  probes in a regular XY grid and writes the              )
+( probed location to the file 'probe-results.ngc' in the same directory )
+( as the .ini file                                                      )
+
+(Configuration section)
+G21   (Metric)
+F20    (probe speed, set here as global speed)
+
+#1= 1  (X start)
+#2=100 (X increment)
+#3=2 (X count)
+
+#4=1
+#5=100
+#6=2 (Y count)
+
+#7=15 (Z safety)
+#8=-25 (Z probe)
+(End configuration section)
+
+(LOGOPEN,probe-results.ngc)
+#9=0 #10=0
+(Go to safe Z Height)
+
+G0Z#7
+    (First loop Y)
+O1 while [#9 lt #6]
+    #10=0
+    (Move to y Y Position)
+    G0 Y[#4+#5*#9]
+    (Now move along X)
+    O2 while [#10 lt #3]
+        G0 X [#1+#2*#10]
+        G38.2Z#8
+        (LOG,G1 X#5061 Y#5062 Z#5063)
+        (Go back up to safe Z)
+        G0Z#7    
+        (Increment X)
+        #10=[#10+1]
+    O2 endwhile
+    (Increment Y)
+    #9=[#9+1]
+O1 endwhile
+
+(LOGCLOSE)
+(Move Z out of harms way)
+G53 G0 Z0
+G0X#1Y#4
+M2

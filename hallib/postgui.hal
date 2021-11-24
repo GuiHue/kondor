@@ -59,52 +59,54 @@ net     machineon-pwr-off                           halui.machine.off           
 #Pressing Run/Step while a program is paused will single step the program.
 #Pressing Hold/Resume while a program is paused will return it to normal run mode.
 
+# Temp disabled for testing
+
 # Pause/Resume Section
-net     DI_CP-cycle-pause-button                    or.program-pause.in0                #other in from pendant in pendant.hal
-net     paussignalin                                or.program-pause.out                and.pauseresume1.in0                and.pauseresume2.in0 
-net     pause-on                                    toggle2nist.externalprogram.is-on   and.pauseresume1.in1    and.runstep2.in1   and.ledyellow.in0  <= halui.program.is-paused
-net     run-on                                      and.pauseresume2.in1                mux4.ledgreen.sel0      conv_bit_float.runon.in          <= halui.program.is-running
-net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
-net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
-net     resume-sig                                  or.externalprogram.in1             <= and.pauseresume2.out
-net     toggle-ok                                   toggle.externalprogram.in           <= or.externalprogram.out
-net     togglesig                                   toggle2nist.externalprogram.in      <= toggle.externalprogram.out
-net     toggleon                                    halui.program.pause                 <= toggle2nist.externalprogram.on
-net     toggleoff                                   halui.program.resume                <= toggle2nist.externalprogram.off
+#net     DI_CP-cycle-pause-button                    or.program-pause.in0                #other in from pendant in pendant.hal
+#net     paussignalin                                or.program-pause.out                and.pauseresume1.in0                and.pauseresume2.in0 
+#net     pause-on                                    toggle2nist.externalprogram.is-on   and.pauseresume1.in1    and.runstep2.in1   and.ledyellow.in0  <= halui.program.is-paused
+#net     run-on                                      and.pauseresume2.in1                mux4.ledgreen.sel0      conv_bit_float.runon.in          <= halui.program.is-running
+#net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
+#net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
+#net     resume-sig                                  or.externalprogram.in1             <= and.pauseresume2.out
+#net     toggle-ok                                   toggle.externalprogram.in           <= or.externalprogram.out
+#net     togglesig                                   toggle2nist.externalprogram.in      <= toggle.externalprogram.out
+#net     toggleon                                    halui.program.pause                 <= toggle2nist.externalprogram.on
+#net     toggleoff                                   halui.program.resume                <= toggle2nist.externalprogram.off
 # Run/Step Section
-net     DI_CP-cycle-start-button                    or.program-run.in0                  # other in from pendant in pendant.hal
-net     runsignalin                                 or.program-run.out                  and.runstep1.in0                    and.runstep2.in0
-net     idle-on                                     and.runstep1.in1                    <= halui.program.is-idle
-net     run-sig                                     halui.mode.auto                     halui.program.run               <= and.runstep1.out
-net     step-sig                                    halui.program.step                  timedelay.stepsig.in            <= and.runstep2.out
-setp    timedelay.stepsig.on-delay                  0
-setp    timedelay.stepsig.off-delay                 2
+#net     DI_CP-cycle-start-button                    or.program-run.in0                  # other in from pendant in pendant.hal
+#net     runsignalin                                 or.program-run.out                  and.runstep1.in0                    and.runstep2.in0
+#net     idle-on                                     and.runstep1.in1                    <= halui.program.is-idle
+#net     run-sig                                     halui.mode.auto                     halui.program.run               <= and.runstep1.out
+#net     step-sig                                    halui.program.step                  timedelay.stepsig.in            <= and.runstep2.out
+#setp    timedelay.stepsig.on-delay                  0
+#setp    timedelay.stepsig.off-delay                 2
 
 # Status light setup
 # YELLOW LED - Blink when pause active
-setp    timedelay.ledyellow.on-delay                   0.5
-setp    timedelay.ledyellow.off-delay                  0.5
-net     DO_CP-light-yellow                              timedelay.ledyellow.out        not.ledyellow.in           
-net     ledyellow-not                                  not.ledyellow.out              and.ledyellow.in1
-net     ledyellow-toogle                               and.ledyellow.out              timedelay.ledyellow.in
+#setp    timedelay.ledyellow.on-delay                   0.5
+#setp    timedelay.ledyellow.off-delay                  0.5
+#net     DO_CP-light-yellow                              timedelay.ledyellow.out        not.ledyellow.in           
+#net     ledyellow-not                                  not.ledyellow.out              and.ledyellow.in1
+#net     ledyellow-toogle                               and.ledyellow.out              timedelay.ledyellow.in
 
 # GREEN LED: on when run-on=high + step-sig-delay=low and blinking for short period of time when run-on=low + step-sig=high
 # mux4.ledgreen          sel1       timedelay.stepsig.out   sel0 run-on (linked above)
 # mux4.ledgreen          sel1=high   sel0=low    in2 --> blink
 # mux4.ledgreen          sel1=low    sel0=high   in1 --> on
-net     timedelay-stepsig                           timedelay.stepsig.out           mux4.ledgreen.sel1      and.ledgreen.in0
-setp    timedelay.ledgreen.on-delay                   0.5
-setp    timedelay.ledgreen.off-delay                  0.5
-net     ledgreen-blink-out                          timedelay.ledgreen.out          not.ledgreen.in       conv_bit_float.ledgreen.in
-net     ledgreen-blink-fb                           conv_bit_float.ledgreen.out     mux4.ledgreen.in2      
-net     ledgreen-not                                not.ledgreen.out                and.ledgreen.in1
-net     ledgreen-toogle                             and.ledgreen.out                timedelay.ledgreen.in
-net     ledgreen-flu32                              mux4.ledgreen.out               conv_flu32.ledgreen.in
-net     ledgreen-conv_u32b                          conv_flu32.ledgreen.out         conv_u32b.ledgreen.in
-net     DO_CP-light-green                           conv_u32b.ledgreen.out 
+#net     timedelay-stepsig                           timedelay.stepsig.out           mux4.ledgreen.sel1      and.ledgreen.in0
+#setp    timedelay.ledgreen.on-delay                   0.5
+#setp    timedelay.ledgreen.off-delay                  0.5
+#net     ledgreen-blink-out                          timedelay.ledgreen.out          not.ledgreen.in       conv_bit_float.ledgreen.in
+#net     ledgreen-blink-fb                           conv_bit_float.ledgreen.out     mux4.ledgreen.in2      
+#net     ledgreen-not                                not.ledgreen.out                and.ledgreen.in1
+#net     ledgreen-toogle                             and.ledgreen.out                timedelay.ledgreen.in
+#net     ledgreen-flu32                              mux4.ledgreen.out               conv_flu32.ledgreen.in
+#net     ledgreen-conv_u32b                          conv_flu32.ledgreen.out         conv_u32b.ledgreen.in
+#net     DO_CP-light-green                           conv_u32b.ledgreen.out 
 
 # Stop/ abort program
-net     DI_CP-cycle-stop-button                     halui.program.stop
+#net     DI_CP-cycle-stop-button                     halui.program.stop
 # Note, that the red light is not being used to indicate any status of the program being stopped but rather emergency behaviour
 
 # -------- GMOCCAPY Spindle Setup --------

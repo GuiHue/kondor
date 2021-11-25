@@ -4,9 +4,11 @@
 #   - Control Panel Buttons
 #   - Status lights
 
-# Include  setup for TSHW pendant 
-source  hallib/pendant2.hal
-source  hallib/estop.hal
+net     estop-out                               <= iocontrol.0.user-enable-out
+net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
+
+# source  hallib/pendant2.hal
+# source  hallib/estop.hal
 
 # ------- Feed Rate Override -------
 # Uses 10k potentiometer at control panel to control feed rate
@@ -31,7 +33,6 @@ net     scale-gmoccapy-rapid                        scale.rapid.out             
 setp    gmoccapy.rapid.rapid-override.analog-enable 1
 setp    gmoccapy.feed.feed-override.analog-enable   1
 
-
 # ------- Spindle Override -------
 # Uses 10k potentiometer at control panel to control spindle rpm
 # 1.0 / 23.8V = 0.04201
@@ -53,19 +54,16 @@ net     machineon-pwr-off                           halui.machine.off           
 
 # -------- Start/Resume Hold/Pause --------
 # External Program Pause/Resume and Run/Step Buttons
-#This is how they function:
-#Pressing Run/Step will begin executing a program.
-#Pressing Hold/Resume while a program is running will pause the program.
-#Pressing Run/Step while a program is paused will single step the program.
-#Pressing Hold/Resume while a program is paused will return it to normal run mode.
-
-# Temp disabled for testing
+# This is how they function:
+# Pressing Run/Step will begin executing a program.
+# Pressing Hold/Resume while a program is running will pause the program.
+# Pressing Run/Step while a program is paused will single step the program.
+# Pressing Hold/Resume while a program is paused will return it to normal run mode.
 
 # Pause/Resume Section
-net     DI_CP-cycle-pause-button                    or.program-pause.in0                #other in from pendant in pendant.hal
-net     pausesignalin                               or.program-pause.out                and.pauseresume1.in0                and.pauseresume2.in0 
-net     pause-on                                    toggle2nist.externalprogram.is-on   and.pauseresume1.in1    and.runstep2.in1   and.ledyellow.in0  <= halui.program.is-paused
-net     run-on                                      and.pauseresume2.in1                mux4.ledgreen.sel0      conv_bit_float.runon.in          <= halui.program.is-running
+net     DI_CP-cycle-pause-button                    and.pauseresume1.in0                and.pauseresume2.in0 
+net     pause-on                                    toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused      and.ledyellow.in0 
+net     run-on                                      and.pauseresume2.in1                <= halui.program.is-running     mux4.ledgreen.sel0          conv_bit_float.runon.in         
 net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
 net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
 net     resume-sig                                  or.externalprogram.in1             <= and.pauseresume2.out
@@ -73,6 +71,7 @@ net     toggle-ok                                   toggle.externalprogram.in   
 net     togglesig                                   toggle2nist.externalprogram.in      <= toggle.externalprogram.out
 net     toggleon                                    halui.program.pause                 <= toggle2nist.externalprogram.on
 net     toggleoff                                   halui.program.resume                <= toggle2nist.externalprogram.off
+
 # Run/Step Section
 net     DI_CP-cycle-start-button                    or.program-run.in0                  # other in from pendant in pendant.hal
 net     runsignalin                                 or.program-run.out                  and.runstep1.in0                    and.runstep2.in0

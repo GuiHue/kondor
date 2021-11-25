@@ -8,9 +8,9 @@ loadrt  [KINS]KINEMATICS
 loadrt  [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
 # num_dio=9 num_aio=1 
 loadrt  hostmot2
-loadrt  hm2_eth board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=0"
+loadrt  hm2_eth board_ip="10.10.10.10" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=10xxxxxx"
 
-# loadrt  hm2_eth board_ip="10.10.10.10" config="num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=11xxxxxx" 
+# loadrt  hm2_eth board_ip="10.10.10.10" config="num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=10xxxxxx" 
 setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 
 
 # ---------- LOAD RT COMPONENTS ----------
@@ -136,6 +136,7 @@ addf    conv_u32b.estoplight                servo-thread
 addf    conv_flu32.estoplight               servo-thread
 addf    or.program-run                      servo-thread
 addf    or.program-pause                    servo-thread
+addf    or.externalprogram                  servo-thread
 addf    ilowpass.shw.enc-smooth             servo-thread
 addf    m_vfdcom                            servo-thread
 addf    m_vfderror                          servo-thread

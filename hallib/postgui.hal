@@ -7,7 +7,7 @@
 net     estop-out                               <= iocontrol.0.user-enable-out
 net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
 
-# source  hallib/pendant2.hal
+ source  hallib/pendant2.hal
 # source  hallib/estop.hal
 
 # ------- Feed Rate Override -------
@@ -61,7 +61,8 @@ net     machineon-pwr-off                           halui.machine.off           
 # Pressing Hold/Resume while a program is paused will return it to normal run mode.
 
 # Pause/Resume Section
-net     DI_CP-cycle-pause-button                    and.pauseresume1.in0                and.pauseresume2.in0 
+net     DI_CP-cycle-pause-button                    or.program-pause.in0
+net     pause-signal                                or.program-pause.out                 and.pauseresume1.in0                and.pauseresume2.in0 
 net     pause-on                                    toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused      and.ledyellow.in0 
 net     run-on                                      and.pauseresume2.in1                <= halui.program.is-running     mux4.ledgreen.sel0          conv_bit_float.runon.in         
 net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1

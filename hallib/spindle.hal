@@ -57,7 +57,8 @@ net      spindle-watchdog                      wj200-vfd.0.watchdog-out         
 net      spindle-is-running                    wj200-vfd.0.is-running
 net      spindle-current                       wj200-vfd.0.motor-current
 net      vfd-temp                              wj200-vfd.0.heatsink-temp
-
+net      vfd-error                             wj200-vfd.0.is-alarm                 not.vfderror.in
+net      vfd-error-inverted                    not.vfderror.out
 
 setp     watchdog.timeout-0                    1.5
 setp     watchdog.enable-in                    true

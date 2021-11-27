@@ -4,11 +4,11 @@
 #   - Control Panel Buttons
 #   - Status lights
 
-net     estop-out                               <= iocontrol.0.user-enable-out
-net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
+#net     estop-out                               <= iocontrol.0.user-enable-out
+#net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
 
- source  hallib/pendant2.hal
-# source  hallib/estop.hal
+source  hallib/pendant2.hal
+source  hallib/estop.hal
 
 # ------- Feed Rate Override -------
 # Uses 10k potentiometer at control panel to control feed rate
@@ -20,7 +20,7 @@ net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
 # As long as the range is symmetric to 100% this is easy 
 
 setp    scale.feed.gain                             0.0421
-setp    scale.feed.offset                           0.1
+setp    scale.feed.offset                           0.0
 # rapid override needs to be scaled differently as the scale width is smaller: 0-100%
 # 2.0 / 23.75V = 0.0421
 setp    scale.rapid.gain                            0.0842

@@ -25,13 +25,13 @@ loadrt  timedelay                           names=timedelay.conecleaning,timedel
 loadrt  mux2                                names=mux2.estoplight
 loadrt  mux4                                names=mux4.ledgreen
 loadrt  mux8                                names=mux8.atcstatusled,mux8.shw.step-choice
-loadrt  not                                 names=not.atcledslow,not.atcledfast,not.spindleinhibit,not.ledyellow,not.ledgreen,not.shw.key0,not.shw.key1,not.shw.key2,not.shw.key3,not.shw.key4,not.shw.key5,not.shw.key6,not.shw.key7,not.shw.key8,not.shw.key9,not.shw.key10,not.estoplight,not.estop
+loadrt  not                                 names=not.atcledslow,not.atcledfast,not.spindleinhibit,not.ledyellow,not.ledgreen,not.shw.key0,not.shw.key1,not.shw.key2,not.shw.key3,not.shw.key4,not.shw.key5,not.shw.key6,not.shw.key7,not.shw.key8,not.shw.key9,not.shw.key10,not.estoplight,not.estop,not.vfderror
 loadrt  and2                                names=and.atcledslow,and.atcledfast,and.atcdb,and.pauseresume1,and.pauseresume2,and.runstep1,and.runstep2,and.ledyellow,and.ledgreen,and.shw.ena-x,and.shw.ena-y,and.shw.ena-z,and.shw.zero-x,and.shw.zero-y,and.shw.zero-z,and.estoplight
 loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause
 loadrt  conv_bit_float                      names=conv_bit_float.spindleinhibit,conv_bit_float.atcstatusled-slow,conv_bit_float.atcstatusled-fast,conv_bit_float.spindleinhibitnot,conv_bit_float.runon,conv_bit_float.ledgreen,conv_bit_float.estopsignal,conv_bit_float.warningsignal
 loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,conv_flu32.ledgreen,conv_flu32.estoplight
 loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv_u32b.ledgreen,conv_u32b.estoplight
-loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold" 
+loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn,m_pendantestop messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold, Pedant ESTOP" 
 
  
 
@@ -101,6 +101,7 @@ addf    not.shw.key8                        servo-thread
 addf    not.shw.key9                        servo-thread
 addf    not.shw.key10                       servo-thread
 addf    not.estop                           servo-thread
+addf    not.vfderror                        servo-thread
 addf    and.atcledslow                      servo-thread
 addf    and.atcledfast                      servo-thread
 addf    and.atcdb                           servo-thread
@@ -142,3 +143,4 @@ addf    m_drivealm                          servo-thread
 addf    m_lowpressure                       servo-thread
 addf    m_drivewarn                         servo-thread
 addf    m_tempwarn                          servo-thread
+addf    m_pendantestop                      servo-thread

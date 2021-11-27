@@ -111,6 +111,7 @@ net key-09 => or.program-pause.in1
 # LED in POSTGUI  
 
 # --- Ermegency SOFT -Stopp ---
-net tshw_estop_key-10 <= hm2_7i76e.0.TsHW.0.1.key-10
+# Unfortunetelly, this is low when ok --> link -not instead
+net pendant_estop <= hm2_7i76e.0.TsHW.0.1.key-10-not
 
 

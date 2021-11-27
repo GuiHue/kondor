@@ -8,83 +8,92 @@
 # Handles and Displays Warnings from Pneumatic Pressure Sensor, Drives and Probe
 
 net     estop-out                               <= iocontrol.0.user-enable-out
-net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
+#net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
 
 # ----- MERGE SERVO ALM  ----- 
-# in-0  Servo X         HIGH when ALM
-# in-1  Servo Y1            
-# in-2  Servo Y2
-# in-3  Servo Z
-# in-4  Servo A
-# Out   High when ALM
-# Function OR5, whenever any input is true
-setp    lut5.drivealarm.function                0xfffffffe
+# in-0  Servo X         HIGH when OK
+# in-1  Servo Y1        HIGH when OK    
+# in-2  Servo Y2        HIGH when OK
+# in-3  Servo Z         HIGH when OK
+# in-4  Servo A         not connected
+# Out   High when ok             
+# Function and5, high, whenever al inputs are true
+setp    lut5.drivealarm.function                0x8000 
 net     DI_DRIVE-x-alarm                        lut5.drivealarm.in-0
 net     DI_DRIVE-y1-alarm                       lut5.drivealarm.in-1
 net     DI_DRIVE-y2-alarm                       lut5.drivealarm.in-2
 net     DI_DRIVE-z-alarm                        lut5.drivealarm.in-3
-net     DI_DRIVE-a-alarm                        lut5.drivealarm.in-4
+# net     DI_DRIVE-a-alarm                        lut5.drivealarm.in-4
 
 # ----- SOFT ESTOP  ----- 
 #   in0     External Estop from Hardware        HIGH when OK
-#   in1     VFD Error                           LOW when OK
-#   in2     Servo Alarm (merged)                LOW when OK
+#   in1     VFD Error                           HIGH when OK due to inversion not.vfderror
+#   in2     Servo Alarm (merged)                HIGH when OK
 #   in3     pendant                             HIGH when OK
 #   in4     watchdog                            HIGH when OK
-#   OUT     iocontrol.0.emc-enable-in           HIGH when OK
+#   OUT     iocontrol.0.emc-enable-in           HIGH when OK (only when and!)
 # NEEDS ADAPTATION!
 
-setp    lut5.estop.function                     0x4
+setp    lut5.estop.function                     0x80000000
 
 net     DI_ESTOP-ext                            lut5.estop.in-0
-net     estop-vfd-error                         lut5.estop.in-1                     wj200-vfd.0.is-alarm
+net     vfd-error-inverted                      lut5.estop.in-1                     
 net     estop-servo-alarm                       lut5.estop.in-2                     lut5.drivealarm.out
 net     pendant_estop                           lut5.estop.in-3
 net     estop-vfd-watchdog                      lut5.estop.in-4                     watchdog.ok-out
 
 # Output LUT5.ESTOP to IOCONTROL
-# net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in              mux2.estoplight.sel
+ net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in              mux2.estoplight.sel
 # Bypass lut5 for testing purposes
-net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in        not.estop.in                   mux2.estoplight.sel
+#net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in        not.estop.in                   mux2.estoplight.sel
 
 
 ##############################################################################
 # ---------- WARNINGS  ---------- 
-# Servo Warning Signals are connected to linuxcnc without further detailled function. These IO can possibly be made availabe when switchover to mb2hal has been completed
+# Servo Warning Signals are connected to linuxcnc without further detailled function
+# Delta manual remains unclear when warn is triggered
 # Note: Warnings are User information and presently not part of estop!
 
 # ----- Merge Drive Warnings ----- 
+# in-0  Servo X         HIGH when OK
+# in-1  Servo Y1        HIGH when OK    
+# in-2  Servo Y2        HIGH when OK
+# in-3  Servo Z         HIGH when OK
+# in-4  Servo A         not connected
+# Out   High when ok   
 # High when any of the inputs goes high
-setp    lut5.drivewarning.function              0x1
-net     DI_DRIVE-x-warn                        lut5.drivewarning.in-0
-net     DI_DRIVE-y1-warn                       lut5.drivewarning.in-1
-net     DI_DRIVE-y2-warn                       lut5.drivewarning.in-2
-net     DI_DRIVE-z-warn                        lut5.drivewarning.in-3
-net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
+setp    lut5.drivewarning.function              0x8000
+net     DI_DRIVE-x-warn                         lut5.drivewarning.in-0
+net     DI_DRIVE-y1-warn                        lut5.drivewarning.in-1
+net     DI_DRIVE-y2-warn                        lut5.drivewarning.in-2
+net     DI_DRIVE-z-warn                         lut5.drivewarning.in-3
+# net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
 
 # ----- Trigger Warnings -----  
 # Drive alarm
 setp    m_drivealm.edge                         1 
 net     estop-drive-alarm                       m_drivealm.trigger                    
 # Drive warning
-setp    m_drivewarn.edge                        1
+setp    m_drivewarn.edge                        0
 net     m-drive-warning                         lut5.drivewarning.out   m_drivewarn.trigger
 # Low Pressure Warning
-setp    m_lowpressure.edge                        1
+setp    m_lowpressure.edge                      0
 net     DI_AIR-pressure-alarm                   m_lowpressure.trigger
 # Spindle temperature warning
-setp    m_tempwarn.edge                        1
+setp    m_tempwarn.edge                         1
 net     m-spindle-temp-warning                  comp.temp.out           m_tempwarn.trigger
 # External Estop
-setp    m_estopext.edge                        0
+setp    m_estopext.edge                         0
 net     DI_ESTOP-ext                            m_estopext.trigger
 # Watchdog
-setp    m_vfdcom.edge                        0
+setp    m_vfdcom.edge                           0
 net     estop-vfd-watchdog                      m_vfdcom.trigger
 # VFD Error
-setp    m_vfderror.edge                        1
+setp    m_vfderror.edge                         1
 net     estop-vfd-error                         m_vfderror.trigger
-
+# Pedant estop 
+setp    m_pendantestop.edge                     0
+net     pendant_estop                         m_pendantestop.trigger
 
 # ----- ESTOP/ WARNING LIGHT  ----- 
 # ESTOP: Red Light = Perm on

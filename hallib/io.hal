@@ -55,7 +55,7 @@ net     DI_ATC-man-button               <= hm2_7i76e.0.7i76.0.0.input-11
 net     DI_ESTOP-ext                    <= hm2_7i76e.0.7i76.0.0.input-12
 
 # --- DI 13 CNC-PROBE---
-net     DI_CNC-probe                    <= hm2_7i76e.0.7i76.0.0.input-13
+net     DI_CNC-probe                    <= hm2_7i76e.0.7i76.0.0.input-13-not
 
 # --- DI 14 CNC-PROBE_OT ---
 net     DI_CNC-probe-ot                 <= hm2_7i76e.0.7i76.0.0.input-14

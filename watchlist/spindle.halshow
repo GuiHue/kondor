@@ -1,0 +1,1 @@
+pin+wj200-vfd.0.commanded-frequency pin+wj200-vfd.0.enable pin+wj200-vfd.0.is-alarm pin+wj200-vfd.0.heatsink-temp pin+spindle.0.speed-cmd-rps pin+spindle.0.speed-out-rps-abs pin+spindle.0.speed-out-rps pin+spindle.0.on pin+spindle.0.speed-in pin+spindle.0.speed-out pin+spindle.0.speed-out-abs

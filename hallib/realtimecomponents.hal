@@ -27,7 +27,7 @@ loadrt  mux4                                names=mux4.ledgreen
 loadrt  mux8                                names=mux8.atcstatusled,mux8.shw.step-choice
 loadrt  not                                 names=not.atcledslow,not.atcledfast,not.spindleinhibit,not.ledyellow,not.ledgreen,not.shw.key0,not.shw.key1,not.shw.key2,not.shw.key3,not.shw.key4,not.shw.key5,not.shw.key6,not.shw.key7,not.shw.key8,not.shw.key9,not.shw.key10,not.estoplight,not.estop,not.vfderror
 loadrt  and2                                names=and.atcledslow,and.atcledfast,and.atcdb,and.pauseresume1,and.pauseresume2,and.runstep1,and.runstep2,and.ledyellow,and.ledgreen,and.shw.ena-x,and.shw.ena-y,and.shw.ena-z,and.shw.zero-x,and.shw.zero-y,and.shw.zero-z,and.estoplight
-loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause
+loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause,or.probe
 loadrt  conv_bit_float                      names=conv_bit_float.spindleinhibit,conv_bit_float.atcstatusled-slow,conv_bit_float.atcstatusled-fast,conv_bit_float.spindleinhibitnot,conv_bit_float.runon,conv_bit_float.ledgreen,conv_bit_float.estopsignal,conv_bit_float.warningsignal
 loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,conv_flu32.ledgreen,conv_flu32.estoplight
 loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv_u32b.ledgreen,conv_u32b.estoplight
@@ -135,6 +135,7 @@ addf    conv_flu32.estoplight               servo-thread
 addf    or.program-run                      servo-thread
 addf    or.program-pause                    servo-thread
 addf    or.externalprogram                  servo-thread
+addf    or.probe                            servo-thread
 addf    ilowpass.shw.enc-smooth             servo-thread
 addf    m_vfdcom                            servo-thread
 addf    m_vfderror                          servo-thread

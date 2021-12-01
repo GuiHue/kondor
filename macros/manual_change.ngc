@@ -1,8 +1,8 @@
 ; manual toolchange with automatic tool length probe 
 
 o<manual_change> sub
-;(debug, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
-;(debug, selected_tool=#<selected_tool> selected_pocket=#<selected_pocket>)
+(debug, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
+(debug, selected_tool=#<selected_tool> selected_pocket=#<selected_pocket>)
 
 ;otherwise after the M6 this information is gone!
 #<tool> = #<selected_tool>
@@ -12,34 +12,36 @@ o<manual_change> sub
 ; or preview will break, so test for '#<_task>' which is 1 for 
 ; the milltask interpreter and 0 in the UI's
 O100 if [#<_task> EQ 0]
-        (debug, Task ist Null)
+        (debug, Task is Null)
 O100     return [999]
 O100 endif
-
+(print, after check)
 ;first go up
 G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
 ; then move to change position
 G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
 G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
-
+(print, after movepos)
 ; cancel tool offset
 G49
-
+(print, before M6)
 ; using the code being remapped here means 'use builtin behaviour'
 M6
-
+(print, afterM6)
 O200 if [#<_hal[probe.use_toolmeasurement]> EQ 0]
+(print, opt out)
 O200 return [3] ; indicate no tool measurement 
 O200 endif
-
+(print, prior move)
 G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 
 
 ; Turn on airblast to clean tool length sensor
 M64 P #<_ini[ATC_PINS]CLEAN_TS>
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
-
+(print, move Z)
 O300 if [#<_hal[probe.ps_searchvel]> LE 0]
+(print, searchvel)
 O300 return [-1] ; indicate searchvel <= 0 
 O300 endif
 

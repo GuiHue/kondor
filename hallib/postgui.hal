@@ -123,23 +123,32 @@ net     spindle-vel-cmd-rps-abs                     => gmoccapy.spindle_feedback
 #net tool-change gmoccapy.toolchange-change <= iocontrol.0.tool-change
 #net tool-changed gmoccapy.toolchange-changed <= iocontrol.0.tool-changed
 #net tool-prep-number gmoccapy.toolchange-number <= iocontrol.0.tool-prep-number
-#net tool-prep-loop iocontrol.0.tool-prepare <= iocontrol.0.tool-prepared
 
 # -------- PROBE SCREEN --------
 # Ensure all toolchange pins are free to use
-unlinkp iocontrol.0.tool-number
-unlinkp iocontrol.0.tool-prep-number
+#unlinkp iocontrol.0.tool-number
+#unlinkp iocontrol.0.tool-prep-number
+#unlinkp iocontrol.0.tool-change
+#unlinkp iocontrol.0.tool-changed
+#unlinkp iocontrol.0.tool-prepare
+#unlinkp iocontrol.0.tool-prepared
+
+# -------- merge probe signal --------
+
+
+
+# The next two lines are only needed if the pins had been connected before
 unlinkp iocontrol.0.tool-change
 unlinkp iocontrol.0.tool-changed
-unlinkp iocontrol.0.tool-prepare
-unlinkp iocontrol.0.tool-prepared
 
+# link to auto tool measurement toolchange, so you get the advantage of tool description on change dialog
 
+# this settings were moved to probe_screen.hal:
+#net tool-change            probe.toolchange-change    <=   iocontrol.0.tool-change 
+#net tool-changed           probe.toolchange-changed   <=   iocontrol.0.tool-changed
+#net tool-prep-number       probe.toolchange-number    <=   iocontrol.0.tool-prep-number
 
-
-
-
-net tooloffset-z gmoccapy.tooloffset-z <= motion.tooloffset.z
+net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
 
 
 

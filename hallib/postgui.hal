@@ -4,11 +4,11 @@
 #   - Control Panel Buttons
 #   - Status lights
 
-#net     estop-out                               <= iocontrol.0.user-enable-out
-#net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
+net     estop-out                               <= iocontrol.0.user-enable-out
+net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
 
-source  hallib/pendant2.hal
-source  hallib/estop.hal
+# source  hallib/pendant2.hal
+# source  hallib/estop.hal
 
 # ------- Feed Rate Override -------
 # Uses 10k potentiometer at control panel to control feed rate
@@ -20,7 +20,7 @@ source  hallib/estop.hal
 # As long as the range is symmetric to 100% this is easy 
 
 setp    scale.feed.gain                             0.0421
-setp    scale.feed.offset                           0.0
+setp    scale.feed.offset                           0.1
 # rapid override needs to be scaled differently as the scale width is smaller: 0-100%
 # 2.0 / 23.75V = 0.0421
 setp    scale.rapid.gain                            0.0842
@@ -61,14 +61,13 @@ net     machineon-pwr-off                           halui.machine.off           
 # Pressing Hold/Resume while a program is paused will return it to normal run mode.
 
 # Pause/Resume Section
-net     DI_CP-cycle-pause-button                    or.program-pause.in0
-net     pause-signal                                or.program-pause.out                 and.pauseresume1.in0                and.pauseresume2.in0 
+net     DI_CP-cycle-pause-button                    and.pauseresume1.in0                and.pauseresume2.in0 
 net     pause-on                                    toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused      and.ledyellow.in0 
 net     run-on                                      and.pauseresume2.in1                <= halui.program.is-running     mux4.ledgreen.sel0          conv_bit_float.runon.in         
 net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
 net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
 net     resume-sig                                  or.externalprogram.in1             <= and.pauseresume2.out
-net     toggle-ok                                   toggle.externalprogram.in           <= or.externalprogram.out
+net     toggle-ok-in                                toggle.externalprogram.in           <= or.externalprogram.out
 net     togglesig                                   toggle2nist.externalprogram.in      <= toggle.externalprogram.out
 net     toggleon                                    halui.program.pause                 <= toggle2nist.externalprogram.on
 net     toggleoff                                   halui.program.resume                <= toggle2nist.externalprogram.off
@@ -145,4 +144,4 @@ net tooloffset-z gmoccapy.tooloffset-z <= motion.tooloffset.z
 
 # ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
 
-setp     watchdog.timeout-0                    0.4
+setp     watchdog.timeout-0                    1

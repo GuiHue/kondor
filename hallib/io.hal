@@ -134,7 +134,7 @@ net     DO_ATC-cone-clean               => hm2_7i76e.0.7i76.0.0.output-03
 net     DO_ATC-drawbar-actuator         => hm2_7i76e.0.7i76.0.0.output-04
 
 # --- DO 05 CNC-PROBE-BLOWOFF  ---
-net     DO_CNC-probe-blowoff            => hm2_7i76e.0.7i76.0.0.output-05
+net     DO_CNC-probe-blowoff            => hm2_7i76e.0.7i76.0.0.output-05           motion.digital-out-00 
 
 # --- DO 06 CNC-PROBE-COVER-ACTUATOR  ---
 net     DO_CNC-probe-cover-actuator     => hm2_7i76e.0.7i76.0.0.output-06

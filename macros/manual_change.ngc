@@ -39,6 +39,9 @@ G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 ; Turn on airblast to clean tool length sensor
 M64 P #<_ini[ATC_PINS]CLEAN_TS>
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
+; Turn off airblast to clean sensor
+M65 P #<_ini[ATC_PINS]CLEAN_TS>
+
 (print, move Z)
 O300 if [#<_hal[probe.ps_searchvel]> LE 0]
 (print, searchvel)
@@ -56,8 +59,6 @@ G38.4 Z2
 F #<_hal[probe.ps_probevel]>
 G38.2 Z-2
 
-; Turn off airblast to clean sensor
-M65 P #<_ini[ATC_PINS]CLEAN_TS>
 
 O500 if [#5070 EQ 0]
 G90
@@ -72,7 +73,7 @@ G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
 #<probeheight> = #<_hal[probe.probeheight]> 
 #<blockheight> = #<_hal[probe.blockheight]>
 
-;(DEBUG, #<touch_result>  #<probeheight>  #<blockheight>)
+(DEBUG, #<touch_result>  #<probeheight>  #<blockheight>)
 
 G10 L1 P#<tool> Z[#<touch_result> - #<_hal[probe.probeheight]> + #<_hal[probe.blockheight]>]
 G43

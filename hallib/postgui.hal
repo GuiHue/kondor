@@ -154,4 +154,4 @@ net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-p
 
 # ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
 
-setp     watchdog.timeout-0                    0.4
+setp     watchdog.timeout-0                    1.0

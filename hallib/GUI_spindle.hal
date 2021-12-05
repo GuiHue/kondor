@@ -1,40 +1,5 @@
 # All HAL commands for spindle GUI in gmoccapy
 
-
-####
-# Setup buttons
-####
-loadrt buttonrow names=br_water,br_dustseal
-addf br_water servo-thread
-addf br_dustseal servo-thread
-
-
-
-# button row water cooling
-net br_water_io_auto      br_water.io-auto  <= spindleUI.lb_water_auto-button
-net br_water_io_auto_led  br_water.led-auto => spindleUI.lb_water_auto-light
-net br_water_io_off      br_water.io-off  <= spindleUI.lb_water_off-button
-net br_water_io_off_led  br_water.led-off => spindleUI.lb_water_off-light
-net br_water_io_on      br_water.io-on  <= spindleUI.lb_water_on-button
-net br_water_io_on_led  br_water.led-on => spindleUI.lb_water_on-light
-net spindle-enable	    br_water.val-auto 
-net cooling_enable      br_water.out	
-
-# button row dust seal air
-net br_dustseal_io_auto      br_dustseal.io-auto  <= spindleUI.lb_dustseal_auto-button
-net br_dustseal_io_auto_led  br_dustseal.led-auto => spindleUI.lb_dustseal_auto-light
-net br_dustseal_io_off      br_dustseal.io-off  <= spindleUI.lb_dustseal_off-button
-net br_dustseal_io_off_led  br_dustseal.led-off => spindleUI.lb_dustseal_off-light
-net br_dustseal_io_on      br_dustseal.io-on  <= spindleUI.lb_dustseal_on-button
-net br_dustseal_io_on_led  br_dustseal.led-on => spindleUI.lb_dustseal_on-light
-net spindle-enable	    br_dustseal.val-auto 
-net dustsealair_enable      br_dustseal.out
-
-
-#4. Wenn man das Modul sperren möchte (so wie ich die Ventile vom ATC wenn die Spindel dreht :huh: ), geht das über den disable-Eingang. Der setzt out hart auf 0.
-# net spindle-running br_lock.disable
-
-
 ####
 # Setup displays
 ####
@@ -46,18 +11,10 @@ net spindle-vel-cmd-rpm spindleUI.meter_rpm
 
 # Connect LEDS
 # Status Information
-net airpressure     spindleUI.led_airpressure
-net spindle_tool    spindleUI.led_toolinspindle
-net spindle_drawbar spindleUI.led_clampopen
+net DI_AIR-pressure-alarm     spindleUI.led_airpressure
+net DI_ATC-tool-sensor    spindleUI.led_toolinspindle
+net sDI_ATC-drawbar-sensor  spindleUI.led_clampopen
 
-
-net atc_toggleout spindleUI.led_unclamptool
-net atc_toggleout_inverted spindleUI.led_clamptool
-
-# Feedback from active components
-net cooling_enable spindleUI.led_water
-net dustsealair_enable spindleUI.led_dustseal
-net atc_toggleout spindleUI.led_coneclean
 
 # Tool Information
 net toolnumber  iocontrol.0.tool-number 

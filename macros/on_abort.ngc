@@ -4,5 +4,7 @@ o<on_abort> sub
 G90
 G40
 G49
+M9
+M5
 o<on_abort> endsub
 M2

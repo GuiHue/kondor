@@ -20,7 +20,7 @@ net     AI_CP-pot-spindle               <= hm2_7i76e.0.7i76.0.0.analogin1
 net     AI_ATC-temp-sensor              <= hm2_7i76e.0.7i76.0.0.analogin2
 
 # --- AI 03 FIELDVOLTAGE ---
-# Reference voltage 24v for NTC resitor 
+# Reference voltage 24v  
 net     AI_fieldvoltage                 <= hm2_7i76e.0.7i76.0.0.analogin3
 
 # --- DI 04 CNC-MIN-HOME-X ---

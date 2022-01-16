@@ -37,7 +37,7 @@ net key-0001  => mux8.shw.step-choice.sel0
 net key-001   => mux8.shw.step-choice.sel1
 net key-01    => mux8.shw.step-choice.sel2
 
-setp mux8.shw.step-choice.in1 0.01
+setp mux8.shw.step-choice.in1 0.001
 setp mux8.shw.step-choice.in2 0.1
 setp mux8.shw.step-choice.in4 1.0
 

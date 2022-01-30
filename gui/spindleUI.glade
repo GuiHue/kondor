@@ -146,42 +146,6 @@
               <placeholder/>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
               <object class="HAL_LED" id="led_airpressure">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -385,11 +349,35 @@
                 <property name="can_focus">False</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="HAL_ToggleButton" id="toggle_vac">
-                    <property name="label" translatable="yes">On/Off</property>
+                  <object class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="HALIO_Button" id="vacon">
+                        <property name="label" translatable="yes">ON</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="HALIO_Button" id="vacoff">
+                        <property name="label" translatable="yes">OFF</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -404,6 +392,9 @@
                 <property name="top_attach">8</property>
                 <property name="bottom_attach">9</property>
               </packing>
+            </child>
+            <child>
+              <placeholder/>
             </child>
             <child>
               <object class="HAL_Label" id="hal_label9">

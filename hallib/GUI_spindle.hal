@@ -28,4 +28,9 @@ net toolprepnumber spindleUI.label_tool_prep
 net pocketprepnumer spindleUI.label_pocket_prep
 
 
-net DO_AUX-vac-remote spindleUI.toggle_vac spindleUI.led_vac
+net DO_AUX-vac-remote  spindleUI.led_vac
+
+# Turn on VAC
+net gui_vac_on  spindleUI.vacon  halui.mdi-command-03
+# TURN OFF VAC
+net gui_vac_off  spindleUI.vacoff  halui.mdi-command-04

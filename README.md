@@ -1,7 +1,7 @@
 # LinuxCNC Config for groot2.0
 Repository for all things related to the linuxCNC and MESA based control system of my CNC router groot2.0
 
-_Status_: Experimental, exect substantial changes during setup. In other words: For the love of all that is holy: Don't try this at home. It couldn't possibly be more broken and machine specific.
+_Status_: Experimental, expect substantial changes during setup. In other words: For the love of all that is holy: Don't try this at home. It couldn't possibly be more broken and machine specific.
 
 ## About the machine
 * CNC router made from aluminium profile and plate based on a design by fraseserbruch.de
@@ -16,7 +16,8 @@ _Status_: Experimental, exect substantial changes during setup. In other words: 
     * Further features: Status lights, control consolde for start/stop and feed and spindle override
 
 ## About the config
-* _Currently_ Manual tool change operated by a toogled push-button on Z axis)
+* _Currently_ Manual tool change operated by a toogled push-button on Z axis
+* in the process of being converted to probe_basic
 
 ## Useful Links 
 
@@ -32,5 +33,3 @@ _Status_: Experimental, exect substantial changes during setup. In other words: 
     * add cnc user to group dialout (debian) using usermod -a -G dialout username
     * additionally, consider chmod 777 for /dev/ttyUSB0 (or any other device tha tis used)
 * Serial communication using modbus via TCP --> use socat
-
-Install all the things.

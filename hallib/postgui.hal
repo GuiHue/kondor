@@ -28,10 +28,10 @@ setp    scale.rapid.offset                          0.05
 setp    lowpass.feed.gain                           0.01
 net     AI_CP-pot-feed                              lowpass.feed.in
 net     lowpass-scale-feed-signal                   lowpass.feed.out                    scale.feed.in                                   scale.rapid.in   
-net     scale-gmoccapy-feed                         scale.feed.out                      => gmoccapy.feed.feed-override.direct-value      
-net     scale-gmoccapy-rapid                        scale.rapid.out                     => gmoccapy.rapid.rapid-override.direct-value
-setp    gmoccapy.rapid.rapid-override.analog-enable 1
-setp    gmoccapy.feed.feed-override.analog-enable   1
+#net     scale-gmoccapy-feed                         scale.feed.out                      => gmoccapy.feed.feed-override.direct-value      
+#net     scale-gmoccapy-rapid                        scale.rapid.out                     => gmoccapy.rapid.rapid-override.direct-value
+#setp    gmoccapy.rapid.rapid-override.analog-enable 1
+#setp    gmoccapy.feed.feed-override.analog-enable   1
 
 # ------- Spindle Override -------
 # Uses 10k potentiometer at control panel to control spindle rpm
@@ -41,8 +41,8 @@ setp    scale.spindle.gain                          0.04201
 setp    lowpass.spindle.gain                        0.05
 net     AI_CP-pot-spindle                           => lowpass.spindle.in
 net     low-spindle                                 lowpass.spindle.out                 scale.spindle.in
-net     spindle-override-scaled                     scale.spindle.out                   => gmoccapy.spindle.spindle-override.direct-value
-setp    gmoccapy.spindle.spindle-override.analog-enable   1
+#net     spindle-override-scaled                     scale.spindle.out                   => gmoccapy.spindle.spindle-override.direct-value
+#setp    gmoccapy.spindle.spindle-override.analog-enable   1
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at contro panel to turn the machine on/off

@@ -32,3 +32,5 @@ _Status_: Experimental, exect substantial changes during setup. In other words: 
     * add cnc user to group dialout (debian) using usermod -a -G dialout username
     * additionally, consider chmod 777 for /dev/ttyUSB0 (or any other device tha tis used)
 * Serial communication using modbus via TCP --> use socat
+
+Install all the things.

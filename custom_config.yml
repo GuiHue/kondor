@@ -4,6 +4,13 @@ windows:
     kwargs:
       confirm_exit: false
 
+data_plugins:
+  tooltable:
+    kwargs:
+      # specify the columns that should be read and writen to the
+      # tooltable file. To use all columns set to: TPXYZABCUVWDIJQR
+      columns: PTZDXYDR
+
 settings:
 
   # VTK backplot view settings

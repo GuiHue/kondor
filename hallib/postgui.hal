@@ -19,30 +19,50 @@ source  hallib/estop.hal
 # For Spindle Override this is from [DISPLAY]MIN_SPINDLE_OVERRIDE to [DISPLAY]MAX_SPINDLE_OVERRIDE
 # As long as the range is symmetric to 100% this is easy 
 
-setp    scale.feed.gain                             0.0421
-setp    scale.feed.offset                           0.0
+setp    scale.feed.gain                             8.1
+setp    scale.feed.offset                           16.9
 # rapid override needs to be scaled differently as the scale width is smaller: 0-100%
 # 2.0 / 23.75V = 0.0421
-setp    scale.rapid.gain                            0.0842
-setp    scale.rapid.offset                          0.05
+#setp    scale.rapid.gain                            4.21
+#setp    scale.rapid.offset                          7.5
 setp    lowpass.feed.gain                           0.01
 net     AI_CP-pot-feed                              lowpass.feed.in
-net     lowpass-scale-feed-signal                   lowpass.feed.out                    scale.feed.in                                   scale.rapid.in   
-#net     scale-gmoccapy-feed                         scale.feed.out                      => gmoccapy.feed.feed-override.direct-value      
-#net     scale-gmoccapy-rapid                        scale.rapid.out                     => gmoccapy.rapid.rapid-override.direct-value
-#setp    gmoccapy.rapid.rapid-override.analog-enable 1
-#setp    gmoccapy.feed.feed-override.analog-enable   1
+net     lowpass-scale-feed-signal                   lowpass.feed.out                    scale.feed.in                                   #scale.rapid.in   
+net     feed-override-scale      scale.feed.out  => conv_fls32.feed.in
+net     feed-override-scale-conv conv_fls32.feed.out halui.feed-override.counts 
+#net     rapid-override-scale      scale.rapid.out  => conv_fls32.rapid.in
+#net     rapid-override-scale-conv conv_fls32.rapid.out halui.rapid-override.counts 
+
+setp    halui.feed-override.direct-value false
+setp    halui.feed-override.scale 0.01
+#setp    halui.rapid-override.direct-value false
+#setp    halui.rapid-override.scale 0.01
 
 # ------- Spindle Override -------
 # Uses 10k potentiometer at control panel to control spindle rpm
 # 1.0 / 23.8V = 0.04201
 # may need correction by offsetting
-setp    scale.spindle.gain                          0.04201
-setp    lowpass.spindle.gain                        0.05
+
+
+setp    scale.spindle.gain                          5.2925
+setp    scale.spindle.offset                          7.5
+setp    lowpass.spindle.gain                        0.01
 net     AI_CP-pot-spindle                           => lowpass.spindle.in
 net     low-spindle                                 lowpass.spindle.out                 scale.spindle.in
-#net     spindle-override-scaled                     scale.spindle.out                   => gmoccapy.spindle.spindle-override.direct-value
-#setp    gmoccapy.spindle.spindle-override.analog-enable   1
+net     spindle-override-scale      scale.spindle.out  => conv_fls32.spindle-scale.in
+net     spindle-override-scale-conv conv_fls32.spindle-scale.out halui.spindle.0.override.counts
+setp    halui.spindle.0.override.direct-value false
+setp    halui.spindle.0.override.scale 0.01
+
+# -------- probe basic spindle data --------
+net  spindle-current qtpyvcp.spindle-load-indicator.in-f 
+setp qtpyvcp.spindle-load-indicator.max-val 8
+setp qtpyvcp.spindle-load-indicator.min-val 0
+
+net spindle-temp qtpyvcp.spindle-temp.in 
+net spindle-at-speed qtpyvcp.spindleatspeed.on
+
+
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at contro panel to turn the machine on/off
@@ -109,49 +129,71 @@ net     DO_CP-light-green                           conv_u32b.ledgreen.out      
 net     DI_CP-cycle-stop-button                     halui.program.stop
 # Note, that the red light is not being used to indicate any status of the program being stopped but rather emergency behaviour
 
-# -------- GMOCCAPY Spindle Setup --------
-# Connect spindle information to gmoccapy spindle info display
-net     spindle-at-speed                            => gmoccapy.spindle_at_speed_led 
-net     spindle-vel-cmd-rps-abs                     => gmoccapy.spindle_feedback_bar
+loadusr -W hal_manualtoolchange
+net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
+net tool-changed iocontrol.0.tool-changed <= hal_manualtoolchange.changed
+net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
+net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
 
+# -------- probe basic spindle data --------
+net  spindle-current qtpyvcp.spindle-load-indicator.in-f 
+setp qtpyvcp.spindle-load-indicator.max-val 8
+setp qtpyvcp.spindle-load-indicator.min-val 0
+net vfd-temp qtpyvcp.vfd-temp.in
+net spindle-current  qtpyvcp.spindle-amp.in 
 
-# -------- GMOCCAPY Tool Setup --------
-#unlinkp iocontrol.0.tool-change
-#unlinkp iocontrol.0.tool-changed
-#unlinkp iocontrol.0.tool-prep-number
-#unlinkp iocontrol.0.tool-prepared
-#net tool-change gmoccapy.toolchange-change <= iocontrol.0.tool-change
-#net tool-changed gmoccapy.toolchange-changed <= iocontrol.0.tool-changed
-#net tool-prep-number gmoccapy.toolchange-number <= iocontrol.0.tool-prep-number
-
-# -------- PROBE SCREEN --------
-# Ensure all toolchange pins are free to use
-#unlinkp iocontrol.0.tool-number
-#unlinkp iocontrol.0.tool-prep-number
-#unlinkp iocontrol.0.tool-change
-#unlinkp iocontrol.0.tool-changed
-#unlinkp iocontrol.0.tool-prepare
-#unlinkp iocontrol.0.tool-prepared
-
-# -------- merge probe signal --------
-
-
-
-# The next two lines are only needed if the pins had been connected before
-unlinkp iocontrol.0.tool-change
-unlinkp iocontrol.0.tool-changed
-
-# link to auto tool measurement toolchange, so you get the advantage of tool description on change dialog
-
-# this settings were moved to probe_screen.hal:
-#net tool-change            probe.toolchange-change    <=   iocontrol.0.tool-change 
-#net tool-changed           probe.toolchange-changed   <=   iocontrol.0.tool-changed
-#net tool-prep-number       probe.toolchange-number    <=   iocontrol.0.tool-prep-number
-
-net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
-
-
+net spindle-temp qtpyvcp.spindle-temp.in 
+net spindle-at-speed qtpyvcp.spindleatspeed.on
 
 # ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
 
 setp     watchdog.timeout-0                    1.0
+
+
+
+##############################################################################
+# ---------- WARNINGS  ---------- 
+# Servo Warning Signals are connected to linuxcnc without further detailled function
+# Delta manual remains unclear when warn is triggered
+# Note: Warnings are User information and presently not part of estop!
+
+# ----- Merge Drive Warnings ----- 
+# in-0  Servo X         HIGH when OK
+# in-1  Servo Y1        HIGH when OK    
+# in-2  Servo Y2        HIGH when OK
+# in-3  Servo Z         HIGH when OK
+# in-4  Servo A         not connected
+# Out   High when ok   
+# High when any of the inputs goes high
+setp    lut5.drivewarning.function              0x8000
+net     DI_DRIVE-x-warn                         lut5.drivewarning.in-0
+net     DI_DRIVE-y1-warn                        lut5.drivewarning.in-1
+net     DI_DRIVE-y2-warn                        lut5.drivewarning.in-2
+net     DI_DRIVE-z-warn                         lut5.drivewarning.in-3
+# net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
+
+# ----- Trigger Warnings -----  
+# Drive alarm
+setp    m_drivealm.edge                         1 
+net     estop-drive-alarm                       m_drivealm.trigger                    
+# Drive warning
+setp    m_drivewarn.edge                        0
+net     m-drive-warning                         lut5.drivewarning.out   m_drivewarn.trigger
+# Low Pressure Warning
+setp    m_lowpressure.edge                      0
+net     DI_AIR-pressure-alarm                   m_lowpressure.trigger
+# Spindle temperature warning
+setp    m_tempwarn.edge                         1
+net     m-spindle-temp-warning                  comp.temp.out           m_tempwarn.trigger
+# External Estop
+setp    m_estopext.edge                         0
+net     DI_ESTOP-ext                            m_estopext.trigger
+# Watchdog
+setp    m_vfdcom.edge                           0
+net     estop-vfd-watchdog                      m_vfdcom.trigger
+# VFD Error
+setp    m_vfderror.edge                         1
+net     estop-vfd-error                         m_vfderror.trigger
+# Pedant estop 
+setp    m_pendantestop.edge                     0
+net     pendant_estop                         m_pendantestop.trigger

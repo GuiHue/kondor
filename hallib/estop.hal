@@ -48,52 +48,7 @@ net     estop-vfd-watchdog                      lut5.estop.in-4                 
 #net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in        not.estop.in                   mux2.estoplight.sel
 
 
-##############################################################################
-# ---------- WARNINGS  ---------- 
-# Servo Warning Signals are connected to linuxcnc without further detailled function
-# Delta manual remains unclear when warn is triggered
-# Note: Warnings are User information and presently not part of estop!
 
-# ----- Merge Drive Warnings ----- 
-# in-0  Servo X         HIGH when OK
-# in-1  Servo Y1        HIGH when OK    
-# in-2  Servo Y2        HIGH when OK
-# in-3  Servo Z         HIGH when OK
-# in-4  Servo A         not connected
-# Out   High when ok   
-# High when any of the inputs goes high
-setp    lut5.drivewarning.function              0x8000
-net     DI_DRIVE-x-warn                         lut5.drivewarning.in-0
-net     DI_DRIVE-y1-warn                        lut5.drivewarning.in-1
-net     DI_DRIVE-y2-warn                        lut5.drivewarning.in-2
-net     DI_DRIVE-z-warn                         lut5.drivewarning.in-3
-# net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
-
-# ----- Trigger Warnings -----  
-# Drive alarm
-setp    m_drivealm.edge                         1 
-net     estop-drive-alarm                       m_drivealm.trigger                    
-# Drive warning
-setp    m_drivewarn.edge                        0
-net     m-drive-warning                         lut5.drivewarning.out   m_drivewarn.trigger
-# Low Pressure Warning
-setp    m_lowpressure.edge                      0
-net     DI_AIR-pressure-alarm                   m_lowpressure.trigger
-# Spindle temperature warning
-setp    m_tempwarn.edge                         1
-net     m-spindle-temp-warning                  comp.temp.out           m_tempwarn.trigger
-# External Estop
-setp    m_estopext.edge                         0
-net     DI_ESTOP-ext                            m_estopext.trigger
-# Watchdog
-setp    m_vfdcom.edge                           0
-net     estop-vfd-watchdog                      m_vfdcom.trigger
-# VFD Error
-setp    m_vfderror.edge                         1
-net     estop-vfd-error                         m_vfderror.trigger
-# Pedant estop 
-setp    m_pendantestop.edge                     0
-net     pendant_estop                         m_pendantestop.trigger
 
 # ----- ESTOP/ WARNING LIGHT  ----- 
 # ESTOP: Red Light = Perm on

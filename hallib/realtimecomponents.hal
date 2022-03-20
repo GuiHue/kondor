@@ -30,6 +30,7 @@ loadrt  and2                                names=and.atcledslow,and.atcledfast,
 loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause,or.probe
 loadrt  conv_bit_float                      names=conv_bit_float.spindleinhibit,conv_bit_float.atcstatusled-slow,conv_bit_float.atcstatusled-fast,conv_bit_float.spindleinhibitnot,conv_bit_float.runon,conv_bit_float.ledgreen,conv_bit_float.estopsignal,conv_bit_float.warningsignal
 loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,conv_flu32.ledgreen,conv_flu32.estoplight
+loadrt  conv_float_s32                       names=conv_fls32.spindle-scale,conv_fls32.feed,conv_fls32.rapid
 loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv_u32b.ledgreen,conv_u32b.estoplight
 loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn,m_pendantestop messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold, Pedant ESTOP" 
 
@@ -127,6 +128,9 @@ addf    conv_bit_float.ledgreen             servo-thread
 addf    conv_bit_float.estopsignal          servo-thread
 addf    conv_bit_float.warningsignal        servo-thread
 addf    conv_u32b.atcstatusledout           servo-thread
+addf    conv_fls32.spindle-scale            servo-thread
+addf    conv_fls32.feed                     servo-thread
+#addf    conv_fls32.rapid                     servo-thread
 addf    conv_flu32.atcstatusledout          servo-thread
 addf    conv_u32b.ledgreen                  servo-thread
 addf    conv_flu32.ledgreen                 servo-thread

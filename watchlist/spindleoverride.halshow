@@ -1,0 +1,13 @@
+# halshow watchlist created Sun Mar 20 09:45:36 CET 2022
+
+pin+scale.spindle.in
+pin+scale.spindle.out
+pin+halui.spindle.0.override.count-enable
+pin+halui.spindle.0.override.counts
+pin+halui.spindle.0.override.decrease
+pin+halui.spindle.0.override.direct-value
+pin+halui.spindle.0.override.increase
+pin+halui.spindle.0.override.scale
+pin+halui.spindle.0.override.value
+pin+conv_fls32.spindle-scale.in
+pin+conv_fls32.spindle-scale.out

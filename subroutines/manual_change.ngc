@@ -24,17 +24,10 @@ G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 (print, after movepos)
 ; cancel tool offset
 G49
-(print, before M6)
-; using the code being remapped here means 'use builtin behaviour'
+; using the code being remapped here means 'use builtin behaviour'- should trigger a dialogue
 M6
-(print, afterM6)
-O200 if [#<_hal[probe.use_toolmeasurement]> EQ 0]
-(print, opt out)
-O200 return [3] ; indicate no tool measurement 
-O200 endif
-(print, prior move)
-G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 
+G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 
 ; Turn on airblast to clean tool length sensor
 M64 P #<_ini[ATC_PINS]CLEAN_TS>
@@ -43,20 +36,20 @@ G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 M65 P #<_ini[ATC_PINS]CLEAN_TS>
 
 (print, move Z)
-O300 if [#<_hal[probe.ps_searchvel]> LE 0]
+O300 if [#<_ini[TOOLSENSOR]FAST_SPEED> LE 0]
 (print, searchvel)
 O300 return [-1] ; indicate searchvel <= 0 
 O300 endif
 
-O400 if [#<_hal[probe.ps_probevel]> LE 0]
+O400 if [#<_ini[TOOLSENSOR]SLOW_SPEED> LE 0]
 O400 return [-2] ; indicate probevel <= 0 
 O400 endif
 
-F #<_hal[probe.ps_searchvel]>
+F #<_ini[TOOLSENSOR]FAST_SPEED>
 G91
 G38.2 Z #<_ini[TOOLSENSOR]MAXPROBE>
 G38.4 Z2
-F #<_hal[probe.ps_probevel]>
+F #<_ini[TOOLSENSOR]SLOW_SPEED>
 G38.2 Z-2
 
 
@@ -70,12 +63,18 @@ G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
 
 #<touch_result> = #5063
-#<probeheight> = #<_hal[probe.probeheight]> 
-#<blockheight> = #<_hal[probe.blockheight]>
+#<referencetool> = #<_ini[TOOLSENSOR]REF_TOOL>
+; Touch result is an absolute value in G53 - we therefore need to do some math to determine the actual meaningful tool length
+; #<tool_length> = #<touch_result> -  #<reference_tool> 
+G10 L1 P#<tool> Z[#<tool_length>]
 
-(DEBUG, #<touch_result>  #<probeheight>  #<blockheight>)
+(PRINT, #<touch_result>   #<reference_tool>    #<tool_length>)
 
-G10 L1 P#<tool> Z[#<touch_result> - #<_hal[probe.probeheight]> + #<_hal[probe.blockheight]>]
+
+; #<probeheight> = #<_hal[probe.probeheight]> 
+; #<blockheight> = #<_hal[probe.blockheight]>
+; (DEBUG, #<touch_result>  #<probeheight>  #<blockheight>)
+; G10 L1 P#<tool> Z[#<touch_result> - #<_hal[probe.probeheight]> + #<_hal[probe.blockheight]>]
 G43
 
 

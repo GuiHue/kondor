@@ -5,7 +5,7 @@
 
 # ---------- LOAD and SETUP MESA ----------
 loadrt  [KINS]KINEMATICS
-loadrt  [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
+loadrt  [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_dio=30 num_aio=30
 loadrt  hostmot2
 loadrt  hm2_eth board_ip="10.10.10.10" config=" num_encoders=3 num_pwmgens=0 num_stepgens=5 sserial_port_0=10xxxxxx"
 setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 

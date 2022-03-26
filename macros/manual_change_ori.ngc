@@ -1,0 +1,85 @@
+; manual toolchange with automatic tool length probe 
+
+o<manual_change> sub
+(print, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
+(print, selected_tool=#<selected_tool> selected_pocket=#<selected_pocket>)
+
+;otherwise after the M6 this information is gone!
+#<tool> = #<selected_tool>
+#<pocket> = #<selected_pocket>
+
+; we must execute this only in the milltask interpreter
+; or preview will break, so test for '#<_task>' which is 1 for 
+; the milltask interpreter and 0 in the UI's
+O100 if [#<_task> EQ 0]
+        (debug, Task is Null)
+O100     return [999]
+O100 endif
+(print, after check)
+;first go up
+G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
+; then move to change position
+G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
+G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
+(print, after movepos)
+; cancel tool offset
+G49
+(print, before M6)
+; using the code being remapped here means 'use builtin behaviour'
+M6
+(print, afterM6)
+O200 if [#<_hal[probe.use_toolmeasurement]> EQ 0]
+(print, opt out)
+O200 return [3] ; indicate no tool measurement 
+O200 endif
+(print, prior move)
+G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
+
+
+; Turn on airblast to clean tool length sensor
+M64 P #<_ini[ATC_PINS]CLEAN_TS>
+G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
+; Turn off airblast to clean sensor
+M65 P #<_ini[ATC_PINS]CLEAN_TS>
+
+(print, move Z)
+O300 if [#<_hal[probe.ps_searchvel]> LE 0]
+(print, searchvel)
+O300 return [-1] ; indicate searchvel <= 0 
+O300 endif
+
+O400 if [#<_hal[probe.ps_probevel]> LE 0]
+O400 return [-2] ; indicate probevel <= 0 
+O400 endif
+
+F #<_hal[probe.ps_searchvel]>
+G91
+G38.2 Z #<_ini[TOOLSENSOR]MAXPROBE>
+G38.4 Z2
+F #<_hal[probe.ps_probevel]>
+G38.2 Z-2
+
+
+O500 if [#5070 EQ 0]
+G90
+O500 return [-3] ; indicate probe contact failure to epilog
+O500 endif
+
+G90
+G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
+G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
+
+#<touch_result> = #5063
+#<probeheight> = #<_hal[probe.probeheight]> 
+#<blockheight> = #<_hal[probe.blockheight]>
+
+(DEBUG, #<touch_result>  #<probeheight>  #<blockheight>)
+
+G10 L1 P#<tool> Z[#<touch_result> - #<_hal[probe.probeheight]> + #<_hal[probe.blockheight]>]
+G43
+
+
+; signal success be returning a value > 0:
+o<manual_change> endsub [1]
+m2
+

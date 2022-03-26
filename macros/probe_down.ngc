@@ -16,6 +16,7 @@ G1 Z[#<_hal[probe.ps_probe_latch]>] F#<_ini[TOOLSENSOR]RAPID_SPEED>
 F #<_hal[probe.ps_probevel]>
 G4 P0.5
 G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
+(msg, #5403)
 G90
 G53 G1 Z[#<_ini[TOOLSENSOR]Z>] F#<_ini[TOOLSENSOR]RAPID_SPEED>	
 o<probe_down> endsub

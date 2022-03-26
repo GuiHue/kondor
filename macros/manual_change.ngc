@@ -53,7 +53,6 @@ O400 if [#<slow_probe_fr> LE 0]
 O400 return [-2] ; indicate probevel <= 0 
 O400 endif
 
-1.965
 
 G91
 F #<fast_probe_fr>

@@ -14,6 +14,7 @@ o<manual_change> sub
 #<retract_distance> = 2
 (print, #<workspace_z>)
 
+
 ; we must execute this only in the milltask interpreter
 ; or preview will break, so test for '#<_task>' which is 1 for 
 ; the milltask interpreter and 0 in the UI's
@@ -22,8 +23,12 @@ O100 if [#<_task> EQ 0]
 O100     return [999]
 O100 endif
 
+
 G92.1
 G59.3
+
+
+
 
 ;first go up
 G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
@@ -31,10 +36,12 @@ G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
 G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
 G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 
+
 ; cancel tool offset
 G49
 ; using the code being remapped here means 'use builtin behaviour'- should trigger a dialogue
 M6
+O111 if [#<tool> NE 99]
 G90
 G53 G0 Z0
 G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
@@ -89,6 +96,13 @@ G53 G0 Z0
   (print, Probed height 5063 #5063)
   (print, new ofset #<new_tool_length_offset>)
 G10 L1 P #<tool>  Z [#<new_tool_length_offset>]  (5400 = tool number)
+
+
+O111 else
+        ;probe is loaded, use existing offset
+        (debug, Change to probe - no measurement!)
+O111 endif
+
 
 ; Call original coordinate system again - DO NOT EVER USE G59.3
 

@@ -9,6 +9,21 @@
 
 # Note: At this time, there is only manual tool release implemented
 
+# ---------- PROBE SIGNAL HANDLING  ----------
+
+#  ---probe signal---
+#net     DI_CNC-probe                => motion.probe-input
+
+net     tlsactivbesignal            and.tlsactivation.in0   motion.digital-out-02
+net     DI_CNC-probe-tls            and.tlsactivation.in1   toggle.probetls.in
+
+net     DI_CNC-probe                => or.probe.in0         toggle.probe3d.in
+net     tlsto_orprobe               and.tlsactivation.out   => or.probe.in1         
+net     probesignalmotion                 or.probe.out            motion.probe-input
+
+
+   
+
 # ---------- MANUAL TOOL CHANGE  ----------
 # is triggered through a momentary switch at Z axis: DI_ATC-man-button
 # uses status light at z axis to indicate wether or not tool change is permitted (on = tool change permitted, blinking: tool change ongoing (timers running), off: spindle-locked): DO_ATC-status-light 
@@ -75,3 +90,5 @@ net     atcledout-conv_u32b                         conv_flu32.atcstatusledout.o
 net     DO_ATC-status-light                         conv_u32b.atcstatusledout.out
 # To be added at a later stage - careful, appraoch below does not work due to doubl linkage
 #net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out
+
+

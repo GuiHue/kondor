@@ -17,12 +17,9 @@ net DI_ATC-tool-sensor    spindleUI.led_toolinspindle
 net DI_ATC-drawbar-sensor  spindleUI.led_clampopen
 
 
+
+
 # Tool Information
-#net toolnumber  iocontrol.0.tool-number 
-#net toolprepnumber iocontrol.0.tool-prep-number  
-#net pocketprepnumer iocontrol.0.tool-prep-pocket 
-
-
 net toolnumber spindleUI.label_tool_current 
 net toolprepnumber spindleUI.label_tool_prep
 net pocketprepnumer spindleUI.label_pocket_prep
@@ -34,3 +31,11 @@ net DO_AUX-vac-remote  spindleUI.led_vac
 net gui_vac_on  spindleUI.vacon  halui.mdi-command-03
 # TURN OFF VAC
 net gui_vac_off  spindleUI.vacoff  halui.mdi-command-04
+
+
+# probe debug
+net probe3dtoogle    toggle.probe3d.out spindleUI.led_toggle_3d
+net probetlstoogle    toggle.probetls.out spindleUI.led_toggle_tls  
+net tlsactivbesignal    spindleUI.led_tlsactive
+net tlsto_orprobe      spindleUI.led_tlsmerged
+net probesignalmotion spindleUI.led_probe_signal

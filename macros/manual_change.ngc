@@ -1,8 +1,8 @@
 ; manual toolchange with automatic tool length probe 
 
 o<manual_change> sub
-(print, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
-(print, selected_tool=#<selected_tool> selected_pocket=#<selected_pocket>)
+(print, in change tool_in_spindle=#<tool_in_spindle>; current_pocket=#<current_pocket>)
+(print, selected_tool=#<selected_tool>; selected_pocket=#<selected_pocket>)
 
 ;otherwise after the M6 this information is gone!
 #<tool> = #<selected_tool>
@@ -12,7 +12,7 @@ o<manual_change> sub
 #<fast_probe_fr> = #<_ini[TOOLSENSOR]RAPID_SPEED>
 #<slow_probe_fr> = #<_ini[TOOLSENSOR]SLOW_SPEED>
 #<retract_distance> = 2
-(print, #<workspace_z>)
+(print, Coordinate system prior to M6 [G54=1]: #<workspace_z>)
 
 
 ; we must execute this only in the milltask interpreter
@@ -25,10 +25,8 @@ O100 endif
 
 
 G92.1
+; use dedicated coordinate system for probing
 G59.3
-
-
-
 
 ;first go up
 G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
@@ -41,10 +39,26 @@ G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 G49
 ; using the code being remapped here means 'use builtin behaviour'- should trigger a dialogue
 M6
+
 O111 if [#<tool> NE 99]
 G90
 G53 G0 Z0
-G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
+; #5410 is tooldiameter
+#<tool_dia> = #5410
+(print, New tool diameter: #5410)
+
+; Check if tooldiameter is greater than pad
+O112 if [#<tool_dia> GE [#<_ini[TOOLSENSOR]TS_DIAMETER>]]
+  ; Move away along y (as to not hit blow off)
+
+  #<retracty>=[#<_ini[TOOLSENSOR]Y> - [#<tool_dia>/2]]
+(print; Large tool - Offset in Y by #<retracty>)
+
+  G53 G0 X[#<_ini[TOOLSENSOR]X>] Y#<retracty>
+O112 else
+  ; Tool is not bigger than pad, normal position
+  G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
+O112 endif
 
 ; Turn on airblast to clean tool length sensor
 M64 P #<_ini[ATC_PINS]CLEAN_TS>
@@ -63,19 +77,26 @@ O400 endif
 
 G91
 F #<fast_probe_fr>
+; Activate TLS 
+M64 P #<_ini[ATC_PINS]TLS_PIN>
 G38.2 Z#<_ini[TOOLSENSOR]MAXPROBE>    (fast tool probe)
 #<z_fast_probe> = #5063    (save probe result of fast probe to parameters)
-G0 Z[#<retract_distance>]    (retract tool retract distance amount)
+; De-Activate TLS 
+M65 P #<_ini[ATC_PINS]TLS_PIN>
+
+G1 Z[#<retract_distance>]  F1500  (retract tool retract distance amount)
 
 (Slow Probe Rule, if Slow Probe FR is set to 0, Slow Probe is Bypassed)
 o<120> if [#<slow_probe_fr> GT 0]
   (Initiate Slow Z- Probe)
   G91
   F[#<slow_probe_fr>]    (set probe slow feedrate)
-  G38.2 Z-[#<retract_distance> * 2]    (slow tool probe)
+  ; Activate TLS 
+  M64 P #<_ini[ATC_PINS]TLS_PIN>
+  G38.2 Z-[#<retract_distance>  * 2]    (slow tool probe)
   #<z_slow_probe> = #5063
-  (print, Probed Pos: #5063 Z Pos: #<_z>)
-
+  ; De-Activate TLS 
+  M65 P #<_ini[ATC_PINS]TLS_PIN>
   G90
   G0 Z[#<z_slow_probe> + #<retract_distance>]
 o<120> endif
@@ -93,14 +114,14 @@ G53 G0 Z0
 #<new_tool_length_offset> = [ABS[#<spindle_zero_height> + #5063]]
 (define new tool length offset parameters)
   (print, Spindle Zero height #<spindle_zero_height>)
-  (print, Probed height 5063 #5063)
-  (print, new ofset #<new_tool_length_offset>)
+  (print, Probed Height #5063)
+  (print, Tool Lenght Offset  #<new_tool_length_offset>)
 G10 L1 P #<tool>  Z [#<new_tool_length_offset>]  (5400 = tool number)
 
 
 O111 else
         ;probe is loaded, use existing offset
-        (debug, Change to probe - no measurement!)
+        (debug, Changing to calibrated probe - no tool measurement!)
 O111 endif
 
 
@@ -125,8 +146,6 @@ o<160> else if [#<workspace_z> EQ 8]
 o<160> endif
 
 T #<tool>  G43  H #<tool>     (enable tool length offset)
-
-
 
 ; signal success be returning a value > 0:
 o<manual_change> endsub [1]

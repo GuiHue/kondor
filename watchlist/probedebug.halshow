@@ -1,0 +1,1 @@
+sig+DI_CNC-probe-ot sig+DI_CNC-probe sig+DI_CNC-probe-tls sig+probesignal pin+spindleUI.led_toggle_3d pin+spindleUI.led_toolinspindle pin+motion.digital-out-02 pin+and.tlsactivation.in0 pin+and.tlsactivation.in1 pin+and.tlsactivation.out

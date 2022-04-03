@@ -16,7 +16,7 @@ loadrt  offset                              names=offset.ntc,offset.feed,offset.
 loadrt  comp                                names=comp.temp
 loadrt  scale                               names=scale.feed,scale.spindle,scale.rapid
 loadrt  toggle2nist                         names=toggle2nist.machineon,toggle2nist.externalprogram
-loadrt  toggle                              names=toggle.machineon,toggle.toolchange,toggle.externalprogram
+loadrt  toggle                              names=toggle.machineon,toggle.toolchange,toggle.externalprogram,toggle.probe3d,toggle.probetls
 loadrt  lowpass                             names=lowpass.feed,lowpass.spindle
 loadrt  ilowpass                            names=ilowpass.shw.enc-smooth		
 loadrt  watchdog                            num_inputs=1
@@ -26,7 +26,7 @@ loadrt  mux2                                names=mux2.estoplight
 loadrt  mux4                                names=mux4.ledgreen
 loadrt  mux8                                names=mux8.atcstatusled,mux8.shw.step-choice
 loadrt  not                                 names=not.atcledslow,not.atcledfast,not.spindleinhibit,not.ledyellow,not.ledgreen,not.shw.key0,not.shw.key1,not.shw.key2,not.shw.key3,not.shw.key4,not.shw.key5,not.shw.key6,not.shw.key7,not.shw.key8,not.shw.key9,not.shw.key10,not.estoplight,not.estop,not.vfderror
-loadrt  and2                                names=and.atcledslow,and.atcledfast,and.atcdb,and.pauseresume1,and.pauseresume2,and.runstep1,and.runstep2,and.ledyellow,and.ledgreen,and.shw.ena-x,and.shw.ena-y,and.shw.ena-z,and.shw.zero-x,and.shw.zero-y,and.shw.zero-z,and.estoplight
+loadrt  and2                                names=and.atcledslow,and.atcledfast,and.atcdb,and.pauseresume1,and.pauseresume2,and.runstep1,and.runstep2,and.ledyellow,and.ledgreen,and.shw.ena-x,and.shw.ena-y,and.shw.ena-z,and.shw.zero-x,and.shw.zero-y,and.shw.zero-z,and.estoplight,and.tlsactivation
 loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause,or.probe
 loadrt  conv_bit_float                      names=conv_bit_float.spindleinhibit,conv_bit_float.atcstatusled-slow,conv_bit_float.atcstatusled-fast,conv_bit_float.spindleinhibitnot,conv_bit_float.runon,conv_bit_float.ledgreen,conv_bit_float.estopsignal,conv_bit_float.warningsignal
 loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,conv_flu32.ledgreen,conv_flu32.estoplight
@@ -60,6 +60,8 @@ addf    scale.rapid                         servo-thread
 addf    toggle.machineon                    servo-thread
 addf    toggle.toolchange                   servo-thread
 addf    toggle.externalprogram              servo-thread
+addf    toggle.probe3d                      servo-thread
+addf    toggle.probetls                     servo-thread
 addf    toggle2nist.externalprogram         servo-thread
 addf    toggle2nist.machineon               servo-thread
 addf    watchdog.process                    servo-thread
@@ -118,6 +120,7 @@ addf    and.shw.zero-x                      servo-thread
 addf    and.shw.zero-y                      servo-thread
 addf    and.shw.zero-z                      servo-thread
 addf    and.estoplight                      servo-thread
+addf    and.tlsactivation                   servo-thread           
 addf    conv_bit_float.spindleinhibit       servo-thread
 addf    conv_bit_float.spindleinhibitnot    servo-thread
 addf    conv_bit_float.atcstatusled-fast    servo-thread

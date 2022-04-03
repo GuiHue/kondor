@@ -30,12 +30,7 @@ net     MDI-mode                    halui.mode.is-mdi
 net     DO_MQL_mist                 <= iocontrol.0.coolant-mist
 net     DO_MQL_flood                <= iocontrol.0.coolant-flood
 
-#  ---probe signal---
-net     DI_CNC-probe                => motion.probe-input
 
-#net     DI_CNC-probe                => or.probe.in0
-#net     DI_CNC-probe-tls            => or.probe.in1
-#net     probesignal                 or.probe.out        motion.probe-input
 
 
 #  ---motion control signals---

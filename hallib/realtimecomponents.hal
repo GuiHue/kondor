@@ -60,8 +60,8 @@ addf    scale.rapid                         servo-thread
 addf    toggle.machineon                    servo-thread
 addf    toggle.toolchange                   servo-thread
 addf    toggle.externalprogram              servo-thread
-addf    toggle.probe3d                      servo-thread
-addf    toggle.probetls                     servo-thread
+#addf    toggle.probe3d                      servo-thread
+#addf    toggle.probetls                     servo-thread
 addf    toggle2nist.externalprogram         servo-thread
 addf    toggle2nist.machineon               servo-thread
 addf    watchdog.process                    servo-thread

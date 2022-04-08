@@ -34,8 +34,8 @@ net gui_vac_off  spindleUI.vacoff  halui.mdi-command-04
 
 
 # probe debug
-net probe3dtoogle    toggle.probe3d.out spindleUI.led_toggle_3d
-net probetlstoogle    toggle.probetls.out spindleUI.led_toggle_tls  
+#net probe3dtoogle    toggle.probe3d.out spindleUI.led_toggle_3d
+#net probetlstoogle    toggle.probetls.out spindleUI.led_toggle_tls  
 net tlsactivbesignal    spindleUI.led_tlsactive
 net tlsto_orprobe      spindleUI.led_tlsmerged
 net probesignalmotion spindleUI.led_probe_signal

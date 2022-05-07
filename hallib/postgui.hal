@@ -7,42 +7,38 @@
 #net     estop-out                               <= iocontrol.0.user-enable-out
 #net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
 
-source  hallib/pendant2.hal
+
+source  hallib/pendant_tshw.hal
+#source  hallib/pendant_whb.hal
 source  hallib/estop.hal
 
-# ------- Feed Rate Override -------
-# Uses 10k potentiometer at control panel to control feed rate
-# Uses same potentiometer to adapt rapid rate but with different scale
-# 1.0 / 23.75V = 0.0421
-# gmoccapy applies the scaled value to the specified range according to ini and considers this to be 1
-# For Feed Rate Override this is from 0 to [DISPLAY]MAX_FEED_OVERRIDE
-# For Spindle Override this is from [DISPLAY]MIN_SPINDLE_OVERRIDE to [DISPLAY]MAX_SPINDLE_OVERRIDE
-# As long as the range is symmetric to 100% this is easy 
+# ------- Feed/rapid rate and Spindle Speed Override -------
+# Uses 10k potentiometer at control panel to control feed/rapid rate and spindle speed
 
-setp    scale.feed.gain                             0.0421
-setp    scale.feed.offset                           0.0
-# rapid override needs to be scaled differently as the scale width is smaller: 0-100%
-# 2.0 / 23.75V = 0.0421
-setp    scale.rapid.gain                            0.0842
-setp    scale.rapid.offset                          0.05
+#  BIT direct value
+setp halui.feed-override.direct-value 1
+setp halui.rapid-override.direct-value 1
+setp halui.spindle.0.override.direct-value 1
+
+# SCALE
+setp halui.feed-override.scale 0.01
+setp halui.rapid-override.scale 0.01
+setp halui.spindle.0.override.scale 0.01
 setp    lowpass.feed.gain                           0.01
-net     AI_CP-pot-feed                              lowpass.feed.in
-net     lowpass-scale-feed-signal                   lowpass.feed.out                    scale.feed.in                                   scale.rapid.in   
-net     scale-gmoccapy-feed                         scale.feed.out                      => gmoccapy.feed.feed-override.direct-value      
-net     scale-gmoccapy-rapid                        scale.rapid.out                     => gmoccapy.rapid.rapid-override.direct-value
-setp    gmoccapy.rapid.rapid-override.analog-enable 1
-setp    gmoccapy.feed.feed-override.analog-enable   1
+setp    lowpass.spindle.gain                        0.01
 
-# ------- Spindle Override -------
-# Uses 10k potentiometer at control panel to control spindle rpm
-# 1.0 / 23.8V = 0.04201
-# may need correction by offsetting
-setp    scale.spindle.gain                          0.04201
-setp    lowpass.spindle.gain                        0.05
-net     AI_CP-pot-spindle                           => lowpass.spindle.in
-net     low-spindle                                 lowpass.spindle.out                 scale.spindle.in
-net     spindle-override-scaled                     scale.spindle.out                   => gmoccapy.spindle.spindle-override.direct-value
-setp    gmoccapy.spindle.spindle-override.analog-enable   1
+# scalemax - adjust by eyxperiment chaning value during runtime via terminal, halcmd setp
+setp hm2_7i76e.0.7i76.0.0.analogin0-scalemax 306
+setp hm2_7i76e.0.7i76.0.0.analogin1-scalemax 195
+
+net AI_CP-pot-feed lowpass.feed.in 
+net feedlowpass lowpass.feed.out conv-float-s32.feed.in 
+
+net AI_CP-pot-spindle lowpass.spindle.in
+net spindlelowpass lowpass.spindle.out conv-float-s32.spindle.in 
+
+net analogout0 conv-float-s32.feed.out => halui.feed-override.counts halui.rapid-override.counts
+net analogout1 conv-float-s32.spindle.out => halui.spindle.0.override.counts
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at contro panel to turn the machine on/off
@@ -63,7 +59,7 @@ net     machineon-pwr-off                           halui.machine.off           
 # Pause/Resume Section
 net     DI_CP-cycle-pause-button                    or.program-pause.in0
 net     pause-signal                                or.program-pause.out                 and.pauseresume1.in0                and.pauseresume2.in0 
-net     pause-on                                    toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused      and.ledyellow.in0 
+net     DO_CP-light-yellow                                     toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused      hm2_7i76e.0.TsHW.0.1.led-09  
 net     run-on                                      and.pauseresume2.in1                <= halui.program.is-running     mux4.ledgreen.sel0          conv_bit_float.runon.in         
 net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
 net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
@@ -81,14 +77,6 @@ net     run-sig                                     halui.mode.auto             
 net     step-sig                                    halui.program.step                  timedelay.stepsig.in            <= and.runstep2.out
 setp    timedelay.stepsig.on-delay                  0
 setp    timedelay.stepsig.off-delay                 2
-
-# Status light setup
-# YELLOW LED - Blink when pause active
-setp    timedelay.ledyellow.on-delay                   0.5
-setp    timedelay.ledyellow.off-delay                  0.5
-net     DO_CP-light-yellow                              timedelay.ledyellow.out        not.ledyellow.in      hm2_7i76e.0.TsHW.0.1.led-09     
-net     ledyellow-not                                  not.ledyellow.out              and.ledyellow.in1
-net     ledyellow-toogle                               and.ledyellow.out              timedelay.ledyellow.in
 
 # GREEN LED: on when run-on=high + step-sig-delay=low and blinking for short period of time when run-on=low + step-sig=high
 # mux4.ledgreen          sel1       timedelay.stepsig.out   sel0 run-on (linked above)
@@ -115,28 +103,6 @@ net     spindle-at-speed                            => gmoccapy.spindle_at_speed
 net     spindle-vel-cmd-rps-abs                     => gmoccapy.spindle_feedback_bar
 
 
-# -------- GMOCCAPY Tool Setup --------
-#unlinkp iocontrol.0.tool-change
-#unlinkp iocontrol.0.tool-changed
-#unlinkp iocontrol.0.tool-prep-number
-#unlinkp iocontrol.0.tool-prepared
-#net tool-change gmoccapy.toolchange-change <= iocontrol.0.tool-change
-#net tool-changed gmoccapy.toolchange-changed <= iocontrol.0.tool-changed
-#net tool-prep-number gmoccapy.toolchange-number <= iocontrol.0.tool-prep-number
-
-# -------- PROBE SCREEN --------
-# Ensure all toolchange pins are free to use
-#unlinkp iocontrol.0.tool-number
-#unlinkp iocontrol.0.tool-prep-number
-#unlinkp iocontrol.0.tool-change
-#unlinkp iocontrol.0.tool-changed
-#unlinkp iocontrol.0.tool-prepare
-#unlinkp iocontrol.0.tool-prepared
-
-# -------- merge probe signal --------
-
-
-
 # The next two lines are only needed if the pins had been connected before
 unlinkp iocontrol.0.tool-change
 unlinkp iocontrol.0.tool-changed
@@ -154,4 +120,4 @@ net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-p
 
 # ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
 
-setp     watchdog.timeout-0                    3.0
+setp     watchdog.timeout-0                    1

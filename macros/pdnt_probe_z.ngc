@@ -1,0 +1,34 @@
+; probe in Z and set Z0
+
+o<pdnt_probe_z> sub
+
+;extract current CS
+#<workspace_z> = #5220
+
+
+G91
+F 300
+; Activate TLS 
+G38.2 Z-5    (fast tool probe)
+#<z_fast_probe> = #5063    (save probe result of fast probe to parameters)
+
+G1 Z2  F1000  (retract tool retract distance amount)
+
+G91
+F100    (set probe slow feedrate)
+G38.2 Z-3    (slow tool probe)
+#<z_slow_probe> = #5063
+
+  G10 L20 P0 Z0
+
+
+
+
+
+(msg, Set Z0 in current CS, moving up)
+G90
+G1z15 f1500
+
+o<pdnt_probe_z> endsub
+m2
+

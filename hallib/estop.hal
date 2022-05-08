@@ -28,18 +28,17 @@ net     DI_DRIVE-z-alarm                        lut5.drivealarm.in-3
 # ----- SOFT ESTOP  ----- 
 #   in0     External Estop from Hardware        HIGH when OK
 #   in1     VFD Error                           HIGH when OK due to inversion not.vfderror
-#   in2     Servo Alarm (merged)                HIGH when OK
+#   in2     Probe OT                            HIGH when OK
 #   in3     pendant                             HIGH when OK
 #   in4     watchdog                            HIGH when OK
 #   OUT     iocontrol.0.emc-enable-in           HIGH when OK (only when and!)
-# NEEDS ADAPTATION!
 
 setp    lut5.estop.function                     0x80000000
 
 net     DI_ESTOP-ext                            lut5.estop.in-0
 net     vfd-error-inverted                      lut5.estop.in-1                     
-net     estop-servo-alarm                       lut5.estop.in-2                     lut5.drivealarm.out
-net     pendant_estop                           lut5.estop.in-3
+net     DI_CNC-probe-ot                        lut5.estop.in-2                     #lut5.drivealarm.out
+net     pendant-estop                          lut5.estop.in-3
 net     estop-vfd-watchdog                      lut5.estop.in-4                     watchdog.ok-out
 
 # Output LUT5.ESTOP to IOCONTROL
@@ -91,9 +90,9 @@ net     estop-vfd-watchdog                      m_vfdcom.trigger
 # VFD Error
 setp    m_vfderror.edge                         1
 net     estop-vfd-error                         m_vfderror.trigger
-# Pedant estop 
+# Pendant estop 
 setp    m_pendantestop.edge                     0
-net     pendant_estop                         m_pendantestop.trigger
+net     pendant-estop                         m_pendantestop.trigger
 
 # ----- ESTOP/ WARNING LIGHT  ----- 
 # ESTOP: Red Light = Perm on

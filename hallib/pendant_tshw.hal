@@ -13,7 +13,7 @@
 #	MDI_COMMAND = G10 L20 P1 Z0
 #
 # Mit setp ilowpass.shw.enc-smooth.gain  kann die Beschleunigung eingestellt werden.
-# und mit setp ilowpass.shw.enc-smooth.scale die Übersetzung
+# und mit setp ilowpass.enc-smooth.scale die Übersetzung
 # 
 # Call from POSTGUI to consider halui links
 ###################################################################
@@ -24,8 +24,8 @@
 ##      TsHW      ##
 ####################
 
-setp ilowpass.shw.enc-smooth.scale 1
-setp ilowpass.shw.enc-smooth.gain  0.025
+setp ilowpass.enc-smooth.scale 1
+setp ilowpass.enc-smooth.gain  0.025
 
 setp axis.x.jog-vel-mode 1
 setp axis.y.jog-vel-mode 1
@@ -79,8 +79,8 @@ net key-ena => halui.mode.manual
 net key-ena-not not.shw.key0.out => hm2_7i76e.0.TsHW.0.1.led-00
 
 # --- Encoder ---
-net enc-00 ilowpass.shw.enc-smooth.in <= hm2_7i76e.0.TsHW.0.1.encoder-0.count
-net enc-01 <= ilowpass.shw.enc-smooth.out
+net enc-00 ilowpass.enc-smooth.in <= hm2_7i76e.0.TsHW.0.1.encoder-0.count
+net enc-01 <= ilowpass.enc-smooth.out
 net enc-01 => axis.x.jog-counts joint.0.jog-counts
 net enc-01 => axis.y.jog-counts joint.1.jog-counts joint.2.jog-counts
 net enc-01 => axis.z.jog-counts joint.3.jog-counts

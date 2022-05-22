@@ -43,6 +43,9 @@ M6
 O111 if [#<tool> NE 99]
 G90
 G53 G0 Z0
+; Turn off the 3d probe
+M65 P #<_ini[ATC_PINS]3D_PIN>
+        (debug, Probe Deactivated - NO CRASH DETECTION FOR PROBE)
 ; #5410 is tooldiameter
 #<tool_dia> = #5410
 (print, New tool diameter: #5410)
@@ -121,7 +124,9 @@ G10 L1 P #<tool>  Z [#<new_tool_length_offset>]  (5400 = tool number)
 
 O111 else
         ;probe is loaded, use existing offset
-        (debug, Changing to calibrated probe - no tool measurement!)
+        ; turn on the 3D Probe
+        M64 P #<_ini[ATC_PINS]3D_PIN>
+        (debug, Changing to calibrated probe - Probe Activated! - Crash Protection on)
 O111 endif
 
 

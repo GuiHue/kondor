@@ -13,16 +13,19 @@
 
 #  ---probe signal---
 #net     DI_CNC-probe                => motion.probe-input
-
+# activation trigger from gcode to enable tls
 net     tlsactivbesignal            and.tlsactivation.in0   motion.digital-out-02
 net     DI_CNC-probe-tls            and.tlsactivation.in1  # toggle.probetls.in
 
-net     DI_CNC-probe                => or.probe.in0       #  toggle.probe3d.in
+# activation trigger from gcode to enable 3Dprobe
+net     3Dprobeactivesignal         and.3Dprobeactivation.in0   motion.digital-out-03
+net     DI_CNC-probe                and.3Dprobeactivation.in1   
+
+net     3dprobeto_orprobe           and.3Dprobeactivation.out     => or.probe.in0       #  toggle.probe3d.in
 net     tlsto_orprobe               and.tlsactivation.out   => or.probe.in1         
-net     probesignalmotion                 or.probe.out            motion.probe-input
+net     probesignalmotion           or.probe.out            motion.probe-input
 
 
-   
 
 # ---------- MANUAL TOOL CHANGE  ----------
 # is triggered through a momentary switch at Z axis: DI_ATC-man-button

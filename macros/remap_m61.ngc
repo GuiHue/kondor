@@ -1,0 +1,37 @@
+; remap_m61 to add check for T99 trigger
+; # REMAP=M61  modalgroup=6 prolog=settool_prolog ngc=remap_m61 epilog=settool_epilog
+o<remap_m61> sub
+(print, tool #<tool>)
+(print, pocket=#<pocket>)
+
+;otherwise after the M6 this information is gone!
+#<pre_tool> = #<tool>
+#<pre_pocket> = #<pocket>
+
+; we must execute this only in the milltask interpreter
+; or preview will break, so test for '#<_task>' which is 1 for 
+; the milltask interpreter and 0 in the UI's
+O100 if [#<_task> EQ 0]
+        (debug, Task is Null)
+O100     return [999]
+O100 endif
+; using the code being remapped here means 'use builtin behaviour'- should trigger a dialogue
+
+M61 Q#<tool>
+
+O111 if [#<tool> EQ 99]
+    ; Activate probe 
+    M64 P #<_ini[ATC_PINS]3D_PIN>
+    (debug, Probe Activated! - Crash Protection on)
+O111 else
+        ;a tool different from probe - turn off triggerpin
+        M65 P #<_ini[ATC_PINS]3D_PIN>       
+        (debug, Probe Deactivated - NO CRASH DETECTION FOR PROBE)
+O111 endif
+
+
+T #<tool>  G43  H #<tool>     (enable tool length offset)
+; signal success be returning a value > 0:
+o<remap_m61> endsub [1]
+m2
+

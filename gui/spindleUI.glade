@@ -427,7 +427,7 @@
               <object class="HAL_Label" id="hal_label10">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">TLS (toggle)</property>
+                <property name="label" translatable="yes">TLS Activated</property>
                 <property name="text_template"/>
               </object>
               <packing>
@@ -439,7 +439,7 @@
               <object class="HAL_Label" id="hal_label13">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">TLS Activated</property>
+                <property name="label" translatable="yes">TLS Signal (live)</property>
                 <property name="text_template"/>
               </object>
               <packing>
@@ -450,7 +450,7 @@
               </packing>
             </child>
             <child>
-              <object class="HAL_LED" id="led_toggle_tls">
+              <object class="HAL_LED" id="led_tlsactive">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="led_blink_rate">0</property>
@@ -461,7 +461,7 @@
               </packing>
             </child>
             <child>
-              <object class="HAL_LED" id="led_tlsactive">
+              <object class="HAL_LED" id="led_tls_live">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="led_blink_rate">0</property>
@@ -477,7 +477,7 @@
               <object class="HAL_Label" id="hal_label15">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">TLS (merged)</property>
+                <property name="label" translatable="yes">Probe Output</property>
                 <property name="text_template"/>
               </object>
               <packing>
@@ -488,7 +488,7 @@
               </packing>
             </child>
             <child>
-              <object class="HAL_LED" id="led_tlsmerged">
+              <object class="HAL_LED" id="led_probe_out">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="led_blink_rate">0</property>
@@ -507,7 +507,7 @@
               <object class="HAL_Label" id="hal_label11">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">3D Probe (toggle)</property>
+                <property name="label" translatable="yes">3D Probe Activated</property>
                 <property name="text_template"/>
               </object>
               <packing>
@@ -519,7 +519,7 @@
               <placeholder/>
             </child>
             <child>
-              <object class="HAL_LED" id="led_toggle_3d">
+              <object class="HAL_LED" id="led_3D_activated">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="led_blink_rate">0</property>

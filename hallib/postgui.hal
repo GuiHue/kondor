@@ -59,7 +59,7 @@ net     machineon-pwr-off                           halui.machine.off           
 # Pause/Resume Section
 net     DI_CP-cycle-pause-button                    or.program-pause.in0
 net     pause-signal                                or.program-pause.out                 and.pauseresume1.in0                and.pauseresume2.in0 
-net     DO_CP-light-yellow                                     toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused      hm2_7i76e.0.TsHW.0.1.led-09  
+net     DO_CP-light-yellow                                     toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused        
 net     run-on                                      and.pauseresume2.in1                <= halui.program.is-running     mux4.ledgreen.sel0          conv_bit_float.runon.in         
 net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
 net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
@@ -67,7 +67,9 @@ net     resume-sig                                  or.externalprogram.in1      
 net     toggle-ok                                   toggle.externalprogram.in           <= or.externalprogram.out
 net     togglesig                                   toggle2nist.externalprogram.in      <= toggle.externalprogram.out
 net     toggleon                                    halui.program.pause                 <= toggle2nist.externalprogram.on
-net     toggleoff                                   halui.program.resume                <= toggle2nist.externalprogram.off
+net     toggleoff                                   or.program-resume.in0                <= toggle2nist.externalprogram.off
+
+net     programresume                               halui.program.resume                or.program-resume.out
 
 # Run/Step Section
 net     DI_CP-cycle-start-button                    or.program-run.in0                  # other in from pendant 
@@ -92,8 +94,7 @@ net     ledgreen-not                                not.ledgreen.out            
 net     ledgreen-toogle                             and.ledgreen.out                timedelay.ledgreen.in
 net     ledgreen-flu32                              mux4.ledgreen.out               conv_flu32.ledgreen.in
 net     ledgreen-conv_u32b                          conv_flu32.ledgreen.out         conv_u32b.ledgreen.in
-net     DO_CP-light-green                           conv_u32b.ledgreen.out          hm2_7i76e.0.TsHW.0.1.led-03
-
+net     DO_CP-light-green                           conv_u32b.ledgreen.out          
 # Stop/ abort program
 net     DI_CP-cycle-stop-button                 or.program-stop.in0    
 net     halui-program-stop              or.program-stop.out     halui.program.stop
@@ -106,8 +107,8 @@ net     spindle-vel-cmd-rps-abs                     => gmoccapy.spindle_feedback
 
 
 # The next two lines are only needed if the pins had been connected before
-unlinkp iocontrol.0.tool-change
-unlinkp iocontrol.0.tool-changed
+#unlinkp iocontrol.0.tool-change
+#unlinkp iocontrol.0.tool-changed
 
 # link to auto tool measurement toolchange, so you get the advantage of tool description on change dialog
 
@@ -122,4 +123,4 @@ net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-p
 
 # ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
 
-setp     watchdog.timeout-0                    1
+setp     watchdog.timeout-0                    3

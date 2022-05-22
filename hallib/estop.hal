@@ -40,11 +40,8 @@ net     vfd-error-inverted                      lut5.estop.in-1
 net     DI_CNC-probe-ot                        lut5.estop.in-2                     #lut5.drivealarm.out
 net     pendant-estop                          lut5.estop.in-3
 net     estop-vfd-watchdog                      lut5.estop.in-4                     watchdog.ok-out
-
 # Output LUT5.ESTOP to IOCONTROL
  net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in              mux2.estoplight.sel
-# Bypass lut5 for testing purposes
-#net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in        not.estop.in                   mux2.estoplight.sel
 
 
 ##############################################################################
@@ -93,6 +90,9 @@ net     estop-vfd-error                         m_vfderror.trigger
 # Pendant estop 
 setp    m_pendantestop.edge                     0
 net     pendant-estop                         m_pendantestop.trigger
+# Pendant tls overtravel 
+setp    m_tlsovertravel.edge                     0
+net     DI_CNC-probe-ot                         m_tlsovertravel.trigger
 
 # ----- ESTOP/ WARNING LIGHT  ----- 
 # ESTOP: Red Light = Perm on

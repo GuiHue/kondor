@@ -94,4 +94,27 @@ net     DO_ATC-status-light                         conv_u32b.atcstatusledout.ou
 # To be added at a later stage - careful, appraoch below does not work due to doubl linkage
 #net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out
 
+# ---------- AUTOMATIC CAROUSEL TOOL CHANGER  ----------
+#setp stepgen.0.position-scale 36000
+#setp stepgen.0.steplen 5000
+#setp stepgen.0.stepspace 5000
+#setp stepgen.0.dirhold 5000
+#setp stepgen.0.dirsetup 5000
+#setp stepgen.0.maxaccel 200
+#net ypos-cmd joint.1.motor-pos-cmd => stepgen.1.position-cmd
+#net ypos-fb stepgen.1.position-fb => joint.1.motor-pos-fb
+#net ystep <= stepgen.1.step
+#net ydir <= stepgen.1.dir
+#net yenable joint.1.amp-enable-out => stepgen.1.enable
+#setp stepgen.0.enable true
+#setp stepgen.0.maxvel 3
 
+setp        [HMOT](CARD0).stepgen.05.dirsetup           [JOINT_0]DIRSETUP
+setp        [HMOT](CARD0).stepgen.05.dirhold            [JOINT_0]DIRHOLD
+setp        [HMOT](CARD0).stepgen.05.steplen            [JOINT_0]STEPLEN
+setp        [HMOT](CARD0).stepgen.05.stepspace          [JOINT_0]STEPSPACE
+setp        [HMOT](CARD0).stepgen.05.position-scale     [JOINT_0]STEP_SCALE
+setp        [HMOT](CARD0).stepgen.05.step_type          0
+setp        [HMOT](CARD0).stepgen.05.control-type       0
+setp        [HMOT](CARD0).stepgen.05.maxaccel           [JOINT_0]STEPGEN_MAXACCEL
+setp        [HMOT](CARD0).stepgen.05.maxvel             [JOINT_0]STEPGEN_MAXVEL

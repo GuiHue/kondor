@@ -27,7 +27,7 @@ G38.2 Z-3    (slow tool probe)
 
 (msg, Set Z0 in current CS, moving up)
 G90
-G1z15 f1500
+G1z5 f1500
 
 o<pdnt_probe_z> endsub
 m2

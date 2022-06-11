@@ -51,7 +51,7 @@ net         x-pos-fb                                    <= [HMOT](CARD0).stepgen
 net         x-pos-fb                                    => joint.0.motor-pos-fb
 net         x-enable                                    <= joint.0.amp-enable-out
 net         x-enable                                    => [HMOT](CARD0).stepgen.00.enable
-net         DI_DRIVE-x-alarm-not                           joint.0.amp-fault-in
+#net         DI_DRIVE-x-alarm                           joint.0.amp-fault-in
 
 # ---setup home / limit switch signals---
 
@@ -105,7 +105,7 @@ net         y1-pos-fb                                    <= [HMOT](CARD0).stepge
 net         y1-pos-fb                                    => joint.1.motor-pos-fb
 net         y1-enable                                    <= joint.1.amp-enable-out
 net         y1-enable                                    => [HMOT](CARD0).stepgen.01.enable
-net         DI_DRIVE-y1-alarm-not                            joint.1.amp-fault-in
+#net         DI_DRIVE-y1-alarm                            joint.1.amp-fault-in
 
 # ---setup home / limit switch signals---
 
@@ -159,7 +159,7 @@ net         y2-pos-fb                                    <= [HMOT](CARD0).stepge
 net         y2-pos-fb                                    => joint.2.motor-pos-fb
 net         y2-enable                                    <= joint.2.amp-enable-out
 net         y2-enable                                    => [HMOT](CARD0).stepgen.02.enable
-net         DI_DRIVE-y2-alarm-not                            joint.2.amp-fault-in
+#net         DI_DRIVE-y2-alarm                            joint.2.amp-fault-in
 
 # ---setup home / limit switch signals---
 
@@ -213,10 +213,63 @@ net         z-pos-fb                                    <= [HMOT](CARD0).stepgen
 net         z-pos-fb                                    => joint.3.motor-pos-fb
 net         z-enable                                    <= joint.3.amp-enable-out
 net         z-enable                                    => [HMOT](CARD0).stepgen.03.enable
-net         DI_DRIVE-z-alarm-not                            joint.3.amp-fault-in
+#net         DI_DRIVE-z-alarm                            joint.3.amp-fault-in
 
 # ---setup home / limit switch signals---
 
 net         DI_CNC-min-home-z                           => joint.3.home-sw-in
 net         DI_CNC-min-home-z                           => joint.3.neg-lim-sw-in
 net         z-pos-limit                                 => joint.3.pos-lim-sw-in
+
+#  AXIS A JOINT 4 #*******************
+
+setp        pid.a.Pgain                                 [JOINT_4]P
+setp        pid.a.Igain                                 [JOINT_4]I
+setp        pid.a.Dgain                                 [JOINT_4]D
+setp        pid.a.bias                                  [JOINT_4]BIAS
+setp        pid.a.FF0                                   [JOINT_4]FF0
+setp        pid.a.FF1                                   [JOINT_4]FF1
+setp        pid.a.FF2                                   [JOINT_4]FF2
+setp        pid.a.deadband                              [JOINT_4]DEADBAND
+setp        pid.a.maxoutput                             [JOINT_4]MAX_OUTPUT
+setp        pid.a.error-previous-target                 true
+# This setting is to limit bogus stepgen
+# velocity corrections caused by position
+# feedback sample time jitter.
+setp        pid.a.maxerror 0.012700
+
+net         a-index-enable                              <=> pid.a.index-enable
+net         a-enable                                    =>  pid.a.enable
+net         a-pos-cmd                                   =>  pid.a.command
+net         a-pos-fb                                    =>  pid.a.feedback
+net         a-output                                    <=  pid.a.output
+
+# Step Gen signals/setup
+
+setp        [HMOT](CARD0).stepgen.04.dirsetup           [JOINT_4]DIRSETUP
+setp        [HMOT](CARD0).stepgen.04.dirhold            [JOINT_4]DIRHOLD
+setp        [HMOT](CARD0).stepgen.04.steplen            [JOINT_4]STEPLEN
+setp        [HMOT](CARD0).stepgen.04.stepspace          [JOINT_4]STEPSPACE
+setp        [HMOT](CARD0).stepgen.04.position-scale     [JOINT_4]STEP_SCALE
+setp        [HMOT](CARD0).stepgen.04.step_type          0
+setp        [HMOT](CARD0).stepgen.04.control-type       1
+setp        [HMOT](CARD0).stepgen.04.maxaccel           [JOINT_4]STEPGEN_MAXACCEL
+setp        [HMOT](CARD0).stepgen.04.maxvel             [JOINT_4]STEPGEN_MAXVEL
+
+# ---closedloop stepper signals---
+
+net         a-pos-cmd                                   <= joint.4.motor-pos-cmd
+net         a-vel-cmd                                   <= joint.4.vel-cmd
+net         a-output                                    <= [HMOT](CARD0).stepgen.04.velocity-cmd
+net         a-pos-fb                                    <= [HMOT](CARD0).stepgen.04.position-fb
+net         a-pos-fb                                    => joint.4.motor-pos-fb
+net         a-enable                                    <= joint.4.amp-enable-out
+net         a-enable                                    => [HMOT](CARD0).stepgen.04.enable
+#net         DI_DRIVE-z-alarm-not                            joint.4.amp-fault-in
+
+# ---setup home / limit switch signals---
+
+net         DI_CNC-min-home-a                           => joint.4.home-sw-in
+#net         DI_CNC-min-home-a                           => joint.4.neg-lim-sw-in
+#net         a-pos-limit                                 => joint.4.pos-lim-sw-in
+

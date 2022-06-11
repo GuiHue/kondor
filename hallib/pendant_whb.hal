@@ -74,15 +74,19 @@ net pdnt.mode.is-teleop halui.mode.is-teleop whb.halui.mode.is-teleop
 net x-is-homed whb.halui.joint.x.is-homed
 net y-is-homed whb.halui.joint.y.is-homed
 net z-is-homed whb.halui.joint.z.is-homed
+net a-is-homed whb.halui.joint.a.is-homed
 
 # "selected axis" signals
 net axis-select-x whb.halui.axis.x.select 
 net axis-select-y whb.halui.axis.y.select 
 net axis-select-z whb.halui.axis.z.select 
+net axis-select-a whb.halui.axis.a.select 
+
 
 net pdnt.axis.x.jog-scale whb.axis.x.jog-scale axis.x.jog-scale
 net pdnt.axis.y.jog-scale whb.axis.y.jog-scale axis.y.jog-scale
 net pdnt.axis.z.jog-scale whb.axis.z.jog-scale axis.z.jog-scale
+net pdnt.axis.a.jog-scale whb.axis.a.jog-scale axis.a.jog-scale
 
 # Using an additona ilowpass makes this substantially smoother! - recommended addition over original setup
 setp ilowpass.x.enc-smooth.scale 1
@@ -91,24 +95,34 @@ setp ilowpass.y.enc-smooth.scale 1
 setp ilowpass.y.enc-smooth.gain  0.025
 setp ilowpass.z.enc-smooth.scale 1
 setp ilowpass.z.enc-smooth.gain  0.025
+setp ilowpass.a.enc-smooth.scale 1
+setp ilowpass.a.enc-smooth.gain  0.025
+
 net pdnt.axis.x.jog-counts  ilowpass.x.enc-smooth.in    whb.axis.x.jog-counts 
 net ilowpass-enc-x ilowpass.x.enc-smooth.out axis.x.jog-counts
 net pdnt.axis.y.jog-counts  ilowpass.y.enc-smooth.in    whb.axis.y.jog-counts 
 net ilowpass-enc-y ilowpass.y.enc-smooth.out axis.y.jog-counts
 net pdnt.axis.z.jog-counts  ilowpass.z.enc-smooth.in    whb.axis.z.jog-counts 
 net ilowpass-enc-z ilowpass.z.enc-smooth.out axis.z.jog-counts
+net pdnt.axis.a.jog-counts  ilowpass.a.enc-smooth.in    whb.axis.a.jog-counts 
+net ilowpass-enc-a ilowpass.a.enc-smooth.out axis.a.jog-counts
+
 
 net pdnt.axis.x.jog-enable whb.axis.x.jog-enable axis.x.jog-enable
 net pdnt.axis.y.jog-enable whb.axis.y.jog-enable axis.y.jog-enable
 net pdnt.axis.z.jog-enable whb.axis.z.jog-enable axis.z.jog-enable
+net pdnt.axis.a.jog-enable whb.axis.a.jog-enable axis.a.jog-enable
 
 net pdnt.axis.x.jog-vel-mode whb.axis.x.jog-vel-mode axis.x.jog-vel-mode
 net pdnt.axis.y.jog-vel-mode whb.axis.y.jog-vel-mode axis.y.jog-vel-mode
 net pdnt.axis.z.jog-vel-mode whb.axis.z.jog-vel-mode axis.z.jog-vel-mode
+net pdnt.axis.a.jog-vel-mode whb.axis.a.jog-vel-mode axis.a.jog-vel-mode
 
 net pdnt.axis.x.jog-scale whb.axis.x.jog-scale axis.x.jog-scale
 net pdnt.axis.y.jog-scale whb.axis.y.jog-scale axis.y.jog-scale
 net pdnt.axis.z.jog-scale whb.axis.z.jog-scale axis.z.jog-scale
+net pdnt.axis.a.jog-scale whb.axis.a.jog-scale axis.a.jog-scale
+
 
 ##############################################################################
 ##########  Button assigments                                       ##########
@@ -189,12 +203,14 @@ net pdnt.feed-override.decrease whb.halui.feed-override.decrease halui.feed-over
 net pdnt.axis.x.pos-feedback halui.axis.x.pos-feedback whb.halui.axis.x.pos-feedback
 net pdnt.axis.y.pos-feedback halui.axis.y.pos-feedback whb.halui.axis.y.pos-feedback
 net pdnt.axis.z.pos-feedback halui.axis.z.pos-feedback whb.halui.axis.z.pos-feedback
+net pdnt.axis.a.pos-feedback halui.axis.a.pos-feedback whb.halui.axis.a.pos-feedback
+
 
 # axis position related signals relative
 net pdnt.axis.x.pos-relative halui.axis.x.pos-relative whb.halui.axis.x.pos-relative
 net pdnt.axis.y.pos-relative halui.axis.y.pos-relative whb.halui.axis.y.pos-relative
 net pdnt.axis.z.pos-relative halui.axis.z.pos-relative whb.halui.axis.z.pos-relative
-
+net pdnt.axis.a.pos-relative halui.axis.a.pos-relative whb.halui.axis.a.pos-relative
 ##############################################################################
 ##########  Pendant Estop                                           ##########
 ##############################################################################

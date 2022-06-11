@@ -13,15 +13,15 @@ loadrt  hm2_eth board_ip="10.10.10.10" config=" num_encoders=3 num_pwmgens=0 num
 setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 
 
 # ---------- LOAD RT COMPONENTS ----------
-loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z,pid.s
+loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z,pid.s,pid.a
 loadrt  offset                              names=offset.ntc,offset.feed,offset.spindle,offset.rapid
 loadrt  comp                                names=comp.temp
 loadrt  toggle2nist                         names=toggle2nist.machineon,toggle2nist.externalprogram
 loadrt  toggle                              names=toggle.machineon,toggle.toolchange,toggle.externalprogram,toggle.probe3d,toggle.probetls,toggle.pdntestop
 loadrt  lowpass                             names=lowpass.feed,lowpass.spindle
-loadrt  ilowpass                            names=ilowpass.x.enc-smooth,ilowpass.y.enc-smooth,ilowpass.z.enc-smooth		
+loadrt  ilowpass                            names=ilowpass.x.enc-smooth,ilowpass.y.enc-smooth,ilowpass.z.enc-smooth,ilowpass.a.enc-smooth		
 loadrt  watchdog                            num_inputs=1
-loadrt  lut5                                names=lut5.spindleinhibit,lut5.toolchange,lut5.estop,lut5.drivealarm,lut5.drivewarning
+loadrt  lut5                                names=lut5.spindleinhibit,lut5.toolchange,lut5.estop,lut5.drivealarm
 loadrt  timedelay                           names=timedelay.conecleaning,timedelay.atcledslow,timedelay.atcledfast,timedelay.toolchange,timedelay.ledgreen,timedelay.stepsig,timedelay.estoplight
 loadrt  mux2                                names=mux2.estoplight
 loadrt  mux4                                names=mux4.ledgreen
@@ -34,8 +34,7 @@ loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,con
 loadrt  conv_float_s32                      names=conv-float-s32.feed,conv-float-s32.spindle
 loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv_u32b.ledgreen,conv_u32b.estoplight
 loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn,m_pendantestop,m_tlsovertravel messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold, Pendant ESTOP, Warning TLS overtravel" 
-#loadrt  stepgen                             step_type=0 ctrl_type=v
-loadrt carousel                             pockets=16 encoding=gray num_sense=6 dir=2
+loadrt  carousel                             pockets=16 encoding=gray num_sense=6 dir=2
 
  
 
@@ -48,22 +47,16 @@ addf    pid.y1.do-pid-calcs                 servo-thread
 addf    pid.y2.do-pid-calcs                 servo-thread
 addf    pid.z.do-pid-calcs                  servo-thread
 addf    pid.s.do-pid-calcs                  servo-thread
+addf    pid.a.do-pid-calcs                  servo-thread
 
 
 # ---------- ADD ADDITIONAL RT COMPONENTS TO SERVOTHREAD ----------
-#addf    stepgen.capture-position            servo-thread
-#addf    stepgen.update-freq                 servo-thread
 addf    offset.ntc.update-feedback          servo-thread
-#addf    offset.feed.update-feedback         servo-thread
-#addf    offset.rapid.update-feedback        servo-thread
-#addf    offset.spindle.update-feedback      servo-thread
 addf    comp.temp                           servo-thread
 addf    toggle.machineon                    servo-thread
 addf    toggle.toolchange                   servo-thread
 addf    toggle.externalprogram              servo-thread
 addf    toggle.pdntestop                    servo-thread
-#addf    toggle.probe3d                      servo-thread
-#addf    toggle.probetls                     servo-thread
 addf    toggle2nist.externalprogram         servo-thread
 addf    toggle2nist.machineon               servo-thread
 addf    watchdog.process                    servo-thread
@@ -72,7 +65,6 @@ addf    lut5.spindleinhibit                 servo-thread
 addf    lut5.toolchange                     servo-thread
 addf    lut5.estop                          servo-thread
 addf    lut5.drivealarm                     servo-thread
-addf    lut5.drivewarning                   servo-thread
 addf    timedelay.conecleaning              servo-thread
 addf    timedelay.toolchange                servo-thread
 addf    timedelay.atcledslow                servo-thread
@@ -126,6 +118,7 @@ addf    or.program-resume                   servo-thread
 addf    ilowpass.x.enc-smooth                 servo-thread
 addf    ilowpass.y.enc-smooth                 servo-thread
 addf    ilowpass.z.enc-smooth                 servo-thread
+addf    ilowpass.a.enc-smooth                 servo-thread
 addf    m_vfdcom                            servo-thread
 addf    m_vfderror                          servo-thread
 addf    m_estopext                          servo-thread

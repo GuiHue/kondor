@@ -58,20 +58,12 @@ net     estop-vfd-watchdog                      lut5.estop.in-4                 
 # in-4  Servo A         not connected
 # Out   High when ok   
 # High when any of the inputs goes high
-setp    lut5.drivewarning.function              0x8000
-net     DI_DRIVE-x-warn                         lut5.drivewarning.in-0
-net     DI_DRIVE-y1-warn                        lut5.drivewarning.in-1
-net     DI_DRIVE-y2-warn                        lut5.drivewarning.in-2
-net     DI_DRIVE-z-warn                         lut5.drivewarning.in-3
 # net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
 
 # ----- Trigger Warnings -----  
 # Drive alarm
 setp    m_drivealm.edge                         1 
 net     estop-drive-alarm                       m_drivealm.trigger                    
-# Drive warning
-setp    m_drivewarn.edge                        0
-net     m-drive-warning                         lut5.drivewarning.out   m_drivewarn.trigger
 # Low Pressure Warning
 setp    m_lowpressure.edge                      0
 net     DI_AIR-pressure-alarm                   m_lowpressure.trigger

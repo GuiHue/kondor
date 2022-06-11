@@ -95,20 +95,20 @@ net     DI_DRIVE-z-alarm-not                <= hm2_7i76e.0.7i76.0.0.input-23-not
 # --- DI 24 DRIVE-A-ALARM ---
 net     DI_DRIVE-a-alarm                <= hm2_7i76e.0.7i76.0.0.input-24
 
-# --- DI 25 DRIVE-X-WARN ---
-net     DI_DRIVE-x-warn                 <= hm2_7i76e.0.7i76.0.0.input-25
+# --- DI 25 ATC-home ---
+net     DI_ATC-home                 <= hm2_7i76e.0.7i76.0.0.input-25
 
-# --- DI 26 DRIVE-Y1-WARN ---
-net     DI_DRIVE-y1-warn                <= hm2_7i76e.0.7i76.0.0.input-26
+# --- DI 26 ATC-index ---
+net     DI_ATC-index                <= hm2_7i76e.0.7i76.0.0.input-26
 
-# --- DI 27 DRIVE-Y2-WARN ---
-net     DI_DRIVE-y2-warn                <= hm2_7i76e.0.7i76.0.0.input-27
+# --- DI 27 ATC-tool presence---
+net     DI_ATC-toolpresence                <= hm2_7i76e.0.7i76.0.0.input-27
 
-# --- DI 28 DRIVE-Z-WARN ---
-net     DI_DRIVE-z-warn                 <= hm2_7i76e.0.7i76.0.0.input-28
+# --- DI 28 ATC-door1 ---
+net     DI_ATC-door1                 <= hm2_7i76e.0.7i76.0.0.input-28
 
-# --- DI 29 DRIVE-A-WARN ---
-net     DI_DRIVE-a-warn                 <= hm2_7i76e.0.7i76.0.0.input-29
+# --- DI 29 ATC-door2 ---
+net     DI_ATC-door2                 <= hm2_7i76e.0.7i76.0.0.input-29
 
 # --- DI 30 MIN-HOME-A ---
 net     DI_CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30

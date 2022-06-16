@@ -14,7 +14,7 @@ setp    [HMOT](CARD0).watchdog.timeout_ns 5000000
 
 # ---------- LOAD RT COMPONENTS ----------
 loadrt  pid                                 names=pid.x,pid.y1,pid.y2,pid.z,pid.s,pid.a
-loadrt  offset                              names=offset.ntc,offset.feed,offset.spindle,offset.rapid
+loadrt  offset                              names=offset.ntc,offset.feed,offset.spindle,offset.rapid,offset.temp
 loadrt  comp                                names=comp.temp
 loadrt  toggle2nist                         names=toggle2nist.machineon,toggle2nist.externalprogram
 loadrt  toggle                              names=toggle.machineon,toggle.toolchange,toggle.externalprogram,toggle.probe3d,toggle.probetls,toggle.pdntestop
@@ -52,6 +52,7 @@ addf    pid.a.do-pid-calcs                  servo-thread
 
 # ---------- ADD ADDITIONAL RT COMPONENTS TO SERVOTHREAD ----------
 addf    offset.ntc.update-feedback          servo-thread
+addf    offset.temp.update-output servo-thread
 addf    comp.temp                           servo-thread
 addf    toggle.machineon                    servo-thread
 addf    toggle.toolchange                   servo-thread

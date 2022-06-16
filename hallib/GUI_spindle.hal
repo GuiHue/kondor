@@ -7,7 +7,7 @@
 # Connect spindle related info
 net vfd-temp => spindleUI.meter_temp
 net  spindle-current  spindleUI.meter_amps
-net spindle-temp spindleUI.meter_spindle
+net fucktemp spindleUI.meter_spindle
 net spindle-rpm  spindleUI.meter_rpm
 
 # Connect LEDS

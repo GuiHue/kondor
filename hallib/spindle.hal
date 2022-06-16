@@ -85,4 +85,9 @@ net      AI_ATC-temp-sensor                    offset.ntc.offset
 net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
 
 net      AI_fieldvoltage                       thermistor.0.v-total
-net      spindle-temp                          thermistor.0.temperature-c          comp.temp.in1
+net      spindle-temp                          thermistor.0.temperature-c          offset.temp.in
+
+# This is seriously ba fuckery... because for some unknown reason the values just spicked around 18 degrees around June 10, 2022
+net     fucktempfactor offset.temp.offset  
+sets fucktempfactor -18
+net     fucktemp    offset.temp.out comp.temp.in1

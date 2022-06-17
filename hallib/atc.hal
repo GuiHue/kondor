@@ -109,12 +109,13 @@ net     DO_ATC-status-light                         conv_u32b.atcstatusledout.ou
 #setp stepgen.0.enable true
 #setp stepgen.0.maxvel 3
 
-setp        [HMOT](CARD0).stepgen.05.dirsetup           [JOINT_0]DIRSETUP
-setp        [HMOT](CARD0).stepgen.05.dirhold            [JOINT_0]DIRHOLD
-setp        [HMOT](CARD0).stepgen.05.steplen            [JOINT_0]STEPLEN
-setp        [HMOT](CARD0).stepgen.05.stepspace          [JOINT_0]STEPSPACE
-setp        [HMOT](CARD0).stepgen.05.position-scale     [JOINT_0]STEP_SCALE
+setp        [HMOT](CARD0).stepgen.05.dirsetup           [ATC]DIRSETUP
+setp        [HMOT](CARD0).stepgen.05.dirhold            [ATC]DIRHOLD
+setp        [HMOT](CARD0).stepgen.05.steplen            [ATC]STEPLEN
+setp        [HMOT](CARD0).stepgen.05.stepspace          [ATC]STEPSPACE
+setp        [HMOT](CARD0).stepgen.05.position-scale     [ATC]STEP_SCALE
 setp        [HMOT](CARD0).stepgen.05.step_type          0
-setp        [HMOT](CARD0).stepgen.05.control-type       0
-setp        [HMOT](CARD0).stepgen.05.maxaccel           [JOINT_0]STEPGEN_MAXACCEL
-setp        [HMOT](CARD0).stepgen.05.maxvel             [JOINT_0]STEPGEN_MAXVEL
+setp        [HMOT](CARD0).stepgen.05.control-type       1
+setp        [HMOT](CARD0).stepgen.05.enable       1
+setp        [HMOT](CARD0).stepgen.05.maxaccel           [ATC]STEPGEN_MAXACCEL
+setp        [HMOT](CARD0).stepgen.05.maxvel             [ATC]STEPGEN_MAXVEL

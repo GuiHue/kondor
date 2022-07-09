@@ -116,6 +116,9 @@ setp        [HMOT](CARD0).stepgen.05.stepspace          [ATC]STEPSPACE
 setp        [HMOT](CARD0).stepgen.05.position-scale     [ATC]STEP_SCALE
 setp        [HMOT](CARD0).stepgen.05.step_type          0
 setp        [HMOT](CARD0).stepgen.05.control-type       1
-setp        [HMOT](CARD0).stepgen.05.enable       1
+setp        [HMOT](CARD0).stepgen.05.enable             1
 setp        [HMOT](CARD0).stepgen.05.maxaccel           [ATC]STEPGEN_MAXACCEL
 setp        [HMOT](CARD0).stepgen.05.maxvel             [ATC]STEPGEN_MAXVEL
+
+net         atc-car-fordwardvel     
+carousel.0.enable 

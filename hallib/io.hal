@@ -92,17 +92,15 @@ net     DI_DRIVE-x-alarm-not                <= hm2_7i76e.0.7i76.0.0.input-20-not
 net     DI_DRIVE-z-alarm                <= hm2_7i76e.0.7i76.0.0.input-23
 net     DI_DRIVE-z-alarm-not                <= hm2_7i76e.0.7i76.0.0.input-23-not
 
-# --- DI 24 DRIVE-A-ALARM ---
-net     DI_DRIVE-a-alarm                <= hm2_7i76e.0.7i76.0.0.input-24
+# --- DI 24 ATC-index ---
+net     DI_ATC-index                <= hm2_7i76e.0.7i76.0.0.input-24
+
 
 # --- DI 25 ATC-home ---
 net     DI_ATC-home                 <= hm2_7i76e.0.7i76.0.0.input-25
 
-# --- DI 26 ATC-index ---
-net     DI_ATC-index                <= hm2_7i76e.0.7i76.0.0.input-26
-
-# --- DI 27 ATC-tool presence---
-net     DI_ATC-toolpresence                <= hm2_7i76e.0.7i76.0.0.input-27
+# --- DI 26 ATC-tool presence---
+net     DI_ATC-toolpresence                <= hm2_7i76e.0.7i76.0.0.input-26
 
 # --- DI 28 ATC-door1 ---
 net     DI_ATC-door1                 <= hm2_7i76e.0.7i76.0.0.input-28

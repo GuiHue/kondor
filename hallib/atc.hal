@@ -94,21 +94,11 @@ net     DO_ATC-status-light                         conv_u32b.atcstatusledout.ou
 # To be added at a later stage - careful, appraoch below does not work due to doubl linkage
 #net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out
 
-# ---------- AUTOMATIC CAROUSEL TOOL CHANGER  ----------
-#setp stepgen.0.position-scale 36000
-#setp stepgen.0.steplen 5000
-#setp stepgen.0.stepspace 5000
-#setp stepgen.0.dirhold 5000
-#setp stepgen.0.dirsetup 5000
-#setp stepgen.0.maxaccel 200
-#net ypos-cmd joint.1.motor-pos-cmd => stepgen.1.position-cmd
-#net ypos-fb stepgen.1.position-fb => joint.1.motor-pos-fb
-#net ystep <= stepgen.1.step
-#net ydir <= stepgen.1.dir
-#net yenable joint.1.amp-enable-out => stepgen.1.enable
-#setp stepgen.0.enable true
-#setp stepgen.0.maxvel 3
 
+
+
+
+# ---------- AUTOMATIC CAROUSEL TOOL CHANGER  ----------
 setp        [HMOT](CARD0).stepgen.05.dirsetup           [ATC]DIRSETUP
 setp        [HMOT](CARD0).stepgen.05.dirhold            [ATC]DIRHOLD
 setp        [HMOT](CARD0).stepgen.05.steplen            [ATC]STEPLEN
@@ -120,5 +110,17 @@ setp        [HMOT](CARD0).stepgen.05.enable             1
 setp        [HMOT](CARD0).stepgen.05.maxaccel           [ATC]STEPGEN_MAXACCEL
 setp        [HMOT](CARD0).stepgen.05.maxvel             [ATC]STEPGEN_MAXVEL
 
-net         atc-car-fordwardvel     
-carousel.0.enable 
+
+net         atc_car_fwd-dc  carousel.0.fwd-dc   10     
+net         atc_car_rev-dc  carousel.0.rev-dc   -10
+net         atc_car_align-dc  carousel.0.align-dc   1
+net         atc_car_decel-time  carousel.0.decel-time 0.4
+net         atc_car_motor-vel   carousel.0.motor-vel [HMOT](CARD0).stepgen.05.velocity-cmd
+
+# map signal for sets
+net atc_car_ena carousel.0.enable
+
+#home/index
+net DI_ATC-home carousel.0.sense-0
+#Pocket
+net DI_ATC-pocket  carousel.0.sense-1

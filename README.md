@@ -17,7 +17,7 @@ _Status_: Experimental, exect substantial changes during setup. In other words: 
 
 ## About the config
 * _Currently_ Manual tool change operated by a toogled push-button on Z axis)
-
+* currently also: big fucking mess
 ## Useful Links 
 
 * Physical override using poti https://forum.linuxcnc.org/24-hal-components/36336-physical-feed-override-knob?start=0

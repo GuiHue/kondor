@@ -94,6 +94,9 @@ net     DO_ATC-status-light                         conv_u32b.atcstatusledout.ou
 # To be added at a later stage - careful, appraoch below does not work due to doubl linkage
 #net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out
 
+# ---------- AUTOMATIC CAROUSEL TOOL CHANGER  ----------
+
+# Motor Setup
 
 
 
@@ -110,17 +113,29 @@ setp        [HMOT](CARD0).stepgen.05.enable             1
 setp        [HMOT](CARD0).stepgen.05.maxaccel           [ATC]STEPGEN_MAXACCEL
 setp        [HMOT](CARD0).stepgen.05.maxvel             [ATC]STEPGEN_MAXVEL
 
+# Carousel Setup
 
-net         atc_car_fwd-dc  carousel.0.fwd-dc   10     
-net         atc_car_rev-dc  carousel.0.rev-dc   -10
-net         atc_car_align-dc  carousel.0.align-dc   1
-net         atc_car_decel-time  carousel.0.decel-time 0.4
-net         atc_car_motor-vel   carousel.0.motor-vel [HMOT](CARD0).stepgen.05.velocity-cmd
+#Setup
+setp        carousel.0.fwd-dc       [ATC_CAR]FWD_DC
+setp        carousel.0.hold-dc      [ATC_CAR]HOLD_DC
+setp        carousel.0.rev-dc       [ATC_CAR]REV_DC
+setp        carousel.0.rev-pulse    [ATC_CAR]REV_PULSE
+setp        carousel.0.align-dc    [ATC_CAR]ALIGN_DC
+setp        carousel.0.decel-time    [ATC_CAR]DECEL_TIME
 
-# map signal for sets
-net atc_car_ena carousel.0.enable
 
-#home/index
-net DI_ATC-home carousel.0.sense-0
-#Pocket
-net DI_ATC-pocket  carousel.0.sense-1
+# Signals
+# Enable is required to turn the whole thing on
+net         carousel_enable         carousel.0.enable 
+# Index = home
+net         DI_ATC-CAR-index    carousel.0.sense-0
+# Pocket = pocket signal
+net         DI_ATC-CAR-pocket    carousel.0.sense-1
+
+net         carousel_jog-fwd    carousel.0.jog-fwd
+net         carousel_jog-rev    carousel.0.jog-rev
+
+net         carousel_motor_fwd  carousel.0.motor-fwd
+net         carousel_motor_rev  carousel.0.motor-rev
+net         carousel_motor_vel  carousel.0.motor-vel    [HMOT](CARD0).stepgen.05.velocity-cmd
+

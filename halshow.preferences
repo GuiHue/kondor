@@ -1,0 +1,29 @@
+# Halshow settings
+# This file is generated automatically.
+wm geometry . 1357x773+399+180
+placeFrames 0.3002136752136752
+set ::ratio 0.3002136752136752
+set ::old_w_leftf 281
+set ::watchlist {
+    pin+carousel.0.active
+    pin+carousel.0.align-dc
+    pin+carousel.0.current-position
+    pin+carousel.0.enable
+    pin+carousel.0.ready
+    pin+carousel.0.pocket-number
+    pin+carousel.0.parity
+    pin+carousel.0.motor-vel
+    pin+carousel.0.sense-0
+    pin+carousel.0.sense-1
+    param+carousel.0.state
+    param+carousel.0.homing
+    param+carousel.0.homed
+    param+carousel.0.motor-dir
+}
+set ::workmode watchhal
+set ::watchInterval 100
+set ::col1_width 100
+set ::ffmts 
+set ::ifmts 
+set ::alwaysOnTop 0
+set ::autoSaveWatchlist 1

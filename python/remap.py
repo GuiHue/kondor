@@ -1,6 +1,6 @@
 #   This is a component of LinuxCNC
-#   Copyright 2011, 2012, 2013 Dewey Garrett <dgarrett@panix.com>,
-#   Michael Haberler <git@mah.priv.at>
+#   Copyright 2011, 2012, 2013, 2014 Dewey Garrett <dgarrett@panix.com>,
+#   Michael Haberler <git@mah.priv.at>, Norbert Schechner <nieson@web.de>
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by

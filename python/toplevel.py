@@ -1,6 +1,6 @@
 #   This is a component of LinuxCNC
-#   Copyright 2011, 2013 Dewey Garrett <dgarrett@panix.com>, Michael
-#   Haberler <git@mah.priv.at>
+#   Copyright 2011, 2013, 2014 Dewey Garrett <dgarrett@panix.com>,
+#   Michael Haberler <git@mah.priv.at>, Norbert Schechner <nieson@web.de>
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -17,4 +17,3 @@
 #   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 import remap
-

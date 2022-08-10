@@ -19,6 +19,9 @@ set ::watchlist {
     param+carousel.0.homing
     param+carousel.0.homed
     param+carousel.0.motor-dir
+    pin+halui.estop.activate
+    pin+halui.estop.is-activated
+    pin+halui.estop.reset
 }
 set ::workmode watchhal
 set ::watchInterval 100

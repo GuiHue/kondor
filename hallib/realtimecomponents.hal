@@ -26,7 +26,7 @@ loadrt  timedelay                           names=timedelay.conecleaning,timedel
 loadrt  mux2                                names=mux2.estoplight
 loadrt  mux4                                names=mux4.ledgreen
 loadrt  mux8                                names=mux8.atcstatusled
-loadrt  not                                 names=not.atcledslow,not.atcledfast,not.spindleinhibit,not.ledgreen,not.estoplight,not.estop,not.vfderror,not.pdntestop
+loadrt  not                                 names=not.atcledslow,not.atcledfast,not.spindleinhibit,not.ledgreen,not.estoplight,not.estop,not.vfderror,not.pdntestop,not.pbtime
 loadrt  and2                                names=and.atcledslow,and.atcledfast,and.atcdb,and.pauseresume1,and.pauseresume2,and.runstep1,and.runstep2,and.ledgreen,and.estoplight,and.tlsactivation,and.3Dprobeactivation
 loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause,or.probe,or.auto,or.program-stop,or.program-resume
 loadrt  conv_bit_float                      names=conv_bit_float.spindleinhibit,conv_bit_float.atcstatusled-slow,conv_bit_float.atcstatusled-fast,conv_bit_float.spindleinhibitnot,conv_bit_float.runon,conv_bit_float.ledgreen,conv_bit_float.estopsignal,conv_bit_float.warningsignal
@@ -36,6 +36,7 @@ loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv
 loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn,m_pendantestop,m_tlsovertravel messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold, Pendant ESTOP, Warning TLS overtravel" 
 loadrt  carousel                             pockets=16 encoding=gray num_sense=6 dir=1
 loadrt  limit2                              names=limit2.spindle
+loadrt  time                                names=time.pb
 
  
 
@@ -85,6 +86,7 @@ addf    not.estoplight                      servo-thread
 addf    not.estop                           servo-thread
 addf    not.vfderror                        servo-thread
 addf    not.pdntestop                       servo-thread
+addf    not.pbtime                          servo-thread                    
 addf    and.atcledslow                      servo-thread
 addf    and.atcledfast                      servo-thread
 addf    and.atcdb                           servo-thread
@@ -136,6 +138,7 @@ addf    lowpass.feed                        servo-thread
 addf    lowpass.spindle                     servo-thread
 addf    limit2.spindle                      servo-thread
 addf    carousel.0                            servo-thread
+addf    time.pb                             servo-thread
 
 #addf    stepgen.make-pulses servo-thread
 

@@ -127,6 +127,7 @@ O111 else
         ; turn on the 3D Probe
         M64 P #<_ini[ATC_PINS]3D_PIN>
         (debug, Changing to calibrated probe - Probe Activated! - Crash Protection on)
+        S0 M5
 O111 endif
 
 

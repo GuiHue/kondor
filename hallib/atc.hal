@@ -126,7 +126,7 @@ setp        carousel.0.decel-time    [ATC_CAR]DECEL_TIME
 
 # Signals
 # Enable is required to turn the whole thing on
-net         carousel_enable         carousel.0.enable 
+net        carenable         carousel.0.enable 
 # Index = home
 net         DI_ATC-CAR-index    carousel.0.sense-0
 # Pocket = pocket signal

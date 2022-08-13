@@ -2,11 +2,7 @@
 ; # REMAP=M61  modalgroup=6 prolog=settool_prolog ngc=remap_m61 epilog=settool_epilog
 o<remap_m61> sub
 (print, tool #<tool>)
-(print, pocket=#<pocket>)
 
-;otherwise after the M6 this information is gone!
-#<pre_tool> = #<tool>
-#<pre_pocket> = #<pocket>
 
 ; we must execute this only in the milltask interpreter
 ; or preview will break, so test for '#<_task>' which is 1 for 
@@ -22,6 +18,7 @@ M61 Q#<tool>
 O111 if [#<tool> EQ 99]
     ; Activate probe 
     M64 P #<_ini[ATC_PINS]3D_PIN>
+    S0
     (debug, Probe Activated! - Crash Protection on)
 O111 else
         ;a tool different from probe - turn off triggerpin

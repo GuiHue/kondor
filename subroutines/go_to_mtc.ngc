@@ -1,0 +1,9 @@
+; 
+
+o<go_to_mtc> sub
+
+G53G0Z0
+G53 G0 X#<_ini[CHANGE_POSITION]X> Y#<_ini[CHANGE_POSITION]Y>
+
+o<go_to_mtc> endsub
+m2

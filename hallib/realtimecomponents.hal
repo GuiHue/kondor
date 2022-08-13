@@ -34,10 +34,10 @@ loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,con
 loadrt  conv_float_s32                      names=conv-float-s32.feed,conv-float-s32.spindle
 loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv_u32b.ledgreen,conv_u32b.estoplight
 loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn,m_pendantestop,m_tlsovertravel messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold, Pendant ESTOP, Warning TLS overtravel" 
-loadrt  carousel                             pockets=16 encoding=gray num_sense=6 dir=1
+loadrt  carousel                             pockets=16 encoding=index num_sense=2 dir=1
 loadrt  limit2                              names=limit2.spindle
 loadrt  time                                names=time.pb
-
+loadrt  scale                               names=scale.spindleload
  
 
 # ---------- ADD CORE RT COMPONENTS TO SERVOTHREAD ----------
@@ -139,6 +139,7 @@ addf    lowpass.spindle                     servo-thread
 addf    limit2.spindle                      servo-thread
 addf    carousel.0                            servo-thread
 addf    time.pb                             servo-thread
+addf    scale.spindleload                   servo-thread
 
 #addf    stepgen.make-pulses servo-thread
 

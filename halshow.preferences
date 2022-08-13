@@ -1,19 +1,22 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1122x661+565+169
+wm geometry . 1122x661+683+260
 placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
 set ::watchlist {
-    pin+qtpyvcp.spindle-encoder-rpm.enable
-    pin+qtpyvcp.spindle-encoder-rpm.in
-    pin+qtpyvcp.spindle-load-indicator.in-f
-    pin+qtpyvcp.spindle-load-indicator.in-i
-    pin+qtpyvcp.spindle-load-indicator.max-val
-    pin+qtpyvcp.spindle-load-indicator.min-val
-    pin+qtpyvcp.probe-in.enable
-    pin+qtpyvcp.probe-in.io
-    pin+qtpyvcp.probe-in.out
+    param+carousel.0.homed
+    param+carousel.0.homing
+    param+carousel.0.state
+    pin+carousel.0.enable
+    pin+carousel.0.pocket-number
+    sig+carenable
+    pin+carousel.0.current-position
+    pin+carousel.0.ready
+    sig+carousel_jog-fwd
+    sig+carousel_jog-rev
+    pin+carousel.0.jog-fwd
+    pin+carousel.0.jog-rev
 }
 set ::workmode watchhal
 set ::watchInterval 100

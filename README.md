@@ -24,10 +24,12 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
     * Physical override using poti https://forum.linuxcnc.org/24-hal-components/36336-physical-feed-override-knob?start=0
     * Run/Step buttons https://forum.linuxcnc.org/47-hal-examples/13201-run-step-hold-resume-buttons?start=0
     * bin to hex converter https://www.rapidtables.com/convert/number/binary-to-hex.html
-    * Isntall deb11 for linxucnc: https://gnipsel.com/linuxcnc/debian-11.html (i use XFCE as GUI)
+    * Install deb11 (bullseye) for linxucnc: https://gnipsel.com/linuxcnc/debian-11.html (i use XFCE as GUI)
     
 * Probe_Basic related
-    * Installing lxcnc 2.9 on Bookworm (deb11) install script: https://github.com/joco-nz/lcnc-bullseye-installer (Note: This may miss some dependencies)
+    * Offizial documentation to install qtpyvcp: https://www.qtpyvcp.com/install/index.html
+    * For BULLSEYE: USE THIS: https://www.qtpyvcp.com/install/bullseye.html
+    * Installing lxcnc 2.9 on Bullseye (deb11) install script: https://github.com/joco-nz/lcnc-bullseye-installer (Note: This may miss some dependencies)
     * Good Info on installing PB with dependency infos: https://www.forum.linuxcnc.org/9-installing-linuxcnc/43506-buildbot-debian-11-bullseye-questions?start=0#220493
     * Installating PB (dev): https://kcjengr.github.io/probe_basic/dev_install.html 
     * Migrate working config to PB: https://forum.linuxcnc.org/qtpyvcp/44889-probe-basic-config-conversion-doc

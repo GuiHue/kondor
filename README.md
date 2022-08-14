@@ -1,7 +1,7 @@
 # LinuxCNC Config for groot2.0
 Repository for all things related to the linuxCNC and MESA based control system of my CNC router groot2.0
 
-_Status_: Experimental, exect substantial changes during setup. In other words: For the love of all that is holy: Don't try this at home. It couldn't possibly be more broken and machine specific.
+_Status_: This is a work in progress, expect substantial changes over time. In other words: For the love of all that is holy: Don't try this at home. It couldn't possibly be more broken and machine specific.
 
 ## About the machine
 * CNC router made from aluminium profile and plate based on a design by fraseserbruch.de
@@ -16,21 +16,29 @@ _Status_: Experimental, exect substantial changes during setup. In other words: 
     * Further features: Status lights, control consolde for start/stop and feed and spindle override
 
 ## About the config
-* _Currently_ Manual tool change operated by a toogled push-button on Z axis)
-* currently also: big fucking mess
+* LinuxCNC 2.9 pre (following master)
+* Debian 11 Bookworm with Preempt-rt kernel 
+* GUI: QtPyVCP based Probe_basic (python3) with several modifications 
 ## Useful Links 
+* General LinuxCNC items:
+    * Physical override using poti https://forum.linuxcnc.org/24-hal-components/36336-physical-feed-override-knob?start=0
+    * Run/Step buttons https://forum.linuxcnc.org/47-hal-examples/13201-run-step-hold-resume-buttons?start=0
+    * bin to hex converter https://www.rapidtables.com/convert/number/binary-to-hex.html
+    * Isntall deb11 for linxucnc: https://gnipsel.com/linuxcnc/debian-11.html (i use XFCE as GUI)
+    
+* Probe_Basic related
+    * Installing lxcnc 2.9 on Bookworm (deb11) install script: https://github.com/joco-nz/lcnc-bullseye-installer (Note: This may miss some dependencies)
+    * Good Info on installing PB with dependency infos: https://www.forum.linuxcnc.org/9-installing-linuxcnc/43506-buildbot-debian-11-bullseye-questions?start=0#220493
+    * Installating PB (dev): https://kcjengr.github.io/probe_basic/dev_install.html 
+    * Migrate working config to PB: https://forum.linuxcnc.org/qtpyvcp/44889-probe-basic-config-conversion-doc
+    * qtpyvcp doc: https://www.qtpyvcp.com/
+* GMOCCAPY related
+    * GMOCCAPY Docu https://linuxcnc.org/docs/devel/html/gui/gmoccapy.html
+    * GMOCCAPY tool change: https://xpkiller.de/2016/12/06/automatische-werkzeuglaengenmessung/
 
-* Physical override using poti https://forum.linuxcnc.org/24-hal-components/36336-physical-feed-override-knob?start=0
-* Run/Step buttons https://forum.linuxcnc.org/47-hal-examples/13201-run-step-hold-resume-buttons?start=0
-* GMOCCAPY Docu https://linuxcnc.org/docs/devel/html/gui/gmoccapy.html
-* GMOCCAPY tool change: https://xpkiller.de/2016/12/06/automatische-werkzeuglaengenmessung/
-* bin to hex converter https://www.rapidtables.com/convert/number/binary-to-hex.html
-* 
 
 ## Useful Hints
 * Serial communication common fixes: 
     * add cnc user to group dialout (debian) using usermod -a -G dialout username
     * additionally, consider chmod 777 for /dev/ttyUSB0 (or any other device tha tis used)
 * Serial communication using modbus via TCP --> use socat
-
-Install all the things.

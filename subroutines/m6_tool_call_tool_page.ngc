@@ -25,13 +25,6 @@ o<020> endif
 
 #<pc_tool_length> = #5403
 
-(run program_coolant sub if selected to be active in settings page with value 1)
-o<100> if [#<activate_programmable_coolant> EQ 1]
-  (run program_coolant.ngc)
-  o<program_coolant> call [#3][#4][#5][#<pc_tool_length>]
-o<100> else
-  o<M6_tool_call_tool_page> return
-o<100> endif
 
 o<M6_tool_call_tool_page> endsub
 

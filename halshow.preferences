@@ -1,22 +1,14 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1122x661+683+260
+wm geometry . 1122x661+219+223
 placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
 set ::watchlist {
-    param+carousel.0.homed
-    param+carousel.0.homing
-    param+carousel.0.state
-    pin+carousel.0.enable
-    pin+carousel.0.pocket-number
-    sig+carenable
-    pin+carousel.0.current-position
-    pin+carousel.0.ready
-    sig+carousel_jog-fwd
-    sig+carousel_jog-rev
-    pin+carousel.0.jog-fwd
-    pin+carousel.0.jog-rev
+    pin+hal_manualtoolchange.change
+    pin+hal_manualtoolchange.change_button
+    pin+hal_manualtoolchange.changed
+    pin+hal_manualtoolchange.number
 }
 set ::workmode watchhal
 set ::watchInterval 100

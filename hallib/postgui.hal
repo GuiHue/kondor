@@ -142,8 +142,11 @@ net spindle-rpm         =>  qtpyvcp.spindle-encoder-rpm.in
 net spindle-at-speed    => qtpyvcp.spindle_at_speed.on 
 # Spindle Load Indicator
 net  spindle-current                scale.spindleload.in
-# 
-setp scale.spindleload.gain 14
+# Scale Gain
+# 100 % = 5.5
+# Meter goes to 125%
+# 10/5.5
+setp scale.spindleload.gain 18.18
 net  spindle-current-scaled         scale.spindleload.out   qtpyvcp.spindle-load-indicator.in-f
 setp qtpyvcp.spindle-load-indicator.max-val 10
 setp qtpyvcp.spindle-load-indicator.min-val 0

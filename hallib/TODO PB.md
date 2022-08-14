@@ -1,8 +1,8 @@
 # Probe Basic To Dos
 
 ## LOP
-- check tool change panels (remove silly macros, modify them
-- check format of numbers
+- see Trello
+- M6 is triggered from three seperate places beside M6 remap call
 
 ## DONE
 - check for cont jogging

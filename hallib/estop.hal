@@ -2,13 +2,12 @@
 # Handles all internal processing required to manage estop functions
 # Note: This setup does not have a mean to trigger physical estop from software
 #       Instead, physical estop will trigger linuxcnc and trigger als drives via hardwiring to estop/STO
-#       Further, a semiconductor port of the deployed PILZ relay triggers linuxcnc (DI_ESTOP-ext)
+#       Further, a semiconductor port of the deployed PILZ relay triggers linuxcnc (DI-ESTOP-ext)
 #       Within linuxCNC, there ar emultiple other signal sources that may trigger soft estop
 #       This file also handles warnings
 # Handles and Displays Warnings from Pneumatic Pressure Sensor, Drives and Probe
 
-net     estop-out                               <= iocontrol.0.user-enable-out
-#net     DI_ESTOP-ext                            => iocontrol.0.emc-enable-in
+net     SYS-estop-out                               <= iocontrol.0.user-enable-out
 
 # ----- MERGE SERVO ALM  ----- 
 # in-0  Servo X         HIGH when OK
@@ -19,11 +18,11 @@ net     estop-out                               <= iocontrol.0.user-enable-out
 # Out   High when ok             
 # Function and5, high, whenever al inputs are true
 setp    lut5.drivealarm.function                0x8000 
-net     DI_DRIVE-x-alarm                        lut5.drivealarm.in-0
-net     DI_DRIVE-y1-alarm                       lut5.drivealarm.in-1
-net     DI_DRIVE-y2-alarm                       lut5.drivealarm.in-2
-net     DI_DRIVE-z-alarm                        lut5.drivealarm.in-3
-# net     DI_DRIVE-a-alarm                        lut5.drivealarm.in-4
+net     DI-DRIVE-x-alarm                        lut5.drivealarm.in-0
+net     DI-DRIVE-y1-alarm                       lut5.drivealarm.in-1
+net     DI-DRIVE-y2-alarm                       lut5.drivealarm.in-2
+net     DI-DRIVE-z-alarm                        lut5.drivealarm.in-3
+# net     DI-DRIVE-a-alarm                        lut5.drivealarm.in-4
 
 # ----- SOFT ESTOP  ----- 
 #   in0     External Estop from Hardware        HIGH when OK
@@ -35,9 +34,9 @@ net     DI_DRIVE-z-alarm                        lut5.drivealarm.in-3
 
 setp    lut5.estop.function                     0x80000000
 
-net     DI_ESTOP-ext                            lut5.estop.in-0
+net     DI-ESTOP-ext                            lut5.estop.in-0
 net     vfd-error-inverted                      lut5.estop.in-1                     
-net     DI_CNC-probe-ot                        lut5.estop.in-2                     #lut5.drivealarm.out
+net     DI-CNC-probe-ot                        lut5.estop.in-2                     #lut5.drivealarm.out
 net     pendant-estop                          lut5.estop.in-3
 net     estop-vfd-watchdog                      lut5.estop.in-4                     watchdog.ok-out
 # Output LUT5.ESTOP to IOCONTROL
@@ -45,7 +44,7 @@ net     estop-vfd-watchdog                      lut5.estop.in-4                 
 
 
 ##############################################################################
-# ---------- WARNINGS  ---------- 
+# ---------- WARNING MESSAGES  ---------- 
 # Servo Warning Signals are connected to linuxcnc without further detailled function
 # Delta manual remains unclear when warn is triggered
 # Note: Warnings are User information and presently not part of estop!
@@ -58,7 +57,7 @@ net     estop-vfd-watchdog                      lut5.estop.in-4                 
 # in-4  Servo A         not connected
 # Out   High when ok   
 # High when any of the inputs goes high
-# net     DI_DRIVE-a-warn                        lut5.drivewarning.in-4
+# net     DI-DRIVE-a-warn                        lut5.drivewarning.in-4
 
 # ----- Trigger Warnings -----  
 # Drive alarm
@@ -66,13 +65,13 @@ setp    m_drivealm.edge                         1
 net     estop-drive-alarm                       m_drivealm.trigger                    
 # Low Pressure Warning
 setp    m_lowpressure.edge                      0
-net     DI_AIR-pressure-alarm                   m_lowpressure.trigger
+net     DI-CNC-pressure-alarm                   m_lowpressure.trigger
 # Spindle temperature warning
 setp    m_tempwarn.edge                         1
 net     m-spindle-temp-warning                  comp.temp.out           m_tempwarn.trigger
 # External Estop
 setp    m_estopext.edge                         0
-net     DI_ESTOP-ext                            m_estopext.trigger
+net     DI-ESTOP-ext                            m_estopext.trigger
 # Watchdog
 setp    m_vfdcom.edge                           0
 net     estop-vfd-watchdog                      m_vfdcom.trigger
@@ -81,10 +80,10 @@ setp    m_vfderror.edge                         1
 net     estop-vfd-error                         m_vfderror.trigger
 # Pendant estop 
 setp    m_pendantestop.edge                     0
-net     pendant-estop                         m_pendantestop.trigger
+net     pendant-estop                           m_pendantestop.trigger
 # Pendant tls overtravel 
-setp    m_tlsovertravel.edge                     0
-net     DI_CNC-probe-ot                         m_tlsovertravel.trigger
+setp    m_tlsovertravel.edge                    0
+net     DI-CNC-probe-ot                         m_tlsovertravel.trigger
 
 # ----- ESTOP/ WARNING LIGHT  ----- 
 # ESTOP: Red Light = Perm on
@@ -94,8 +93,6 @@ net     DI_CNC-probe-ot                         m_tlsovertravel.trigger
 # mux2.estoplight.in1 = estop
 # mux2.estoplight.sel = estop triggered
 # convert to float required
-
-
 setp    timedelay.estoplight.on-delay           0.5
 setp    timedelay.estoplight.off-delay          0.5
 net     estop-inverse                           not.estop.out                       and.estoplight.in0      conv_bit_float.estopsignal.in
@@ -107,4 +104,4 @@ net     mux2-estoplight-warning                 conv_bit_float.warningsignal.out
 net     mux2-estoplight-estopsignal             conv_bit_float.estopsignal.out      mux2.estoplight.in1
 net     mux2-estopsignalout-conv_flu32          conv_flu32.estoplight.in            mux2.estoplight.out
 net     mux2-estopsignalout-conv_u32b           conv_flu32.estoplight.out           conv_u32b.estoplight.in
-net     DO_CP-light-red                         conv_u32b.estoplight.out
+net     DO-HMI-light-red                         conv_u32b.estoplight.out

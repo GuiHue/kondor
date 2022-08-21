@@ -1,6 +1,11 @@
+##############################################################################
+##########  HAL file to configure XHC Wireless Pendant
+############################################################################## 
+
 loadusr -W xhc-whb04b-6 -H
 
-# Notes on macro assignment
+#################   Keyboard layout/ macro assignment
+# Note:  Top to bottom, left to right
 # row 1 
 # reset/macro11       stop/macro12     startpause/macro13
 # row 2
@@ -35,7 +40,7 @@ net machine-is-on whb.halui.machine.is-on
 net idle-on whb.halui.program.is-idle
 #changed
 #net pdnt.program.is-paused whb.halui.program.is-paused halui.program.is-paused
-net DO_CP-light-yellow          whb.halui.program.is-paused
+net DO-HMI-light-yellow          whb.halui.program.is-paused
 #changed
 #net pdnt.program-is-running whb.halui.program.is-running halui.program.is-running
 net run-on whb.halui.program.is-running
@@ -215,6 +220,6 @@ net pdnt.axis.a.pos-relative halui.axis.a.pos-relative whb.halui.axis.a.pos-rela
 ##########  Pendant Estop                                           ##########
 ##############################################################################
 # Reset Button as additional soft estop - as this is a momentary switch, we need to toogle and invert it.
-net pdnt.button.reset whb.button.reset toggle.pdntestop.in
-net pdtn.estop-toggle-invert toggle.pdntestop.out not.pdntestop.in
+net pdnt.button.reset       whb.button.reset    toggle.pdntestop.in
+net pdtn.estop-toggle-invert    toggle.pdntestop.out not.pdntestop.in
 net pendant-estop not.pdntestop.out

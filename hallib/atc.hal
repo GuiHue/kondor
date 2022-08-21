@@ -12,26 +12,27 @@
 # ---------- PROBE SIGNAL HANDLING  ----------
 
 #  ---probe signal---
-#net     DI_CNC-probe                => motion.probe-input
+#net     DI-CNC-probe                => motion.probe-input
 # activation trigger from gcode to enable tls
 net     tlsactivbesignal            and.tlsactivation.in0   motion.digital-out-02
-net     DI_CNC-probe-tls            and.tlsactivation.in1  # toggle.probetls.in
+net     DI-CNC-probe-tls            and.tlsactivation.in1  # toggle.probetls.in
 
 # activation trigger from gcode to enable 3Dprobe
 net     3Dprobeactivesignal         and.3Dprobeactivation.in0   motion.digital-out-03
-net     DI_CNC-probe                and.3Dprobeactivation.in1   
+net     DI-CNC-probe                and.3Dprobeactivation.in1   
 
 net     3dprobeto_orprobe           and.3Dprobeactivation.out     => or.probe.in0       #  toggle.probe3d.in
 net     tlsto_orprobe               and.tlsactivation.out   => or.probe.in1         
 net     probesignalmotion           or.probe.out            motion.probe-input
 
-
+# Link valve of TLS  blow off to motion handler DO-00
+net     DO-CNC-probe-blowoff        motion.digital-out-00
 
 # ---------- MANUAL TOOL CHANGE  ----------
-# is triggered through a momentary switch at Z axis: DI_ATC-man-button
-# uses status light at z axis to indicate wether or not tool change is permitted (on = tool change permitted, blinking: tool change ongoing (timers running), off: spindle-locked): DO_ATC-status-light 
-# triggers valves for drawbar DO_ATC-drawbar-actuator and cone cleaning DO_ATC-cone-clean
-# lut5.toolchange only high when in0:spindle-is-running = low and in1:DI_ATC-man-button = high 
+# is triggered through a momentary switch at Z axis: DI-ATC-man-button
+# uses status light at z axis to indicate wether or not tool change is permitted (on = tool change permitted, blinking: tool change ongoing (timers running), off: spindle-locked): DO-ATC-status-light 
+# triggers valves for drawbar DO-ATC-drawbar-actuator and cone cleaning DO-ATC-cone-clean
+# lut5.toolchange only high when in0:spindle-is-running = low and in1:DI-ATC-man-button = high 
 # lut5.function = b0100 = 0x4 
 # Note: Requires changes at a later stage to account for ATC --> check use of halui.program.is-running
 
@@ -43,35 +44,35 @@ setp    timedelay.toolchange.off-delay              [ATC]CLAMP_DELAY
 
 setp    lut5.toolchange.function                    0x4
 net     spindle-is-running                          lut5.toolchange.in-0
-net     DI_ATC-man-button                           lut5.toolchange.in-1
+net     DI-ATC-man-button                           lut5.toolchange.in-1
 
 net     toolchange-signal                           lut5.toolchange.out             toggle.toolchange.in        and.atcdb.in1
-net     DI_ATC-drawbar-sensor-not                   and.atcdb.in0
+net     DI-ATC-drawbar-sensor-not                   and.atcdb.in0
 net     coneclean-trigger                           timedelay.conecleaning.in       and.atcdb.out
 
 
 # timedelay.coneclean starts only when
 # drawbar not open
 net     toolchange-toggle                           toggle.toolchange.out           timedelay.toolchange.in
-net     DO_ATC-drawbar-actuator                     timedelay.toolchange.out           
-net     DO_ATC-cone-clean                           timedelay.conecleaning.out
+net     DO-ATC-drawbar-actuator                     timedelay.toolchange.out           
+net     DO-ATC-cone-clean                           timedelay.conecleaning.out
 
 
 # MUX8 mux8.atcstatusled to select between different modes of light
 #   sel0 spindle-is-running
 #   sel1 spindle-inhibit
-#   sel2 DI_ATC-tool-sensor 
+#   sel2 DI-ATC-tool-sensor 
 # LED
-# off,              when spindle-is-running =high   and spindle-inhibit =low    and DI_ATC-tool-sensor =high (this is related to spindle-inhibit being low)  --> not ready for tool change   
-# on,               when spindle-is-running =low    and spindle-inhibit =low    and DI_ATC-tool-sensor =high (ready for tool change)
-# blinking,         when spindle-is-running =low    and spindle-inhibit =high   and DI_ATC-tool-sensor =low (tool change taking place or not tool - this cannot be distinguished by using the selected inputs) 
+# off,              when spindle-is-running =high   and spindle-inhibit =low    and DI-ATC-tool-sensor =high (this is related to spindle-inhibit being low)  --> not ready for tool change   
+# on,               when spindle-is-running =low    and spindle-inhibit =low    and DI-ATC-tool-sensor =high (ready for tool change)
+# blinking,         when spindle-is-running =low    and spindle-inhibit =high   and DI-ATC-tool-sensor =low (tool change taking place or not tool - this cannot be distinguished by using the selected inputs) 
 #   Logic Table
 #       sel0=1 sel1=0 sel2=1 >> in5 (light off)                 signal: spindle-inhibit
 #       sel0=0 sel1=0 sel2=1 >> in4 (READY FOR TS light  on)    signal: spindle-inhibit
 #       sel0=0 sel1=1 sel2=0 >> in2 (blink slow)                signal: atcledslow-out
        
 # Select signal
-net     DI_ATC-tool-sensor                          mux8.atcstatusled.sel2
+net     DI-ATC-tool-sensor                          mux8.atcstatusled.sel2
 net     spindle-is-running                          mux8.atcstatusled.sel0
 net     spindle-inhibit                             and.atcledslow.in0                      mux8.atcstatusled.sel1       not.spindleinhibit.in  conv_bit_float.spindleinhibit.in 
 
@@ -90,9 +91,9 @@ net     atcledslow-toogle                           and.atcledslow.out          
 # Map output signal
 net     atcledout-flu32                             conv_flu32.atcstatusledout.in       mux8.atcstatusled.out
 net     atcledout-conv_u32b                         conv_flu32.atcstatusledout.out      conv_u32b.atcstatusledout.in
-net     DO_ATC-status-light                         conv_u32b.atcstatusledout.out
+net     DO-ATC-status-light                         conv_u32b.atcstatusledout.out
 # To be added at a later stage - careful, appraoch below does not work due to doubl linkage
-#net     DO_CP-light-blue                            conv_u32b.atcstatusledout.out
+#net     DO-HMI-light-blue                            conv_u32b.atcstatusledout.out
 
 # ---------- AUTOMATIC CAROUSEL TOOL CHANGER  ----------
 
@@ -128,9 +129,9 @@ setp        carousel.0.decel-time    [ATC_CAR]DECEL_TIME
 # Enable is required to turn the whole thing on
 net        carenable         carousel.0.enable 
 # Index = home
-net         DI_ATC-CAR-index    carousel.0.sense-0
+net         DI-ATC-index    carousel.0.sense-0
 # Pocket = pocket signal
-net         DI_ATC-CAR-pocket    carousel.0.sense-1
+net         DI-ATC-pocket    carousel.0.sense-1
 
 net         carousel_jog-fwd    carousel.0.jog-fwd
 net         carousel_jog-rev    carousel.0.jog-rev

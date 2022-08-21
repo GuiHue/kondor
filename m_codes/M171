@@ -1,4 +1,4 @@
 #!/bin/bash
 # custom mcode to tun on shop vac
-halcmd sets DO_AUX-vac-remote True
+halcmd sets DO-CNC-vac-remote True
 exit 0

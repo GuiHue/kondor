@@ -26,10 +26,10 @@ setp    lowpass.spindle.gain                        0.01
 setp hm2_7i76e.0.7i76.0.0.analogin0-scalemax 306
 setp hm2_7i76e.0.7i76.0.0.analogin1-scalemax 195
 
-net AI_CP-pot-feed lowpass.feed.in 
+net AI-HMI-pot-feed lowpass.feed.in 
 net feedlowpass lowpass.feed.out conv-float-s32.feed.in 
 
-net AI_CP-pot-spindle lowpass.spindle.in
+net AI-HMI-pot-spindle lowpass.spindle.in
 net spindlelowpass lowpass.spindle.out conv-float-s32.spindle.in 
 
 net analogout0 conv-float-s32.feed.out => halui.feed-override.counts halui.rapid-override.counts
@@ -37,7 +37,7 @@ net analogout1 conv-float-s32.spindle.out => halui.spindle.0.override.counts
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at contro panel to turn the machine on/off
-net     DI_CP-machine-on-button                     <= toggle.machineon.in 
+net     DI-HMI-machine-on-button                     <= toggle.machineon.in 
 net     machineon-toogle                            toggle2nist.machineon.in            <= toggle.machineon.out
 net     machine-is-on                               toggle2nist.machineon.is-on
 net     machineon-pwr-on                            halui.machine.on                    <= toggle2nist.machineon.on
@@ -52,9 +52,9 @@ net     machineon-pwr-off                           halui.machine.off           
 # Pressing Hold/Resume while a program is paused will return it to normal run mode.
 
 # Pause/Resume Section
-net     DI_CP-cycle-pause-button                    or.program-pause.in0
+net     DI-HMI-cycle-pause-button                    or.program-pause.in0
 net     pause-signal                                or.program-pause.out                 and.pauseresume1.in0                and.pauseresume2.in0 
-net     DO_CP-light-yellow                                     toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused        
+net     DO-HMI-light-yellow                                     toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused        
 net     run-on                                      and.pauseresume2.in1                <= halui.program.is-running     mux4.ledgreen.sel0          conv_bit_float.runon.in         
 net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
 net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
@@ -67,7 +67,7 @@ net     toggleoff                                   or.program-resume.in0       
 net     programresume                               halui.program.resume                or.program-resume.out
 
 # Run/Step Section
-net     DI_CP-cycle-start-button                    or.program-run.in0                  # other in from pendant 
+net     DI-HMI-cycle-start-button                    or.program-run.in0                  # other in from pendant 
 net     runsignalin                                 or.program-run.out                  and.runstep1.in0                    and.runstep2.in0
 net     idle-on                                     and.runstep1.in1                    <= halui.program.is-idle
 net     run-sig                                     or.auto.in0                     halui.program.run               <= and.runstep1.out
@@ -89,9 +89,9 @@ net     ledgreen-not                                not.ledgreen.out            
 net     ledgreen-toogle                             and.ledgreen.out                timedelay.ledgreen.in
 net     ledgreen-flu32                              mux4.ledgreen.out               conv_flu32.ledgreen.in
 net     ledgreen-conv_u32b                          conv_flu32.ledgreen.out         conv_u32b.ledgreen.in
-net     DO_CP-light-green                           conv_u32b.ledgreen.out          
+net     DO-HMI-light-green                           conv_u32b.ledgreen.out          
 # Stop/ abort program
-net     DI_CP-cycle-stop-button                 or.program-stop.in0    
+net     DI-HMI-cycle-stop-button                 or.program-stop.in0    
 net     halui-program-stop              or.program-stop.out     halui.program.stop
 # Note, that the red light is not being used to indicate any status of the program being stopped but rather emergency behaviour
 
@@ -132,10 +132,10 @@ net cycle-hours qtpyvcp.timerhours.in <= time.pb.hours
 # Status Page
 net vfd-temp            => qtpyvcp.vfd_temp.in-f
 net spindle-current     => qtpyvcp.spindle_current.in-f
-net fucktemp            => qtpyvcp.spindle_temp.in-f
+net SPINDLE-temp            => qtpyvcp.spindle_temp.in-f
 # Spindle Sensors
-net DI_ATC-tool-sensor    qtpyvcp.tool_in_spindle.on
-net DI_ATC-drawbar-sensor  qtpyvcp.tool_clamp_open.on
+net DI-ATC-tool-sensor    qtpyvcp.tool_in_spindle.on
+net DI-ATC-drawbar-sensor  qtpyvcp.tool_clamp_open.on
 
 # Spindle Interface Bottom Right
 net spindle-rpm         =>  qtpyvcp.spindle-encoder-rpm.in
@@ -163,9 +163,9 @@ net pocketprepnumer qtpyvcp.pb_prepared_pocket.in
 
 
 # Connect Various Status Signals
-net DI_AIR-pressure-alarm     qtpyvcp.air_pressure.on
-net DO_AUX-vac-remote         qtpyvcp.vac_on.on
-net DI_CNC-probe-ot-not           qtpyvcp.tls_ot.on
+net DI-CNC-pressure-alarm     qtpyvcp.air_pressure.on
+net DO-CNC-vac-remote         qtpyvcp.vac_on.on
+net DI-CNC-probe-ot-not           qtpyvcp.tls_ot.on
 
 
 
@@ -179,8 +179,8 @@ net DI_CNC-probe-ot-not           qtpyvcp.tls_ot.on
 
 # Probe Status Monitor
 net tlsactivbesignal    qtpyvcp.tls_active.on
-net DI_CNC-probe-tls    qtpyvcp.tls_live.on
+net DI-CNC-probe-tls    qtpyvcp.tls_live.on
 net probesignalmotion   qtpyvcp.probe_out.on
 net 3Dprobeactivesignal qtpyvcp.probe_active.on
-net DI_CNC-probe  qtpyvcp.probe_live.on
+net DI-CNC-probe  qtpyvcp.probe_live.on
 

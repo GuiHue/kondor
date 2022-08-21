@@ -2,6 +2,7 @@
 # Handles connection for VFD Hitachi WJ200-022SF
 # Handles processing of temperature sensor in spindle
 
+
 # watchdog.timeout-0 can not be set to 0.2s here. It may take too long to establish communication via USB
 # therefore it is initially set to a high value and later reduced in postgui.hal
 
@@ -10,14 +11,14 @@
 # Lock the spindle through spindle.0.inhibit whenever either the drawbar is open (=high), no tool is present (=low) or the drawbar actuator valve is active (=high)
 # lut5.spindleinhibit in0 (high) / in1 (low) / in2 (high)or any combination thereof = b11101111 = 0xEF
 #  see http://linuxcnc.org/docs/2.8/html/man/man9/lut5.9.html
-# DI_ATC-drawbar-sensor
-# DO_ATC-drawbar-actuator
-# DI_ATC-tool-sensor
+# DI-ATC-drawbar-sensor
+# DO-ATC-drawbar-actuator
+# DI-ATC-tool-sensor
 
 setp    lut5.spindleinhibit.function            0xEF
-net     DI_ATC-drawbar-sensor                   lut5.spindleinhibit.in-0
-net     DO_ATC-drawbar-actuator                 lut5.spindleinhibit.in-1
-net     DI_ATC-tool-sensor                      lut5.spindleinhibit.in-2     
+net     DI-ATC-drawbar-sensor                   lut5.spindleinhibit.in-0
+net     DO-ATC-drawbar-actuator                 lut5.spindleinhibit.in-1
+net     DI-ATC-tool-sensor                      lut5.spindleinhibit.in-2     
 net     spindle-inhibit                         lut5.spindleinhibit.out                     spindle.0.inhibit
 
 
@@ -32,7 +33,7 @@ setp     wj200-vfd.0.mbslaveaddr               1
 setp     wj200-vfd.0.enable                    1
 
 # Set max spindle rpm to avoid stupid crashes
-setp limit2.spindle.max 400
+setp        limit2.spindle.max 400
 
 setp     pid.s.Pgain                           [SPINDLE_0]P
 setp     pid.s.Igain                           [SPINDLE_0]I
@@ -86,14 +87,15 @@ setp     thermistor.0.beta                     [NTC]NTC_BETA
 setp     thermistor.0.r-other                  [NTC]VDIV_RES
 setp     comp.temp.in0                         [NTC]NTC_MAX_TEMP
 
-net      AI_fieldvoltage                       offset.ntc.fb-in                    
-net      AI_ATC-temp-sensor                    offset.ntc.offset                   
+net      AI-SYS-fieldvoltage                   offset.ntc.fb-in                    
+net      AI-ATC-temp-sensor                    offset.ntc.offset                   
 net      ntc-voltage-drop                      offset.ntc.fb-out                   thermistor.0.v-thermistor
 
-net      AI_fieldvoltage                       thermistor.0.v-total
-net      spindle-temp                          thermistor.0.temperature-c          offset.temp.in
+net      AI-SYS-fieldvoltage                   thermistor.0.v-total
+net      SPINDLE-temp-ori                      thermistor.0.temperature-c          offset.temp.in
 
-# This is seriously ba fuckery... because for some unknown reason the values just spicked around 18 degrees around June 10, 2022
-net     fucktempfactor offset.temp.offset  
-sets fucktempfactor -18
-net     fucktemp    offset.temp.out comp.temp.in1
+# GROOTCUSTOM
+# On June 10, 2022 the temp sensor of the spindle developed an offset of roughly 18 degrees, causing the temperature measurement to be meaningless
+# The following offset is seriously bad fuckery, yet at the time the easiest way to mitigate the problemn - if not required, set offset to zero
+setp     offset.temp.offset -18
+net      SPINDLE-temp                   offset.temp.out         comp.temp.in1

@@ -5,9 +5,8 @@
 
 # ---------- LOAD and SETUP MESA ----------
 loadrt  [KINS]KINEMATICS
+# Note: num_dio, num_AIO are required for PB (+some extras)
 loadrt  [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_dio=30 num_aio=30
-
-#loadrt  [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS 
 loadrt  hostmot2
 loadrt  hm2_eth board_ip="10.10.10.10" config=" num_encoders=2 num_pwmgens=0 num_stepgens=6 sserial_port_0=10xxxxxx"
 setp    [HMOT](CARD0).watchdog.timeout_ns 5000000 
@@ -34,7 +33,7 @@ loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,con
 loadrt  conv_float_s32                      names=conv-float-s32.feed,conv-float-s32.spindle
 loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv_u32b.ledgreen,conv_u32b.estoplight
 loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn,m_pendantestop,m_tlsovertravel messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold, Pendant ESTOP, Warning TLS overtravel" 
-loadrt  carousel                             pockets=16 encoding=index num_sense=2 dir=1
+loadrt  carousel                            pockets=16 encoding=index num_sense=2 dir=1
 loadrt  limit2                              names=limit2.spindle
 loadrt  time                                names=time.pb
 loadrt  scale                               names=scale.spindleload
@@ -54,7 +53,7 @@ addf    pid.a.do-pid-calcs                  servo-thread
 
 # ---------- ADD ADDITIONAL RT COMPONENTS TO SERVOTHREAD ----------
 addf    offset.ntc.update-feedback          servo-thread
-addf    offset.temp.update-output servo-thread
+addf    offset.temp.update-output           servo-thread
 addf    comp.temp                           servo-thread
 addf    toggle.machineon                    servo-thread
 addf    toggle.toolchange                   servo-thread
@@ -113,16 +112,16 @@ addf    conv_flu32.ledgreen                 servo-thread
 addf    conv_u32b.estoplight                servo-thread
 addf    conv_flu32.estoplight               servo-thread
 addf    or.program-run                      servo-thread
-addf    or.program-stop                      servo-thread
+addf    or.program-stop                     servo-thread
 addf    or.program-pause                    servo-thread
 addf    or.externalprogram                  servo-thread
 addf    or.probe                            servo-thread
 addf    or.auto                             servo-thread
 addf    or.program-resume                   servo-thread
-addf    ilowpass.x.enc-smooth                 servo-thread
-addf    ilowpass.y.enc-smooth                 servo-thread
-addf    ilowpass.z.enc-smooth                 servo-thread
-addf    ilowpass.a.enc-smooth                 servo-thread
+addf    ilowpass.x.enc-smooth               servo-thread
+addf    ilowpass.y.enc-smooth               servo-thread
+addf    ilowpass.z.enc-smooth               servo-thread
+addf    ilowpass.a.enc-smooth               servo-thread
 addf    m_vfdcom                            servo-thread
 addf    m_vfderror                          servo-thread
 addf    m_estopext                          servo-thread
@@ -137,13 +136,11 @@ addf    conv-float-s32.spindle              servo-thread
 addf    lowpass.feed                        servo-thread
 addf    lowpass.spindle                     servo-thread
 addf    limit2.spindle                      servo-thread
-addf    carousel.0                            servo-thread
+addf    carousel.0                           servo-thread
 addf    time.pb                             servo-thread
 addf    scale.spindleload                   servo-thread
 
-#addf    stepgen.make-pulses servo-thread
-
-# ---------- FINALIZE SERVO-THREAD ----------
+# ---------- CLOSE/ WRITE SERVO-THREAD ----------
 setp    [HMOT](CARD0).dpll.01.timer-us      -50
 setp    [HMOT](CARD0).stepgen.timer-number  1
 addf    [HMOT](CARD0).write                 servo-thread

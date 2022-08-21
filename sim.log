@@ -956,7 +956,7 @@ qtdesigner:
 2022-08-14 12:08:00,104 - qtpyvcp.app.launcher - DEBUG - Time: 0.000 (+0.000) - in script
 2022-08-14 12:08:00,104 - qtpyvcp.app.launcher - DEBUG - Loading data plugings
 2022-08-14 12:08:00,104 - qtpyvcp.plugins - DEBUG - Loading plugin 'status' from 'qtpyvcp.plugins.status:Status'
-2022-08-14 12:08:00,107 - qtpyvcp.plugins.status - DEBUG - ---------set mdi_history: None, ['M172', 'M171', 'M6T21', 'M6T20', 'G53G0Z-50', 'G53G0Z0', 'M61Q20', 'G30', '#5182', '5030', 'G53G0Z-70', 'G53G0X30Y1210', 'G53G0X30Y1200', 'M61Q99', 'M61 Q99', 'G61 Q99', 'G0X0Y0', 'M6T99', 'G54G0X0Y0', 'G55', 'G10 L20 P0 X0', 'G00 X0', '', 'M3S5000', 'O <WARMUP> CALL', 'O <WARMUP>', 'O CALL <WARMUP>', 'G61H0', 'G0 A1440', 'G0A1440', 'g0a10', 'g0a-10', 'g0a0', 'g0x0', 'g0x100', 'g0a0', 'g0 a1440', 'g0 a360', 'm172']
+2022-08-14 12:08:00,107 - qtpyvcp.plugins.status - DEBUG - ---------set mDI-history: None, ['M172', 'M171', 'M6T21', 'M6T20', 'G53G0Z-50', 'G53G0Z0', 'M61Q20', 'G30', '#5182', '5030', 'G53G0Z-70', 'G53G0X30Y1210', 'G53G0X30Y1200', 'M61Q99', 'M61 Q99', 'G61 Q99', 'G0X0Y0', 'M6T99', 'G54G0X0Y0', 'G55', 'G10 L20 P0 X0', 'G00 X0', '', 'M3S5000', 'O <WARMUP> CALL', 'O <WARMUP>', 'O CALL <WARMUP>', 'G61H0', 'G0 A1440', 'G0A1440', 'g0a10', 'g0a-10', 'g0a0', 'g0x0', 'g0x100', 'g0a0', 'g0 a1440', 'g0 a360', 'm172']
 2022-08-14 12:08:00,111 - qtpyvcp.plugins - DEBUG - Loading plugin 'persistent_data_manager' from 'qtpyvcp.plugins.persistent_data_manager:PersistentDataManager'
 2022-08-14 12:08:00,111 - qtpyvcp.plugins - DEBUG - Loading plugin 'settings' from 'qtpyvcp.plugins.settings:Settings'
 2022-08-14 12:08:00,112 - qtpyvcp.plugins - DEBUG - Loading plugin 'position' from 'qtpyvcp.plugins.positions:Position'

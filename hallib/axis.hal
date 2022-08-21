@@ -51,12 +51,12 @@ net         x-pos-fb                                    <= [HMOT](CARD0).stepgen
 net         x-pos-fb                                    => joint.0.motor-pos-fb
 net         x-enable                                    <= joint.0.amp-enable-out
 net         x-enable                                    => [HMOT](CARD0).stepgen.00.enable
-net         DI_DRIVE-x-alarm-not                           joint.0.amp-fault-in
+net         DI-DRIVE-x-alarm-not                           joint.0.amp-fault-in
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC-min-home-x                           => joint.0.home-sw-in
-net         DI_CNC-min-home-x                           => joint.0.neg-lim-sw-in
+net         DI-CNC-min-home-x                           => joint.0.home-sw-in
+net         DI-CNC-min-home-x                           => joint.0.neg-lim-sw-in
 net         x-pos-limit                                 => joint.0.pos-lim-sw-in
 
 #*******************
@@ -105,12 +105,12 @@ net         y1-pos-fb                                    <= [HMOT](CARD0).stepge
 net         y1-pos-fb                                    => joint.1.motor-pos-fb
 net         y1-enable                                    <= joint.1.amp-enable-out
 net         y1-enable                                    => [HMOT](CARD0).stepgen.01.enable
-net         DI_DRIVE-y1-alarm-not                           joint.1.amp-fault-in
+net         DI-DRIVE-y1-alarm-not                           joint.1.amp-fault-in
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC-min-home-y1                           => joint.1.home-sw-in
-net         DI_CNC-min-home-y1                           => joint.1.neg-lim-sw-in
+net         DI-CNC-min-home-y1                           => joint.1.home-sw-in
+net         DI-CNC-min-home-y1                           => joint.1.neg-lim-sw-in
 net         y1-pos-limit                                 => joint.1.pos-lim-sw-in
 
 #*******************
@@ -159,12 +159,12 @@ net         y2-pos-fb                                    <= [HMOT](CARD0).stepge
 net         y2-pos-fb                                    => joint.2.motor-pos-fb
 net         y2-enable                                    <= joint.2.amp-enable-out
 net         y2-enable                                    => [HMOT](CARD0).stepgen.02.enable
-net         DI_DRIVE-y2-alarm-not                            joint.2.amp-fault-in
+net         DI-DRIVE-y2-alarm-not                            joint.2.amp-fault-in
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC-min-home-y2                           => joint.2.home-sw-in
-net         DI_CNC-min-home-y2                           => joint.2.neg-lim-sw-in
+net         DI-CNC-min-home-y2                           => joint.2.home-sw-in
+net         DI-CNC-min-home-y2                           => joint.2.neg-lim-sw-in
 net         y2-pos-limit                                 => joint.2.pos-lim-sw-in
 
 #*******************
@@ -213,15 +213,17 @@ net         z-pos-fb                                    <= [HMOT](CARD0).stepgen
 net         z-pos-fb                                    => joint.3.motor-pos-fb
 net         z-enable                                    <= joint.3.amp-enable-out
 net         z-enable                                    => [HMOT](CARD0).stepgen.03.enable
-net         DI_DRIVE-z-alarm-not                              joint.3.amp-fault-in
+net         DI-DRIVE-z-alarm-not                              joint.3.amp-fault-in
 
 # ---setup home / limit switch signals---
 
-net         DI_CNC-min-home-z                           => joint.3.home-sw-in
-net         DI_CNC-min-home-z                           => joint.3.neg-lim-sw-in
+net         DI-CNC-min-home-z                           => joint.3.home-sw-in
+net         DI-CNC-min-home-z                           => joint.3.neg-lim-sw-in
 net         z-pos-limit                                 => joint.3.pos-lim-sw-in
 
-#  AXIS A JOINT 4 #*******************
+#*******************
+#  AXIS A JOINT 4 
+#*******************
 
 setp        pid.a.Pgain                                 [JOINT_4]P
 setp        pid.a.Igain                                 [JOINT_4]I
@@ -265,11 +267,7 @@ net         a-pos-fb                                    <= [HMOT](CARD0).stepgen
 net         a-pos-fb                                    => joint.4.motor-pos-fb
 net         a-enable                                    <= joint.4.amp-enable-out
 net         a-enable                                    => [HMOT](CARD0).stepgen.04.enable
-net         DI_DRIVE-z-alarm-not                            joint.4.amp-fault-in
+net         DI-DRIVE-z-alarm-not                            joint.4.amp-fault-in
 
 # ---setup home / limit switch signals---
-
-net         DI_CNC-min-home-a                           => joint.4.home-sw-in
-#net         DI_CNC-min-home-a                           => joint.4.neg-lim-sw-in
-#net         a-pos-limit                                 => joint.4.pos-lim-sw-in
-
+net         DI-CNC-min-home-a                           => joint.4.home-sw-in

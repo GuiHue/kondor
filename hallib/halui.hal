@@ -19,21 +19,14 @@ net     jog-z-analog                halui.axis.z.analog
 net     z-is-homed                  halui.joint.2.is-homed
 net     jog-selected-pos            halui.axis.selected.plus
 net     jog-selected-neg            halui.axis.selected.minus
-#net     spindle-manual-cw           halui.spindle.0.forward
-#net     spindle-manual-ccw          halui.spindle.0.reverse
-#net     spindle-manual-stop         halui.spindle.0.stop
 net     machine-is-on               halui.machine.is-on
 net     jog-speed                   halui.axis.jog-speed
 net     MDI-mode                    halui.mode.is-mdi
 
 #  ---coolant signals---
-net     DO_MQL_mist                 <= iocontrol.0.coolant-mist
-net     DO_MQL_flood                <= iocontrol.0.coolant-flood
-
-
-
+net     DO-CNC-mist                 <= iocontrol.0.coolant-mist
+net     DO-CNC-flood                <= iocontrol.0.coolant-flood
 
 #  ---motion control signals---
-
-net     in-position                 <= motion.in-position
-net     machine-is-enabled          <= motion.motion-enabled
+net     SYS-in-position                 <= motion.in-position
+net     SYS-machine-is-enabled          <= motion.motion-enabled

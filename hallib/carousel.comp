@@ -113,7 +113,7 @@ pin in float rev-pulse """The duration in seconds for which a ratchet changer (B
 should pulse the reverse pin to lock the holder""";
 pin in float fwd-dc "Velocity or duty cycle when forwards rotation is desired";
 pin in float rev-dc "Velocity or duty cycle when reverse rotation is desired";
-pin in float hold-dc "Duty cycle when carousel is in-position (to hold against stop)";
+pin in float hold-dc "Duty cycle when carousel is SYS-in-position (to hold against stop)";
 pin in float align-dc """Use this pin to set the speed of a slower alignment move once the changer is in position. Such a system almost
 certainly needs decel-time setting too""";
 pin in float decel-time "Time to wait for carousel to stop before final alignment";

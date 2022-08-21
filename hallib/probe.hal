@@ -1,0 +1,19 @@
+
+# ---------- PROBE SIGNAL HANDLING  ----------
+
+#  ---probe signal---
+#net     DI-CNC-probe                => motion.probe-input
+# activation trigger from gcode to enable tls
+net     tls-active-signal           and.tlsactivation.in0   
+net     DI-CNC-tls                  and.tlsactivation.in1  # toggle.probetls.in
+
+# activation trigger from gcode to enable 3Dprobe
+net     probe-active-signal         and.3Dprobeactivation.in0   
+net     DI-CNC-probe                and.3Dprobeactivation.in1   
+
+net     probe-2or-probe             and.3Dprobeactivation.out     => or.probe.in0       #  toggle.probe3d.in
+net     tls-2or-probe               and.tlsactivation.out   => or.probe.in1         
+# Link merged signal with both acitvation sequences 
+net     probe-signal-motion         or.probe.out            motion.probe-input
+
+

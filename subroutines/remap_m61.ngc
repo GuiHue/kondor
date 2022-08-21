@@ -17,12 +17,12 @@ M61 Q#<tool>
 
 O111 if [#<tool> EQ 99]
     ; Activate probe 
-    M64 P #<_ini[ATC_PINS]3D_PIN>
+    M64 P #<_ini[ATC]3D_PIN>
     S0
     (debug, Probe Activated! - Crash Protection on)
 O111 else
         ;a tool different from probe - turn off triggerpin
-        M65 P #<_ini[ATC_PINS]3D_PIN>       
+        M65 P #<_ini[ATC]3D_PIN>       
         (debug, Probe Deactivated - NO CRASH DETECTION FOR PROBE)
 O111 endif
 

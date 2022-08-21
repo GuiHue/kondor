@@ -31,8 +31,8 @@ G59.3
 ;first go up
 G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
 ; then move to change position
-G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
-G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
+G53 G0 X[#<_ini[MTC_POS]X>] Y[#<_ini[MTC_POS]Y>]
+G53 G0 Z[#<_ini[MTC_POS]Z>]
 
 
 ; cancel tool offset
@@ -44,7 +44,7 @@ O111 if [#<tool> EQ 99]
 
         ;probe is loaded, use existing offset
         ; turn on the 3D Probe
-        M64 P #<_ini[ATC_PINS]3D_PIN>
+        M64 P #<_ini[ATC]3D_PIN>
         (debug, Changing to calibrated probe - Probe Activated! - Crash Protection on)
         S0 M5
 
@@ -59,7 +59,7 @@ O111 else
       G90
       G53 G0 Z0
       ; Turn off the 3d probe
-      M65 P #<_ini[ATC_PINS]3D_PIN>
+      M65 P #<_ini[ATC]3D_PIN>
               ;(debug, Probe Deactivated - NO CRASH DETECTION FOR PROBE)
       ; #5410 is tooldiameter
       #<tool_dia> = #5410
@@ -79,10 +79,10 @@ O111 else
       O112 endif
 
       ; Turn on airblast to clean tool length sensor
-      M64 P #<_ini[ATC_PINS]CLEAN_TS>
+      M64 P #<_ini[ATC]CLEAN_TLS>
       G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
       ; Turn off airblast to clean sensor
-      M65 P #<_ini[ATC_PINS]CLEAN_TS>
+      M65 P #<_ini[ATC]CLEAN_TLS>
 
       O300 if [#<fast_probe_fr> LE 0]
       O300 return [-1] ; indicate searchvel <= 0 
@@ -96,11 +96,11 @@ O111 else
       G91
       F #<fast_probe_fr>
       ; Activate TLS 
-      M64 P #<_ini[ATC_PINS]TLS_PIN>
-      G38.2 Z#<_ini[TOOLSENSOR]MAXPROBE>    (fast tool probe)
+      M64 P #<_ini[ATC]TLS_PIN>
+      G38.2 Z#<_ini[TOOLSENSOR]MAX_PROBE_DISTANCE>    (fast tool probe)
       #<z_fast_probe> = #5063    (save probe result of fast probe to parameters)
       ; De-Activate TLS 
-      M65 P #<_ini[ATC_PINS]TLS_PIN>
+      M65 P #<_ini[ATC]TLS_PIN>
 
       G1 Z[#<retract_distance>]  F1500  (retract tool retract distance amount)
 
@@ -110,11 +110,11 @@ O111 else
         G91
         F[#<slow_probe_fr>]    (set probe slow feedrate)
         ; Activate TLS 
-        M64 P #<_ini[ATC_PINS]TLS_PIN>
+        M64 P #<_ini[ATC]TLS_PIN>
         G38.2 Z-[#<retract_distance>  * 2]    (slow tool probe)
         #<z_slow_probe> = #5063
         ; De-Activate TLS 
-        M65 P #<_ini[ATC_PINS]TLS_PIN>
+        M65 P #<_ini[ATC]TLS_PIN>
         G90
         G0 Z[#<z_slow_probe> + #<retract_distance>]
       o<120> endif

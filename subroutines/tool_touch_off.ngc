@@ -43,10 +43,10 @@ G53 G0 Z#<tool_touch_z_coords>
 G91
 F #<fast_probe_fr>
 (Turn on TLS)
-M64 P #<_ini[ATC_PINS]TLS_PIN>
+M64 P #<_ini[ATC]TLS_PIN>
 G38.2 Z-[#<z_max_travel>]    (fast tool probe)
 (Turn off TLS)
-M65 P #<_ini[ATC_PINS]TLS_PIN>
+M65 P #<_ini[ATC]TLS_PIN>
 #<z_fast_probe> = #5063    (save probe result of fast probe to parameters)
 G0 Z[#<retract_distance>]    (retract tool retract distance amount)
 
@@ -56,10 +56,10 @@ o<120> if [#<slow_probe_fr> GT 0]
   G91
   F[#<slow_probe_fr>]    (set probe slow feedrate)
   (Turn on TLS)
-  M64 P #<_ini[ATC_PINS]TLS_PIN>
+  M64 P #<_ini[ATC]TLS_PIN>
   G38.2 Z-[#<retract_distance> * 2]    (slow tool probe)
   (Turn off TLS)
-  M65 P #<_ini[ATC_PINS]TLS_PIN>
+  M65 P #<_ini[ATC]TLS_PIN>
   #<z_slow_probe> = #5063
   (debug, Probed Pos: #5063 Z Pos: #<_z>)
   G90

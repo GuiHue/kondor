@@ -520,7 +520,7 @@ def index_lathe_tool_with_wear(self,**words):
 # required INI settings
 # (Abs coordinates/ machine based units)
 #
-#[CHANGE_POSITION]
+#[MTC_POS]
 #X = 5
 #Y = 0
 #Z = 0
@@ -530,7 +530,7 @@ def index_lathe_tool_with_wear(self,**words):
 #Y = -1
 #Z = -1
 #PROBEHEIGHT = 2.3
-#MAXPROBE =  -3
+#MAX_PROBE_DISTANCE =  -3
 #SEARCH_VEL = 20
 #PROBE_VEL = 5
 
@@ -601,7 +601,7 @@ def tool_probe_m6(self, **words):
 
             # course probe
             self.execute("F [#<_ini[TOOLSENSOR]SEARCH_VEL>]")
-            self.execute("G38.2 Z [#<_ini[TOOLSENSOR]MAXPROBE>]")
+            self.execute("G38.2 Z [#<_ini[TOOLSENSOR]MAX_PROBE_DISTANCE>]")
 
             # Wait for results
             yield INTERP_EXECUTE_FINISH

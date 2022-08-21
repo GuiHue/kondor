@@ -1,32 +1,10 @@
 # ---------- ATC  ----------
-# Handles all functions pertaining to ATC operation
-# Includes the following fucntions:     
+# Handles all functions pertaining to Tool Change operation
+# Includes the following functions:     
 #       - Check is spindle is off
 #       - set spindle.0.inhibit whenever drawbar is down (hardcoded based on sensor)
 #       - triggers cone cleaning when manual process is triggered
-
-
-
-# Note: At this time, there is only manual tool release implemented
-
-# ---------- PROBE SIGNAL HANDLING  ----------
-
-#  ---probe signal---
-#net     DI-CNC-probe                => motion.probe-input
-# activation trigger from gcode to enable tls
-net     tlsactivbesignal            and.tlsactivation.in0   motion.digital-out-02
-net     DI-CNC-probe-tls            and.tlsactivation.in1  # toggle.probetls.in
-
-# activation trigger from gcode to enable 3Dprobe
-net     3Dprobeactivesignal         and.3Dprobeactivation.in0   motion.digital-out-03
-net     DI-CNC-probe                and.3Dprobeactivation.in1   
-
-net     3dprobeto_orprobe           and.3Dprobeactivation.out     => or.probe.in0       #  toggle.probe3d.in
-net     tlsto_orprobe               and.tlsactivation.out   => or.probe.in1         
-net     probesignalmotion           or.probe.out            motion.probe-input
-
-# Link valve of TLS  blow off to motion handler DO-00
-net     DO-CNC-probe-blowoff        motion.digital-out-00
+#       - Configures tool change carousel
 
 # ---------- MANUAL TOOL CHANGE  ----------
 # is triggered through a momentary switch at Z axis: DI-ATC-man-button
@@ -95,14 +73,18 @@ net     DO-ATC-status-light                         conv_u32b.atcstatusledout.ou
 # To be added at a later stage - careful, appraoch below does not work due to doubl linkage
 #net     DO-HMI-light-blue                            conv_u32b.atcstatusledout.out
 
-# ---------- AUTOMATIC CAROUSEL TOOL CHANGER  ----------
 
-# Motor Setup
+# ---------- MANUAL TOOLCHANGE----------
+loadusr -W hal_manualtoolchange
+net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
+net tool-changed iocontrol.0.tool-changed <= hal_manualtoolchange.changed
+net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
+net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
 
 
+# ---------- CAROUSEL TOOL CHANGER  ----------
 
-
-# ---------- AUTOMATIC CAROUSEL TOOL CHANGER  ----------
+# Drive Setup
 setp        [HMOT](CARD0).stepgen.05.dirsetup           [ATC]DIRSETUP
 setp        [HMOT](CARD0).stepgen.05.dirhold            [ATC]DIRHOLD
 setp        [HMOT](CARD0).stepgen.05.steplen            [ATC]STEPLEN
@@ -114,29 +96,25 @@ setp        [HMOT](CARD0).stepgen.05.enable             1
 setp        [HMOT](CARD0).stepgen.05.maxaccel           [ATC]STEPGEN_MAXACCEL
 setp        [HMOT](CARD0).stepgen.05.maxvel             [ATC]STEPGEN_MAXVEL
 
+setp        carousel.0.fwd-dc       [ATC]FWD_DC
+setp        carousel.0.hold-dc      [ATC]HOLD_DC
+setp        carousel.0.rev-dc       [ATC]REV_DC
+setp        carousel.0.rev-pulse    [ATC]REV_PULSE
+setp        carousel.0.align-dc    [ATC]ALIGN_DC
+setp        carousel.0.decel-time    [ATC]DECEL_TIME
+
 # Carousel Setup
-
-#Setup
-setp        carousel.0.fwd-dc       [ATC_CAR]FWD_DC
-setp        carousel.0.hold-dc      [ATC_CAR]HOLD_DC
-setp        carousel.0.rev-dc       [ATC_CAR]REV_DC
-setp        carousel.0.rev-pulse    [ATC_CAR]REV_PULSE
-setp        carousel.0.align-dc    [ATC_CAR]ALIGN_DC
-setp        carousel.0.decel-time    [ATC_CAR]DECEL_TIME
-
-
 # Signals
 # Enable is required to turn the whole thing on
 net        carenable         carousel.0.enable 
 # Index = home
-net         DI-ATC-index    carousel.0.sense-0
+net        DI-ATC-index    carousel.0.sense-0
 # Pocket = pocket signal
-net         DI-ATC-pocket    carousel.0.sense-1
+net        DI-ATC-pocket    carousel.0.sense-1
 
-net         carousel_jog-fwd    carousel.0.jog-fwd
-net         carousel_jog-rev    carousel.0.jog-rev
+net        carousel_jog-fwd    carousel.0.jog-fwd
+net        carousel_jog-rev    carousel.0.jog-rev
 
-net         carousel_motor_fwd  carousel.0.motor-fwd
-net         carousel_motor_rev  carousel.0.motor-rev
-net         carousel_motor_vel  carousel.0.motor-vel    [HMOT](CARD0).stepgen.05.velocity-cmd
-
+net        carousel_motor_fwd  carousel.0.motor-fwd
+net        carousel_motor_rev  carousel.0.motor-rev
+net        carousel_motor_vel  carousel.0.motor-vel    [HMOT](CARD0).stepgen.05.velocity-cmd

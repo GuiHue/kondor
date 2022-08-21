@@ -95,23 +95,6 @@ net     DI-HMI-cycle-stop-button                 or.program-stop.in0
 net     halui-program-stop              or.program-stop.out     halui.program.stop
 # Note, that the red light is not being used to indicate any status of the program being stopped but rather emergency behaviour
 
-loadusr -W hal_manualtoolchange
-
-
-net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
-
-net tool-changed iocontrol.0.tool-changed <= hal_manualtoolchange.changed
-
-net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
-
-net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
-
-
-
-#net tool-change-loop        iocontrol.0.tool-change         iocontrol.0.tool-changed
-#net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
-
-
 
 # ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
 setp     watchdog.timeout-0                    3
@@ -128,59 +111,54 @@ net cycle-minutes qtpyvcp.timerminutes.in <= time.pb.minutes
 net cycle-hours qtpyvcp.timerhours.in <= time.pb.hours
 
 
-# Spindle Signals for GUI
-# Status Page
-net vfd-temp            => qtpyvcp.vfd_temp.in-f
-net spindle-current     => qtpyvcp.spindle_current.in-f
-net SPINDLE-temp            => qtpyvcp.spindle_temp.in-f
-# Spindle Sensors
-net DI-ATC-tool-sensor    qtpyvcp.tool_in_spindle.on
-net DI-ATC-drawbar-sensor  qtpyvcp.tool_clamp_open.on
 
 # Spindle Interface Bottom Right
-net spindle-rpm         =>  qtpyvcp.spindle-encoder-rpm.in
-net spindle-at-speed    => qtpyvcp.spindle_at_speed.on 
+net spindle-rpm                 qtpyvcp.spindle-encoder-rpm.in
+net spindle-at-speed            qtpyvcp.spindle_at_speed.on 
 # Spindle Load Indicator
-net  spindle-current                scale.spindleload.in
+net  spindle-current            scale.spindleload.in
 # Scale Gain
 # 100 % = 5.5
 # Meter goes to 125%
 # 10/5.5
-setp scale.spindleload.gain 18.18
-net  spindle-current-scaled         scale.spindleload.out   qtpyvcp.spindle-load-indicator.in-f
-setp qtpyvcp.spindle-load-indicator.max-val 10
-setp qtpyvcp.spindle-load-indicator.min-val 0
+setp scale.spindleload.gain     18.18
+net  spindle-current-scaled     scale.spindleload.out   qtpyvcp.spindle-load-indicator.in-f
+setp qtpyvcp.spindle-load-indicator.max-val     10
+setp qtpyvcp.spindle-load-indicator.min-val     0
 
 
 # Tool Information
-net toolnumber qtpyvcp.pb_current_tool.in
-net current_pocket qtpyvcp.pb_current_pocket.in
-net toolprepnumber qtpyvcp.pb_prepared_tool.in
-net pocketprepnumer qtpyvcp.pb_prepared_pocket.in
+net toolnumber                  qtpyvcp.pb_current_tool.in
+net current_pocket              qtpyvcp.pb_current_pocket.in
+net toolprepnumber              qtpyvcp.pb_prepared_tool.in
+net pocketprepnumer             qtpyvcp.pb_prepared_pocket.in
+
+net probe-signal-motion         qtpyvcp.probe-in.out
+net probe-signal-motion         qtpyvcp.probe-led.on
 
 
-
-
+###### Status page
 
 # Connect Various Status Signals
-net DI-CNC-pressure-alarm     qtpyvcp.air_pressure.on
-net DO-CNC-vac-remote         qtpyvcp.vac_on.on
-net DI-CNC-probe-ot-not           qtpyvcp.tls_ot.on
+net DI-CNC-pressure-alarm       qtpyvcp.air_pressure.on
+net DO-CNC-vac-remote           qtpyvcp.vac_on.on
+net DI-CNC-probe-ot-not         qtpyvcp.tls_ot.on
+
+# Spindle Signals for  Status Page
+# Temperatures
+net vfd-temp                    qtpyvcp.vfd_temp.in-f
+net spindle-current             qtpyvcp.spindle_current.in-f
+net SPINDLE-temp                qtpyvcp.spindle_temp.in-f
+# Spindle Sensors
+net DI-ATC-tool-sensor          qtpyvcp.tool_in_spindle.on
+net DI-ATC-drawbar-sensor       qtpyvcp.tool_clamp_open.on
 
 
+# Probe Signals (live, activated)
+net DI-CNC-probe                qtpyvcp.probe_live.on
+net DI-CNC-tls                  qtpyvcp.tls_live.on
+net tls-active-signal           qtpyvcp.tls_active.on
+net probe-active-signal         qtpyvcp.probe_active.on
+net probe-signal-motion         qtpyvcp.probe_out.on
 
-
-
-# Turn on VAC
-#net gui_vac_on  spindleUI.vacon  halui.mdi-command-17
-# TURN OFF VAC
-#net gui_vac_off  spindleUI.vacoff  halui.mdi-command-18
-
-
-# Probe Status Monitor
-net tlsactivbesignal    qtpyvcp.tls_active.on
-net DI-CNC-probe-tls    qtpyvcp.tls_live.on
-net probesignalmotion   qtpyvcp.probe_out.on
-net 3Dprobeactivesignal qtpyvcp.probe_active.on
-net DI-CNC-probe  qtpyvcp.probe_live.on
 

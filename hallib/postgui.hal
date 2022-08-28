@@ -127,7 +127,7 @@ net current_pocket              qtpyvcp.pb_current_pocket.in
 net toolprepnumber              qtpyvcp.pb_prepared_tool.in
 net pocketprepnumer             qtpyvcp.pb_prepared_pocket.in
 
-net probe-signal-motion         qtpyvcp.probe-in.out
+#net probe-signal-motion         qtpyvcp.probe-in.out
 net probe-signal-motion         qtpyvcp.probe-led.on
 
 

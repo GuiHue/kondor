@@ -167,7 +167,7 @@ net     DO-HMI-light-blue               => hm2_7i76e.0.7i76.0.0.output-13
 net     DO-HMI-light-green              => hm2_7i76e.0.7i76.0.0.output-14
 
 # --- DO 15 AUX-VAC-REMOTE ---
-net     DO-CNC-vac-remote               => hm2_7i76e.0.7i76.0.0.output-15,
+net     DO-CNC-vac-remote               => hm2_7i76e.0.7i76.0.0.output-15
 
 
 ########################################################################################################################

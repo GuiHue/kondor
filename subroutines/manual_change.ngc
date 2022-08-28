@@ -7,7 +7,7 @@ o<manual_change> sub
 ;otherwise after the M6 this information is gone!
 #<tool> = #<selected_tool>
 #<pocket> = #<selected_pocket>
-#<spindle_zero_height> = #<_ini[TOOLSENSOR]REF_TOOL>
+#<spindle_zero_height_old> = #<_ini[TOOLSENSOR]REF_TOOL>
 #<workspace_z> = #5220
 #<fast_probe_fr> = #<_ini[TOOLSENSOR]RAPID_SPEED>
 #<slow_probe_fr> = #<_ini[TOOLSENSOR]SLOW_SPEED>
@@ -129,9 +129,9 @@ O111 else
       G53 G0 Z0
 
 
-      #<new_tool_length_offset> = [ABS[#<spindle_zero_height> + #5063]]
+      #<new_tool_length_offset> = [ABS[#<spindle_zero_height_old> + #5063]]
       (define new tool length offset parameters)
-        (print, Spindle Zero height #<spindle_zero_height>)
+        (print, Spindle Zero height #<spindle_zero_height_old>)
         (print, Probed Height #5063)
         (print, Tool Lenght Offset  #<new_tool_length_offset>)
       G10 L1 P #<tool>  Z [#<new_tool_length_offset>]  (5400 = tool number)

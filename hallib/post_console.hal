@@ -1,0 +1,85 @@
+# ------- Feed/rapid rate and Spindle Speed Override -------
+# Uses 10k potentiometer at control panel to control feed/rapid rate and spindle speed
+#  BIT direct value
+setp    halui.feed-override.direct-value 1
+setp    halui.rapid-override.direct-value 1
+setp    halui.spindle.0.override.direct-value 1
+# SCALE
+setp    halui.feed-override.scale 0.01
+setp    halui.rapid-override.scale 0.01
+setp    halui.spindle.0.override.scale 0.01
+setp    lowpass.feed.gain                           0.01
+setp    lowpass.spindle.gain                        0.01
+
+# scalemax - adjust by eyxperiment chaning value during runtime via terminal, halcmd setp
+setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     306
+setp    hm2_7i76e.0.7i76.0.0.analogin1-scalemax     195
+net     AI-HMI-pot-feed                             lowpass.feed.in 
+net     feedlowpass                                 lowpass.feed.out                    conv-float-s32.feed.in 
+net     AI-HMI-pot-spindle                          lowpass.spindle.in
+net     spindlelowpass                              lowpass.spindle.out                 conv-float-s32.spindle.in 
+net     analogout0 conv-float-s32.feed.out          halui.feed-override.counts          halui.rapid-override.counts
+net     analogout1 conv-float-s32.spindle.out       halui.spindle.0.override.counts
+
+# -------- MACHINE ON --------
+# Uses a momentary switch at controö panel to turn the machine on/off
+net     DI-HMI-machine-on-button                    toggle.machineon.in 
+net     machineon-toogle                            toggle2nist.machineon.in            <= toggle.machineon.out
+net     machine-is-on                               toggle2nist.machineon.is-on
+net     machineon-pwr-on                            halui.machine.on                    <= toggle2nist.machineon.on
+net     machineon-pwr-off                           halui.machine.off                   <= toggle2nist.machineon.off
+
+# -------- Start/Resume Hold/Pause --------
+# External Program Pause/Resume and Run/Step Buttons
+# This is how they function:
+# Pressing Run/Step will begin executing a program.
+# Pressing Hold/Resume while a program is running will pause the program.
+# Pressing Run/Step while a program is paused will single step the program.
+# Pressing Hold/Resume while a program is paused will return it to normal run mode.
+
+# Pause/Resume Section
+net     DI-HMI-cycle-pause-button                   or.program-pause.in0
+net     pause-signal                                or.program-pause.out                 and.pauseresume1.in0                and.pauseresume2.in0 
+net     DO-HMI-light-yellow                         toggle2nist.externalprogram.is-on   and.pauseresume1.in1            and.runstep2.in1            <= halui.program.is-paused        
+net     run-on                                      and.pauseresume2.in1                <= halui.program.is-running     mux4.ledgreen.sel0          conv_bit_float.runon.in         
+net     run-on-bf                                   conv_bit_float.runon.out            mux4.ledgreen.in1
+net     pause-sig                                   or.externalprogram.in0             <= and.pauseresume1.out
+net     resume-sig                                  or.externalprogram.in1             <= and.pauseresume2.out
+net     toggle-ok                                   toggle.externalprogram.in           <= or.externalprogram.out
+net     togglesig                                   toggle2nist.externalprogram.in      <= toggle.externalprogram.out
+net     toggleon                                    halui.program.pause                 <= toggle2nist.externalprogram.on
+net     toggleoff                                   or.program-resume.in0                <= toggle2nist.externalprogram.off
+net     programresume                               halui.program.resume                or.program-resume.out
+
+# Run/Step Section
+net     DI-HMI-cycle-start-button                   or.program-run.in0                  # other in from pendant 
+net     runsignalin                                 or.program-run.out                  and.runstep1.in0                    and.runstep2.in0
+net     idle-on                                     and.runstep1.in1                    <= halui.program.is-idle
+net     run-sig                                     or.auto.in0                     halui.program.run               <= and.runstep1.out
+net     step-sig                                    halui.program.step                  timedelay.stepsig.in            <= and.runstep2.out
+net     halui-auto                                  or.auto.out                 halui.mode.auto
+setp    timedelay.stepsig.on-delay                  0
+setp    timedelay.stepsig.off-delay                 2
+
+# GREEN LED: on when run-on=high + step-sig-delay=low and blinking for short period of time when run-on=low + step-sig=high
+# mux4.ledgreen          sel1       timedelay.stepsig.out   sel0 run-on (linked above)
+# mux4.ledgreen          sel1=high   sel0=low    in2 --> blink
+# mux4.ledgreen          sel1=low    sel0=high   in1 --> on
+net     timedelay-stepsig                           timedelay.stepsig.out           mux4.ledgreen.sel1      and.ledgreen.in0
+setp    timedelay.ledgreen.on-delay                 0.5
+setp    timedelay.ledgreen.off-delay                0.5
+net     ledgreen-blink-out                          timedelay.ledgreen.out          not.ledgreen.in       conv_bit_float.ledgreen.in
+net     ledgreen-blink-fb                           conv_bit_float.ledgreen.out     mux4.ledgreen.in2      
+net     ledgreen-not                                not.ledgreen.out                and.ledgreen.in1
+net     ledgreen-toogle                             and.ledgreen.out                timedelay.ledgreen.in
+net     ledgreen-flu32                              mux4.ledgreen.out               conv_flu32.ledgreen.in
+net     ledgreen-conv_u32b                          conv_flu32.ledgreen.out         conv_u32b.ledgreen.in
+net     DO-HMI-light-green                          conv_u32b.ledgreen.out          
+# Stop/ abort program
+net     DI-HMI-cycle-stop-button                    or.program-stop.in0    
+net     halui-program-stop                          or.program-stop.out             halui.program.stop
+# Note, that the red light is not being used to indicate any status of the program being stopped but rather emergency behaviour
+
+
+# ---------- DECREASE VFD WATCHDOG TIMEOUT ----------
+setp     watchdog.timeout-0                    1

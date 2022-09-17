@@ -9,6 +9,10 @@ set ::watchlist {
     pin+hal_manualtoolchange.change_button
     pin+hal_manualtoolchange.changed
     pin+hal_manualtoolchange.number
+    pin+qtpyvcp.spindle-load-indicator.in-f
+    pin+qtpyvcp.spindle-load-indicator.in-i
+    pin+qtpyvcp.spindle-load-indicator.max-val
+    pin+qtpyvcp.spindle-load-indicator.min-val
 }
 set ::workmode watchhal
 set ::watchInterval 100

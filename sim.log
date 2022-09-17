@@ -1,32 +1,37 @@
-2022-08-28 23:46:06,097 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2022-08-28 23:46:06,097 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2022-08-28 23:46:06,740 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2022-08-28 23:46:06,740 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2022-08-28 23:46:06,741 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2022-08-28 23:46:06,741 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2022-08-28 23:46:06,741 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2022-08-28 23:46:06,741 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2022-08-28 23:46:06,741 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2022-08-28 23:46:06,741 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2022-08-28 23:46:06,934 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2022-08-28 23:46:10,390 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2022-08-28 23:46:10,571 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
-2022-08-28 23:46:10,917 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-08-28 23:46:10,943 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-08-28 23:46:14,248 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2022-08-28 23:47:04,008 - qtpyvcp.plugins.tool_table - INFO - Reloading tool in spindle: 201
-2022-08-28 23:47:04,209 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
-2022-08-28 23:47:04,210 - qtpyvcp.actions.machine_actions - ERROR - Failed to issue MDI command: M61 Q201 G43
-2022-08-28 23:47:09,562 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P1 X454.999997 Y609.59999 Z-129.466851 R0.0
-2022-08-28 23:47:09,633 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P2 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:47:09,704 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P3 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:47:09,775 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P4 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:47:09,845 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P5 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:47:09,916 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P6 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:47:09,977 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P7 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:47:10,037 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P8 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:47:10,098 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L2 P9 X0.0 Y0.0 Z0.0 R0.0
-2022-08-28 23:48:00,235 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T201
-2022-08-28 23:49:17,586 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
-2022-08-28 23:49:17,827 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-08-28 23:49:18,014 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-09-17 16:27:17,791 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2022-09-17 16:27:17,791 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2022-09-17 16:27:18,458 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2022-09-17 16:27:18,458 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2022-09-17 16:27:18,458 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2022-09-17 16:27:18,458 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2022-09-17 16:27:18,458 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2022-09-17 16:27:18,458 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2022-09-17 16:27:18,459 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2022-09-17 16:27:18,459 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2022-09-17 16:27:18,646 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2022-09-17 16:27:22,071 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2022-09-17 16:27:22,242 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
+2022-09-17 16:27:22,586 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-09-17 16:27:22,613 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-09-17 16:28:14,282 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2022-09-17 16:29:08,889 - qtpyvcp.actions.machine_actions - INFO - Homing Axis: A
+2022-09-17 16:31:15,848 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3S6000
+2022-09-17 16:31:26,150 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M5
+2022-09-17 16:31:28,774 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3
+2022-09-17 16:31:32,349 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M5
+2022-09-17 16:31:37,857 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M171
+2022-09-17 16:31:41,858 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M172
+2022-09-17 16:31:52,201 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_zero> call
+2022-09-17 16:31:52,315 - qtpyvcp.plugins.notifications - ERROR - Linear move on line 8 
+ would exceed Z's negative limit 
+
+2022-09-17 16:31:52,409 - qtpyvcp.plugins.notifications - ERROR - Linear move on line 8 
+ would exceed joint 3's negative 
+ limit
+2022-09-17 16:31:52,609 - qtpyvcp.plugins.notifications - ERROR - invalid params in linear command 
+
+2022-09-17 16:32:02,233 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2022-09-17 16:33:12,261 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-09-17 16:33:12,320 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-09-17 16:33:52,765 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-09-17 16:33:52,798 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii

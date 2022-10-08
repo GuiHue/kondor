@@ -19,7 +19,7 @@ G4 P180
 S22000
 G4 P180
 M5
-(DEBUG, Spindle warum-up completed)
+(DEBUG, Spindle warm-up completed)
 O<Warmup> endsub
 M2
 

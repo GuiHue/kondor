@@ -3,12 +3,10 @@
 o<pdnt_probe_z> sub
 
 ;extract current CS
-#<workspace_z> = #5220
-
+#<_workspace_z> = #5220
 
 G91
 F 300
-; Activate TLS 
 G38.2 Z-5    (fast tool probe)
 #<z_fast_probe> = #5063    (save probe result of fast probe to parameters)
 

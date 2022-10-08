@@ -8,3 +8,5 @@ python/stdglue.pyc
 .vscode/settings.json
 position.txt
 position.txt
+.vcp_persistent_data.pickle
+sim.log

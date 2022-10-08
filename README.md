@@ -1,26 +1,29 @@
 # LinuxCNC Config for groot2.0
-## WARNING: The MAIN BRANCH of this repo has been moved to linuxcnc 2.9 with probe_basic gui on October 8, 2022 
+_WARNING_: The MAIN BRANCH of this repo has been moved to linuxcnc 2.9 with probe_basic GUI  on October 8, 2022. Branches in this repository are generally outdated and not maintained. 
 
-Repository for all things related to the linuxCNC and MESA based control system of my CNC router groot2.0
+Repository for all things related to the linuxCNC and MESA based control system of my CNC router groot2.0. You're welcome to fork, however, push requests will not be considered as the main purpose of this repo is VC for myself.
 
 _Status_: This is a work in progress, expect substantial changes over time. In other words: For the love of all that is holy: Don't try this at home. It couldn't possibly be more broken and machine specific.
 
 ## About the machine
-* CNC router made from aluminium profile and plate based on a design by fraseserbruch.de
+* CNC router made from aluminum profile and plate based on a design by fraseserbruch.de
 * Workspace XYZ approx. 650/1200/230 mm
 * Key components
     * AC spindle Jianken JGL80 (2.2 kW, ISO20) driven by VFD Hitachi WJ20-022SF
-    * All drives Delta A2 Series (Driver Delta ASDA-A2 0421L and Motors EMCA0604 series)
-    * Control based on linuxCNC 2.8 and Mesa cards (7i76E + 7i84)
-    * ATC Setup using rack stle toolchange (to come)
+    * All drives Delta A2 Series (Driver Delta ASDA-A2 0421L and Motors EMCA0604 series) interface based on step/dir
+    * 4th axis (A Axis) using Nema 34 Stepper and Step/Dir Interface
+    * Control based on linuxCNC 2.9 and Mesa cards (7i76E + 7i84)
+    * ATC Setup using a carousel style tool change based on probe_basic and carousel.comp (to come)
     * tool lenght sensor and 3D wireless touch probe
-    * Pendant by talla83 with TSHW housing as designed by surmetal (see thingiverse)
-    * Further features: Status lights, control consolde for start/stop and feed and spindle override
+    * Pendant by talla83 with TSHW housing as designed by surmetal (see thingiverse) (depreceated)
+    * xhc-whb04b-6 wireless 4 axis pendant
+    * Further features: Status lights, control console for start/stop and feed and spindle override
 
 ## About the config
 * LinuxCNC 2.9 pre (following master)
 * Debian 11 Bookworm with Preempt-rt kernel 
-* GUI: QtPyVCP based Probe_basic (python3) with several modifications 
+* GUI: QtPyVCP based Probe_basic (python3) with several modifications to the gui file
+
 ## Useful Links 
 * General LinuxCNC items:
     * Physical override using poti https://forum.linuxcnc.org/24-hal-components/36336-physical-feed-override-knob?start=0
@@ -33,7 +36,7 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
     * For BULLSEYE: USE THIS: https://www.qtpyvcp.com/install/bullseye.html
     * Installing lxcnc 2.9 on Bullseye (deb11) install script: https://github.com/joco-nz/lcnc-bullseye-installer (Note: This may miss some dependencies)
     * Good Info on installing PB with dependency infos: https://www.forum.linuxcnc.org/9-installing-linuxcnc/43506-buildbot-debian-11-bullseye-questions?start=0#220493
-    * Installating PB (dev): https://kcjengr.github.io/probe_basic/dev_install.html 
+    * Installing PB (dev): https://kcjengr.github.io/probe_basic/dev_install.html 
     * Migrate working config to PB: https://forum.linuxcnc.org/qtpyvcp/44889-probe-basic-config-conversion-doc
     * qtpyvcp doc: https://www.qtpyvcp.com/
 * GMOCCAPY related
@@ -44,5 +47,5 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
 ## Useful Hints
 * Serial communication common fixes: 
     * add cnc user to group dialout (debian) using usermod -a -G dialout username
-    * additionally, consider chmod 777 for /dev/ttyUSB0 (or any other device tha tis used)
+    * additionally, consider chmod 777 for /dev/ttyUSB0 (or any other device that is used)
 * Serial communication using modbus via TCP --> use socat

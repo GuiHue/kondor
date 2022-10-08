@@ -8,11 +8,12 @@ o<manual_change> sub
 #<tool> = #<selected_tool>
 #<pocket> = #<selected_pocket>
 #<spindle_zero_height_old> = #<_ini[TOOLSENSOR]REF_TOOL>
-#<workspace_z> = #5220
+; Save workspae to a global variable
+#<_workspace_z> = #5220
 #<fast_probe_fr> = #<_ini[TOOLSENSOR]RAPID_SPEED>
 #<slow_probe_fr> = #<_ini[TOOLSENSOR]SLOW_SPEED>
 #<retract_distance> = 2
-(print, Coordinate system prior to M6 [G54=1]: #<workspace_z>)
+(print, Coordinate system prior to M6 [G54=1]: #<__workspace_z>)
 
 
 ; we must execute this only in the milltask interpreter
@@ -141,21 +142,21 @@ O111 endif
 
 ; Call original coordinate system again - DO NOT EVER USE G59.3
 
-o<160> if [#<workspace_z> EQ 1]
+o<160> if [#<_workspace_z> EQ 1]
   G54
-o<160> else if [#<workspace_z> EQ 2]
+o<160> else if [#<_workspace_z> EQ 2]
   G55
-o<160> else if [#<workspace_z> EQ 3]
+o<160> else if [#<_workspace_z> EQ 3]
   G56
-o<160> else if [#<workspace_z> EQ 4]
+o<160> else if [#<_workspace_z> EQ 4]
   G57
-o<160> else if [#<workspace_z> EQ 5]
+o<160> else if [#<_workspace_z> EQ 5]
   G58
-o<160> else if [#<workspace_z> EQ 6]
+o<160> else if [#<_workspace_z> EQ 6]
   G59
-o<160> else if [#<workspace_z> EQ 7]
+o<160> else if [#<_workspace_z> EQ 7]
   G59.1
-o<160> else if [#<workspace_z> EQ 8]
+o<160> else if [#<_workspace_z> EQ 8]
   G59.2
 o<160> endif
 

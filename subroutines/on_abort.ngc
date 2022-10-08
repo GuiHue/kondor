@@ -1,10 +1,32 @@
 O<on_abort> sub
 G90
 G40
+(print, GLOB VAR #<_workspace_z>)
+(print, NUM VAR #4999)
+
 G43
 M9
 M172
 M5
-G54
+; Call original coordinate system again - DO NOT EVER USE G59.3
+
+o<160> if [#<_workspace_z> EQ 1]
+  G54
+o<160> else if [#<_workspace_z> EQ 2]
+  G55
+o<160> else if [#<_workspace_z> EQ 3]
+  G56
+o<160> else if [#<_workspace_z> EQ 4]
+  G57
+o<160> else if [#<_workspace_z> EQ 5]
+  G58
+o<160> else if [#<_workspace_z> EQ 6]
+  G59
+o<160> else if [#<_workspace_z> EQ 7]
+  G59.1
+o<160> else if [#<_workspace_z> EQ 8]
+  G59.2
+o<160> endif
+
 O<on_abort> endsub
 M2

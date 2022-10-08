@@ -1,21 +1,22 @@
-2022-10-08 18:26:41,695 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2022-10-08 18:26:41,695 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2022-10-08 18:26:42,225 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2022-10-08 18:26:42,370 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2022-10-08 18:26:45,096 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2022-10-08 18:26:45,270 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
-2022-10-08 18:26:45,617 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-10-08 18:26:45,646 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-10-08 18:26:59,140 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2022-10-08 18:27:15,607 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G53 GZ-50
-2022-10-08 18:27:15,651 - qtpyvcp.plugins.notifications - ERROR - Unknown word where unary operation 
- could be
-2022-10-08 18:27:23,108 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G53 G0Z-50
-2022-10-08 18:27:27,857 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G53G0Z0
+2022-10-08 18:40:56,549 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2022-10-08 18:40:56,549 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2022-10-08 18:40:57,198 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2022-10-08 18:40:59,980 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2022-10-08 18:41:00,151 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
+2022-10-08 18:41:00,492 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-08 18:41:00,521 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-08 18:41:03,291 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2022-10-08 18:41:19,097 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G56
+2022-10-08 18:41:27,357 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T20
+2022-10-08 18:41:28,083 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-08 18:41:28,114 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-08 18:41:28,116 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2022-10-08 18:41:33,013 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call

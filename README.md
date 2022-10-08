@@ -1,4 +1,6 @@
 # LinuxCNC Config for groot2.0
+## WARNING: The MAIN BRANCH of this repo has been moved to linuxcnc 2.9 with probe_basic gui on October 8, 2022 
+
 Repository for all things related to the linuxCNC and MESA based control system of my CNC router groot2.0
 
 _Status_: This is a work in progress, expect substantial changes over time. In other words: For the love of all that is holy: Don't try this at home. It couldn't possibly be more broken and machine specific.

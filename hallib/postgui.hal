@@ -68,3 +68,25 @@ net probe-active-signal         qtpyvcp.probe_active.on
 net probe-signal-motion         qtpyvcp.probe_out.on
 
 
+# Joint/ Axis signals
+net     DI-ESTOP-ext-not        qtpyvcp.1in4.flash
+
+net     DI-DRIVE-x-alarm-not    qtpyvcp.1in5.on
+net     DI-DRIVE-y1-alarm-not   qtpyvcp.1in6.on
+net     DI-DRIVE-y2-alarm-not   qtpyvcp.1in7.on
+net     DI-DRIVE-z-alarm-not    qtpyvcp.1in8.on
+net     DI-DRIVE-a-alarm-not    qtpyvcp.1in9.on
+net     DI-CNC-probe-ot-not     qtpyvcp.1in10.on
+net     vfd-ERROR               qtpyvcp.1in11.on
+net     estop-vfd-watchdog      qtpyvcp.1in12.on
+net     pdtn.estop-toggle-invert    qtpyvcp.1in13.on
+net     m-spindle-temp-warning  qtpyvcp.1in14.on
+net     spindle-inhibit         qtpyvcp.1in15.on
+
+net     DI-ATC-pocket           qtpyvcp.1in21.on
+net     DI-ATC-index            qtpyvcp.1in22.on
+net     DI-ATC-toolpresence     qtpyvcp.1in23.on
+net     DI-ATC-door1            qtpyvcp.1in24.on
+net     DI-ATC-door2            qtpyvcp.1in25.on
+
+

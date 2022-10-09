@@ -267,7 +267,7 @@ net         a-pos-fb                                    <= [HMOT](CARD0).stepgen
 net         a-pos-fb                                    => joint.4.motor-pos-fb
 net         a-enable                                    <= joint.4.amp-enable-out
 net         a-enable                                    => [HMOT](CARD0).stepgen.04.enable
-net         DI-DRIVE-z-alarm-not                            joint.4.amp-fault-in
+net         DI-DRIVE-a-alarm-not                            joint.4.amp-fault-in
 
 # ---setup home / limit switch signals---
 net         DI-CNC-min-home-a                           => joint.4.home-sw-in

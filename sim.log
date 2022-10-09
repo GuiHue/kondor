@@ -1,22 +1,123 @@
-2022-10-08 18:40:56,549 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2022-10-08 18:40:56,549 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2022-10-08 18:40:57,057 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2022-10-08 18:40:57,198 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2022-10-08 18:40:59,980 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2022-10-08 18:41:00,151 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
-2022-10-08 18:41:00,492 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-10-08 18:41:00,521 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-10-08 18:41:03,291 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2022-10-08 18:41:19,097 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G56
-2022-10-08 18:41:27,357 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T20
-2022-10-08 18:41:28,083 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-10-08 18:41:28,114 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-10-08 18:41:28,116 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
-2022-10-08 18:41:33,013 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2022-10-09 11:44:32,657 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2022-10-09 11:44:32,657 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2022-10-09 11:44:33,175 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2022-10-09 11:44:33,175 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2022-10-09 11:44:33,175 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2022-10-09 11:44:33,175 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2022-10-09 11:44:33,175 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2022-10-09 11:44:33,175 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2022-10-09 11:44:33,175 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2022-10-09 11:44:33,176 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2022-10-09 11:44:33,307 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2022-10-09 11:44:36,010 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2022-10-09 11:44:36,430 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:44:36,459 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:44:45,733 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2022-10-09 11:45:48,506 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [230.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2022-10-09 11:46:51,108 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3S18000
+2022-10-09 11:47:21,346 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M5
+2022-10-09 11:47:24,385 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L20 P1 Z0.0
+2022-10-09 11:47:53,924 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [99.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2022-10-09 11:47:56,081 - qtpyvcp.plugins.notifications - INFO - Changing to calibrated probe - 
+ Probe Activated! - Crash Protection 
+ on
+2022-10-09 11:48:37,025 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [2.0] [1.0] [5.0] [2.0] [40.0] [250.0] [0.006842] [1.0] [1.0] [1.0] [0.0] [1.0]
+2022-10-09 11:48:38,810 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.449589 Z Pos: 
+ 0.447274
+2022-10-09 11:49:31,260 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G49
+2022-10-09 11:49:31,820 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G43
+2022-10-09 11:49:42,340 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [2.0] [1.0] [5.0] [2.0] [40.0] [250.0] [0.006842] [1.0] [1.0] [1.0] [0.0] [1.0]
+2022-10-09 11:49:44,081 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.002218 Z Pos: 
+ 0.000000
+2022-10-09 11:49:56,044 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [2.0] [1.0] [5.0] [2.0] [40.0] [250.0] [0.006842] [1.0] [1.0] [1.0] [0.0] [1.0]
+2022-10-09 11:49:57,610 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.002047 Z Pos: 
+ -0.000268
+2022-10-09 11:49:59,362 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [2.0] [1.0] [5.0] [2.0] [40.0] [250.0] [0.006842] [1.0] [1.0] [1.0] [0.0] [1.0]
+2022-10-09 11:50:01,010 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.002718 Z Pos: 
+ 0.000403
+2022-10-09 11:50:04,741 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [230.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2022-10-09 11:50:35,909 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:50:35,945 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:50:35,947 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2022-10-09 11:50:38,475 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [230.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2022-10-09 11:51:34,598 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G1Z0F1000
+2022-10-09 11:52:10,912 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3
+2022-10-09 11:52:12,953 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M5
+2022-10-09 11:52:21,608 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G1Z0F1000
+2022-10-09 11:52:29,848 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3S18000
+2022-10-09 11:52:51,620 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M5
+2022-10-09 11:52:54,867 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L20 P1 Z0.0
+2022-10-09 11:52:59,487 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [99.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2022-10-09 11:53:15,610 - qtpyvcp.plugins.notifications - INFO - Changing to calibrated probe - 
+ Probe Activated! - Crash Protection 
+ on
+2022-10-09 11:53:55,820 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [2.0] [1.0] [5.0] [2.0] [40.0] [250.0] [0.006842] [1.0] [1.0] [1.0] [0.0] [1.0]
+2022-10-09 11:53:56,433 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:53:56,464 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:53:56,466 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2022-10-09 11:53:56,611 - qtpyvcp.plugins.notifications - ERROR - G38.2 move finished without making 
+ contact.
+2022-10-09 11:53:59,598 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [2.0] [1.0] [5.0] [2.0] [40.0] [250.0] [0.006842] [1.0] [1.0] [1.0] [0.0] [1.0]
+2022-10-09 11:54:01,262 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.005657 Z Pos: 
+ 0.003342
+2022-10-09 11:54:21,302 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61 Q0 G49 #5210 = 0 #5231 = 0
+2022-10-09 11:54:21,422 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
+ DETECTION FOR PROBE
+2022-10-09 11:54:43,124 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2022-10-09 11:54:43,421 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:54:46,933 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 11:59:55,411 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [99.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2022-10-09 12:00:08,011 - qtpyvcp.plugins.notifications - INFO - Changing to calibrated probe - 
+ Probe Activated! - Crash Protection 
+ on
+2022-10-09 12:01:08,410 - qtpyvcp.plugins.notifications - ERROR - Probe tripped during a coordinate 
+ jog.
+2022-10-09 12:01:22,908 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:01:26,257 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:01:26,318 - qtpyvcp.plugins.notifications - ERROR - G38.2 move finished without making 
+ contact.
+2022-10-09 12:01:34,408 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:01:37,813 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:01:38,634 - qtpyvcp.plugins.notifications - INFO - Set Z0 in current CS, 
+ moving up
+2022-10-09 12:02:57,816 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2022-10-09 12:02:58,073 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:02:58,116 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:02:59,436 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2022-10-09 12:02:59,708 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:03:03,196 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:29:03,458 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_mtc> call
+2022-10-09 12:46:23,762 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2022-10-09 12:46:25,024 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:46:25,069 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:46:47,684 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2022-10-09 12:47:15,065 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G58
+2022-10-09 12:49:16,737 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:49:16,789 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:49:25,081 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2022-10-09 12:49:25,343 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:49:28,679 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:49:28,702 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2022-10-09 12:49:28,910 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:49:28,962 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:49:56,393 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [99.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2022-10-09 12:50:18,244 - qtpyvcp.plugins.notifications - INFO - Changing to calibrated probe - 
+ Probe Activated! - Crash Protection 
+ on
+2022-10-09 12:50:54,708 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:50:54,760 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:50:58,611 - qtpyvcp.plugins.notifications - INFO - Set Z0 in current CS, 
+ moving up
+2022-10-09 12:55:33,278 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 12:55:33,337 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2022-10-09 13:02:10,108 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3S1600
+2022-10-09 13:02:17,357 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3S16000
+2022-10-09 13:02:24,858 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G1Z0.5F1000
+2022-10-09 13:02:49,300 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M5
+2022-10-09 13:03:00,107 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G58
+2022-10-09 13:03:12,107 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G1Z0.5F1000
+2022-10-09 13:03:29,358 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M3S16000
+2022-10-09 13:03:37,608 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G1Z0
+2022-10-09 13:06:48,812 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_mtc> call
+2022-10-09 13:07:15,811 - qtpyvcp.plugins.notifications - ERROR - Warning TLS overtravel
+2022-10-09 13:11:08,770 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call

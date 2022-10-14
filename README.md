@@ -9,7 +9,7 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
 * CNC router made from aluminum profile and plate based on a design by fraseserbruch.de
 * Workspace XYZ approx. 650/1200/230 mm
 * Key components
-    * AC spindle Jianken JGL80 (2.2 kW, ISO20) driven by VFD Hitachi WJ20-022SF
+    * ATC spindle Jianken JGL80 (2.2 kW, ISO20) driven by VFD Hitachi WJ20-022SF
     * All drives Delta A2 Series (Driver Delta ASDA-A2 0421L and Motors EMCA0604 series) interface based on step/dir
     * 4th axis (A Axis) using Nema 34 Stepper and Step/Dir Interface
     * Control based on linuxCNC 2.9 and Mesa cards (7i76E + 7i84)
@@ -60,7 +60,8 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
    * get rid of additional features with empty pins to avoid dealing with the indexes
    * muxed encoders only on supported boards (i.e. 7i85   )
    * make sure the counts for stepgen etc are right
-   * index and array errors point o fuck ups above
+   * index and array errors point to fuck-ups above
+   * Mesaflash: https://www.mankier.com/1/mesaflash
 * Useful links
    * http://wiki.linuxcnc.org/cgi-bin/wiki.pl?Editing_MESA_Bitfiles
    * https://forum.linuxcnc.org/27-driver-boards/45581-mesa-7i76e-xilinix-bitfile-creation

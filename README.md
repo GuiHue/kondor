@@ -49,3 +49,8 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
     * add cnc user to group dialout (debian) using usermod -a -G dialout username
     * additionally, consider chmod 777 for /dev/ttyUSB0 (or any other device that is used)
 * Serial communication using modbus via TCP --> use socat
+
+## Cooking Mesa Bitfiles
+* May require license to be downlaoded for ise webpack
+* install via VirtualBox current version and import image from 14GB Download  
+* 

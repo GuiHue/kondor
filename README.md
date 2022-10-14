@@ -51,6 +51,16 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
 * Serial communication using modbus via TCP --> use socat
 
 ## Cooking Mesa Bitfiles
-* May require license to be downlaoded for ise webpack
-* install via VirtualBox current version and import image from 14GB Download  
-* 
+* Installing ISE 14_7
+   * May require license to be downloaded for ise webpack - follow acquire license link
+   * install via VirtualBox current version and import image from 14GB Download  
+* Making a firmware
+   * make sure that there are exactly 32 lines in the first array
+   * Pick configs from others as needed
+   * get rid of additional features with empty pins to avoid dealing with the indexes
+   * muxed encoders only on supported boards (i.e. 7i85   )
+   * make sure the counts for stepgen etc are right
+   * index and array errors point o fuck ups above
+* Useful links
+   * http://wiki.linuxcnc.org/cgi-bin/wiki.pl?Editing_MESA_Bitfiles
+   * https://forum.linuxcnc.org/27-driver-boards/45581-mesa-7i76e-xilinix-bitfile-creation

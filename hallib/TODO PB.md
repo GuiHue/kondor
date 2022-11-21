@@ -2,9 +2,10 @@
 
 ## LOP
 - see Trello
-- M6 is triggered from three seperate places beside M6 remap call
 
 ## DONE
+- M6 is triggered from three seperate places beside M6 remap call
+
 - check for cont jogging
 - check where the tool table is and how it works
 - add spindle at speed

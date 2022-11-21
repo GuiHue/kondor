@@ -1,12 +1,17 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1122x661+434+207
+wm geometry . 1122x661+601+57
 placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
 set ::watchlist {
-    pin+qtpyvcp.1in9.on
-    pin+qtpyvcp.1in8.on
+    pin+hm2_7i76e.0.encoder.timer-number
+    pin+hm2_7i76e.0.encoder.00.count
+    pin+hm2_7i76e.0.encoder.00.rawcounts
+    pin+hm2_7i76e.0.encoder.01.rawcounts
+    pin+hm2_7i76e.0.encoder.01.count
+    pin+hm2_7i76e.0.encoder.02.count
+    pin+hm2_7i76e.0.encoder.02.rawcounts
 }
 set ::workmode watchhal
 set ::watchInterval 100

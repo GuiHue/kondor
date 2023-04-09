@@ -93,15 +93,15 @@ net pdnt.axis.y.jog-scale whb.axis.y.jog-scale axis.y.jog-scale
 net pdnt.axis.z.jog-scale whb.axis.z.jog-scale axis.z.jog-scale
 net pdnt.axis.a.jog-scale whb.axis.a.jog-scale axis.a.jog-scale
 
-# Using an additona ilowpass makes this substantially smoother! - recommended addition over original setup
+# Using an additonal ilowpass makes this substantially smoother! - recommended addition over original setup
 setp ilowpass.x.enc-smooth.scale 1
-setp ilowpass.x.enc-smooth.gain  0.01
+setp ilowpass.x.enc-smooth.gain  0.025
 setp ilowpass.y.enc-smooth.scale 1
-setp ilowpass.y.enc-smooth.gain  0.01
+setp ilowpass.y.enc-smooth.gain  0.025
 setp ilowpass.z.enc-smooth.scale 1
-setp ilowpass.z.enc-smooth.gain  0.01
+setp ilowpass.z.enc-smooth.gain  0.025
 setp ilowpass.a.enc-smooth.scale 1
-setp ilowpass.a.enc-smooth.gain  0.01
+setp ilowpass.a.enc-smooth.gain  0.025
 
 net pdnt.axis.x.jog-counts  ilowpass.x.enc-smooth.in    whb.axis.x.jog-counts 
 net ilowpass-enc-x ilowpass.x.enc-smooth.out axis.x.jog-counts

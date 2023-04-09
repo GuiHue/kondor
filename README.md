@@ -62,8 +62,8 @@ _Status_: This is a work in progress, expect substantial changes over time. In o
    * make sure the counts for stepgen etc are right
    * index and array errors point to fuck-ups above
    * Mesaflash: https://www.mankier.com/1/mesaflash
-   * sudo mesaflash --device 7i76e --addr 10.10.10.10 --readhmi
-   * 
+   * sudo mesaflash --device 7i76e --addr 10.10.10.10 --readhmid
+   * file in /mesa 7i76e_htt_simple.bit --> 7i85 + 7i78 working encoders 
 * Useful links
    * http://wiki.linuxcnc.org/cgi-bin/wiki.pl?Editing_MESA_Bitfiles
    * https://forum.linuxcnc.org/27-driver-boards/45581-mesa-7i76e-xilinix-bitfile-creation

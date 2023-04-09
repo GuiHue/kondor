@@ -1,42 +1,16 @@
-2022-11-19 20:08:21,836 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2022-11-19 20:08:21,837 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2022-11-19 20:08:22,350 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2022-11-19 20:08:22,482 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2022-11-19 20:08:25,219 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2022-11-19 20:08:25,628 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-11-19 20:08:25,656 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-11-19 20:08:28,205 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2022-11-19 20:08:30,486 - qtpyvcp.plugins.tool_table - INFO - Reloading tool in spindle: 110
-2022-11-19 20:08:30,728 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61 Q110 G43
-2022-11-19 20:08:30,870 - qtpyvcp.plugins.notifications - ERROR - Can't issue MDI command when 
- not homed
-2022-11-19 20:08:32,501 - qtpyvcp.actions.machine_actions - INFO - Homing Axis: A
-2022-11-19 20:08:39,775 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_mtc> call
-2022-11-19 20:08:54,526 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
-2022-11-19 20:08:54,784 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-11-19 20:08:54,864 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-11-19 20:09:47,747 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [99.0] [0.0] [0.0] [0.0] [0.0] [99.0]
-2022-11-19 20:10:12,615 - qtpyvcp.plugins.notifications - INFO - Changing to calibrated probe - 
- Probe Activated! - Crash Protection 
- on
-2022-11-19 20:10:16,612 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G0X0Y0
-2022-11-19 20:10:58,577 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_right_top_side> call [99.0] [3.0] [5.0] [1.0] [1.0] [5.0] [1.0] [40.0] [250.0] [0.006842] [1.0] [1.0] [1.0] [0.0] [0.0] [12000.0]
-2022-11-19 20:11:00,613 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 6.803343 Z Pos: 
- 6.801860
-2022-11-19 20:11:04,213 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -64.494296 X Pos: 
- -64.495779
-2022-11-19 20:11:04,562 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-11-19 20:11:04,663 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2022-11-19 20:11:35,014 - qtpyvcp.plugins.notifications - INFO - Set Z0 in current CS, 
- moving up
-2022-11-19 20:11:47,556 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
-2022-11-19 20:12:09,717 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2022-11-19 20:12:15,656 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_mtc> call
-2022-11-19 20:18:36,674 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_mtc> call
+2023-04-09 21:03:54,966 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2023-04-09 21:03:54,966 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2023-04-09 21:03:55,484 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-04-09 21:03:55,484 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-04-09 21:03:55,484 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-04-09 21:03:55,484 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-04-09 21:03:55,484 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-04-09 21:03:55,485 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-04-09 21:03:55,485 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-04-09 21:03:55,485 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-04-09 21:03:55,631 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2023-04-09 21:03:58,446 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2023-04-09 21:03:58,631 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
+2023-04-09 21:03:58,969 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-04-09 21:03:58,998 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-04-09 21:03:59,023 - qtpyvcp.plugins.notifications - ERROR - Warning TLS overtravel

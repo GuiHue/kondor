@@ -103,11 +103,11 @@ net     DI-ATC-index                    <= hm2_7i76e.0.7i76.0.0.input-25-not
 # --- DI 26 ATC-tool presence---
 net     DI-ATC-toolpresence             <= hm2_7i76e.0.7i76.0.0.input-26
 
-# --- DI 28 ATC-door1 ---
-net     DI-ATC-door1                    <= hm2_7i76e.0.7i76.0.0.input-28
+# --- DI 28 CNC-probe-error ---
+net     DI-CNC-probe-error                    <= hm2_7i76e.0.7i76.0.0.input-28
 
-# --- DI 29 ATC-door2 ---
-net     DI-ATC-door2                    <= hm2_7i76e.0.7i76.0.0.input-29
+# --- DI 29 ATC-door1 ---
+net     DI-ATC-door1                    <= hm2_7i76e.0.7i76.0.0.input-29
 
 # --- DI 30 MIN-HOME-A ---
 net     DI-CNC-min-home-a               <= hm2_7i76e.0.7i76.0.0.input-30

@@ -1,4 +1,5 @@
 # ------- Feed/rapid rate and Spindle Speed Override -------
+# Change 11-21-2022: no more link to rapid
 # Uses 10k potentiometer at control panel to control feed/rapid rate and spindle speed
 #  BIT direct value
 setp    halui.feed-override.direct-value 1
@@ -18,7 +19,7 @@ net     AI-HMI-pot-feed                             lowpass.feed.in
 net     feedlowpass                                 lowpass.feed.out                    conv-float-s32.feed.in 
 net     AI-HMI-pot-spindle                          lowpass.spindle.in
 net     spindlelowpass                              lowpass.spindle.out                 conv-float-s32.spindle.in 
-net     analogout0 conv-float-s32.feed.out          halui.feed-override.counts          halui.rapid-override.counts
+net     analogout0 conv-float-s32.feed.out          halui.feed-override.counts          #halui.rapid-override.counts
 net     analogout1 conv-float-s32.spindle.out       halui.spindle.0.override.counts
 
 # -------- MACHINE ON --------

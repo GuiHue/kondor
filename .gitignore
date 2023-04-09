@@ -13,3 +13,5 @@ sim.log
 .vcp_persistent_data.pickle
 sim.log
 position.txt
+sim.log
+.vcp_persistent_data.pickle

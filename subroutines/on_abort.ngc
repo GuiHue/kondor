@@ -9,7 +9,8 @@ M9
 M172
 M5
 ; Call original coordinate system again - DO NOT EVER USE G59.3
-
+o10 if [EXISTS[#<_workspace_z>]]
+    (PRINT, On Abort_workspace_z found: #<_workspace_z>)
 o<160> if [#<_workspace_z> EQ 1]
   G54
 o<160> else if [#<_workspace_z> EQ 2]
@@ -27,6 +28,9 @@ o<160> else if [#<_workspace_z> EQ 7]
 o<160> else if [#<_workspace_z> EQ 8]
   G59.2
 o<160> endif
+o10 else
+    (debug, _workspace_z does not exist)
+o10 endif
 
 O<on_abort> endsub
 M2

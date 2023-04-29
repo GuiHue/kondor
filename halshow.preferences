@@ -5,33 +5,8 @@ placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
 set ::watchlist {
-    pin+hm2_7i76e.0.encoder.00.count
-    pin+hm2_7i76e.0.encoder.00.input-a
-    pin+hm2_7i76e.0.encoder.00.input-b
-    pin+hm2_7i76e.0.encoder.00.input-index
-    pin+hm2_7i76e.0.encoder.00.position
-    pin+hm2_7i76e.0.encoder.00.rawcounts
-    pin+hm2_7i76e.0.encoder.timer-number
-    pin+hm2_7i76e.0.encoder.01.count
-    pin+hm2_7i76e.0.encoder.01.input-a
-    pin+hm2_7i76e.0.encoder.01.input-b
-    pin+hm2_7i76e.0.encoder.01.input-index
-    pin+hm2_7i76e.0.encoder.01.position
-    pin+hm2_7i76e.0.encoder.01.rawcounts
-    pin+hm2_7i76e.0.encoder.02.count
-    pin+hm2_7i76e.0.encoder.02.input-a
-    pin+hm2_7i76e.0.encoder.02.input-b
-    pin+hm2_7i76e.0.encoder.02.input-index
-    pin+hm2_7i76e.0.encoder.02.position
-    pin+hm2_7i76e.0.encoder.02.rawcounts
-    sig+DI-CNC-probe
-    sig+DI-CNC-probe-ot
-    sig+DI-CNC-probe-ot-not
-    sig+DI-CNC-tls
-    sig+DI-CNC-probe-error
-    pin+hm2_7i76e.0.7i76.0.0.input-28
-    pin+hm2_7i76e.0.7i76.0.0.input-28-not
-    pin+hm2_7i76e.0.encoder.00.index-enable
+    sig+DI-CNC-min-home-z
+    sig+DI-CNC-min-home-x
 }
 set ::workmode watchhal
 set ::watchInterval 100

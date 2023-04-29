@@ -36,10 +36,10 @@ loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext
 loadrt  carousel                            pockets=16 encoding=index num_sense=2 dir=1
 loadrt  limit2                              names=limit2.spindle
 loadrt  time                                names=time.pb
-loadrt  scale                               names=scale.spindleload
+loadrt  scale                               names=scale.spindleload,scale.xjog,scale.yjog,scale.zjog,scale.ajog
  
 
-# ---------- ADD CORE RT COMPONENTS TO SERVOTHREAD ----------
+#  --------- ADD  CjRE R TCOMPONENTS TO SERVOTHREAD ----------
 addf    [HMOT](CARD0).read                  servo-thread
 addf    motion-command-handler              servo-thread
 addf    motion-controller                   servo-thread
@@ -118,6 +118,11 @@ addf    or.externalprogram                  servo-thread
 addf    or.probe                            servo-thread
 addf    or.auto                             servo-thread
 addf    or.program-resume                   servo-thread
+addf    scale.xjog                          servo-thread
+addf    scale.yjog                          servo-thread
+addf    scale.zjog                          servo-thread
+addf    scale.ajog                          servo-thread
+
 addf    ilowpass.x.enc-smooth               servo-thread
 addf    ilowpass.y.enc-smooth               servo-thread
 addf    ilowpass.z.enc-smooth               servo-thread

@@ -13,7 +13,7 @@ o<manual_change> sub
 #<fast_probe_fr> = #<_ini[TOOLSENSOR]RAPID_SPEED>
 #<slow_probe_fr> = #<_ini[TOOLSENSOR]SLOW_SPEED>
 #<retract_distance> = 2
-(print, Coordinate system prior to M6 [G54=1]: #<__workspace_z>)
+(print, Coordinate system prior to M6 [G54=1]: #<_workspace_z>)
 
 
 ; we must execute this only in the milltask interpreter

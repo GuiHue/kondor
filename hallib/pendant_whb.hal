@@ -88,20 +88,24 @@ net axis-select-z whb.halui.axis.z.select
 net axis-select-a whb.halui.axis.a.select 
 
 
-net pdnt.axis.x.jog-scale whb.axis.x.jog-scale axis.x.jog-scale
-net pdnt.axis.y.jog-scale whb.axis.y.jog-scale axis.y.jog-scale
-net pdnt.axis.z.jog-scale whb.axis.z.jog-scale axis.z.jog-scale
-net pdnt.axis.a.jog-scale whb.axis.a.jog-scale axis.a.jog-scale
+#net pdnt.axis.x.jog-scale whb.axis.x.jog-scale axis.x.jog-scale
+#net pdnt.axis.y.jog-scale whb.axis.y.jog-scale axis.y.jog-scale
+#net pdnt.axis.z.jog-scale whb.axis.z.jog-scale axis.z.jog-scale
+#net pdnt.axis.a.jog-scale whb.axis.a.jog-scale axis.a.jog-scale
 
 # Using an additonal ilowpass makes this substantially smoother! - recommended addition over original setup
-setp ilowpass.x.enc-smooth.scale 1
-setp ilowpass.x.enc-smooth.gain  0.025
-setp ilowpass.y.enc-smooth.scale 1
-setp ilowpass.y.enc-smooth.gain  0.025
-setp ilowpass.z.enc-smooth.scale 1
-setp ilowpass.z.enc-smooth.gain  0.025
-setp ilowpass.a.enc-smooth.scale 1
-setp ilowpass.a.enc-smooth.gain  0.025
+setp ilowpass.x.enc-smooth.scale 1000
+setp ilowpass.x.enc-smooth.gain  0.2
+setp ilowpass.y.enc-smooth.scale 1000
+setp ilowpass.y.enc-smooth.gain  0.2
+setp ilowpass.z.enc-smooth.scale 1000
+setp ilowpass.z.enc-smooth.gain  0.2
+setp ilowpass.a.enc-smooth.scale 1000
+setp ilowpass.a.enc-smooth.gain  0.2
+setp scale.xjog.gain               0.001
+setp scale.yjog.gain               0.001
+setp scale.zjog.gain               0.001
+setp scale.ajog.gain               0.001
 
 net pdnt.axis.x.jog-counts  ilowpass.x.enc-smooth.in    whb.axis.x.jog-counts 
 net ilowpass-enc-x ilowpass.x.enc-smooth.out axis.x.jog-counts
@@ -123,10 +127,17 @@ net pdnt.axis.y.jog-vel-mode whb.axis.y.jog-vel-mode axis.y.jog-vel-mode
 net pdnt.axis.z.jog-vel-mode whb.axis.z.jog-vel-mode axis.z.jog-vel-mode
 net pdnt.axis.a.jog-vel-mode whb.axis.a.jog-vel-mode axis.a.jog-vel-mode
 
-net pdnt.axis.x.jog-scale whb.axis.x.jog-scale axis.x.jog-scale
-net pdnt.axis.y.jog-scale whb.axis.y.jog-scale axis.y.jog-scale
-net pdnt.axis.z.jog-scale whb.axis.z.jog-scale axis.z.jog-scale
-net pdnt.axis.a.jog-scale whb.axis.a.jog-scale axis.a.jog-scale
+net pdnt.axis.x.jog-scale whb.axis.x.jog-scale scale.xjog.in
+net pdnt.axis.x.jog-scale-scale scale.xjog.out axis.x.jog-scale
+
+net pdnt.axis.y.jog-scale whb.axis.y.jog-scale scale.yjog.in
+net pdnt.axis.y.jog-scale-scale scale.yjog.out axis.y.jog-scale
+
+net pdnt.axis.z.jog-scale whb.axis.z.jog-scale scale.zjog.in
+net pdnt.axis.z.jog-scale-scale scale.zjog.out axis.z.jog-scale
+
+net pdnt.axis.a.jog-scale whb.axis.a.jog-scale scale.ajog.in
+net pdnt.axis.a.jog-scale-scale scale.ajog.out axis.a.jog-scale
 
 
 ##############################################################################

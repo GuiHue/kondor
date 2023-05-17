@@ -63,14 +63,18 @@ net pdnt.mode.auto whb.halui.mode.auto or.auto.in1
 net pdnt.mode.manual whb.halui.mode.manual halui.mode.manual
 net pdnt.mode.mdi whb.halui.mode.mdi halui.mode.mdi
 net pdnt.mode.joint whb.halui.mode.joint halui.mode.joint
-net pdnt.mode.teleop whb.halui.mode.teleop halui.mode.teleop
+#net pdnt.mode.teleop whb.halui.mode.teleop halui.mode.teleop
 net pdnt.mode.is-auto halui.mode.is-auto whb.halui.mode.is-auto
-net pdnt.mode.is-manual halui.mode.is-manual whb.halui.mode.is-manual
+net pdnt.mode.is-manual halui.mode.is-manual whb.halui.mode.is-manual whb.halui.mode.is-teleop
+
+net pdnt.mode.is-manual whb.halui.mode.is-teleop
+
+
 #changed
 #net pdnt.mode.is-mdi halui.mode.is-mdi whb.halui.mode.is-mdi
 net MDI-mode whb.halui.mode.is-mdi
 net pdnt.mode.is-joint halui.mode.is-joint whb.halui.mode.is-joint
-net pdnt.mode.is-teleop halui.mode.is-teleop whb.halui.mode.is-teleop
+net pdnt.mode.is-teleop halui.mode.is-teleop #whb.halui.mode.is-teleop
 
 ##############################################################################
 ##########  Axis motion setup                                       ##########
@@ -94,18 +98,18 @@ net axis-select-a whb.halui.axis.a.select
 #net pdnt.axis.a.jog-scale whb.axis.a.jog-scale axis.a.jog-scale
 
 # Using an additonal ilowpass makes this substantially smoother! - recommended addition over original setup
-setp ilowpass.x.enc-smooth.scale 1000
-setp ilowpass.x.enc-smooth.gain  0.2
-setp ilowpass.y.enc-smooth.scale 1000
-setp ilowpass.y.enc-smooth.gain  0.2
-setp ilowpass.z.enc-smooth.scale 1000
-setp ilowpass.z.enc-smooth.gain  0.2
-setp ilowpass.a.enc-smooth.scale 1000
-setp ilowpass.a.enc-smooth.gain  0.2
-setp scale.xjog.gain               0.001
-setp scale.yjog.gain               0.001
-setp scale.zjog.gain               0.001
-setp scale.ajog.gain               0.001
+setp ilowpass.x.enc-smooth.scale 2000
+setp ilowpass.x.enc-smooth.gain  0.05
+setp ilowpass.y.enc-smooth.scale 2000
+setp ilowpass.y.enc-smooth.gain  0.05
+setp ilowpass.z.enc-smooth.scale 2000
+setp ilowpass.z.enc-smooth.gain  0.05
+setp ilowpass.a.enc-smooth.scale 2000
+setp ilowpass.a.enc-smooth.gain  0.05
+setp scale.xjog.gain               0.0005
+setp scale.yjog.gain               0.0005
+setp scale.zjog.gain               0.0005
+setp scale.ajog.gain               0.0005
 
 net pdnt.axis.x.jog-counts  ilowpass.x.enc-smooth.in    whb.axis.x.jog-counts 
 net ilowpass-enc-x ilowpass.x.enc-smooth.out axis.x.jog-counts

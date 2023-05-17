@@ -5,8 +5,9 @@ placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
 set ::watchlist {
-    sig+DI-CNC-min-home-z
-    sig+DI-CNC-min-home-x
+    pin+hm2_7i76e.0.encoder.00.count
+    pin+hm2_7i76e.0.encoder.01.count
+    pin+whb.pendant.is-connected
 }
 set ::workmode watchhal
 set ::watchInterval 100

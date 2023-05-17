@@ -40,9 +40,8 @@ net     DI-CNC-probe-ot                        lut5.estop.in-2                  
 net     pendant-estop                          lut5.estop.in-3
 net     estop-vfd-watchdog                      lut5.estop.in-4                     watchdog.ok-out
 # Output LUT5.ESTOP to IOCONTROL
- net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in              mux2.estoplight.sel
-
-
+net     estop-soft-trigger                      lut5.estop.out                      iocontrol.0.emc-enable-in     not.estop.in              mux2.estoplight.sel
+#setp iocontrol.0.emc-enable-in true 
 ##############################################################################
 # ---------- WARNING MESSAGES  ---------- 
 # Servo Warning Signals are connected to linuxcnc without further detailled function
@@ -74,6 +73,7 @@ setp    m_estopext.edge                         0
 net     DI-ESTOP-ext                            m_estopext.trigger
 # Watchdog
 setp    m_vfdcom.edge                           0
+setp    m_vfdcom.trigger 1
 net     estop-vfd-watchdog                      m_vfdcom.trigger
 # VFD Error
 setp    m_vfderror.edge                         1

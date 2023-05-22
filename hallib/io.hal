@@ -94,11 +94,11 @@ net     DI-DRIVE-x-alarm-not            <= hm2_7i76e.0.7i76.0.0.input-20-not
 net     DI-DRIVE-z-alarm                <= hm2_7i76e.0.7i76.0.0.input-23
 net     DI-DRIVE-z-alarm-not            <= hm2_7i76e.0.7i76.0.0.input-23-not
 
-# --- DI 24 ATC-pocket ---
-net     DI-ATC-pocket                   <= hm2_7i76e.0.7i76.0.0.input-24-not
+# --- DI 24 ATC-home ---
+net     DI-ATC-home                   <= hm2_7i76e.0.7i76.0.0.input-24-not
 
-# --- DI 25 ATC-index ---
-net     DI-ATC-index                    <= hm2_7i76e.0.7i76.0.0.input-25-not
+# --- DI 25 ATC-pocket ---
+net     DI-ATC-pocket                    <= hm2_7i76e.0.7i76.0.0.input-25-not
 
 # --- DI 26 ATC-tool presence---
 net     DI-ATC-toolpresence             <= hm2_7i76e.0.7i76.0.0.input-26

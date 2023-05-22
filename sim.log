@@ -1,22 +1,15 @@
-2023-05-17 22:11:28,132 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2023-05-17 22:11:28,132 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2023-05-17 22:11:28,645 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2023-05-17 22:11:28,788 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2023-05-17 22:11:31,548 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2023-05-17 22:11:31,719 - qtpyvcp.plugins.notifications - ERROR - External E-Stop
-2023-05-17 22:11:31,995 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-17 22:11:32,062 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-17 22:11:32,087 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
-2023-05-17 22:11:34,014 - qtpyvcp.plugins.notifications - INFO - _workspace_z does not exist
-2023-05-17 22:11:35,014 - qtpyvcp.plugins.notifications - INFO - _workspace_z does not exist
-2023-05-17 22:11:44,875 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2023-05-17 22:11:59,814 - qtpyvcp.plugins.notifications - ERROR - joint 0 amplifier fault
-2023-05-17 22:12:00,213 - qtpyvcp.plugins.notifications - INFO - _workspace_z does not exist
-2023-05-17 22:12:08,843 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2023-05-22 19:49:45,533 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2023-05-22 19:49:45,533 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2023-05-22 19:49:46,182 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-05-22 19:49:46,182 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-05-22 19:49:46,380 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2023-05-22 19:49:49,881 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2023-05-22 19:49:50,081 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
+2023-05-22 19:49:50,443 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-22 19:49:50,469 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii

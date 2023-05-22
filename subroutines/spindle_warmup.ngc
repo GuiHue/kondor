@@ -11,13 +11,13 @@ G80
 G90
 
 S6000 m3
-G4 P180
+G4 P300
 S12000
-G4 P180
+G4 P300
 S18000
-G4 P180
-S22000
-G4 P180
+G4 P300
+S24000
+G4 P300
 M5
 (DEBUG, Spindle warm-up completed)
 O<spindle_warmup> endsub

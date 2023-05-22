@@ -1,0 +1,4 @@
+#!/bin/bash
+# M131 close spindle drawbar
+halcmd sets DO-ATC-drawbar-actuator-auto False
+exit 0

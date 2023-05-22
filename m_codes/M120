@@ -1,0 +1,6 @@
+#!/bin/bash
+# M120 set pocket_number target, requires P value
+# Below is some fuckery to gt an S32 from a float passed on via P Value
+pocket=${1/.*}
+halcmd sets carousel_pocket-number $pocket
+exit 0

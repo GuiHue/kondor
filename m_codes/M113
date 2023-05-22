@@ -1,0 +1,6 @@
+#!/bin/bash
+# M113 force unhome
+halcmd sets carousel_force-unhome True
+halcmd sets carousel_enable False
+halcmd sets carousel_force-unhome False 
+exit 0

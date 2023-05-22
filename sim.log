@@ -1,15 +1,23 @@
-2023-05-22 19:49:45,533 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2023-05-22 19:49:45,533 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2023-05-22 19:49:46,182 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2023-05-22 19:49:46,182 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2023-05-22 19:49:46,183 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2023-05-22 19:49:46,380 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2023-05-22 19:49:49,881 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2023-05-22 19:49:50,081 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
-2023-05-22 19:49:50,443 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-22 19:49:50,469 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-22 21:59:35,394 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2023-05-22 21:59:35,394 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-05-22 21:59:35,910 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-05-22 21:59:36,048 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2023-05-22 21:59:38,794 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2023-05-22 21:59:39,226 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-22 21:59:39,259 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-22 21:59:41,155 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2023-05-22 21:59:54,958 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-22 21:59:54,985 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-22 22:00:06,098 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M130
+2023-05-22 22:00:10,108 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M132
+2023-05-22 22:00:12,358 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M133
+2023-05-22 22:00:15,608 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M131
+2023-05-22 22:01:42,108 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M130
+2023-05-22 22:01:52,858 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M131

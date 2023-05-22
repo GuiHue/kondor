@@ -1,0 +1,4 @@
+#!/bin/bash
+# M132 Activate cone clean
+halcmd sets DO-ATC-cone-clean-auto True
+exit 0

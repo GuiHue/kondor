@@ -1,0 +1,4 @@
+#!/bin/bash
+# M114 ENABLE carousel
+halcmd sets carousel_enable True
+exit 0

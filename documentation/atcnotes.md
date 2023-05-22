@@ -14,8 +14,8 @@
 
 
 ## Macros
-- m10: move best direction (Determien direction)
-- m11: ccw movement (with #p steps or p emtpy == 1 step)
+- m10: move best direction (Determine direction) --> not needed
+- m11: ccw movement (with #p steps or p emtpy == 1 step) --> not needed
 - m12: cw movement (with #p steps or p emtpy == 1 step)
 - m13: Homing/ Referencing
 
@@ -44,25 +44,26 @@ https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines
 #5231 --> tool in spindle, persistent
 
 
-#5171 in m13 ??
-
 #5399 result of m66
 
 ## Custom M Codes to make
-- enable
-- pocket number
-- force home
-- forward one
-- reverse one
-- Drawbar (maybe through M65)
+- enable --> M114
+- Disable --> M115
+- pocket number --> M120 P#
+- force home --> M113
+- forward one  --> M111
+- reverse one --> M112
+- Drawbar (maybe through M65)       M130 open, m131 close       ==> try to interlock this with spindle! - sort of safe, since spindle cannot be satrted... due to no tool
+- spindle air blast     m132 activate, m133 deactivate      ==> CAREFUL: THESE ARE NOT CHECKED
 
 ## Pins to read
-- homed
-- ready
-- current pocket
-- tool presence
-- tool sensor drawbar
-- tool sensor in spindle
+- homed --> DIN 00
+- ready --> DIN 01
+- current pocket atc AIN 00
+- current pocket spindle AIN 01
+- tool presence --> DIN 02
+- tool sensor drawbar --> DIN 04
+- tool sensor in spindle --> DIN 03
 
 
 ## This is the way / ToDo
@@ -77,3 +78,8 @@ halui.mod-command-xx systematics --> could be used to triggert homing
 
 https://forum.linuxcnc.org/qtpyvcp/46629-qtpyvcp-probe-basic-changing-tool-table-entries-from-macro-or-script
 https://forum.linuxcnc.org/38-general-linuxcnc-questions/45564-atc-project-debug-phase?start=190
+
+## Bugs
+
+* jog-fwd / jog-rev: stick to state 20 an do not perform align
+

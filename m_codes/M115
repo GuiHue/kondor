@@ -1,0 +1,4 @@
+#!/bin/bash
+# M115 DISABLE carousel
+halcmd sets carousel_enable False
+exit 0

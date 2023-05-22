@@ -1,32 +1,38 @@
 o<m13> sub
 
-; Move tool carousel CW until ATC zero
+; Unhome an then Home ATC Carousel
 ; Parameter #5170 is used to track the current tool pocket (persistently)
 (print, o<M13> P#<p>)
 
 (DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{"REFERENCING"}])
 
-M64 P3 ; Move Motor FWD
-M66 P3 L1 Q20
+; Force Unhome
+M113
+G4 P0.1
+; Enable to tigger homing
+(print, m114)
+M114
+; Readd pin to wait for signal homed, max 10s
+M66 P00 L1 Q15
 O120 if [#5399 LT 0]
-    (abort, failed to home carousel)
-    M65 P3; stop motor
+    (abort, ATC Error: Failed to home)
 O120 endif
+; Set persistent variable for homing to check along macros 
 #5170 = 1
-M65 P3 ; Stop motor
+
+; Sets homed parameter to 1
 #5171 = 1
 
-(DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{}])
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{"HOMED"}])
 
 #1 = 0
-o130 while [#1 LT 12]
+o130 while [#1 LT #<_ini[ATC]POCKETS>]
     #1 = [#1+1]
     #2 = #[5189+#1]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{#1, #2}])
 o130 endwhile
 
-M61 Q#5231 G43 H#5231 #5210 = 0
-
+;M61 Q#5231 G43 H#5231 #5210 = 0
 o<m13> endsub [1]
 
 M2

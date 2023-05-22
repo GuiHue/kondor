@@ -1,0 +1,6 @@
+#!/bin/bash
+# M112 to move carousel one pocket rev
+halcmd sets carousel_enable False
+halcmd sets carousel_jog-rev True
+halcmd sets carousel_jog-rev False
+exit 0

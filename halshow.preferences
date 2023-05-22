@@ -1,6 +1,6 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1122x661+534+96
+wm geometry . 1122x661+687+82
 placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
@@ -28,6 +28,12 @@ set ::watchlist {
     pin+carousel.0.motor-vel
     pin+carousel.0.align-dc
     pin+carousel.0.rev-dc
+    pin+carousel.0.jog-fwd
+    pin+carousel.0.jog-rev
+    pin+carousel.0.unhome
+    pin+halui.home-all
+    pin+joint.3.homing
+    pin+spindle.0.inhibit
 }
 set ::workmode watchhal
 set ::watchInterval 100

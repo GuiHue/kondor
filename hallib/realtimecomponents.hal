@@ -27,13 +27,14 @@ loadrt  mux4                                names=mux4.ledgreen
 loadrt  mux8                                names=mux8.atcstatusled
 loadrt  not                                 names=not.atcledslow,not.atcledfast,not.spindleinhibit,not.ledgreen,not.estoplight,not.estop,not.vfderror,not.pdntestop,not.pbtime
 loadrt  and2                                names=and.atcledslow,and.atcledfast,and.atcdb,and.pauseresume1,and.pauseresume2,and.runstep1,and.runstep2,and.ledgreen,and.estoplight,and.tlsactivation,and.3Dprobeactivation
-loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause,or.probe,or.auto,or.program-stop,or.program-resume
+loadrt  or2                                 names=or.externalprogram,or.program-run,or.program-pause,or.probe,or.auto,or.program-stop,or.program-resume,or.spindle-auto-drawbar,or.spindle-auto-cone-clean
 loadrt  conv_bit_float                      names=conv_bit_float.spindleinhibit,conv_bit_float.atcstatusled-slow,conv_bit_float.atcstatusled-fast,conv_bit_float.spindleinhibitnot,conv_bit_float.runon,conv_bit_float.ledgreen,conv_bit_float.estopsignal,conv_bit_float.warningsignal
 loadrt  conv_float_u32                      names=conv_flu32.atcstatusledout,conv_flu32.ledgreen,conv_flu32.estoplight
 loadrt  conv_float_s32                      names=conv-float-s32.feed,conv-float-s32.spindle
+loadrt  conv_s32_float                      names=conv-s32-float.atc-pocket
 loadrt  conv_u32_bit                        names=conv_u32b.atcstatusledout,conv_u32b.ledgreen,conv_u32b.estoplight
 loadrt  message                             names=m_vfdcom,m_vfderror,m_estopext,m_drivealm,m_lowpressure,m_drivewarn,m_tempwarn,m_pendantestop,m_tlsovertravel messages="VFD Communication lost (watchdog), VFD Error (Check Display), External E-Stop, Drive Alarm, WARNING: Air Pressure Low, WARNING: Drives in Warning, WARNING: Spindle Temperature over Treshold, Pendant ESTOP, Warning TLS overtravel" 
-loadrt  carousel                            pockets=16 encoding=index num_sense=2 dir=2
+loadrt  carousel                            pockets=[ATC]POCKETS encoding=index num_sense=2 dir=2
 loadrt  limit2                              names=limit2.spindle
 loadrt  time                                names=time.pb
 loadrt  scale                               names=scale.spindleload,scale.xjog,scale.yjog,scale.zjog,scale.ajog
@@ -111,6 +112,7 @@ addf    conv_u32b.ledgreen                  servo-thread
 addf    conv_flu32.ledgreen                 servo-thread
 addf    conv_u32b.estoplight                servo-thread
 addf    conv_flu32.estoplight               servo-thread
+addf    conv-s32-float.atc-pocket           servo-thread
 addf    or.program-run                      servo-thread
 addf    or.program-stop                     servo-thread
 addf    or.program-pause                    servo-thread
@@ -118,6 +120,8 @@ addf    or.externalprogram                  servo-thread
 addf    or.probe                            servo-thread
 addf    or.auto                             servo-thread
 addf    or.program-resume                   servo-thread
+addf    or.spindle-auto-cone-clean          servo-thread
+addf    or.spindle-auto-drawbar             servo-thread
 addf    scale.xjog                          servo-thread
 addf    scale.yjog                          servo-thread
 addf    scale.zjog                          servo-thread

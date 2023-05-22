@@ -32,8 +32,17 @@ net     coneclean-trigger                           timedelay.conecleaning.in   
 # timedelay.coneclean starts only when
 # drawbar not open
 net     toolchange-toggle                           toggle.toolchange.out           timedelay.toolchange.in
-net     DO-ATC-drawbar-actuator                     timedelay.toolchange.out           
-net     DO-ATC-cone-clean                           timedelay.conecleaning.out
+
+# Bypass for actuation from OCODE MACROS --> final signal goes through or2
+
+net     DO-ATC-drawbar-actuator-delay               timedelay.toolchange.out      or.spindle-auto-drawbar.in0
+net     DO-ATC-drawbar-actuator-auto                or.spindle-auto-drawbar.in1
+net     DO-ATC-drawbar-actuator                     or.spindle-auto-drawbar.out   
+
+net     DO-ATC-cone-clean-delay                           timedelay.conecleaning.out        or.spindle-auto-cone-clean.in0
+net     DO-ATC-cone-clean-auto                           or.spindle-auto-cone-clean.in1
+
+net     DO-ATC-cone-clean                           or.spindle-auto-cone-clean.out  
 
 
 # MUX8 mux8.atcstatusled to select between different modes of light
@@ -108,13 +117,21 @@ setp        carousel.0.decel-time    [ATC]DECEL_TIME
 # Enable is required to turn the whole thing on
 #net        carenable         carousel.0.enable 
 # Index = home
-net        DI-ATC-home    carousel.0.sense-0
+net         DI-ATC-home    carousel.0.sense-0
 # Pocket = pocket signal
-net        DI-ATC-pocket    carousel.0.sense-1
+net         DI-ATC-pocket    carousel.0.sense-1
 
-net        carousel_jog-fwd    carousel.0.jog-fwd
-net        carousel_jog-rev    carousel.0.jog-rev
-
-net        carousel_motor_fwd  carousel.0.motor-fwd
-net        carousel_motor_rev  carousel.0.motor-rev
-net        carousel_motor_vel  carousel.0.motor-vel    [HMOT](CARD0).stepgen.05.velocity-cmd
+# Setup Write Signales
+net         carousel_enable     carousel.0.enable     
+net         carousel_jog-fwd    carousel.0.jog-fwd
+net         carousel_jog-rev    carousel.0.jog-rev
+net         carousel_force-unhome carousel.0.unhome
+net         carousel_motor-vel  carousel.0.motor-vel    [HMOT](CARD0).stepgen.05.velocity-cmd
+net         carousel_pocket-number  carousel.0.pocket-number 
+#conv-s32-float.atc-pocket.in
+# Setup READ Signals
+net         carousel_homed      carousel.0.homed
+net         carousel_ready      carousel.0.ready
+net         carousel_current-position carousel.0.current-position conv-s32-float.atc-pocket.in
+# Trigger homing of atc with homing of machine
+net         carousel_home-auto halui.mdi-command-17 joint.0.homed

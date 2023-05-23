@@ -15,9 +15,10 @@
 - m12: cw movement (with #p steps or p emtpy == 1 step)
 - m13: Homing/ Referencing
 
-- m21: move carousel to tool change position - OUT (removes tool)
-- m22 Move Carousel to the home position - IN
-- m23 - m26: unused
+- M21 Clamp Tool and Check --> use as macro, not as custom gcode in hal
+- M22 UnClamp Tool and Check --> use as macro, not as custom gcode in hal
+- M23 Open Doors and CHeck --> not implemented
+- M24  Clsoe Doors and Check --> not implemented
 
 https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines/toolchange.ngc
 - see for example of abort script with message
@@ -28,7 +29,6 @@ https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines
 ## New Macro Structure
 
 * On the order im implementation:
-    - Tool Measurement
     - Spindle PUT REMOVE
     - Enter into atc
     - Remove from atc
@@ -168,24 +168,25 @@ https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines
 - current pocket atc AIN 00
 - current pocket spindle AIN 01
 - tool presence --> DIN 02
-- tool sensor drawbar --> DIN 04
-- tool sensor in spindle --> DIN 03
+- sensor   drawbar --> DIN 04
+- sensor tool in spindle --> DIN 03 (high when tool present)
 
 
-## This is the way / ToDo
 
-* Use probe_basic persistent variables to store what tools are in the carousel
-* in M6 Macro: Check if <requested_tool> is in any of the Carousel Pockets (see toolchange.ngc for effective code to do that)
-* remove programmable coolant shit
-* find a way to trigger homing through custom script --> set #5171 homed (or use pin), furthermore: issue vcp.getWidget("dynatc")... statement to display "home" - "Ready" etc.
+## Check me
 
-trigger MDI commands from HAL using: https://linuxcnc.org/docs/html/man/man1/halui.1.html
-halui.mod-command-xx systematics --> could be used to triggert homing
+- When does the tool sensor trigger empty (check with fixed holder in pocket) and determien mm ==> safe distance Z (when the forks can do that)
+- m21, m22: What does abort really do?
+- check tool lenght measurement macro and link to interface (i.e. adjust filename)
 
-https://forum.linuxcnc.org/qtpyvcp/46629-qtpyvcp-probe-basic-changing-tool-table-entries-from-macro-or-script
-https://forum.linuxcnc.org/38-general-linuxcnc-questions/45564-atc-project-debug-phase?start=190
 
 ## Bugs
 
 * jog-fwd / jog-rev: stick to state 20 an do not perform align
 
+
+
+#### Notes
+
+https://forum.linuxcnc.org/qtpyvcp/46629-qtpyvcp-probe-basic-changing-tool-table-entries-from-macro-or-script
+https://forum.linuxcnc.org/38-general-linuxcnc-questions/45564-atc-project-debug-phase?start=190

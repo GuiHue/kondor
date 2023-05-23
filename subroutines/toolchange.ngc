@@ -1,3 +1,5 @@
+; Main Macro to perform TOOL LENGHT MEASUREMTN 
+
 o<toolchange> sub
 (print, o<toolchange>)
 

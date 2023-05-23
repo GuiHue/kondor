@@ -1,0 +1,28 @@
+o<placetoolinatc> sub
+; Macro to perform spindle operations to place a tool in the atc (approach from front, seat to pocket, unclamp, retreat Z)
+; These do not perform additional logic as they are assumed to be embedded in other macros
+; These only check drawbar actuation and tool presence
+
+; Fast move to Safe position in front of pocket
+
+#<safey>=[#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y]
+
+G53 G0 X#<_ini[ATC]ATC_POCKET_X> X#<safey>      
+G53 G0 Z #<_ini[ATC]ATC_POCKET_Z>
+; with ATC_PLACE_SPEED move to final pocket position
+F #<_ini[ATC]ATC_PLACE_SPEED>
+G53 G1 Y #<_ini[ATC]ATC_POCKET_Y>
+; Unclamp tool
+M22
+G91
+F #<_ini[ATC]ATC_RELEASE_SPEED>
+G1 Z #<_ini[ATC]ATC_LIFT_OFF_Z>
+G90
+; Cone Clean ON
+M132
+G53 G0 Z #<_ini[ATC]ATC_TOP_SAFE_Z>
+; Cone Clean OFF
+M133
+
+o<placetoolinatc> endsub [1]
+M2

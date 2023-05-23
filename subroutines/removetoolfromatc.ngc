@@ -1,0 +1,8 @@
+o<removetoolfromatc> sub
+; Macro to perform spindle operations to REMOVE a tool in the atc (approach from top, open, grab to pocket, clamp, retreat to front)
+
+
+
+
+o<removetoolfromatc> endsub [1]
+M2

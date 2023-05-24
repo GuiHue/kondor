@@ -1,0 +1,138 @@
+o<load_tool_atc> sub
+(Macro to load a tool into the carousel safely (i.e. into an empty pocket + Check for redudancy)
+(Macro is expected to be triggered from the probe_basic UI and requires at least a toolnumber of Load Tool ATC: The tool to be put into the atc)
+
+(Macro expects that the tool in the spindle is the one specified in the macro call. It will not try to indentify it)
+
+#<load_spindle_tool_number> = #1
+#<probe_tool_number> = #<_ini[TOOLSENSOR]PROBE_NO> ;#6
+#<current_tool> = #5400
+#<atc_size> =#<_ini[ATC]POCKETS>
+
+
+#1 = #5190
+#2 = #5191
+#3 = #5192
+#4 = #5193
+#5 = #5194
+#6 = #5195
+#7 = #5196
+#8 = #5197
+#9 = #5198
+#10 = #5199
+#11 = #5200
+#12 = #5201
+#13 = #5202
+#14 = #5203
+#15 = #5204
+#16 = #5205
+
+; First: Check if Load Tool ATC: The tool is already in the ATC
+o<100> if [#<load_spindle_tool_number> EQ #5190]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 1)
+o<100> else if [#<load_spindle_tool_number> EQ #5191]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 2)
+o<100> else if [#<load_spindle_tool_number> EQ #5192]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 3)
+o<100> else if [#<load_spindle_tool_number> EQ #5193]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 4)
+o<100> else if [#<load_spindle_tool_number> EQ #5194]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 5)
+o<100> else if [#<load_spindle_tool_number> EQ #5195]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 6)
+o<100> else if [#<load_spindle_tool_number> EQ #5196]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 7)
+o<100> else if [#<load_spindle_tool_number> EQ #5197]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 8)
+o<100> else if [#<load_spindle_tool_number> EQ #5198]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 9)
+o<100> else if [#<load_spindle_tool_number> EQ #5199]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 10)
+o<100> else if [#<load_spindle_tool_number> EQ #5200]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 11)
+o<100> else if [#<load_spindle_tool_number> EQ #5201]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 12)
+o<100> else if [#<load_spindle_tool_number> EQ #5202]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 14)
+o<100> else if [#<load_spindle_tool_number> EQ #5203]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 14)
+o<100> else if [#<load_spindle_tool_number> EQ #5204]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 15)
+o<100> else if [#<load_spindle_tool_number> EQ #5205]
+  (MSG, Load Tool ATC: The tool you are trying to load is already stored in carousel pocket 16)
+o<100> else if [#<load_spindle_tool_number> EQ #<probe_tool_number>]
+  S0 M5
+  (MSG, Load Tool ATC: Not allowed to store the probe in the atc)
+o<100> else
+  ; Assuming that the specified number is the actual tool in the spindle, we may now proceed
+
+  ; First: Check if there is space available in the ATC
+  #<next_pocket> = 0 ; assigns 0 to the next pocket for a later check if the tool is found in the carousel
+  #<open_pocket> = 0
+  #15 = <atc_size>
+  O110 do
+    O115 if [#[5189 + #15] EQ 0] ; checks if the pocket is empty, last pocket checked will be the lowest empty pocket number, for putting tool in spindle away.
+      #<open_pocket> = #15
+    O115 endif
+    #15= [#15 - 1]
+  O110 while [#15 GT 0]
+  ; Abort when ATC is full (open_pocket=0)
+  O120 if [#<open_pocket> EQ 0] 
+		(abort, Load Tool ATC: Carousel is full)
+	O120 endif
+  #30 = #<open_pocket>
+  ; Manually determine direction of travel and number of steps to trigger animation
+  ; Read current_pocket, determien steps and direction for the animation... 
+  M66 E#<_ini[ATC]CURRENT_POSITION> L0
+  #<current_position> = #5399
+  #<steps> = [#<current_position> - #<open_pocket>]
+  o130 if [#<steps> GT [#<atc_size> / 2]]
+      #<steps>=[#<steps> - #<atc_size>]
+  o130 endif
+  o131 if [#<steps> LT - [#<atc_size> / 2]]
+      #<steps>=[#<steps> + #<atc_size>]
+  o131 endif
+  o132 if [#<steps> GT 0]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
+  o132 elseif [#<steps> LT 0]
+      #<steps>=[#<steps> * -1]
+      (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+  o132 endif
+
+  ; Cancel TOol Offset
+  G49
+
+  ; Call pocket 
+  M120 P#<open_pocket>
+  ;Move spindle to safe forward position
+  G53 G0 Z0
+  G53 G0 X#<_ini[ATC]ATC_POCKET_X> Y#<safey> 
+  ;Wait for Ready
+  M66 P #<_ini[ATC]ATC_READY> L3 Q10 
+  O140 if [#5399 LT 0]
+    (abort, Load Tool ATC: Carousel failed to reach ready state)
+  O140 endif
+  ;Check if pocket empty
+  M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+  O150 if [#5399 LT 1]
+    (abort, Load Tool ATC: Pocket not empty - Sensor Manual Intervention Required)
+  O150 endif
+
+  ;call subroutine to put tool pocket 
+  o<put_tool_pocket> call
+  
+  M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+  O160 if [#5399 GT 0]
+    (abort, Load Tool ATC: No Tool in Pocket after Dropoff)
+  O160 endif
+  ; Write Toolnumber into Open Pocket for Animation
+  (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{#<open_pocket>, #<load_spindle_tool_number>}])
+  M61 Q0
+  ; Set Tool in Spindle for PB to 0
+  #5231 = 0
+  ; Set variable of Pocket Content 
+  ##30 = #<load_spindle_tool_number>
+  (print, Tool #<load_spindle_tool_number> successfully placed at pocket #<open_pocket> )
+o<100> endif
+o<load_tool_atc> endsub [1]
+M2 

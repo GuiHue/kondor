@@ -1,40 +1,44 @@
 # ATC Notes
 
-## Python Widget Functions
-![Annotated Screenshot of ATC Page](Isolated.png "ATC Page with Standard Linked Macros")
-
-(DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{}])
-(DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{"REFERENCING"}])
-(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{#1, #2}])
-(DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<Steps_to_move>, "cw"}])
-
-
 ## Macros
-- m10: move best direction (Determine direction) --> not needed
-- m11: ccw movement (with #p steps or p emtpy == 1 step) --> not needed
-- m12: cw movement (with #p steps or p emtpy == 1 step)
-- m13: Homing/ Referencing
+- M10: move best direction (Determine direction) --> not needed/ implemented as done by carousel.comp
+- M11: ccw movement (with #p steps or p emtpy == 1 step) --> not needed/ implemented as done by carousel.comp
+- M12: cw movement (with #p steps or p emtpy == 1 step) --> not needed/ implemented as done by carousel.comp
+- M13: Homing/ Referencing
 
 - M21 Clamp Tool and Check --> use as macro, not as custom gcode in hal
 - M22 UnClamp Tool and Check --> use as macro, not as custom gcode in hal
 - M23 Open Doors and CHeck --> not implemented
-- M24  Clsoe Doors and Check --> not implemented
+- M24 Close  Doors and Check --> not implemented
 
-https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines/toolchange.ngc
-- see for example of abort script with message
+## Custom M Codes to make
+- Enable --> M114
+- Disable --> M115
+- Write Pocket number --> M120 P#
+- Force home --> M113
+- Forward one pocket  --> M111 --> triggered from probe_basic UI
+- Reverse one pocket --> M112 --> triggered from probe_basic UI
+- Drawbar -->       M130 open, m131 close       
+- Spindle Cone Clean Air Blast -->     m132 activate, m133 deactivate
 
-- store_tool_in_carousel.ngc ??
-- toolsetter_wco.ngc - measure tool currently in spindle and store
+## Pins to read
+- homed --> DIN 00
+- ready --> DIN 01
+- current pocket atc AIN 00
+- current pocket spindle AIN 01
+- tool presence --> DIN 02
+- sensor   drawbar --> DIN 04
+- sensor tool in spindle --> DIN 03 (high when tool present)
+
 
 ## New Macro Structure
 
 * On the order im implementation:
-    - Spindle PUT REMOVE
     - Enter into atc
     - Remove from atc
     - tool change
     - TouchOffAll
-* ATCToolchange.ngc: M6 Master Document
+* atc_toolchange.ngc: M6 Master Document
     * Modal Junk handling around the script as before
     * check if current tool is part of wheel
     * check if new tool is in wheel
@@ -67,12 +71,8 @@ https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines
             * M61 Qx
             * load tooloffset
             * end
-* ToolLenghtMeasurement.ngc: Macro to measure the currently loaded tool (and no other)
-    - from whereever the spindle is with the tool in the spindle 
-    - G53 G0 Z0, G53 G0 XY TS
-    - Perform Measurement
-    - Calculate and store offset
-* RemoveToolFromATC.ngc: Macro to fetch and remove a tool
+* tool_touch_off.ngc: Macro to measure the currently loaded tool (and no other) *(DONE)*
+* remove_tool_atc.ngc: Macro to fetch and remove a tool
     - Check if tool is in ATC
         - yes:
             -  Check if spindle is empty:
@@ -88,7 +88,7 @@ https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines
             - Set pocketvariable to 0 to delete record of tool being in ATC
             - Move to Manual Handover Position and Trigger dialoge via T0 M6
         - else: abort with message
-* PlaceToolinATC.ngc: Macro to enter a tool into the ATC
+* enter_tool_atc.ngc: Macro to enter a tool into the ATC
     - Assumes that this is triggered from PB interface with a textfield that provides the tool number to be put to the wheel
     - Assume that whatever the number is, it is going to be put into the wheel
     - if new tool in wheel
@@ -119,74 +119,34 @@ https://github.com/kcjengr/probe_basic/blob/main/configs/probe_basic/subroutines
 
 
 * SubMacros
-    * SpindleGetToolFromATC.ngc: Only relevant spindle movement
-        * Only the spindle motions, no interaction with ATC (avoids) stupid parameters
-        * Check if spindle is empty, otherwise abort 
-        * From safe position move to Safe Position above pocket at G0
-        * open and blowout spindle (check drawbar)
-        * move down G0 and G1
-        * air off, final move
-        * clamp, check for tool presence and drawbar state
-        * move out of pocket safely
-        * G53 G0 Z0 once clear
-    * SpindlePutTooltoATC.ngc: Only relevant spindle movement
-        * Only the spindle motions, no interaction with atc
-        * Check if tool in spindle
-        * at G53 G0Z0 move to safe location in front of pocket
-        * move to Z height for Pocket
-        * move Y into pocket
-        * unclamp
-        * raise Z slightly at G1
-        * spindle empty? 
-        * blowoff  on
-        * move to G53 Z0
-        * blowoff off
-        * drawbar close + check
-
+    * remove_tool_pocket.ngc: Only relevant spindle movement *(DONE)*       
+    * put_tool_pocket.ngc: Only relevant spindle movement *(DONE)*
 
 ## Numbered Parameters of Probe_Basic
-
 - #5191 ongoing --> typically used for tool to pocket relation
-- #5170 --> current tol pocket persiste2nt
+- #5170 --> current tool pocket persiste2nt
 - #5171 --> homed
 - #5231 --> tool in spindle, persistent
 - #5399 result of m66
 
-## Custom M Codes to make
-- enable --> M114
-- Disable --> M115
-- pocket number --> M120 P#
-- force home --> M113
-- forward one  --> M111
-- reverse one --> M112
-- Drawbar (maybe through M65)       M130 open, m131 close       ==> try to interlock this with spindle! - sort of safe, since spindle cannot be satrted... due to no tool
-- spindle air blast     m132 activate, m133 deactivate      ==> CAREFUL: THESE ARE NOT CHECKED
-
-## Pins to read
-- homed --> DIN 00
-- ready --> DIN 01
-- current pocket atc AIN 00
-- current pocket spindle AIN 01
-- tool presence --> DIN 02
-- sensor   drawbar --> DIN 04
-- sensor tool in spindle --> DIN 03 (high when tool present)
-
-
+## Python Widget Functions
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{}])
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{"REFERENCING"}])
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{#1, #2}])
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<Steps_to_move>, "cw"}])
 
 ## Check me
 
 - When does the tool sensor trigger empty (check with fixed holder in pocket) and determien mm ==> safe distance Z (when the forks can do that)
 - m21, m22: What does abort really do?
 - check tool lenght measurement macro and link to interface (i.e. adjust filename)
-
+- load_tool_atc animation logic is sketchy - check
 
 ## Bugs
-
 * jog-fwd / jog-rev: stick to state 20 an do not perform align
 
 
 
 #### Notes
-
-https://forum.linuxcnc.org/qtpyvcp/46629-qtpyvcp-probe-basic-changing-tool-table-entries-from-macro-or-script
-https://forum.linuxcnc.org/38-general-linuxcnc-questions/45564-atc-project-debug-phase?start=190
+- https://forum.linuxcnc.org/qtpyvcp/46629-qtpyvcp-probe-basic-changing-tool-table-entries-from-macro-or-script
+- https://forum.linuxcnc.org/38-general-linuxcnc-questions/45564-atc-project-debug-phase?start=190

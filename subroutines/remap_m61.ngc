@@ -15,7 +15,7 @@ O100 endif
 
 M61 Q#<tool>
 
-O111 if [#<tool> EQ 99]
+O111 if [#<tool> EQ #<_ini[TOOLSENSOR]PROBE_NO>]
     ; Activate probe 
     M64 P #<_ini[ATC]3D_PIN>
     S0

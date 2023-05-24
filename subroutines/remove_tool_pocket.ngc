@@ -1,0 +1,44 @@
+o<remove_tool_pocket> sub
+; Macro to perform spindle operations to REMOVE a tool in the atc (approach from top, open, grab to pocket, clamp, retreat to front)
+; These do not perform additional logic as they are assumed to be embedded in other macros
+; These only check drawbar actuation and tool presence
+
+; Make sure that spindle is in a know location above the pocket at safe Z
+
+G53 G0 Z0
+G53 G0 X #<_ini[ATC]ATC_POCKET_X> Y #<_ini[ATC]ATC_POCKET_Y>
+
+; Go down to safe Z (this may be 0 as well)
+G53 G0 Z #<_ini[ATC]ATC_TOP_SAFE_Z>
+
+; Open the Spindle
+M22
+; Cone Clean on
+M132
+
+<safez> = [#<_ini[ATC]ATC_POCKET_Z> + #<_ini[ATC]ATC_LIFT_OFF_Z]
+G53 G0 Z <safez>
+; Cone Clean off
+M133
+; At ATC_PLACE_SPEED move onto the tool
+F #<_ini[ATC]ATC_PLACE_SPEED>
+G53 G1 Z #<_ini[ATC]ATC_POCKET_Z>
+
+; Clamp the tool
+M21
+
+; Check if tool is in spindle (high when tool present)
+M66 P #<_ini[ATC]SENSOR_TOOL> L0  (needs to be high immediately)
+   O131 if [#5399  LT 1]
+      (abort, Remove Toom from ATC: No Tool in Spindle) ; abort if the sensor does not see a tool after the spindle has clamped
+   O131 endif
+
+; with ATC_RELEASE_SPEED move away from the pocket along Y
+F #<_ini[ATC]ATC_RELEASE_SPEED>
+#<safey>=[#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y]
+G53 G1 Y#<safey> 
+; Go up to safe Z
+G53 G0 Z0 
+
+o<remove_tool_pocket> endsub [1]
+M2

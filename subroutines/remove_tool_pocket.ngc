@@ -10,14 +10,14 @@ G53 G0 X #<_ini[ATC]ATC_POCKET_X> Y #<_ini[ATC]ATC_POCKET_Y>
 
 ; Go down to safe Z (this may be 0 as well)
 G53 G0 Z #<_ini[ATC]ATC_TOP_SAFE_Z>
-
 ; Open the Spindle
 M22
 ; Cone Clean on
 M132
 
-<safez> = [#<_ini[ATC]ATC_POCKET_Z> + #<_ini[ATC]ATC_LIFT_OFF_Z]
-G53 G0 Z <safez>
+
+#<safez> = [#<_ini[ATC]ATC_POCKET_Z> + #<_ini[ATC]ATC_LIFT_OFF_Z>]
+G53 G0 Z #<safez>
 ; Cone Clean off
 M133
 ; At ATC_PLACE_SPEED move onto the tool
@@ -35,7 +35,7 @@ M66 P #<_ini[ATC]SENSOR_TOOL> L0  (needs to be high immediately)
 
 ; with ATC_RELEASE_SPEED move away from the pocket along Y
 F #<_ini[ATC]ATC_RELEASE_SPEED>
-#<safey>=[#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y]
+#<safey>=[#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y>]
 G53 G1 Y#<safey> 
 ; Go up to safe Z
 G53 G0 Z0 

@@ -74,7 +74,7 @@ G91
 F #<fast_probe_fr>
 (Turn on TLS)
 M64 P #<_ini[ATC]TLS_PIN>
-G38.2 Z-[#<z_max_travel>]    (fast tool probe)
+G38.2 Z[#<z_max_travel>]    (fast tool probe)
 (Turn off TLS)
 M65 P #<_ini[ATC]TLS_PIN>
 #<z_fast_probe> = #5063    (save probe result of fast probe to parameters)
@@ -104,7 +104,7 @@ o<130> endif
 
 (Tool Diameter Probe Mode Section, User must define this section as needed)
 o<140> if [#<tool_diameter_probe_mode> EQ 1]
-  (MSG, Tool Diameter Probing is Not Defined in Subroutine)
+  (print, Tool Diameter Probing is Not Defined in Subroutine)
 o<140> endif
 
 o<150> if [3 EQ 3]

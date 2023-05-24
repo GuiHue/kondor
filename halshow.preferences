@@ -1,6 +1,6 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1122x661+687+82
+wm geometry . 1122x661+826+215
 placeFrames 0.3
 set ::ratio 0.3
 set ::old_w_leftf 160
@@ -10,8 +10,6 @@ set ::watchlist {
     sig+DI-ATC-toolpresence
     sig+DI-ATC-home
     pin+carousel.0.active
-    pin+carousel.0.counts
-    pin+carousel.0.counts-target
     pin+carousel.0.current-position
     pin+carousel.0.enable
     pin+carousel.0.pocket-number
@@ -19,7 +17,6 @@ set ::watchlist {
     pin+carousel.0.decel-time
     pin+carousel.0.fwd-dc
     pin+carousel.0.hold-dc
-    pin+carousel.0.home-offset
     pin+carousel.0.homed
     param+carousel.0.state
     param+carousel.0.motor-dir
@@ -31,9 +28,8 @@ set ::watchlist {
     pin+carousel.0.jog-fwd
     pin+carousel.0.jog-rev
     pin+carousel.0.unhome
-    pin+halui.home-all
-    pin+joint.3.homing
-    pin+spindle.0.inhibit
+    sig+DI-ATC-drawbar-sensor
+    sig+DO-ATC-drawbar-actuator
 }
 set ::workmode watchhal
 set ::watchInterval 100

@@ -5,9 +5,9 @@ o<put_tool_pocket> sub
 ; Assumes start at safe front location but ensures it by force placing
 ; Fast move to Safe position in front of pocket
 
-;#<safey>=[#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y]
+#<safey> = [#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y>]
 
-;G53 G0 X#<_ini[ATC]ATC_POCKET_X> Y#<safey>      
+G53 G0 X #<_ini[ATC]ATC_POCKET_X> Y #<safey>      
 G53 G0 Z #<_ini[ATC]ATC_POCKET_Z>
 ; with ATC_PLACE_SPEED move to final pocket position
 F #<_ini[ATC]ATC_PLACE_SPEED>

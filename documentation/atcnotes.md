@@ -137,9 +137,12 @@
 
 ## Check me
 
-- When does the tool sensor trigger empty (check with fixed holder in pocket) and determien mm ==> safe distance Z (when the forks can do that)
+- When does the tool sensor trigger empty (check with fixed holder in pocket) and determien mm ==> safe distance Z (when the forks can do that) --> instant
 - m21, m22: What does abort really do?
-- check tool lenght measurement macro and link to interface (i.e. adjust filename)
+
+
+- add button and macro to fully empty atc (virtually)
+
 - load_tool_atc animation logic is sketchy - check
 
 ## Bugs

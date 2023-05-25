@@ -1,0 +1,39 @@
+o<emptyatc> sub
+
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{1, 0}])
+#5190 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{2, 0}])
+#5191 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{3, 0}])
+#5192 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{4, 0}])
+#5193 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{5, 0}])
+#5194 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{6, 0}])
+#5195 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{7, 0}])
+#5196 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{8, 0}])
+#5197 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{9, 0}])
+#5198 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{10, 0}])
+#5199 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{11, 0}])
+#5200 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{12, 0}])
+#5201 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{13, 0}])
+#5202 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{14, 0}])
+#5203 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{15, 0}])
+#5204 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{16, 0}])
+#5205 = 0
+(MSG, All tool<>pocket entries deleted)
+
+o<emptyatc> endsub [1]
+
+M2

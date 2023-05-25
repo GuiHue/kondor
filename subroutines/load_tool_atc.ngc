@@ -106,6 +106,7 @@ o<100> else
   M120 P#<open_pocket>
   ;Move spindle to safe forward position
   G53 G0 Z0
+  #<safey> = [#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y>]
   G53 G0 X#<_ini[ATC]ATC_POCKET_X> Y#<safey> 
   ;Wait for Ready
   M66 P #<_ini[ATC]ATC_READY> L3 Q10 

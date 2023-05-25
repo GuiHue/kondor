@@ -6,20 +6,23 @@
 
 o<M6_tool_call_tool_page> sub
 
-#<tool_number_entry_tool_page> = #1
+#<tool_number_entry_tool_page2> = #1
 #<activate_programmable_coolant> = #2
 #<horizontal_spindle_nozzle_dist> = #3
 #<vertical_spindle_nozzle_dist> = #4
 #<pc_angle_offset> = #5
 #<probe_tool_number> = #6
 
-T#<tool_number_entry_tool_page> M6
+(print, #<tool_number_entry_tool_page2>)
+(print,#1)
+
+; T#<tool_number_entry_tool_page2> M6
 
 o<010> if [1 EQ 1]
-  G43 H#<tool_number_entry_tool_page>
+  G43 H#<tool_number_entry_tool_page2>
 o<010> endif
 
-o<020> if [#<tool_number_entry_tool_page> EQ #<probe_tool_number>]
+o<020> if [#<tool_number_entry_tool_page2> EQ #<probe_tool_number>]
   S0 M5
 o<020> endif
 

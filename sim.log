@@ -1,30 +1,77 @@
-2023-05-24 22:33:29,679 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2023-05-24 22:33:29,679 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2023-05-24 22:33:30,191 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2023-05-24 22:33:30,191 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2023-05-24 22:33:30,192 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2023-05-24 22:33:30,192 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2023-05-24 22:33:30,192 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2023-05-24 22:33:30,192 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2023-05-24 22:33:30,192 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2023-05-24 22:33:30,192 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2023-05-24 22:33:30,354 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2023-05-24 22:33:33,155 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2023-05-24 22:33:33,585 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-24 22:33:33,615 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-24 22:33:34,717 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2023-05-24 22:33:46,912 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-24 22:33:46,939 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-24 22:33:51,602 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G53G0X400Y1000
-2023-05-24 22:33:59,171 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
-2023-05-24 22:34:01,048 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
-2023-05-24 22:34:02,800 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
-2023-05-24 22:34:06,200 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
-2023-05-24 22:34:10,333 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
-2023-05-24 22:34:13,106 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
-2023-05-24 22:34:17,695 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
-2023-05-24 22:34:19,485 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
-2023-05-24 22:34:42,780 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: O<PUT_TOOL_POCKET> CALL
-2023-05-24 22:34:52,200 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
-2023-05-24 22:34:58,042 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: O<REMOVE_TOOL_POCKET> CALL
-2023-05-24 22:35:05,427 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2023-05-25 22:06:49,964 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2023-05-25 22:06:49,965 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2023-05-25 22:06:50,476 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-05-25 22:06:50,476 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-05-25 22:06:50,477 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-05-25 22:06:50,477 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-05-25 22:06:50,477 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-05-25 22:06:50,477 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-05-25 22:06:50,477 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-05-25 22:06:50,477 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-05-25 22:06:50,623 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2023-05-25 22:06:53,366 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2023-05-25 22:06:53,727 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:06:53,790 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:06:54,998 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2023-05-25 22:06:59,259 - qtpyvcp.plugins.tool_table - INFO - Reloading tool in spindle: 99
+2023-05-25 22:06:59,488 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2023-05-25 22:06:59,489 - qtpyvcp.actions.machine_actions - ERROR - Failed to issue MDI command: M61 Q99 G43
+2023-05-25 22:07:06,759 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:07:06,786 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:07:53,020 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [111.0]
+2023-05-25 22:07:59,838 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:07:59,865 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:07:59,867 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2023-05-25 22:08:00,268 - qtpyvcp.plugins.notifications - INFO - _workspace_z does not exist
+2023-05-25 22:08:30,137 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5190=110
+2023-05-25 22:08:31,155 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5190=110
+2023-05-25 22:08:33,842 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [111.0]
+2023-05-25 22:08:33,997 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:08:34,025 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:08:34,124 - qtpyvcp.plugins.notifications - ERROR - Load Tool ATC: Pocket not 
+ empty - Sensor Manual Intervention 
+ Required
+2023-05-25 22:22:48,330 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M66 P #<_INI[ATC]ATC_TOOLPRESENCE> L0
+2023-05-25 22:23:01,188 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M66 P02 L0
+2023-05-25 22:23:05,580 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5399
+2023-05-25 22:23:05,713 - qtpyvcp.plugins.notifications - ERROR - Equal sign missing in parameter 
+ setting
+2023-05-25 22:23:18,554 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: (print, #5399)
+2023-05-25 22:23:49,461 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M66 P02 L0
+2023-05-25 22:23:53,725 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: (print, #5399)
+2023-05-25 22:23:54,973 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: (print, #5399)
+2023-05-25 22:24:26,166 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [111.0]
+2023-05-25 22:24:26,293 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:24:26,320 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:24:26,422 - qtpyvcp.plugins.notifications - ERROR - Load Tool ATC: Pocket not 
+ empty - Sensor Manual Intervention 
+ Required
+2023-05-25 22:24:45,933 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5190=110
+2023-05-25 22:24:46,555 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5399
+2023-05-25 22:24:46,696 - qtpyvcp.plugins.notifications - ERROR - Equal sign missing in parameter 
+ setting
+2023-05-25 22:24:48,971 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5190=110
+2023-05-25 22:24:49,526 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5399
+2023-05-25 22:24:49,661 - qtpyvcp.plugins.notifications - ERROR - Equal sign missing in parameter 
+ setting
+2023-05-25 22:24:52,605 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: #5190=110
+2023-05-25 22:24:55,310 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [111.0]
+2023-05-25 22:24:59,032 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:24:59,060 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:24:59,061 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2023-05-25 22:24:59,412 - qtpyvcp.plugins.notifications - INFO - _workspace_z does not exist
+2023-05-25 22:25:20,059 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M13
+2023-05-25 22:25:27,859 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:25:27,888 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:25:38,790 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [111.0]
+2023-05-25 22:25:44,210 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:25:44,235 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-25 22:25:44,237 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2023-05-25 22:25:44,611 - qtpyvcp.plugins.notifications - INFO - _workspace_z does not exist
+2023-05-25 22:25:51,430 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M115
+2023-05-25 22:25:53,382 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M114
+2023-05-25 22:26:21,519 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
+2023-05-25 22:26:24,061 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [111.0]
+2023-05-25 22:26:44,413 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
+ DETECTION FOR PROBE
+2023-05-25 22:26:58,679 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call

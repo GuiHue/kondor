@@ -138,10 +138,10 @@
 ## Check me
 
 - When does the tool sensor trigger empty (check with fixed holder in pocket) and determien mm ==> safe distance Z (when the forks can do that) --> instant
-- m21, m22: What does abort really do?
+- m21, m22: What does abort really do? --> exactly that
 
 
-- add button and macro to fully empty atc (virtually)
+- we need buttos to cw ccw the animation of the atc
 
 - load_tool_atc animation logic is sketchy - check
 

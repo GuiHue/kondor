@@ -5,7 +5,7 @@ o<remove_tool_pocket> sub
 
 ; Make sure that spindle is in a know location above the pocket at safe Z
 
-G53 G0 Z0
+; G53 G0 Z0
 G53 G0 X #<_ini[ATC]ATC_POCKET_X> Y #<_ini[ATC]ATC_POCKET_Y>
 
 ; Go down to safe Z (this may be 0 as well)

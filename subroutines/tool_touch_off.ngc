@@ -40,10 +40,10 @@ o<100> endif
 O10 if [#<current_tool> EQ 0] ; checks if tool in the spindle is same as requested
  (debug, Tool Touch off: Spindle is empty, Control)
  o<toolchange> endsub [1]
-o10 elseif [#<current_tool> EQ #<_ini[TOOLSENSOR]PROBE_NO>] ; check if tool equals probe
+O10 elseif [#<current_tool> EQ #<_ini[TOOLSENSOR]PROBE_NO>] ; check if tool equals probe
  (debug, Tool Touch off: Probe detected, Tool Lenght Measurement disabled)
  o<toolchange> endsub [1]
-o10 endif
+O10 endif
 
 M66 P #<_ini[ATC]SENSOR_TOOL> L0
 O11 if [#5399 EQ 0]
@@ -91,7 +91,7 @@ o<120> if [#<slow_probe_fr> GT 0]
   (Turn off TLS)
   M65 P #<_ini[ATC]TLS_PIN>
   #<z_slow_probe> = #5063
-  (debug, Probed Pos: #5063 Z Pos: #<_z>)
+  (Print, Probed Pos: #5063 Z Pos: #<_z>)
   G90
   G0 Z[#<z_slow_probe> + #<retract_distance>]
 o<120> endif

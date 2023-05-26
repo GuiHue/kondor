@@ -18,11 +18,17 @@ G91
 F #<_ini[ATC]ATC_RELEASE_SPEED>
 G1 Z #<_ini[ATC]ATC_LIFT_OFF_Z>
 G90
+M66 P #<_ini[ATC]SENSOR_TOOL> L0
+; high when tool is inserted, here we epect NO tool
+o888 if [#5399 EQ 1]
+    (abort, Put tool pocket: Tool still in spindle)
+o888 end if 
 ; Cone Clean ON
 M132
 G53 G0 Z #<_ini[ATC]ATC_TOP_SAFE_Z>
 ; Cone Clean OFF
 M133
+M131
 
 o<put_tool_pocket> endsub [1]
 M2

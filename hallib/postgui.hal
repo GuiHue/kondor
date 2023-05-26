@@ -86,7 +86,11 @@ net     spindle-inhibit         qtpyvcp.1in15.on
 net     DI-ATC-pocket           qtpyvcp.1in21.on
 net     DI-ATC-index            qtpyvcp.1in22.on
 net     DI-ATC-toolpresence     qtpyvcp.1in23.on
-net     DI-ATC-door1            qtpyvcp.1in24.on
-net     DI-ATC-door2            qtpyvcp.1in25.on
 
+
+net     DI-ATC-tool-sensor      qtpyvcp.1in24.on
+net     DI-ATC-drawbar-sensor   qtpyvcp.1in25.on
+net     DO-ATC-drawbar-actuator qtpyvcp.1in26.on
+net     DO-ATC-cone-clean       qtpyvcp.1in27.on
+net     DO-CNC-tls-blowoff      qtpyvcp.1in28.on
 

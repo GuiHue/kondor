@@ -8,6 +8,8 @@ G43
 M9
 ; Diable carousel
 M115
+;M131 close drawbar auto trigger
+M131
 M172
 
 M5

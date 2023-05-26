@@ -1,0 +1,153 @@
+o<remove_tool_atc> sub
+
+#<remove_tool_pocket_atc> = #1
+#<probe_tool_number_ini> = #<_ini[TOOLSENSOR]PROBE_NO> 
+#<current_tool> = #5400
+#<atc_size> =#<_ini[ATC]POCKETS>
+
+(print, Removing tool T#<remove_tool_pocket_atc> from carousel)
+#1 = #5190
+#2 = #5191
+#3 = #5192
+#4 = #5193
+#5 = #5194
+#6 = #5195
+#7 = #5196
+#8 = #5197
+#9 = #5198
+#10 = #5199
+#11 = #5200
+#12 = #5201
+#13 = #5202
+#14 = #5203
+#15 = #5204
+#16 = #5205
+
+; First: Check if the spindle is empty
+M66 P#<_ini[ATC]SENSOR_TOOL> L0
+  O101 if [#5399 EQ 1]
+    (Abort, Remove Tool ATC: Tool in spindle!)
+   O101 endif
+
+
+; Check if the tool is actually in the carousel
+
+#<target_pocket> = 0
+#700 = #<atc_size> ;assign test parameter the number of pockets in the carousel
+
+O100 do
+ 	O110 if [#[5189 + #700] EQ #<remove_tool_pocket_atc>] ; checks all pockets to see if it contains tool number requested as the new tool
+      ; if tool is found in pocket, assign target_pocket the actual pocket value
+      #<target_pocket> = #700 
+
+	O110 endif
+  #700= [#700 - 1]
+O100 while [#700 GT 0]
+
+
+O120 if [#<target_pocket> EQ 0]
+   (abort, Remove Tool ATC: Tool T#<remove_tool_pocket_atc>  not in carousel)
+O120 endif
+
+; Cancel Tool Offset
+G49
+
+; Call pocket 
+(print, Target pocket determined: #<target_pocket>)
+M115
+M120 P#<target_pocket>
+#30 = #<target_pocket>
+; Manually determine direction of travel and number of steps to trigger animation
+; Read current_pocket, determien steps and direction for the animation... 
+M66 E#<_ini[ATC]CURRENT_POSITION> L0
+#<current_position> = #5399
+#<steps> = [#<current_position> - #<target_pocket>]
+o130 if [#<steps> GT [#<atc_size> / 2]]
+   #<steps>=[#<steps> - #<atc_size>]
+o130 endif
+o131 if [#<steps> LT - [#<atc_size> / 2]]
+   #<steps>=[#<steps> + #<atc_size>]
+o131 endif
+o132 if [#<steps> GT 0]
+   (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
+o132 elseif [#<steps> LT 0]
+   #<steps>=[#<steps> * -1]
+   (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+o132 endif
+; Disable carousel to reset state
+M114
+
+;Move spindle to safe top position
+G53 G0 Z0
+G53 G0 X#<_ini[ATC]ATC_POCKET_X> Y#<_ini[ATC]ATC_POCKET_Y> 
+;Wait for Ready
+M66 P #<_ini[ATC]ATC_READY> L3 Q10 
+O140 if [#5399 EQ 0]
+   (abort, Remove Tool ATC: Carousel failed to reach ready state)
+O140 endif
+(print, Carousel ready: #5399)
+;Check if pocket occupied
+M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+O150 if [#5399 EQ 0]
+   (abort, Remove Tool ATC: Target pocket empty. Manual Intervention Required)
+O150 endif
+
+ ;call subroutine to grab tool pocket 
+o<remove_tool_pocket> call
+
+M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+O160 if [#5399 EQ 1]
+(abort, Remove Tool ATC:  Tool still in pocket after pick up!)
+O160 endif
+
+; Write Toolnumber T0 into target Pocket for Animation
+  (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{#<target_pocket>, 0}])
+  M61 Q#<remove_tool_pocket_atc>
+  ; Set Tool in Spindle for PB to #<remove_tool_pocket_atc>
+  #5231 = #<remove_tool_pocket_atc>
+  ; Set variable of Pocket Content 
+
+  o<200> if [#<target_pocket> EQ 1]
+    #5190 = 0
+  o<200> else if [#<target_pocket> EQ 2]
+    #5191 = 0
+  o<200> else if [#<target_pocket> EQ 3]
+    #5192 = 0
+  o<200> else if [#<target_pocket> EQ 4]
+    #5193 = 0
+  o<200> else if [#<target_pocket> EQ 5]
+    #5194 = 0
+  o<200> else if [#<target_pocket> EQ 6]
+    #5195 = 0
+  o<200> else if [#<target_pocket> EQ 7]
+    #5196 = 0
+  o<200> else if [#<target_pocket> EQ 8]
+    #5197 = 0
+  o<200> else if [#<target_pocket> EQ 9]
+    #5198 = 0
+  o<200> else if [#<target_pocket> EQ 10]
+    #5199 = 0
+  o<200> else if [#<target_pocket> EQ 11]
+    #5200 = 0
+  o<200> else if [#<target_pocket> EQ 12]
+    #5201 = 0
+  o<200> else if [#<target_pocket> EQ 13]
+    #5202 = 0
+  o<200> else if [#<target_pocket> EQ 14]
+    #5203 = 0
+  o<200> else if [#<target_pocket> EQ 15]
+    #5204 = 0
+  o<200> else if [#<target_pocket> EQ 16]
+    #5205 = 0
+  o<200> endif
+  (print, Tool #<remove_tool_pocket_atc> successfully remove from pocket #<target_pocket> )
+  M115
+  G53 G0 Z0 
+  G53 G0 X[#<_ini[MTC_POS]X>] Y[#<_ini[MTC_POS]Y>]
+  G53 G0 Z[#<_ini[MTC_POS]Z>]
+  (MSG, remove Tool ATC: Remove tool from spindle!)
+o<remove_tool_atc> endsub [1]
+M2
+
+
+

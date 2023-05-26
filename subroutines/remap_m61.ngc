@@ -1,9 +1,10 @@
 ; remap_m61 to add check for T99 trigger
 ; # REMAP=M61  modalgroup=6 prolog=settool_prolog ngc=remap_m61 epilog=settool_epilog
 o<remap_m61> sub
-(print, tool #<tool>)
+(print, Remap M61: New Tool #<tool>)
+(print, Remap M61: Present Tool from #5231 #<5231>)
 
-
+#<old_tool>=#5231
 ; we must execute this only in the milltask interpreter
 ; or preview will break, so test for '#<_task>' which is 1 for 
 ; the milltask interpreter and 0 in the UI's
@@ -19,15 +20,20 @@ O111 if [#<tool> EQ #<_ini[TOOLSENSOR]PROBE_NO>]
     ; Activate probe 
     M64 P #<_ini[ATC]3D_PIN>
     S0
-    (debug, Probe Activated! - Crash Protection on)
+    (MSG, Probe Activated! - Crash Protection on)
 O111 else
-        ;a tool different from probe - turn off triggerpin
-        M65 P #<_ini[ATC]3D_PIN>       
-        (debug, Probe Deactivated - NO CRASH DETECTION FOR PROBE)
+        O112 IF [#<old_tool> EQ #<_ini[TOOLSENSOR]PROBE_NO>]        
+                ;a tool different from probe - turn off triggerpin
+                M65 P #<_ini[ATC]3D_PIN>       
+                (MSG, Probe Deactivated - NO CRASH DETECTION)
+        O112 ELSE
+                ; Nothing to do here, since the pin was not on in the first place
+                (pring, Nothing to do here)
+        O112 endif
 O111 endif
 
-
-T #<tool>  G43  H #<tool>     (enable tool length offset)
+(enable tool length offset)
+T #<tool>  G43  H #<tool>     
 ; signal success be returning a value > 0:
 o<remap_m61> endsub [1]
 m2

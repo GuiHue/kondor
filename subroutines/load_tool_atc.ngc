@@ -8,7 +8,7 @@ o<load_tool_atc> sub
 #<current_tool> = #5400
 #<atc_size> =#<_ini[ATC]POCKETS>
 
-(print, #<load_spindle_tool_number_3>)
+(print, Loading tool T#<load_spindle_tool_number_3> to carousel)
 
 #1 = #5190
 #2 = #5191
@@ -26,15 +26,6 @@ o<load_tool_atc> sub
 #14 = #5203
 #15 = #5204
 #16 = #5205
-
-(print, #<load_spindle_tool_number_3>)
-(print, #<probe_tool_number_ini_ini>)
-(print, #<current_tool>)
-(print, #<atc_size>)
-(print, #5)
-
-
-
 
 ; First: Check if Load Tool ATC: The tool is already in the ATC
 o<100> if [#<load_spindle_tool_number_3> EQ #5190]
@@ -77,12 +68,16 @@ o<100> else
 
   ; First: Check if there is space available in the ATC
   ; assigns 0 to the next pocket for a later check if the tool is found in the carousel
-  
+  M66 P#<_ini[ATC]SENSOR_TOOL> L0
+  O101 if [#5399 EQ 0]
+    (Abort, Load Tool ATC: No tool in spindle)
+  O101 endif
+
   #<next_pocket> = 0 
   #<open_pocket> = 0
   #700 = #<atc_size>
   O110 do
-  ; checks if the pocket is empty, last pocket checked will be the lowest empty pocket number, for putting tool in spindle away.
+  ; checks if there is an empty pocket, last pocket checked will be the lowest empty pocket number, for putting tool in spindle away.
     O115 if [#[5189 + #700] EQ 0] 
       #<open_pocket> = #700
     O115 endif
@@ -91,7 +86,15 @@ o<100> else
   ; Abort when ATC is full (open_pocket=0)
   O120 if [#<open_pocket> EQ 0] 
 		(abort, Load Tool ATC: Carousel is full)
-	O120 endif
+	O120 endif 
+
+  ; Cancel Tool Offset
+  G49
+
+  ; Call pocket 
+  (print, Open pocket determined: #<open_pocket>)
+  M115
+  M120 P#<open_pocket>
   #30 = #<open_pocket>
   ; Manually determine direction of travel and number of steps to trigger animation
   ; Read current_pocket, determien steps and direction for the animation... 
@@ -110,12 +113,7 @@ o<100> else
       #<steps>=[#<steps> * -1]
       (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
   o132 endif
-
-  ; Cancel TOol Offset
-  G49
-
-  ; Call pocket 
-  M120 P#<open_pocket>
+  
   M114
   ;Move spindle to safe forward position
   G53 G0 Z0
@@ -123,14 +121,13 @@ o<100> else
   G53 G0 X#<_ini[ATC]ATC_POCKET_X> Y#<safey> 
   ;Wait for Ready
   M66 P #<_ini[ATC]ATC_READY> L3 Q10 
-  O140 if [#5399 LT 0]
+  O140 if [#5399 EQ 0]
     (abort, Load Tool ATC: Carousel failed to reach ready state)
   O140 endif
+  (print, Carousel ready: #5399)
   ;Check if pocket empty
   M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
-  (print, problem: #5399)
-  O150 if [#5399 GT 0]
-    (print, #5399)
+  O150 if [#5399 EQ 1]
     (abort, Load Tool ATC: Pocket not empty - Sensor Manual Intervention Required)
   O150 endif
 
@@ -138,7 +135,7 @@ o<100> else
   o<put_tool_pocket> call
   
   M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
-  O160 if [#5399 GT 0]
+  O160 if [#5399 EQ 0]
     (abort, Load Tool ATC: No Tool in Pocket after Dropoff)
   O160 endif
   ; Write Toolnumber into Open Pocket for Animation
@@ -147,7 +144,40 @@ o<100> else
   ; Set Tool in Spindle for PB to 0
   #5231 = 0
   ; Set variable of Pocket Content 
-  ##30 = #<load_spindle_tool_number_3>
+
+  o<200> if [#<open_pocket> EQ 1]
+    #5190 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 2]
+    #5191 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 3]
+    #5192 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 4]
+    #5193 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 5]
+    #5194 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 6]
+    #5195 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 7]
+    #5196 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 8]
+    #5197 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 9]
+    #5198 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 10]
+    #5199 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 11]
+    #5200 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 12]
+    #5201 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 13]
+    #5202 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 14]
+    #5203 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 15]
+    #5204 = #<load_spindle_tool_number_3>
+  o<200> else if [#<open_pocket> EQ 16]
+    #5205 = #<load_spindle_tool_number_3>
+  o<200> endif
   (print, Tool #<load_spindle_tool_number_3> successfully placed at pocket #<open_pocket> )
   M115
 o<100> endif

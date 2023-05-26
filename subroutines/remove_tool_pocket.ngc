@@ -37,8 +37,6 @@ M66 P #<_ini[ATC]SENSOR_TOOL> L0  (needs to be high immediately)
 F #<_ini[ATC]ATC_RELEASE_SPEED>
 #<safey>=[#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y>]
 G53 G1 Y#<safey> 
-; Go up to safe Z
-G53 G0 Z0 
 
 o<remove_tool_pocket> endsub [1]
 M2

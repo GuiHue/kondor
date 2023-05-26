@@ -2,8 +2,8 @@ o<emptyatc> sub
 
 (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{1, 0}])
 #5190 = 0
-(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{2, 0}])
-#5191 = 0
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{2, 350}])
+#5191 = 350
 (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{3, 0}])
 #5192 = 0
 (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{4, 0}])

@@ -1,0 +1,280 @@
+; Master M6 REMAP
+o<atc_toolchange> sub
+(print, Starting M6 tool change macro)
+;(auto-restore modal settings on return)
+;M73 
+O10 IF [#<_task> EQ 0]
+        (abort, M6: Task is Null)
+O10 ENDIF
+
+;assign the tool numbers held in parameters to the pocket numbers
+#1 = #5190
+#2 = #5191
+#3 = #5192
+#4 = #5193
+#5 = #5194
+#6 = #5195
+#7 = #5196
+#8 = #5197
+#9 = #5198
+#10 = #5199
+#11 = #5200
+#12 = #5201
+#13 = #5202
+#14 = #5203
+#15 = #5204
+#16 = #5205
+
+#<new_tool> = #<selected_tool>
+#<current_tool> = #5400
+#<atc_size> =#<_ini[ATC]POCKETS>
+#<probe_tool_number_ini> = #<_ini[TOOLSENSOR]PROBE_NO> 
+
+; checks if tool in the spindle is same as requested
+O20 IF [#<current_tool> EQ #<new_tool>] 
+    (MSG, M6: No toolchange necessary)
+    o<toolchange> endsub [1]
+    M2
+O20 ENDIF
+
+
+; Determine if current_tool is from carousel
+#<current_atc_pocket> = 0
+#700 = #<atc_size> ;assign test parameter the number of pockets in the carousel
+O30 DO
+ 	; checks all pockets to see if it contains tool number requested as the new tool
+    O31 IF [#[5189 + #700] EQ #<current_tool>] 
+      ; if tool is found in pocket, assign current_atc_pocket the actual pocket value
+      #<current_atc_pocket> = #700 
+	O31 ENDIF
+  #700= [#700 - 1]
+O30 WHILE [#700 GT 0]
+(print, M6: Current ATC Pocket: #<current_atc_pocket>)
+; Determine if new_tool is in carousel
+#<new_atc_pocket> = 0
+#700 = #<atc_size> ;assign test parameter the number of pockets in the carousel
+O32 DO
+ 	O33 IF [#[5189 + #700] EQ #<new_tool>] ; checks all pockets to see if it contains tool number requested as the new tool
+      ; if tool is found in pocket, assign new_atc_pocket the actual pocket value
+      #<new_atc_pocket> = #700 
+	O33 ENDIF
+  #700= [#700 - 1]
+O32 WHILE [#700 GT 0]
+
+; Check if new tool is 99 --> must be picked up manually andd new_atc_pocket is 0 
+O40 IF [#<new_tool> EQ #<probe_tool_number_ini>]
+    #<new_atc_pocket> = 0
+O40 ELSEIF [#<new_tool> EQ 0]
+    #<new_atc_pocket> = 0
+O40 ENDIF
+(print, M6: New ATC Pocket: #<new_atc_pocket>)
+
+
+; Ensure everything that we do is done in absolute coordinates
+G90
+G40
+G92.1
+G49
+; Step 1: check if a tool is in the spindle and put away (Physical sensor > current_tool)
+M66 P#<_ini[ATC]SENSOR_TOOL> L0
+O100 IF [#5399 EQ 0]
+    ; NO tool in spindle, proceed
+    O110 IF [#<current_tool> EQ 0]
+        ; NO Tool in spindle, proceed
+    O110 ELSE
+        (abort, M6: Mismatch Spindle Tool Sensor and Program - Check manually!)
+    O110 ENDIF
+O100 ELSE 
+    ; There is a tool in the spindle and we know the toolnumber
+    O120 IF [#<current_atc_pocket> EQ 0]
+        (print, M6: Current tool not from carousel - Manual PickUp)
+        G53 G0 Z0
+        G53 G0 X[#<_ini[MTC_POS]X>] Y[#<_ini[MTC_POS]Y>]
+        G53 G0 Z[#<_ini[MTC_POS]Z>]
+        O121 IF [#<current_tool> EQ #<probe_tool_number_ini>]
+            (print, Current tool is probe - turn off pin)
+            M65 P #<_ini[ATC]3D_PIN>
+            (debug, Probe Deactivated - NO CRASH DETECTION FOR PROBE)
+        O121 ENDIF
+
+        O122 IF [#<new_atc_pocket> EQ 0]
+            ; New tool not in carousel, hence we can M6 to new tool with dialog
+            M6
+        O122 ELSE
+            ; New tool in carousel, hence we go M6 T0
+            T0
+            M6 
+            T #<new_tool>
+            #5231 = 0
+        O122 ENDIF        
+    O120 ELSE
+        (print, M6: Current tool originates from carousel - Return)
+        M115
+        M120 P#<current_atc_pocket>
+        #30 = #<current_atc_pocket>
+        ; Manually determine direction of travel and number of steps to trigger animation
+        ; Read current_pocket, determien steps and direction for the animation... 
+        M66 E#<_ini[ATC]CURRENT_POSITION> L0
+        #<current_position> = #5399
+        #<steps> = [#<current_position> - #<current_atc_pocket>]
+        o130 if [#<steps> GT [#<atc_size> / 2]]
+            #<steps>=[#<steps> - #<atc_size>]
+        o130 endif
+        o131 if [#<steps> LT - [#<atc_size> / 2]]
+            #<steps>=[#<steps> + #<atc_size>]
+        o131 endif
+        o132 if [#<steps> GT 0]
+            (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
+        o132 elseif [#<steps> LT 0]
+            #<steps>=[#<steps> * -1]
+            (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+        o132 endif
+        M114
+        ;Move spindle to safe forward position
+        G53 G0 Z0
+        #<safey> = [#<_ini[ATC]ATC_POCKET_Y> - #<_ini[ATC]ATC_FRONT_SAFE_Y>]
+        G53 G0 X#<_ini[ATC]ATC_POCKET_X> Y#<safey> 
+        ;Wait for Ready
+        M66 P #<_ini[ATC]ATC_READY> L3 Q10 
+        O140 if [#5399 EQ 0]
+            (abort, M6: Carousel failed to reach ready state at drop off)
+        O140 endif
+        ;Check if pocket empty
+        M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+        O150 if [#5399 EQ 1]
+            (abort, M6: Pocket not empty - Sensor Manual Intervention Required)
+        O150 endif
+
+        ;call subroutine to put tool pocket 
+        o<put_tool_pocket> call
+        
+        M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+        O160 if [#5399 EQ 0]
+            (abort, M6: No Tool in Pocket after Dropoff)
+        O160 endif
+        M61 Q0
+        #5231 = 0
+    O120 ENDIF
+O100 ENDIF
+
+O199 IF [#<new_tool> EQ 0]
+    (print, M6: New tool = 0, nothing to do)    
+    G53 G0Z0
+    M61 Q0
+O199 ELSE
+
+O200 IF [#<new_atc_pocket> EQ 0]
+    (print, M6: New tool not in ATC, manual pickup)
+
+    O210 IF [#<current_atc_pocket>  EQ 0]
+        ; In this case we have already triggered M6 T#<new_tool>
+    O210 ELSE
+        ; in this case we have not and we need to move to MTC an trigger dialogue
+        G53 G0 Z0
+        G53 G0 X[#<_ini[MTC_POS]X>] Y[#<_ini[MTC_POS]Y>]
+        G53 G0 Z[#<_ini[MTC_POS]Z>]
+        M6 
+    O210 ENDIF
+    ; we can now assume that M6 has run through - check tool presence
+    M66 P#<_ini[ATC]SENSOR_TOOL> L0
+    O220 IF [#5399 EQ 0]
+        (abort, M6: No tool in spindle after M6)
+    O220 ENDIF
+
+    ; We don't trust external tools - send to tool measurement
+    O230 IF[#<new_tool> EQ #<probe_tool_number_ini>]
+        M64 P #<_ini[ATC]3D_PIN>
+        (MSG, M6: Probe Activated! - Crash Protection on)
+        S0 M5
+    O230 ELSE
+        (print, M6: Measure tool lenght - no probe)
+        O<tool_touch_off> call
+    O230 ENDIF
+
+O200 ELSE
+    (print,M6: New tool in ATC, automated pickup)
+
+    M66 P#<_ini[ATC]SENSOR_TOOL> L0
+    O239 if [#5399 EQ 1]
+        (Abort, M6: Tool in spindle!)
+    O239 endif
+    ; Call pocket 
+    M115
+    M120 P#<new_atc_pocket>
+    #30 = #<new_atc_pocket>
+    ; Manually determine direction of travel and number of steps to trigger animation
+    ; Read current_pocket, determien steps and direction for the animation... 
+    M66 E#<_ini[ATC]CURRENT_POSITION> L0
+    #<current_position> = #5399
+    #<steps> = [#<current_position> - #<new_atc_pocket>]
+    O240 IF [#<steps> GT [#<atc_size> / 2]]
+        #<steps>=[#<steps> - #<atc_size>]
+    O240 ENDIF
+    O241 IF [#<steps> LT - [#<atc_size> / 2]]
+        #<steps>=[#<steps> + #<atc_size>]
+    O241 ENDIF
+    O242 IF [#<steps> GT 0]
+        (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
+    O242 ELSEIF [#<steps> LT 0]
+        #<steps>=[#<steps> * -1]
+        (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+    O242 ENDIF
+    ; Disable carousel to reset state
+    M114
+    ;Move spindle to safe top position
+    
+    O243 IF [#<current_atc_pocket> EQ 0]
+        ; Spindle is at MTC, approach via G53 G0 Z0
+        G53 G0 Z0
+        G53 G0 X#<_ini[ATC]ATC_POCKET_X> Y#<_ini[ATC]ATC_POCKET_Y> 
+    O243 ELSE
+        ; in this case the spindle is already above the carousel
+    O243 ENDIF
+        
+    
+    ;Wait for Ready
+    M66 P #<_ini[ATC]ATC_READY> L3 Q10 
+    O250 IF [#5399 EQ 0]
+        (abort, M6: Carousel failed to reach ready state at pickup)
+    O250 ENDIF
+    ;Check if pocket occupied
+    M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+    O260 if [#5399 EQ 0]
+    (abort, M6: Target pocket empty. Manual Intervention Required)
+    O260 ENDIF
+
+    ;call subroutine to grab tool pocket 
+    o<remove_tool_pocket> call
+
+    M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+    O270 if [#5399 EQ 1]
+        (abort, M6:  Tool still in pocket after pick up!)
+    O270 endif
+    M61 Q#<new_tool>
+    G53G0Z0
+O200 ENDIF
+O199 ENDIF
+; Call original coordinate system again - DO NOT EVER USE G59.3
+
+o<990> if [#<_workspace_z> EQ 1]
+  G54
+o<990> else if [#<_workspace_z> EQ 2]
+  G55
+o<990> else if [#<_workspace_z> EQ 3]
+  G56
+o<990> else if [#<_workspace_z> EQ 4]
+  G57
+o<990> else if [#<_workspace_z> EQ 5]
+  G58
+o<990> else if [#<_workspace_z> EQ 6]
+  G59
+o<990> else if [#<_workspace_z> EQ 7]
+  G59.1
+o<990> else if [#<_workspace_z> EQ 8]
+  G59.2
+o<990> endif
+
+T #<new_tool>  G43  H #<new_tool>     (enable tool length offset)
+#5231 =  #<new_tool>
+o<atc_toolchange> endsub [1]
+M2

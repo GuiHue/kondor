@@ -1,12 +1,12 @@
 o<m21> sub
-; Macro to Clamp Tool and Check Drawbar
+; Macro to CLOSE AND CHECK Drawbar
 
 ; Close the drawbar
 M131
 
 M66 P #<_ini[ATC]SENSOR_DRAWBAR> L4 Q2 ;Check drawbar sensor: needs to go low within 2 seconds (high when drawbar open)
-   O130 if [#5399 LT 0]
-      (abort, Spindle Tool Change: Failed to clamp tool) ; abort if the sensor does not activate in 2 seconds
+   O130 if [#5399 EQ 1]
+      (abort, M21: Failed to close drawbar) ; abort if the sensor does not activate in 2 seconds
    O130 endif
 o<m21> endsub [1]
 M2

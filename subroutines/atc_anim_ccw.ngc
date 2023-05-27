@@ -1,0 +1,7 @@
+o<atc_anim_ccw> sub
+
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{1, "ccw"}])
+
+o<atc_anim_ccw> endsub [1]
+
+M2

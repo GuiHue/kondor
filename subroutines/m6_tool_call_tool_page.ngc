@@ -1,7 +1,3 @@
-(author: Chris P)
-(version: 0.3)
-(date: 07/18/22)
-
 (m6 tool call with g43 offset applied)
 
 o<M6_tool_call_tool_page> sub
@@ -13,16 +9,15 @@ o<M6_tool_call_tool_page> sub
 #<pc_angle_offset> = #5
 #<probe_tool_number> = #6
 
-(print, #<tool_number_entry_tool_page2>)
-(print,#1)
 
-; T#<tool_number_entry_tool_page2> M6
+(print, M6 tool call from tool page, T #<tool_number_entry_tool_page2>)
+T#<tool_number_entry_tool_page2> M6
 
 o<010> if [1 EQ 1]
   G43 H#<tool_number_entry_tool_page2>
 o<010> endif
 
-o<020> if [#<tool_number_entry_tool_page2> EQ #<probe_tool_number>]
+o<020> if [#<tool_number_entry_tool_page2> EQ #<_ini[TOOLSENSOR]PROBE_NO> ]
   S0 M5
 o<020> endif
 

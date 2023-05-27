@@ -1,8 +1,8 @@
 O<on_abort> sub
 G90
 G40
-(print, GLOB VAR #<_workspace_z>)
-(print, NUM VAR #4999)
+(print, On Abort: GLOB VAR #5209)
+(print, On Abort: NUM VAR #5209)
 
 G43
 M9
@@ -15,23 +15,23 @@ M172
 M5
 
 ; Call original coordinate system again - DO NOT EVER USE G59.3
-o10 if [EXISTS[#<_workspace_z>]]
-    (PRINT, On Abort_workspace_z found: #<_workspace_z>)
-o<160> if [#<_workspace_z> EQ 1]
+o10 if [EXISTS[#5209]]
+    (PRINT, On Abort_workspace_z found: #5209)
+o<160> if [#5209 EQ 1]
   G54
-o<160> else if [#<_workspace_z> EQ 2]
+o<160> else if [#5209 EQ 2]
   G55
-o<160> else if [#<_workspace_z> EQ 3]
+o<160> else if [#5209 EQ 3]
   G56
-o<160> else if [#<_workspace_z> EQ 4]
+o<160> else if [#5209 EQ 4]
   G57
-o<160> else if [#<_workspace_z> EQ 5]
+o<160> else if [#5209 EQ 5]
   G58
-o<160> else if [#<_workspace_z> EQ 6]
+o<160> else if [#5209 EQ 6]
   G59
-o<160> else if [#<_workspace_z> EQ 7]
+o<160> else if [#5209 EQ 7]
   G59.1
-o<160> else if [#<_workspace_z> EQ 8]
+o<160> else if [#5209 EQ 8]
   G59.2
 o<160> endif
 o10 else

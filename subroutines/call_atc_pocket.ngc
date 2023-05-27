@@ -1,0 +1,31 @@
+
+o<call_atc_pocket> sub
+; M120 wrapper to align tool changer manually
+#<call_atc_pocket_number> = #1
+#<atc_size> = #<_ini[ATC]POCKETS>
+
+(print, Moving carousel to #<call_atc_pocket_number>)
+M115
+M120 P#<call_atc_pocket_number>
+M114
+
+M66 E#<_ini[ATC]CURRENT_POSITION> L0
+#<current_position> = #5399
+
+#<steps> = [#<current_position> - #<call_atc_pocket_number>]
+o130 if [#<steps> GT [#<atc_size> / 2]]
+    #<steps>=[#<steps> - #<atc_size>]
+o130 endif
+o131 if [#<steps> LT - [#<atc_size> / 2]]
+    #<steps>=[#<steps> + #<atc_size>]
+o131 endif
+o132 if [#<steps> GT 0]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+o132 elseif [#<steps> LT 0]
+    #<steps>=[#<steps> * -1]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
+o132 endif
+
+o<call_atc_pocket> endsub [1]
+
+M2

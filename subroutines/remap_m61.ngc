@@ -4,7 +4,7 @@ o<remap_m61> sub
 (print, Remap M61: New Tool #<tool>)
 (print, Remap M61: Present Tool from #5231 #<5231>)
 
-#<old_tool>=#5231
+#<old_tool> = #5231
 ; we must execute this only in the milltask interpreter
 ; or preview will break, so test for '#<_task>' which is 1 for 
 ; the milltask interpreter and 0 in the UI's
@@ -33,7 +33,8 @@ O111 else
 O111 endif
 
 (enable tool length offset)
-T #<tool>  G43  H #<tool>     
+T #<tool>  G43  H #<tool> 
+#5231 = #<tool>    
 ; signal success be returning a value > 0:
 o<remap_m61> endsub [1]
 m2

@@ -1,0 +1,88 @@
+o<check_carousel> sub
+; Script to move to all pockets, check if there should be a tool and validate against tool_presence sensor
+#1 = #5190
+#2 = #5191
+#3 = #5192
+#4 = #5193
+#5 = #5194
+#6 = #5195
+#7 = #5196
+#8 = #5197
+#9 = #5198
+#10 = #5199
+#11 = #5200
+#12 = #5201
+#13 = #5202
+#14 = #5203
+#15 = #5204
+#16 = #5205
+
+#<atc_size> = #<_ini[ATC]POCKETS>
+
+M115
+
+M120 P1
+M114
+; Manually determine direction of travel and number of steps to trigger animation
+; Read current_pocket, determine steps and direction for the animation... 
+M66 E#<_ini[ATC]CURRENT_POSITION> L0
+#<current_position> = #5399
+
+#<steps> = [#<current_position> - #<atc_size>]
+o130 if [#<steps> GT [#<atc_size> / 2]]
+    #<steps>=[#<steps> - #<atc_size>]
+o130 endif
+o131 if [#<steps> LT - [#<atc_size> / 2]]
+    #<steps>=[#<steps> + #<atc_size>]
+o131 endif
+o132 if [#<steps> GT 0]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+o132 elseif [#<steps> LT 0]
+    #<steps>=[#<steps> * -1]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
+o132 endif
+
+M66 P #<_ini[ATC]ATC_READY> L3 Q10 
+O90 if [#5399 EQ 0]
+    (abort, Check Carousel: Initial Move of carousel failed to reach ready state)
+O90 endif
+
+#700 = 1 ;assign test parameter the number of pockets in the carousel
+O100 DO
+    (print, Processing pocket #700)
+    M115
+    M120 P #700
+    M114
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+    M66 P #<_ini[ATC]ATC_READY> L3 Q10 
+    O110 if [#5399 EQ 0]
+        (abort, Check Carousel: Carousel failed to reach ready state - Pocket #700)
+    O110 endif
+    
+    O120 IF [#[5189 + #700] EQ 0]
+        ; this pocket should be empty
+        M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+        O121 if [#5399 EQ 1]
+            (DEBUG, Check Carousel: Pocket #700 not empty - Manual action required!)
+        O121 else
+            (print, Check Carousel: Pocket #700 validated empty)
+        O121 endif
+    O120 ELSE
+        ; this pocket should be occupied
+        M66 P #<_ini[ATC]ATC_TOOLPRESENCE> L0 
+        O122 if [#5399 EQ 0]
+            (DEBUG, Check Carousel: Pocket #700 empty - deleting tool information)
+            (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{#700, 0}])
+            #[5189 + #700] = 0 
+        O122 else
+            (print, Check Carousel: Pocket #700 holds tool as expected)
+        O122 endif
+    O120 ENDIF
+  #700= [#700 + 1]
+O100 WHILE [#700 LT [#<atc_size> + 1]]
+
+
+
+o<check_carousel> endsub [1]
+
+M2

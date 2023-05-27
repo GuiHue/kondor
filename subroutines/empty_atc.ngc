@@ -1,4 +1,4 @@
-o<emptyatc> sub
+o<empty_atc> sub
 
 (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{1, 0}])
 #5190 = 0
@@ -34,6 +34,6 @@ o<emptyatc> sub
 #5205 = 0
 (MSG, All tool<>pocket entries deleted)
 
-o<emptyatc> endsub [1]
+o<empty_atc> endsub [1]
 
 M2

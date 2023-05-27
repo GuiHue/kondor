@@ -1,0 +1,22 @@
+
+(M61 tool call with g43 offset applied from tool page)
+
+o<m61_call_tool_page> sub
+
+#<load_spindle_tool_number_2> = #1
+
+(print, M61 tool call from tool page, T #<load_spindle_tool_number_2>)
+
+M61 Q#<load_spindle_tool_number_2>
+
+; m61 remap handles G43 and probe settings
+
+o<020> if [#<load_spindle_tool_number_2> EQ #<_ini[TOOLSENSOR]PROBE_NO> ]
+  S0 M5
+o<020> endif
+
+
+
+o<m61_call_tool_page> endsub
+
+M2 (end program)

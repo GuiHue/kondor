@@ -19,7 +19,7 @@ o<tool_touch_off> sub
 #<tool_touch_z_coords> = #<_ini[TOOLSENSOR]Z>
 G92.1    (Cancel G92 offset)
 
-#<_workspace_z> = #5220
+#5209 = #5220
 
 ; these are g30 coordinates - we are not going to that!
 
@@ -119,21 +119,21 @@ G53 G0 Z0 (Send Spindle to home zero position)
 
 G10 L1 P #<current_tool> Z [#<new_tool_length_offset>]  (5400 = tool number)
 
-o<160> if [#<_workspace_z> EQ 1]
+o<160> if [#5209 EQ 1]
   G54
-o<160> else if [#<_workspace_z> EQ 2]
+o<160> else if [#5209 EQ 2]
   G55
-o<160> else if [#<_workspace_z> EQ 3]
+o<160> else if [#5209 EQ 3]
   G56
-o<160> else if [#<_workspace_z> EQ 4]
+o<160> else if [#5209 EQ 4]
   G57
-o<160> else if [#<_workspace_z> EQ 5]
+o<160> else if [#5209 EQ 5]
   G58
-o<160> else if [#<_workspace_z> EQ 6]
+o<160> else if [#5209 EQ 6]
   G59
-o<160> else if [#<_workspace_z> EQ 7]
+o<160> else if [#5209 EQ 7]
   G59.1
-o<160> else if [#<_workspace_z> EQ 8]
+o<160> else if [#5209 EQ 8]
   G59.2
 o<160> endif
 

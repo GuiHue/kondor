@@ -1,117 +1,171 @@
-2023-05-26 23:29:46,778 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2023-05-26 23:29:46,778 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2023-05-26 23:29:47,288 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2023-05-26 23:29:47,288 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2023-05-26 23:29:47,288 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2023-05-26 23:29:47,288 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2023-05-26 23:29:47,289 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2023-05-26 23:29:47,289 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2023-05-26 23:29:47,289 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2023-05-26 23:29:47,289 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2023-05-26 23:29:47,432 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2023-05-26 23:29:50,158 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2023-05-26 23:29:50,593 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:29:50,622 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:30:20,304 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2023-05-26 23:30:32,486 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:30:32,512 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:31:51,453 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M51Q111
-2023-05-26 23:31:51,670 - qtpyvcp.plugins.notifications - ERROR - Q word with no G5, 
- G10, G64, G73, G76, G83, 
- M19, M66, M67, M68 or 
- user M code that uses 
- it
-2023-05-26 23:31:57,604 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q111
-2023-05-26 23:31:57,815 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:32:06,062 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<tool_touch_off> call
-2023-05-26 23:32:24,414 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -138.523458 Z Pos: 
- -138.525867
-2023-05-26 23:33:29,446 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T0
-2023-05-26 23:33:29,492 - qtpyvcp.plugins.notifications - ERROR - 57: duplicate O-word label - 
- already defined in line 46: 
- ' 	O31 IF [#[5189 + 
- #700] EQ #<new_tool>] ; checks 
- all pockets to see if 
- it contains tool number requested 
- as the new tool'
-2023-05-26 23:35:36,147 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T0
-2023-05-26 23:35:36,414 - qtpyvcp.plugins.notifications - ERROR - Bad character '0' used
-2023-05-26 23:35:36,415 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:35:36,444 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:35:44,591 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T0
-2023-05-26 23:35:44,817 - qtpyvcp.plugins.notifications - ERROR - Bad character '0' used
-2023-05-26 23:35:44,818 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:35:44,850 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:35:54,952 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6 T0
-2023-05-26 23:35:55,214 - qtpyvcp.plugins.notifications - ERROR - Bad character '0' used
-2023-05-26 23:35:55,236 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:35:55,264 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:41:01,092 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6 T0
-2023-05-26 23:41:01,312 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:41:01,339 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:41:01,443 - qtpyvcp.plugins.notifications - ERROR - Bad character '0' used
-2023-05-26 23:42:14,140 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6 T0
-2023-05-26 23:43:17,214 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:43:54,936 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:43:54,964 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:43:55,056 - qtpyvcp.plugins.notifications - ERROR - M6: No tool in spindle 
+2023-05-27 13:15:42,903 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
+2023-05-27 13:15:42,903 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
+2023-05-27 13:15:43,415 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-05-27 13:15:43,415 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-05-27 13:15:43,416 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-05-27 13:15:43,416 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-05-27 13:15:43,416 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-05-27 13:15:43,416 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-05-27 13:15:43,416 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-05-27 13:15:43,416 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-05-27 13:15:43,554 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
+2023-05-27 13:15:46,287 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
+2023-05-27 13:15:46,711 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:15:46,741 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:15:49,382 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2023-05-27 13:16:00,058 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:16:00,087 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:16:03,407 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [0.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:16:03,667 - qtpyvcp.plugins.notifications - INFO - M6: No toolchange necessary: Old=New 
+ Tool
+2023-05-27 13:16:19,858 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:16:19,885 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:16:40,802 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [0.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:16:41,212 - qtpyvcp.plugins.notifications - INFO - M6: No toolchange necessary: Old=New 
+ Tool
+2023-05-27 13:16:56,458 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:16:56,482 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:17:08,608 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61T110
+2023-05-27 13:17:08,651 - qtpyvcp.plugins.notifications - ERROR - M61 requires a Q parameter 
+
+2023-05-27 13:17:18,848 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q110
+2023-05-27 13:17:21,570 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [110.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:17:21,811 - qtpyvcp.plugins.notifications - INFO - M6: No toolchange necessary: Old=New 
+ Tool
+2023-05-27 13:17:21,883 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:17:21,907 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:18:56,358 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q0
+2023-05-27 13:19:06,532 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 13:19:08,812 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [110.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:19:42,358 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:19:42,382 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:21:56,535 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_atc_page> call [0.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:30:40,109 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:30:40,133 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:32:08,604 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [0.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:32:08,648 - qtpyvcp.plugins.notifications - ERROR - M6: No toolchange required
+2023-05-27 13:32:17,999 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2023-05-27 13:34:23,987 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: T111M6
+2023-05-27 13:34:24,211 - qtpyvcp.plugins.notifications - ERROR - M6: No tool in spindle 
  after M6
-2023-05-26 23:47:14,255 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-26 23:47:14,511 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:47:14,538 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:47:14,624 - qtpyvcp.plugins.notifications - ERROR - 206: duplicate O-word label - 
- already defined in line 194: 
- '    O240 
- IF [#<steps> GT [#<atc_size> / 
- 2]]'
-2023-05-26 23:48:09,178 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-26 23:48:41,287 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:48:41,312 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:48:41,415 - qtpyvcp.plugins.notifications - ERROR - Named parameter #<remove_tool_pocket_atc> not defined 
+2023-05-27 13:34:24,212 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:34:24,240 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:40:32,465 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [0.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:40:32,611 - qtpyvcp.plugins.notifications - ERROR - M6: No toolchange required
+2023-05-27 13:40:38,105 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [111.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:42:02,192 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [0.0] [0.0] [0.0] [0.0] [0.0] [99.0]
+2023-05-27 13:42:08,758 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:42:08,785 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:42:08,875 - qtpyvcp.plugins.notifications - ERROR - No message text set.
+2023-05-27 13:42:27,770 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q111
+2023-05-27 13:43:19,542 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
+2023-05-27 13:43:32,867 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:43:32,894 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:43:32,896 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2023-05-27 13:43:46,610 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q111
+2023-05-27 13:43:50,100 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
+2023-05-27 13:43:50,996 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
+2023-05-27 13:43:52,172 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
+2023-05-27 13:43:57,389 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
+2023-05-27 13:44:53,916 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<atc_anim_cw> call
+2023-05-27 13:45:00,764 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
+2023-05-27 13:45:03,875 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 13:45:06,605 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
+2023-05-27 13:45:08,725 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 13:45:14,484 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2023-05-27 13:45:28,692 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q111
+2023-05-27 13:45:33,900 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T230
+2023-05-27 13:45:43,709 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:45:43,737 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:45:43,834 - qtpyvcp.plugins.notifications - ERROR - Need tool prepared -Txx- for 
+ toolchange
+2023-05-27 13:48:06,957 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q111
+2023-05-27 13:48:11,045 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T230
+2023-05-27 13:48:19,810 - qtpyvcp.plugins.notifications - INFO - Tool Touch off: Spindle is 
+ empty, Control
+2023-05-27 13:49:39,431 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61 Q111
+2023-05-27 13:49:42,230 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T230
+2023-05-27 13:50:26,515 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [230.0]
+2023-05-27 13:50:26,611 - qtpyvcp.plugins.notifications - ERROR - 89: duplicate O-word label - 
+ already defined in line 82: 
+ '  O31 IF [#<tool_pocket> 
+ EQ 0]'
+2023-05-27 13:50:26,612 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:50:26,645 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:52:20,241 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [230.0]
+2023-05-27 13:53:02,016 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
+2023-05-27 13:53:09,584 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:53:09,615 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 13:53:09,716 - qtpyvcp.plugins.notifications - ERROR - M6: Target pocket empty. Manual 
+ Intervention Required
+2023-05-27 13:53:58,007 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61T110
+2023-05-27 13:53:58,053 - qtpyvcp.plugins.notifications - ERROR - M61 requires a Q parameter 
 
-2023-05-26 23:49:49,552 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-26 23:50:19,415 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:51:09,001 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q112
-2023-05-26 23:51:09,079 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:51:18,825 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T111
-2023-05-26 23:52:29,814 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:52:58,114 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q112
-2023-05-26 23:52:58,215 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:53:12,435 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T44
-2023-05-26 23:54:05,795 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T43
-2023-05-26 23:54:59,836 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [110.0] [0.0] [0.0] [0.0] [0.0] [99.0]
-2023-05-26 23:55:55,814 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:56:41,143 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m6_tool_call_main_panel> call [111.0] [0.0] [0.0] [0.0] [0.0] [99.0]
-2023-05-26 23:56:56,022 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:57:14,214 - qtpyvcp.plugins.notifications - INFO - Probe Deactivated - NO CRASH 
- DETECTION FOR PROBE
-2023-05-26 23:57:17,811 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-26 23:57:17,836 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-27 00:06:59,371 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-27 00:07:10,015 - qtpyvcp.plugins.notifications - ERROR - Bad character '<' used
-2023-05-27 00:07:10,016 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-27 00:07:10,042 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-27 00:10:07,893 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-27 00:10:29,214 - qtpyvcp.plugins.notifications - ERROR - Unknown operation
-2023-05-27 00:10:29,215 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-27 00:10:29,242 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-27 00:12:40,025 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-27 00:12:40,311 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-27 00:12:40,336 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-27 00:12:40,425 - qtpyvcp.plugins.notifications - ERROR - Bad character '0' used
-2023-05-27 00:13:37,872 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-27 00:13:38,014 - qtpyvcp.plugins.notifications - ERROR - command (EMC_TASK_PLAN_EXECUTE) cannot be executed 
- until the machine is out 
- of E-stop and turned on 
+2023-05-27 13:54:02,737 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q110
+2023-05-27 13:54:10,554 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 13:54:13,097 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [110.0]
+2023-05-27 13:54:13,211 - qtpyvcp.plugins.notifications - INFO - Load Tool ATC: The tool 
+ aready stored in carousel pocket 
+ 1
+2023-05-27 14:00:17,678 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [110.0]
+2023-05-27 14:00:17,812 - qtpyvcp.plugins.notifications - INFO - Load Tool ATC: Tool aready 
+ stored in carousel pocket 1 
 
-2023-05-27 00:13:45,639 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
-2023-05-27 00:14:31,672 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T0
-2023-05-27 00:23:41,455 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2023-05-27 14:08:02,171 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:08:08,141 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [110.0]
+2023-05-27 14:08:08,224 - qtpyvcp.plugins.notifications - INFO - Load Tool ATC: Tool aready 
+ stored in carousel pocket 1 
+
+2023-05-27 14:08:10,410 - qtpyvcp.plugins.notifications - ERROR - 134: duplicate O-word label - 
+ already defined in line 35: 
+ '    O36 
+ if [#5399 EQ 0]'
+2023-05-27 14:08:10,433 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:08:10,468 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:08:43,403 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:08:43,838 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:08:44,178 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:08:44,819 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:08:49,596 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [110.0]
+2023-05-27 14:08:49,620 - qtpyvcp.plugins.notifications - INFO - Load Tool ATC: Tool aready 
+ stored in carousel pocket 1 
+
+2023-05-27 14:08:51,811 - qtpyvcp.plugins.notifications - ERROR - Load Tool ATC: Tool in 
+ ATC but pocket empty - 
+ Manual action required!
+2023-05-27 14:08:51,859 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:08:51,896 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:09:23,586 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [110.0]
+2023-05-27 14:09:23,657 - qtpyvcp.plugins.notifications - INFO - Load Tool ATC: Tool aready 
+ stored in carousel pocket 1 
+
+2023-05-27 14:09:23,883 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:09:23,918 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:09:24,027 - qtpyvcp.plugins.notifications - ERROR - File ended with no percent 
+ sign or program end
+2023-05-27 14:10:21,885 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [110.0]
+2023-05-27 14:10:22,011 - qtpyvcp.plugins.notifications - INFO - Load Tool ATC: Tool aready 
+ stored in carousel pocket 1 
+
+2023-05-27 14:10:26,074 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:10:36,493 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [110.0]
+2023-05-27 14:10:36,611 - qtpyvcp.plugins.notifications - INFO - Load Tool ATC: Tool aready 
+ stored in carousel pocket 1 
+
+2023-05-27 14:11:05,725 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<atc_anim_ccw> call
+2023-05-27 14:11:06,290 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<atc_anim_ccw> call
+2023-05-27 14:13:08,501 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61Q231
+2023-05-27 14:13:15,847 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<load_tool_atc> call [231.0]
+2023-05-27 14:13:48,189 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
+2023-05-27 14:14:19,055 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:14:33,462 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T230
+2023-05-27 14:14:46,258 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:14:46,291 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-27 14:14:46,411 - qtpyvcp.plugins.notifications - ERROR - M6: Tool in spindle!
+2023-05-27 14:19:33,487 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T110
+2023-05-27 14:20:02,584 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M11
+2023-05-27 14:20:12,592 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T231
+2023-05-27 14:20:59,608 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M12
+2023-05-27 14:21:05,285 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M6T232
+2023-05-27 14:21:41,612 - qtpyvcp.plugins.notifications - ERROR - Warning TLS overtravel
+2023-05-27 14:21:49,980 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: M61 Q0 G49 #5210 = 0 #5231 = 0

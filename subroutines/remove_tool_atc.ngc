@@ -69,10 +69,10 @@ o131 if [#<steps> LT - [#<atc_size> / 2]]
    #<steps>=[#<steps> + #<atc_size>]
 o131 endif
 o132 if [#<steps> GT 0]
-   (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
+   (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
 o132 elseif [#<steps> LT 0]
    #<steps>=[#<steps> * -1]
-   (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "ccw"}])
+   (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{#<steps>, "cw"}])
 o132 endif
 ; Disable carousel to reset state
 M114

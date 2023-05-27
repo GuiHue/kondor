@@ -3,8 +3,6 @@ o<m11> sub
 ; Move carousel one forward, wrapper to include animation
 (print, o<M13> P#<p>)
 
-(DEBUG, EVAL[vcp.getWidget{"dynatc"}.atc_message{"REFERENCING"}])
-
 M111
 (DEBUG, EVAL[vcp.getWidget{"dynatc"}.rotate{1, "cw"}])
 

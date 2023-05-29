@@ -10,17 +10,17 @@ setp    halui.feed-override.scale 0.01
 setp    halui.rapid-override.scale 0.01
 setp    halui.spindle.0.override.scale 0.01
 setp    lowpass.feed.gain                           0.01
-setp    lowpass.spindle.gain                        0.01
+setp    lowpass.spindle.gain                        0.01    # currently used for rapid
 
-# scalemax - adjust by eyxperiment chaning value during runtime via terminal, halcmd setp
+# scalemax - adjust by experiment chaning value during runtime via terminal, halcmd setp
 setp    hm2_7i76e.0.7i76.0.0.analogin0-scalemax     306
-setp    hm2_7i76e.0.7i76.0.0.analogin1-scalemax     195
+setp    hm2_7i76e.0.7i76.0.0.analogin1-scalemax     155
 net     AI-HMI-pot-feed                             lowpass.feed.in 
 net     feedlowpass                                 lowpass.feed.out                    conv-float-s32.feed.in 
 net     AI-HMI-pot-spindle                          lowpass.spindle.in
 net     spindlelowpass                              lowpass.spindle.out                 conv-float-s32.spindle.in 
-net     analogout0 conv-float-s32.feed.out          halui.feed-override.counts          #halui.rapid-override.counts
-net     analogout1 conv-float-s32.spindle.out       halui.spindle.0.override.counts
+net     analogout0 conv-float-s32.feed.out          halui.feed-override.counts          
+net     analogout1 conv-float-s32.spindle.out            halui.rapid-override.counts    #halui.spindle.0.override.counts
 
 # -------- MACHINE ON --------
 # Uses a momentary switch at controö panel to turn the machine on/off

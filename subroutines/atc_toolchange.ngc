@@ -35,7 +35,6 @@ O10 ENDIF
 ; checks if tool in the spindle is same as requested
 O20 IF [#<current_tool> EQ #<new_tool>] 
     (print, M6: No toolchange necessary: Old=New Tool)
-    (abort, M6: No toolchange required)
     o<atc_toolchange> endsub [1]
     M2
 O20 ENDIF

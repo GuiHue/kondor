@@ -14,9 +14,9 @@ o<tool_touch_off> sub
 #<tool_diameter_offset_mode> = 1; #9    (activates the tool diameter offset position for probe subroutine section)
 #<tool_diameter> = #5410 ;#10    (current tool's diameter used for offseting probe position in x axis)
 #<current_tool> = #5400
-#<tool_touch_x_coords> = #<_ini[TOOLSENSOR]X>
-#<tool_touch_y_coords> = #<_ini[TOOLSENSOR]Y>
-#<tool_touch_z_coords> = #<_ini[TOOLSENSOR]Z>
+#<tool_touch_x_coordsmacro> = #<_ini[TOOLSENSOR]X>
+#<tool_touch_y_coordsmacro> = #<_ini[TOOLSENSOR]Y>
+#<tool_touch_z_coordsmacro> = #<_ini[TOOLSENSOR]Z>
 G92.1    (Cancel G92 offset)
 
 #5209 = #5220
@@ -24,7 +24,11 @@ G92.1    (Cancel G92 offset)
 ; these are g30 coordinates - we are not going to that!
 
 #<tool_radius_offset> = [#<tool_diameter> / 2]
-#<offset_probing_position> = [#<tool_touch_y_coords> - #<tool_radius_offset>]
+#<offset_probing_position> = [#<tool_touch_x_coordsmacro> - #<tool_radius_offset>]
+G49 ; Cancel tool offset
+
+; Ensure that G59.3 is a "zero" CS 
+G10 L2 P9 X0 Y0 Z0
 
 G59.3
 
@@ -32,7 +36,7 @@ G59.3
 o<100> if [#<tool_diameter_offset_mode> EQ 1]
   ; Check if tooldiameter is greater than pad
   O112 if [#<tool_diameter> GE [#<_ini[TOOLSENSOR]TS_DIAMETER>]]
-    #<tool_touch_y_coords> = #<offset_probing_position>
+    #<tool_touch_x_coordsmacro> = #<offset_probing_position>
   O112 endif
 o<100> endif
 
@@ -51,14 +55,14 @@ O11 if [#5399 EQ 0]
  o<toolchange> endsub [1]
 o11 endif
 
-G49 ; Cancel tool offset
 
 G90    (set absolute coordinates)
+
 G53 G0 Z0    (move to z0 home position)
-G53 G0 X#<tool_touch_x_coords> Y#<tool_touch_y_coords>
+G53 G0 X#<tool_touch_x_coordsmacro> Y#<tool_touch_y_coordsmacro>
 ; Turn on airblast to clean tool length sensor
 M64 P #<_ini[ATC]CLEAN_TLS>
-G53 G0 Z#<tool_touch_z_coords>
+G53 G0 Z#<tool_touch_z_coordsmacro>
 ; Turn off airblast to clean sensor
 M65 P #<_ini[ATC]CLEAN_TLS>
 

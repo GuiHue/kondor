@@ -48,18 +48,7 @@
 
 ## Check me
 
-- When does the tool sensor trigger empty (check with fixed holder in pocket) and determien mm ==> safe distance Z (when the forks can do that) --> instant
-- m21, m22: What does abort really do? --> exactly that
-
-
-- we need buttos to cw ccw the animation of the atc
-
-- load_tool_atc animation logic is sketchy - check
-
 ## Bugs
-* jog-fwd / jog-rev: stick to state 20 an do not perform align
-
-
 
 #### Notes
 - https://forum.linuxcnc.org/qtpyvcp/46629-qtpyvcp-probe-basic-changing-tool-table-entries-from-macro-or-script

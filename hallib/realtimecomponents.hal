@@ -131,6 +131,16 @@ addf    ilowpass.x.enc-smooth               servo-thread
 addf    ilowpass.y.enc-smooth               servo-thread
 addf    ilowpass.z.enc-smooth               servo-thread
 addf    ilowpass.a.enc-smooth               servo-thread
+
+addf    conv-float-s32.feed                 servo-thread
+addf    conv-float-s32.spindle              servo-thread
+addf    lowpass.feed                        servo-thread
+addf    lowpass.spindle                     servo-thread
+addf    limit2.spindle                      servo-thread
+addf    carousel.0                           servo-thread
+addf    time.pb                             servo-thread
+addf    scale.spindleload                   servo-thread
+
 addf    m_vfdcom                            servo-thread
 addf    m_vfderror                          servo-thread
 addf    m_estopext                          servo-thread
@@ -140,14 +150,6 @@ addf    m_drivewarn                         servo-thread
 addf    m_tempwarn                          servo-thread
 addf    m_pendantestop                      servo-thread
 addf    m_tlsovertravel                     servo-thread
-addf    conv-float-s32.feed                 servo-thread
-addf    conv-float-s32.spindle              servo-thread
-addf    lowpass.feed                        servo-thread
-addf    lowpass.spindle                     servo-thread
-addf    limit2.spindle                      servo-thread
-addf    carousel.0                           servo-thread
-addf    time.pb                             servo-thread
-addf    scale.spindleload                   servo-thread
 
 # ---------- CLOSE/ WRITE SERVO-THREAD ----------
 setp    [HMOT](CARD0).dpll.01.timer-us      -50

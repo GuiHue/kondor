@@ -1,41 +1,79 @@
-2023-05-29 10:48:10,388 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/grootbasic/sim.log
-2023-05-29 10:48:10,388 - qtpyvcp - INFO - QtPyVCP Version: python3_master+286.g54a2a9e4
-2023-05-29 10:48:11,047 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2023-05-29 10:48:11,047 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2023-05-29 10:48:11,047 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2023-05-29 10:48:11,047 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2023-05-29 10:48:11,047 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2023-05-29 10:48:11,047 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2023-05-29 10:48:11,048 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2023-05-29 10:48:11,048 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2023-05-29 10:48:11,240 - qtpyvcp - INFO - Loading global stylesheet: /home/groot/dev/probe_basic/probe_basic/probe_basic.qss
-2023-05-29 10:48:14,811 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/grootbasic/hallib/postgui.hal
-2023-05-29 10:48:14,992 - qtpyvcp.plugins.notifications - ERROR - Warning TLS overtravel
-2023-05-29 10:48:15,351 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-29 10:48:15,378 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-29 10:48:16,892 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2023-05-29 10:48:21,179 - qtpyvcp.plugins.tool_table - INFO - Reloading tool in spindle: 340
-2023-05-29 10:48:21,380 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
-2023-05-29 10:48:21,380 - qtpyvcp.actions.machine_actions - ERROR - Failed to issue MDI command: M61 Q340 G43
-2023-05-29 10:48:25,305 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-29 10:48:25,330 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-29 10:48:25,486 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
-2023-05-29 10:48:25,714 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-29 10:48:25,727 - qtpyvcp.app.launcher - CRITICAL - Unhandled exception in vtk_backplot.py line 444
-Traceback (most recent call last):
-  File "/home/groot/dev/qtpyvcp/qtpyvcp/widgets/display_widgets/vtk_backplot/vtk_backplot.py", line 444, in load_program
-    self.load(fname)
-  File "/home/groot/dev/qtpyvcp/qtpyvcp/widgets/display_widgets/vtk_backplot/base_backplot.py", line 75, in load
-    self.notification.setNotify("3D plot", "Error in {} line {}\n{}".format(fname, seq - 1, msg))
-AttributeError: 'Notifications' object has no attribute 'setNotify'
-2023-05-29 10:48:35,400 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-29 10:48:41,761 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
-2023-05-29 10:48:42,028 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
-2023-05-29 10:48:42,067 - qtpyvcp.app.launcher - CRITICAL - Unhandled exception in vtk_backplot.py line 444
-Traceback (most recent call last):
-  File "/home/groot/dev/qtpyvcp/qtpyvcp/widgets/display_widgets/vtk_backplot/vtk_backplot.py", line 444, in load_program
-    self.load(fname)
-  File "/home/groot/dev/qtpyvcp/qtpyvcp/widgets/display_widgets/vtk_backplot/base_backplot.py", line 75, in load
-    self.notification.setNotify("3D plot", "Error in {} line {}\n{}".format(fname, seq - 1, msg))
-AttributeError: 'Notifications' object has no attribute 'setNotify'
-2023-05-29 10:48:51,820 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:42:26,048 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/kondor/sim.log
+2023-05-30 20:42:26,048 - qtpyvcp - INFO - QtPyVCP Version: 0+unknown
+2023-05-30 20:42:26,536 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-05-30 20:42:26,536 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-05-30 20:42:26,537 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-05-30 20:42:26,537 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-05-30 20:42:26,537 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-05-30 20:42:26,537 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-05-30 20:42:26,537 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-05-30 20:42:26,537 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-05-30 20:42:26,675 - qtpyvcp - INFO - Loading global stylesheet: /usr/lib/python3/dist-packages/probe_basic/probe_basic.qss
+2023-05-30 20:42:29,512 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/kondor/hallib/postgui.hal
+2023-05-30 20:42:30,990 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2023-05-30 20:42:35,302 - qtpyvcp.plugins.tool_table - INFO - Reloading tool in spindle: 99
+2023-05-30 20:42:35,503 - qtpyvcp.actions.base_actions - ERROR - Can't set mode while machine is running
+2023-05-30 20:42:35,504 - qtpyvcp.actions.machine_actions - ERROR - Failed to issue MDI command: M61 Q99 G43
+2023-05-30 20:44:34,971 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<m61_call_atc_page> call [99.0]
+2023-05-30 20:44:35,234 - qtpyvcp.plugins.notifications - INFO - Probe Activated! - Crash Protection 
+ on
+2023-05-30 20:44:51,830 - qtpyvcp.plugins.notifications - ERROR - Probe tripped during a coordinate 
+ jog.
+2023-05-30 20:45:17,739 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_cal_round_pocket> call [99.0] [3.0] [20.0] [1.0] [1.0] [3.0] [2.0] [20.0] [300.0] [0.0093] [1.0] [1.0] [1.0] [0.0] [0.0] [17.0] [0.0] [12000.0]
+2023-05-30 20:45:21,230 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.004676 Z Pos: 
+ 0.003842
+2023-05-30 20:45:21,883 - qtpyvcp.plugins.notifications - ERROR - Probe is already tripped when 
+ starting G38.2 or G38.3 move 
+
+2023-05-30 20:47:04,261 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_cal_round_pocket> call [99.0] [3.0] [20.0] [1.0] [1.0] [3.0] [2.0] [20.0] [300.0] [0.0093] [1.0] [1.0] [1.0] [0.0] [0.0] [17.0] [0.0] [12000.0]
+2023-05-30 20:47:04,285 - qtpyvcp.plugins.notifications - ERROR - Probe is already tripped when 
+ starting G38.2 or G38.3 move 
+
+2023-05-30 20:47:04,351 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:47:04,386 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:47:23,356 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_cal_round_pocket> call [99.0] [3.0] [20.0] [1.0] [1.0] [3.0] [2.0] [20.0] [300.0] [0.0093] [1.0] [1.0] [1.0] [0.0] [0.0] [17.0] [0.0] [12000.0]
+2023-05-30 20:47:26,830 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.002166 Z Pos: 
+ 0.001333
+2023-05-30 20:47:27,629 - qtpyvcp.plugins.notifications - ERROR - Probe is already tripped when 
+ starting G38.2 or G38.3 move 
+
+2023-05-30 20:47:40,680 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_cal_round_pocket> call [99.0] [3.0] [20.0] [1.0] [1.0] [3.0] [2.0] [20.0] [300.0] [0.0093] [1.0] [1.0] [1.0] [0.0] [0.0] [17.0] [0.0] [12000.0]
+2023-05-30 20:47:44,230 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.000500 Z Pos: 
+ -0.000333
+2023-05-30 20:47:48,629 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -7.485335 X Pos: 
+ -7.486168
+2023-05-30 20:47:54,629 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 7.459165 X Pos: 
+ 7.459998
+2023-05-30 20:47:59,829 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 7.518500 Y Pos: 
+ 7.519333
+2023-05-30 20:48:05,829 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -7.488666 Y Pos: 
+ -7.489499
+2023-05-30 20:48:10,830 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -7.529252 X Pos: 
+ -7.530086
+2023-05-30 20:48:16,830 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 7.504248 X Pos: 
+ 7.505082
+2023-05-30 20:48:21,629 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 7.516750 Y Pos: 
+ 7.517583
+2023-05-30 20:48:27,630 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -7.489750 Y Pos: 
+ -7.490583
+2023-05-30 20:52:24,574 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [1.0] [1.0] [3.0] [2.0] [20.0] [300.0] [0.0085] [1.0] [1.0] [1.0] [0.0] [0.0]
+2023-05-30 20:52:28,279 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -0.002834 Z Pos: 
+ -0.003667
+2023-05-30 20:52:34,246 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [1.0] [1.0] [3.0] [2.0] [20.0] [300.0] [0.0085] [1.0] [1.0] [1.0] [0.0] [1.0]
+2023-05-30 20:52:37,629 - qtpyvcp.plugins.notifications - INFO - Probed Pos: -0.000167 Z Pos: 
+ -0.001000
+2023-05-30 20:52:40,824 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<probe_z_minus_wco> call [99.0] [3.0] [20.0] [1.0] [1.0] [3.0] [2.0] [20.0] [300.0] [0.0085] [1.0] [1.0] [1.0] [0.0] [1.0]
+2023-05-30 20:52:44,229 - qtpyvcp.plugins.notifications - INFO - Probed Pos: 0.000000 Z Pos: 
+ -0.000833
+2023-05-30 20:53:17,206 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2023-05-30 20:53:17,482 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:53:17,530 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:53:29,858 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2023-05-30 20:53:30,109 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:53:30,176 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:53:56,966 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2023-05-30 20:53:57,218 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:53:57,277 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:54:02,263 - qtpyvcp.widgets.input_widgets.file_system - INFO - File encoding: ascii
+2023-05-30 20:54:02,509 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii
+2023-05-30 20:54:02,576 - qtpyvcp.widgets.input_widgets.gcode_text_edit - INFO - File encoding: ascii

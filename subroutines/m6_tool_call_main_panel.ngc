@@ -3,11 +3,7 @@
 o<M6_tool_call_main_panel> sub
 
 #<tool_number_entry_main_panel> = #1
-#<activate_programmable_coolant> = #2
-#<horizontal_spindle_nozzle_dist> = #3
-#<vertical_spindle_nozzle_dist> = #4
-#<pc_angle_offset> = #5
-#<probe_tool_number> = #6
+#<probe_tool_number> = #<_ini[TOOLSENSOR]PROBE_NO>
 
 (print, M6 tool call from main page, T #<tool_number_entry_main_panel>)
 

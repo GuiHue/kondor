@@ -1,0 +1,59 @@
+o<atc_page_remove_tool> sub
+
+#<manual_atc_pocket_no_remove>=#1
+(print, ATC Man Remove Tool: #<manual_atc_pocket_no_remove>)
+
+O100 if [#<manual_atc_pocket_no_remove> EQ 1]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{1, 0}])
+    #5190 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 2]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{2, 0}])
+    #5191 = 350
+    (print, hee0)
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 3]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{3, 0}])
+    #5192 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 4]
+    (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{4, 0}])
+    #5193 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 5]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{5, 0}])
+#5194 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 6]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{6, 0}])
+#5195 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 7]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{7, 0}])
+#5196 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 8]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{8, 0}])
+#5197 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 0]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{9, 0}])
+#5198 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 10]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{10, 0}])
+#5199 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ11]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{11, 0}])
+#5200 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 12]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{12, 0}])
+#5201 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 13]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{13, 0}])
+#5202 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 14]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{14, 0}])
+#5203 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 15]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{15, 0}])
+#5204 = 0
+O100 ELSE IF [#<manual_atc_pocket_no_remove> EQ 16]
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{16, 0}])
+#5205 = 0
+o100 endif
+
+o<atc_page_remove_tool> endsub [1]
+
+M2

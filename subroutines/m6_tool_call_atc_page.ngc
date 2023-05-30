@@ -5,11 +5,7 @@ o<M6_tool_call_atc_page> sub
 
 
 #<m6_tool_call_atc_page_number> = #1
-#<activate_programmable_coolant> = #2
-#<horizontal_spindle_nozzle_dist> = #3
-#<vertical_spindle_nozzle_dist> = #4
-#<pc_angle_offset> = #5
-#<probe_tool_number> = #6
+#<probe_tool_number> = #<_ini[TOOLSENSOR]PROBE_NO>
 
 (print, M6 tool call from atc page, T #<m6_tool_call_atc_page_number>)
 

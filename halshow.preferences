@@ -13,6 +13,7 @@ set ::watchlist {
     pin+hm2_7i76e.0.encoder.02.position-latched
     param+hm2_7i76e.0.7i76.0.0.analogin1-scalemax
     pin+joint.0.homed
+    pin+halui.machine.on
 }
 set ::workmode watchhal
 set ::watchInterval 100

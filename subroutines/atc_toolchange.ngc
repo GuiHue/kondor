@@ -2,9 +2,6 @@
 o<atc_toolchange> sub
 ;(auto-restore modal settings on return)
 M73 
-O10 IF [#<_task> EQ 0]
-        (abort, M6: Task is Null)
-O10 ENDIF
 
 ;assign the tool numbers held in parameters to the pocket numbers
 #1 = #5190
@@ -31,6 +28,12 @@ O10 ENDIF
 
 (print, Starting M6 tool change macro; New Tool  #<new_tool>)
 (print, M6: Current tool: #<current_tool> )
+
+O10 IF [#<_task> EQ 0]
+        (abort, M6: Task is Null)
+O10     return [999]
+O10 ENDIF
+
 
 ; checks if tool in the spindle is same as requested
 O20 IF [#<current_tool> EQ #<new_tool>] 

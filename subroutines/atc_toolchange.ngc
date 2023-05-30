@@ -1,7 +1,7 @@
 ; Master M6 REMAP
 o<atc_toolchange> sub
 ;(auto-restore modal settings on return)
-;M73 
+M73 
 O10 IF [#<_task> EQ 0]
         (abort, M6: Task is Null)
 O10 ENDIF

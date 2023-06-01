@@ -2,13 +2,13 @@
 windows:
   mainwindow:
     kwargs:
-      confirm_exit: false
+      confirm_exit: True
 
 data_plugins:
   tooltable:
     provider: qtpyvcp.plugins.tool_table:ToolTable
     kwargs:
-        columns: TPXYZDR
+        columns: TXYZDR
 
 settings:
 
@@ -27,7 +27,7 @@ settings:
     default_value: false
 
   backplot.show-machine-bounds:
-    default_value: false
+    default_value: True
 
   backplot.show-machine-labels:
     default_value: false
@@ -36,7 +36,7 @@ settings:
     default_value: false
 
   backplot.perspective-view:
-    default_value: false
+    default_value: True
 
   backplot.view:
     default_value: P

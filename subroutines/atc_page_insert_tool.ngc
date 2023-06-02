@@ -1,57 +1,57 @@
 o<atc_page_insert_tool> sub
 
-#<manual_atc_tool_no>=#1
+#<manual_atc_tool_no> = #1
 #<manual_atc_pocket_no> = #2
 (print, ATC Man Insert Tool: Pocket #<manual_atc_pocket_no> Tool: #<manual_atc_tool_no>)
 
 O100 if [#<manual_atc_pocket_no> EQ 1]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{1, #<manual_atc_tool_no>}])
-    #5190 #<manual_atc_pocket_no>
+    #5190 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 2]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{2, #<manual_atc_tool_no>}])
     #5191 = 350
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 3]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{3,#<manual_atc_tool_no>}])
-    #5192 = #<manual_atc_pocket_no>
+    #5192 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 4]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{4,#<manual_atc_tool_no>}])
-    #5193 = #<manual_atc_pocket_no>
+    #5193 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 5]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{5,#<manual_atc_tool_no>}])
-    #5194 = #<manual_atc_pocket_no>
+    #5194 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 6]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{6,#<manual_atc_tool_no>}])
-    #5195 = #<manual_atc_pocket_no>
+    #5195 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 7]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{7,#<manual_atc_tool_no>}])
-    #5196 = #<manual_atc_pocket_no>
+    #5196 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 8]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{8,#<manual_atc_tool_no>}])
-    #5197 = #<manual_atc_pocket_no>
+    #5197 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 0]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{9,#<manual_atc_tool_no>}])
-    #5198 = #<manual_atc_pocket_no>
+    #5198 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 10]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{10,#<manual_atc_tool_no>}])
-    #5199 = #<manual_atc_pocket_no>
+    #5199 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ11]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{11,#<manual_atc_tool_no>}])
-    #5200 = #<manual_atc_pocket_no>
+    #5200 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 12]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{12,#<manual_atc_tool_no>}])
-    #5201 = #<manual_atc_pocket_no>
+    #5201 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 13]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{13,#<manual_atc_tool_no>}])
-    #5202 = #<manual_atc_pocket_no>
+    #5202 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 14]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{14,#<manual_atc_tool_no>}])
-    #5203 = #<manual_atc_pocket_no>
+    #5203 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 15]
     (DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{15,#<manual_atc_tool_no>}])
-    #5204 = #<manual_atc_pocket_no>
+    #5204 = #<manual_atc_tool_no>
 O100 ELSE IF [#<manual_atc_pocket_no> EQ 16]
     (DEBUG,EV  AL[vcp.getWidget{"dynatc"}.store_tool{16#<manual_atc_tool_no>}])
-    #5205 = #<manual_atc_pocket_no>
+    #5205 = #<manual_atc_tool_no>
 o100 endif
 
 o<atc_page_insert_tool> endsub [1]

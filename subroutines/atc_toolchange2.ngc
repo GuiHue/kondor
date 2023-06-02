@@ -1,9 +1,12 @@
-; Master M6 REMAP
-o<atc_toolchange> sub
-;(auto-restore modal settings on return)
-M73 
+o<atc_toolchange2> sub
+(print, in change tool_in_spindle=#<tool_in_spindle>; current_pocket=#<current_pocket>)
+(print, selected_tool=#<selected_tool>; selected_pocket=#<selected_pocket>)
+#<new_tool> = #<selected_tool>
+#<current_tool> = #5400
+#<atc_size> =#<_ini[ATC]POCKETS>
+#<probe_tool_number_ini> = #<_ini[TOOLSENSOR]PROBE_NO> 
+#<somevar>=2
 
-;assign the tool numbers held in parameters to the pocket numbers
 #1 = #5190
 #2 = #5191
 #3 = #5192
@@ -21,19 +24,14 @@ M73
 #15 = #5204
 #16 = #5205
 
-#<new_tool> = #<selected_tool>
-#<current_tool> = #5400
-#<atc_size> =#<_ini[ATC]POCKETS>
-#<probe_tool_number_ini> = #<_ini[TOOLSENSOR]PROBE_NO> 
-
+(print, #<_task>)
 (print, Starting M6 tool change macro; New Tool  #<new_tool>)
 (print, M6: Current tool: #<current_tool> )
 
 O10 IF [#<_task> EQ 0]
-        (abort, M6: Task is Null)
-O10     return [999]
+        (debug, M6: Task is Null)
+O10 return [999]
 O10 ENDIF
-
 
 ; checks if tool in the spindle is same as requested
 O20 IF [#<current_tool> EQ #<new_tool>] 
@@ -41,6 +39,8 @@ O20 IF [#<current_tool> EQ #<new_tool>]
     o<atc_toolchange> endsub [1]
     M2
 O20 ENDIF
+
+
 ; Determine if current_tool is from carousel
 #<current_atc_pocket> = 0
 #700 = #<atc_size> ;assign test parameter the number of pockets in the carousel
@@ -65,13 +65,13 @@ O34 ENDIF
 ; Determine if new_tool is in carousel
 #<new_atc_pocket> = 0
 #700 = #<atc_size> ;assign test parameter the number of pockets in the carousel
-O32 DO
- 	O33 IF [#[5189 + #700] EQ #<new_tool>] ; checks all pockets to see if it contains tool number requested as the new tool
+O35 DO
+ 	O36 IF [#[5189 + #700] EQ #<new_tool>] ; checks all pockets to see if it contains tool number requested as the new tool
       ; if tool is found in pocket, assign new_atc_pocket the actual pocket value
       #<new_atc_pocket> = #700 
-	O33 ENDIF
+	O36 ENDIF
   #700= [#700 - 1]
-O32 WHILE [#700 GT 0]
+O35 WHILE [#700 GT 0]
 
 ; Check if new tool is 99 --> must be picked up manually andd new_atc_pocket is 0 
 O40 IF [#<new_tool> EQ #<probe_tool_number_ini>]
@@ -174,7 +174,7 @@ O199 IF [#<new_tool> EQ 0]
     G53 G0Z0
     M61 Q0
     #5231 =0
-    (ABORT,)
+    
 O199 ELSE
 
 O200 IF [#<new_atc_pocket> EQ 0]
@@ -215,11 +215,11 @@ O200 IF [#<new_atc_pocket> EQ 0]
     O230 ENDIF
 
 O200 ELSE
-    (print,M6: New tool in ATC, automated pickup)
+    (print, M6: New tool in ATC, automated pickup)
 
     M66 P#<_ini[ATC]SENSOR_TOOL> L4 Q3
     O239 if [#5399 EQ 1]
-        (Abort, M6: Tool in spindle!)
+        (abort, M6: Tool in spindle!)
     O239 endif
     ; Call pocket 
     M115
@@ -277,9 +277,9 @@ O200 ELSE
     G53G0Z0
 O200 ENDIF
 O199 ENDIF
-
-
 T #<new_tool>  G43  H #<new_tool>     (enable tool length offset)
 #5231 =  #<new_tool>
-o<atc_toolchange> endsub [1]
+
+
+o<atc_toolchange2> endsub [1]
 M2

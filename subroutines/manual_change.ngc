@@ -3,7 +3,7 @@
 o<manual_change> sub
 (print, in change tool_in_spindle=#<tool_in_spindle>; current_pocket=#<current_pocket>)
 (print, selected_tool=#<selected_tool>; selected_pocket=#<selected_pocket>)
-
+(print, #<_task>)
 ;otherwise after the M6 this information is gone!
 #<tool> = #<selected_tool>
 #<pocket> = #<selected_pocket>

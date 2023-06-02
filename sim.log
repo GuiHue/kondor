@@ -1,19 +1,18 @@
-2023-06-01 20:31:35,060 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/kondor/sim.log
-2023-06-01 20:31:35,060 - qtpyvcp - INFO - QtPyVCP Version: 0+unknown
-2023-06-01 20:31:35,545 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2023-06-01 20:31:35,546 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2023-06-01 20:31:35,546 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2023-06-01 20:31:35,546 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2023-06-01 20:31:35,546 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2023-06-01 20:31:35,546 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2023-06-01 20:31:35,546 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2023-06-01 20:31:35,546 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2023-06-01 20:31:35,685 - qtpyvcp - INFO - Loading global stylesheet: /usr/lib/python3/dist-packages/probe_basic/probe_basic.qss
-2023-06-01 20:31:38,496 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/kondor/hallib/postgui.hal
-2023-06-01 20:32:43,357 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2023-06-01 20:32:58,463 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G10 L20 P1 A0.0
-2023-06-01 20:33:06,246 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G0A720
-2023-06-01 20:33:14,246 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G0A0
-2023-06-01 20:33:32,735 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: G0Y500
-2023-06-01 20:38:53,553 - qtpyvcp.plugins.notifications - ERROR - WARNING: Air Pressure Low
-2023-06-01 20:43:38,717 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: o<go_to_home> call
+2023-06-02 22:33:00,255 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/kondor/sim.log
+2023-06-02 22:33:00,255 - qtpyvcp - INFO - QtPyVCP Version: 0+unknown
+2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-06-02 22:33:00,739 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-06-02 22:33:00,873 - qtpyvcp - INFO - Loading global stylesheet: /usr/lib/python3/dist-packages/probe_basic/probe_basic.qss
+2023-06-02 22:33:03,726 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/kondor/hallib/postgui.hal
+2023-06-02 22:33:07,934 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2023-06-02 22:33:10,678 - qtpyvcp.plugins.notifications - ERROR - joint 3 amplifier fault
+2023-06-02 22:33:57,272 - qtpyvcp.plugins.notifications - ERROR - joint 3 amplifier fault
+2023-06-02 22:36:08,474 - qtpyvcp.plugins.notifications - ERROR - Can't issue MDI command when 
+ not homed
+2023-06-02 22:36:11,184 - qtpyvcp.actions.machine_actions - INFO - Homing Axis: Z

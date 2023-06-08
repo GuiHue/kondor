@@ -1,18 +1,27 @@
-2023-06-02 22:33:00,255 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/kondor/sim.log
-2023-06-02 22:33:00,255 - qtpyvcp - INFO - QtPyVCP Version: 0+unknown
-2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
-2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
-2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
-2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
-2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
-2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
-2023-06-02 22:33:00,738 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
-2023-06-02 22:33:00,739 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
-2023-06-02 22:33:00,873 - qtpyvcp - INFO - Loading global stylesheet: /usr/lib/python3/dist-packages/probe_basic/probe_basic.qss
-2023-06-02 22:33:03,726 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/kondor/hallib/postgui.hal
-2023-06-02 22:33:07,934 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
-2023-06-02 22:33:10,678 - qtpyvcp.plugins.notifications - ERROR - joint 3 amplifier fault
-2023-06-02 22:33:57,272 - qtpyvcp.plugins.notifications - ERROR - joint 3 amplifier fault
-2023-06-02 22:36:08,474 - qtpyvcp.plugins.notifications - ERROR - Can't issue MDI command when 
- not homed
-2023-06-02 22:36:11,184 - qtpyvcp.actions.machine_actions - INFO - Homing Axis: Z
+2023-06-08 21:58:25,384 - qtpyvcp - INFO - Logging to /home/groot/linuxcnc/configs/kondor/sim.log
+2023-06-08 21:58:25,384 - qtpyvcp - INFO - QtPyVCP Version: 0+unknown
+2023-06-08 21:58:25,852 - qtpyvcp.utilities.info - INFO - Machine appearers to be a gantry config having a double Y axis
+2023-06-08 21:58:25,852 - qtpyvcp.utilities.info - INFO - The machine has 4 axes and 5 joints
+2023-06-08 21:58:25,852 - qtpyvcp.utilities.info - INFO - The Axis/Joint mapping is:
+2023-06-08 21:58:25,853 - qtpyvcp.utilities.info - INFO - Axis X --> Joint 0
+2023-06-08 21:58:25,853 - qtpyvcp.utilities.info - INFO - Axis Y0 --> Joint 1
+2023-06-08 21:58:25,853 - qtpyvcp.utilities.info - INFO - Axis Y1 --> Joint 2
+2023-06-08 21:58:25,853 - qtpyvcp.utilities.info - INFO - Axis Z --> Joint 3
+2023-06-08 21:58:25,853 - qtpyvcp.utilities.info - INFO - Axis A --> Joint 4
+2023-06-08 21:58:25,988 - qtpyvcp - INFO - Loading global stylesheet: /usr/lib/python3/dist-packages/probe_basic/probe_basic.qss
+2023-06-08 21:58:28,917 - qtpyvcp.app.launcher - INFO - Loading POSTGUI_HALFILE: /home/groot/linuxcnc/configs/kondor/hallib/postgui.hal
+2023-06-08 21:58:31,756 - qtpyvcp.actions.machine_actions - INFO - Homing all axes
+2023-06-08 22:00:45,649 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m12
+2023-06-08 22:00:47,783 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:00:48,607 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:00:49,277 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:00:50,511 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:00:51,288 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:00:51,887 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:03:10,058 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:03:10,439 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:03:10,763 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:03:12,487 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:03:14,396 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:03:17,156 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11
+2023-06-08 22:04:11,250 - qtpyvcp.actions.machine_actions - INFO - Issuing MDI command: m11

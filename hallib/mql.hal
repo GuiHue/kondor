@@ -1,0 +1,65 @@
+# ---------- MQL  ----------
+# setup all required functions for M QL control of peristaltic pump 
+
+# Drive Setup
+setp        [HMOT](CARD0).stepgen.06.dirsetup           [MQL]DIRSETUP
+setp        [HMOT](CARD0).stepgen.06.dirhold            [MQL]DIRHOLD
+setp        [HMOT](CARD0).stepgen.06.steplen            [MQL]STEPLEN
+setp        [HMOT](CARD0).stepgen.06.stepspace          [MQL]STEPSPACE
+setp        [HMOT](CARD0).stepgen.06.position-scale     [MQL]STEP_SCALE
+setp        [HMOT](CARD0).stepgen.06.step_type          0
+setp        [HMOT](CARD0).stepgen.06.control-type       1
+setp        [HMOT](CARD0).stepgen.06.maxaccel           [MQL]STEPGEN_MAXACCEL
+setp        [HMOT](CARD0).stepgen.06.maxvel             [MQL]STEPGEN_MAXVEL
+
+
+#  ---Signals to Valves via MESA DO---
+# flood must also trigger mist 
+net     MQL-dist-air-mist           or.mistflood.in0            iocontrol.0.coolant-mist
+net     DO-CNC-flood                iocontrol.0.coolant-flood   or.floodin.in0              or.mistflood.in1  
+net     DO-CNC-mist                 or.mistflood.out                         
+#mx2 to switch between automati volume and manual volume
+# mux2.sel based on halui.program.is-idle (idle-on)
+
+# this signal gets written to
+net     mql-autoin              scale.mqlvolover.in
+net     mql-autovolgain         scale.mqlvolover.gain   qtpyvcp.mql_volume_override.out-f   
+net     mql-override-label      qtpyvcp.mql_volume_override.out-i qtpyvcp.mql-vol-override-label.in
+
+net     mql-override-limit-in       scale.mqlvolover.out    limit2.mql.in
+setp    limit2.mql.load 1
+setp    limit2.mql.min 0
+setp    limit2.mql.max [MQL]MAXVOL
+ 
+
+net     idle-on                     mux2.mqlvol.sel   
+
+net     mql-volautomatic            mux2.mqlvol.in0        limit2.mql.out
+net     mql-volmanual               mux2.mqlvol.in1        qtpyvcp.mql_volume.out-f
+
+#Activate pump when flood requested or fastpump active
+net     MQL-flood-fastpump          or.floodin.in1         qtpyvcp.mql_fastpump.checked mux4.mql.sel1
+net     MQL-flood-enable            or.floodin.out         [HMOT](CARD0).stepgen.06.enable  
+
+#Oneshot needed to transition between latching and momentary switch
+net     MQL-flood-enable    oneshot.mql.in
+setp    oneshot.mql.width   0.15 
+net     MQL-oneshot-out     oneshot.mql.out timedelay.mql.in  
+
+setp        timedelay.mql.on-delay          0.1
+setp        qtpyvcp.mql_fastpump.enable     1
+net         MQL-spittime                    timedelay.mql.off-delay    qtpyvcp.mql_spittime.out
+
+net         MQL-timedelay-select        mux4.mql.sel0    timedelay.mql.out
+net         MQL-volume                  mux4.mql.in0    mux2.mqlvol.out qtpyvcp.mql-vol-label1.in
+
+setp        mux4.mql.in1    [MQL]SPITVOL
+setp        mux4.mql.in2    [MQL]MAXVOL
+setp        mux4.mql.in3    [MQL]MAXVOL
+
+
+
+# Scale outsignal first
+net     MQL-scale-in        scale.mql.in        mux4.mql.out  qtpyvcp.mql-vol-label2.in
+setp    scale.mql.gain      [MQL]SCALE
+net     MQL-scale-out       scale.mql.out [HMOT](CARD0).stepgen.06.velocity-cmd

@@ -1,0 +1,5 @@
+#!/bin/bash
+# M177 set mql volume
+# Below is some fuckery to gt an S32 from a float passed on via P Value
+halcmd sets mql-autoin $1   
+exit 0

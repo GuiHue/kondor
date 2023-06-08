@@ -5,6 +5,8 @@
 source  hallib/pendant_whb.hal
 source  hallib/estop.hal
 source  hallib/post_console.hal
+source  hallib/mql.hal
+
 
 
 ################################################################

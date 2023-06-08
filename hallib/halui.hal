@@ -23,9 +23,6 @@ net     machine-is-on               halui.machine.is-on
 net     jog-speed                   halui.axis.jog-speed
 net     MDI-mode                    halui.mode.is-mdi
 
-#  ---coolant signals---
-net     DO-CNC-mist                 <= iocontrol.0.coolant-mist
-net     DO-CNC-flood                <= iocontrol.0.coolant-flood
 
 #  ---motion control signals---
 net     SYS-in-position                 <= motion.in-position

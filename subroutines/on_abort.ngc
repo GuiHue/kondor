@@ -4,15 +4,17 @@ G40
 (print, On Abort: GLOB VAR #5209)
 (print, On Abort: NUM VAR #5209)
 
+M5
 G43
 M9
+M89
 ; Diable carousel
 M115
 ;M131 close drawbar auto trigger
 M131
 M172
 
-M5
+
 
 ; Call original coordinate system again - DO NOT EVER USE G59.3
 o10 if [EXISTS[#5209]]

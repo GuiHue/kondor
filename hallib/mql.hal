@@ -32,10 +32,11 @@ setp    limit2.mql.min 0
 setp    limit2.mql.max [MQL]MAXVOL
  
 
-net     idle-on                     mux2.mqlvol.sel   
+net     mql-select-auto                     mux2.mqlvol.sel   
 
-net     mql-volautomatic            mux2.mqlvol.in0        limit2.mql.out
-net     mql-volmanual               mux2.mqlvol.in1        qtpyvcp.mql_volume.out-f
+net     mql-volautomatic            mux2.mqlvol.in1        limit2.mql.out
+# label1 is on settingspage
+net     mql-volmanual               mux2.mqlvol.in0        qtpyvcp.mql_volume.out-f qtpyvcp.mql-vol-label1.in
 
 #Activate pump when flood requested or fastpump active
 net     MQL-flood-fastpump          or.floodin.in1         qtpyvcp.mql_fastpump.checked mux4.mql.sel1
@@ -51,7 +52,8 @@ setp        qtpyvcp.mql_fastpump.enable     1
 net         MQL-spittime                    timedelay.mql.off-delay    qtpyvcp.mql_spittime.out
 
 net         MQL-timedelay-select        mux4.mql.sel0    timedelay.mql.out
-net         MQL-volume                  mux4.mql.in0    mux2.mqlvol.out qtpyvcp.mql-vol-label1.in
+
+net         MQL-volume                  mux4.mql.in0    mux2.mqlvol.out 
 
 setp        mux4.mql.in1    [MQL]SPITVOL
 setp        mux4.mql.in2    [MQL]MAXVOL

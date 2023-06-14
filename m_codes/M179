@@ -1,0 +1,4 @@
+#!/bin/bash
+# M179 enable mql auto signal
+halcmd sets mql-select-auto 1   
+exit 0
